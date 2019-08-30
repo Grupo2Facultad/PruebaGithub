@@ -13,5 +13,4 @@ public class GithubTest {
     public void setProbar(String probar) {
         this.probar = probar;
     }
-
 }
