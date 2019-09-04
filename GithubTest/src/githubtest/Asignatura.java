@@ -6,20 +6,16 @@ public class Asignatura {
   private int codigo,
           cargaHoraria;
   private String nombre;
+  private int añoalQuePertenece;
   private PeriodoLectivoEnum periodoLectivo;
   private boolean promocional;
   private int cantidadParciales;
+  private Equipo equipo;
   private List<Alumno> alumosCursantes;
+  private BitacoraFinal bitacora;
+  private List<TrabajoPractico> listadoTrabajosPracticos;
 
-    public Asignatura(int codigo, int cargaHoraria, String nombre, PeriodoLectivoEnum periodoLectivo, boolean promocional, int cantidadParciales, List<Alumno> alumosCursantes) {
-        this.codigo = codigo;
-        this.cargaHoraria = cargaHoraria;
-        this.nombre = nombre;
-        this.periodoLectivo = periodoLectivo;
-        this.promocional = promocional;
-        this.cantidadParciales = cantidadParciales;
-        this.alumosCursantes = alumosCursantes;
-    }
+  
 
     @Override
     public int hashCode() {
