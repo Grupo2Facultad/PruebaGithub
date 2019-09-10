@@ -14,9 +14,6 @@ public class Asignatura {
   private List<Alumno> alumosCursantes;
   private BitacoraFinal bitacora;
   private List<TrabajoPractico> listadoTrabajosPracticos;
-
-  
-
     @Override
     public int hashCode() {
         int hash = 5;
