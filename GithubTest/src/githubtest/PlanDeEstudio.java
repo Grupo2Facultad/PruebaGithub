@@ -1,6 +1,9 @@
 package githubtest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+//prubea branches;
+
 
 public abstract class PlanDeEstudio {
 
@@ -8,12 +11,15 @@ public abstract class PlanDeEstudio {
             fechadeVigencia;
     private int añosCarrera;
     /*Opciones para asignatura: 
-    1)Hacer una clase AsignaturaAño que tenga como atributos una asignatura y un año, y tener como atributo de plan de Estudio un ArrayList<AsignaturAño>
+    1)Hacer una clase AsignaturaAño que tenga como atributos una asignatura y un año, y tener como atributo de plan de Estudio un ArrayList<AsignaturaAño>
     2)Hacer una matriz con las asinaturas segun su respectivo año
     Mi favortita: 1;
-     */
-    private ? Asignaturas ;
-    
+    */
+    private ArrayList<Asignatura> listAsignatura;
+
+    public PlanDeEstudio(ArrayList<Asignatura> listAsignatura) {
+        this.listAsignatura = listAsignatura;
+    }
     public PlanDeEstudio(){}
 
     public LocalDate getFechaDeImplementacion() {
