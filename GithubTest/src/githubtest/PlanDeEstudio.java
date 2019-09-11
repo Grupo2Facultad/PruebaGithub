@@ -17,6 +17,7 @@ public abstract class PlanDeEstudio {
     private String alcachofa;
     private String naranja;
     private String otraCosa;
+    private String sinImagincacion;
 
     private ArrayList<Asignatura> Asignaturas;
 
