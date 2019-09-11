@@ -11,15 +11,11 @@ public abstract class PlanDeEstudio {
     private LocalDate fechaDeImplementacion,
             fechadeVigencia;
     private int añosCarrera;
-    /*Opciones para asignatura: 
-    1)Hacer una clase AsignaturaAño que tenga como atributos una asignatura y un año, y tener como atributo de plan de Estudio un ArrayList<AsignaturaAño>
-    2)Hacer una matriz con las asinaturas segun su respectivo año
-    Mi favortita: 1;
-    */
-    private ArrayList<Asignatura> listAsignatura;
+
+    private ArrayList<Asignatura> Asignaturas;
 
     public PlanDeEstudio(ArrayList<Asignatura> listAsignatura) {
-        this.listAsignatura = listAsignatura;
+        this.Asignaturas = listAsignatura;
     }
     public PlanDeEstudio(){}
 
