@@ -11,7 +11,7 @@ public abstract class PlanDeEstudio {
     private LocalDate fechaDeImplementacion,
             fechadeVigencia;
     private int añosCarrera;
-    private String zanahoria;
+    private String zapallo;
 
     private ArrayList<Asignatura> Asignaturas;
 
