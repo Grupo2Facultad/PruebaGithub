@@ -3,6 +3,7 @@ package githubtest;
 
 import java.util.List;
 public class Asignatura {
+    private int o;
   private int codigo,
           cargaHoraria;
   private String nombre;
