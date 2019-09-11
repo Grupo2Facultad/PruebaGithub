@@ -12,6 +12,7 @@ public abstract class PlanDeEstudio {
             fechadeVigencia;
     private int añosCarrera;
     private String zapallo;
+    private String papa;
 
     private ArrayList<Asignatura> Asignaturas;
 
