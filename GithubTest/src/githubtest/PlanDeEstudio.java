@@ -13,6 +13,7 @@ public abstract class PlanDeEstudio {
     private int añosCarrera;
     private String zapallo;
     private String papa;
+    private String batata;
 
     private ArrayList<Asignatura> Asignaturas;
 
