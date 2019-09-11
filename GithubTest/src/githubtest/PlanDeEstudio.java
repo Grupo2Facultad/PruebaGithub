@@ -19,7 +19,7 @@ public abstract class PlanDeEstudio {
     private String otraCosa;
 
     private String imaginacion;
-
+    private String h;
     private String sinImagincacion;
 
 
