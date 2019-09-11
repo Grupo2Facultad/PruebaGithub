@@ -2,26 +2,12 @@ package githubtest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-//prubea branches;
-//lalallalalalalal
-
 
 public abstract class PlanDeEstudio {
 
     private LocalDate fechaDeImplementacion,
             fechadeVigencia;
     private int añosCarrera;
-    private String zapallo;
-    private String papa;
-    private String batata;
-    private String alcachofa;
-    private String naranja;
-    private String otraCosa;
-
-    private String imaginacion;
-    private String h;
-    private String sinImagincacion;
-
 
     private ArrayList<Asignatura> Asignaturas;
 
