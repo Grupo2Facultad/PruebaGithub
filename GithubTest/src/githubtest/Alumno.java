@@ -6,6 +6,7 @@ public class Alumno extends Persona{
 
     private String pedro;
         private String pablo;
+    private String k;
 
 private String domicilio,
         localidad,
