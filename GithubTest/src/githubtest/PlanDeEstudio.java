@@ -15,6 +15,7 @@ public abstract class PlanDeEstudio {
     private String papa;
     private String batata;
     private String alcachofa;
+    private String naranja;
 
     private ArrayList<Asignatura> Asignaturas;
 
