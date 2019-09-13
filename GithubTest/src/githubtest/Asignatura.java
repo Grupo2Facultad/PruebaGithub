@@ -1,6 +1,7 @@
 
 package githubtest;
 
+import java.util.ArrayList;
 import java.util.List;
 public class Asignatura {
 
@@ -15,6 +16,8 @@ public class Asignatura {
   private List<Alumno> alumosCursantes;
   private BitacoraFinal bitacora;
   private List<TrabajoPractico> listadoTrabajosPracticos;
+  private List<Examen> o; 
+  
     @Override
     public int hashCode() {
         int hash = 5;
