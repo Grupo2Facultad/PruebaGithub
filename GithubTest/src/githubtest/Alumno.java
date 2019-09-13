@@ -25,68 +25,11 @@ private int numeroMatricula;
         this.numeroMatricula = numeroMatricula;
     }
 
-    public String getDomicilio() {
-        return domicilio;
+    public void Inscribirse() {
+        
     }
-
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
-    }
-
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
-
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
-
-    public String getPaisDeResidencia() {
-        return paisDeResidencia;
-    }
-
-    public void setPaisDeResidencia(String paisDeResidencia) {
-        this.paisDeResidencia = paisDeResidencia;
-    }
-
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
-
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
-    }
-
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public LocalDate getFechaInscripcion() {
-        return fechaInscripcion;
-    }
-
-    public void setFechaInscripcion(LocalDate fechaInscripcion) {
-        this.fechaInscripcion = fechaInscripcion;
-    }
-
-    public int getNumeroMatricula() {
-        return numeroMatricula;
-    }
-
-    public void setNumeroMatricula(int numeroMatricula) {
-        this.numeroMatricula = numeroMatricula;
+    public void DarseDeBaja() {
+        
     }
 
     @Override
