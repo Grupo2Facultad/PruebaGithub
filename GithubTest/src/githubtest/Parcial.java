@@ -11,5 +11,15 @@ package githubtest;
  */
 public class Parcial extends Examen{
     private boolean recuperatorio;
+
+    @Override
+    public Acta HacerActa() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean controlarNotas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
