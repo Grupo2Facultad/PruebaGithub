@@ -12,10 +12,30 @@ public abstract class Persona {
         this.DNI = DNI;
     }
 
-    @Override
-    public abstract boolean equals(Object o);
+    public String getNombre() {
+        return nombre;
+    }
 
-    @Override
-    public abstract int hashCode();
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
+
 
 }
