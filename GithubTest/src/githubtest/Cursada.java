@@ -14,14 +14,40 @@ import java.time.LocalDate;
 public class Cursada 
 extends Regimen{
     private LocalDate fechaDeInscripcion;
-  private PeriodoLectivoEnum periodoLectivo;
+  private PeriodoLectivoConAño periodoLectivo;
   private int notaFinalCurso;
 
-    public Cursada(LocalDate fechaDeInscripcion, PeriodoLectivoEnum periodoLectivo, Alumno alumno, Asignatura asignatura, boolean regularidad) {
+    public Cursada(LocalDate fechaDeInscripcion, PeriodoLectivoConAño periodoLectivo, Alumno alumno, Asignatura asignatura, boolean regularidad) {
         super(alumno, asignatura, regularidad);
         this.fechaDeInscripcion = fechaDeInscripcion;
         this.periodoLectivo = periodoLectivo;
     }
+
+    public LocalDate getFechaDeInscripcion() {
+        return fechaDeInscripcion;
+    }
+
+    public void setFechaDeInscripcion(LocalDate fechaDeInscripcion) {
+        this.fechaDeInscripcion = fechaDeInscripcion;
+    }
+
+    public PeriodoLectivoConAño getPeriodoLectivo() {
+        return periodoLectivo;
+    }
+
+    public void setPeriodoLectivo(PeriodoLectivoConAño periodoLectivo) {
+        this.periodoLectivo = periodoLectivo;
+    }
+
+    public int getNotaFinalCurso() {
+        return notaFinalCurso;
+    }
+
+    public void setNotaFinalCurso(int notaFinalCurso) {
+        this.notaFinalCurso = notaFinalCurso;
+    }
+
+    
 
   
 
