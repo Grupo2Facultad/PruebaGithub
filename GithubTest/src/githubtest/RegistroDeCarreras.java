@@ -43,14 +43,14 @@ public class RegistroDeCarreras {
         return carrerasPorDNI; 
     } 
 
-    public static List<Asignatura> getAsigPorDNI(Asignatura a, String DNI) {
+    public static List<Asignatura> getAsigPorDNI(Asignatura a, String DNI, int año) {
         ArrayList<Asignatura> asignaturas=new ArrayList<Asignatura>();    
         for (Carrera carrera : carreras) {
             ArrayList<Asignatura> b= carrera.getPlanDeEstudio().getAsignaturas();
             for (Asignatura asignatura : b) {
                 ArrayList<Regimen> k= (ArrayList) asignatura.getCursantes();  
                 for (Regimen regimen : k) {
-                    if (regimen.getAlumno().getDNI().equals(DNI)){
+                    if (regimen.getAlumno().getDNI().equals(DNI)&&((Cursada)regimen).getPeriodoLectivo().getAño()==año){
                         asignaturas.add(asignatura);
                     }
                 }

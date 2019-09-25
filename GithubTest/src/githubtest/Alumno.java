@@ -28,13 +28,26 @@ private ArrayList<Cursada> cursadas;
     }
 
 
-    public void Inscribirse(Asignatura ag) {
+    public void InscribirseComoRegular(Asignatura ag,int año) {
         ArrayList<Carrera>carreras= RegistroDeCarreras.getCarreras();
         for (Carrera carrera : carreras) {
             ArrayList<Asignatura> a= carrera.getPlanDeEstudio().getAsignaturas();
             for (Asignatura asignatura : a) {
                 if (ag.equals(asignatura)){
-                     Cursada i= new Cursada(LocalDate.now(),ag.getPeriodoLectivo(),this,asignatura,true);
+                     Cursada i= new Cursada(LocalDate.now(),new PeriodoLectivoConAño(ag.getPeriodoLectivo(),año),this,asignatura,true);
+                    asignatura.getCursantes().add(i);
+                    
+                }
+            }
+        }
+    }
+    public void InscribirseComoLibre(Asignatura ag) {
+        ArrayList<Carrera>carreras= RegistroDeCarreras.getCarreras();
+        for (Carrera carrera : carreras) {
+            ArrayList<Asignatura> a= carrera.getPlanDeEstudio().getAsignaturas();
+            for (Asignatura asignatura : a) {
+                if (ag.equals(asignatura)){
+                    Regimen i= new Regimen(this,asignatura,false);
                     asignatura.getCursantes().add(i);
                     
                 }

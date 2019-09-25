@@ -8,7 +8,7 @@ public class Asignatura {
   private int codigo,
           cargaHoraria;
   private String nombre;
-  private int añoalQuePertenece;
+  private int añoDeCarreraAlQuePertenece;
   private PeriodoLectivoEnum periodoLectivo;
   private boolean promocional;
   private int cantidadParciales;
@@ -22,7 +22,7 @@ public class Asignatura {
         this.codigo = codigo;
         this.cargaHoraria = cargaHoraria;
         this.nombre = nombre;
-        this.añoalQuePertenece = añoalQuePertenece;
+        this.añoDeCarreraAlQuePertenece = añoalQuePertenece;
         this.periodoLectivo = periodoLectivo;
         this.promocional = promocional;
         this.cantidadParciales = cantidadParciales;
@@ -59,11 +59,11 @@ public class Asignatura {
     }
 
     public int getAñoalQuePertenece() {
-        return añoalQuePertenece;
+        return añoDeCarreraAlQuePertenece;
     }
 
     public void setAñoalQuePertenece(int añoalQuePertenece) {
-        this.añoalQuePertenece = añoalQuePertenece;
+        this.añoDeCarreraAlQuePertenece = añoalQuePertenece;
     }
 
     public PeriodoLectivoEnum getPeriodoLectivo() {
