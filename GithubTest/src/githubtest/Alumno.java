@@ -27,43 +27,54 @@ private ArrayList<Cursada> cursadas;
         this.numeroMatricula = numeroMatricula;
     }
 
-
-    public void InscribirseComoRegular(Asignatura ag,int año) {
-        ArrayList<Carrera>carreras= RegistroDeCarreras.getCarreras();
+    public void InscribirseAAsignaturaComoRegular(Asignatura ag, int año) {
+        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
         for (Carrera carrera : carreras) {
-            ArrayList<Asignatura> a= carrera.getPlanDeEstudio().getAsignaturas();
-            for (Asignatura asignatura : a) {
-                if (ag.equals(asignatura)){
-                     Cursada i= new Cursada(LocalDate.now(),new PeriodoLectivoConAño(ag.getPeriodoLectivo(),año),this,asignatura,true);
-                    asignatura.getCursantes().add(i);
-                    
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            for (PlanDeEstudio plan : planes) {
+                if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
+                    ArrayList<Asignatura> a = plan.getAsignaturas();
+                    for (Asignatura asignatura : a) {
+                        if (ag.equals(asignatura)) {
+                            Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(ag.getPeriodoLectivo(), año), this, asignatura, true);
+                            asignatura.getCursantes().add(i);
+
+                        }
+                    }
                 }
             }
         }
     }
-    public void InscribirseComoLibre(Asignatura ag) {
-        ArrayList<Carrera>carreras= RegistroDeCarreras.getCarreras();
+    public void InscribirseAAsignaturaComoLibre(Asignatura ag,int año) {
+        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
         for (Carrera carrera : carreras) {
-            ArrayList<Asignatura> a= carrera.getPlanDeEstudio().getAsignaturas();
-            for (Asignatura asignatura : a) {
-                if (ag.equals(asignatura)){
-                    Regimen i= new Regimen(this,asignatura,false);
-                    asignatura.getCursantes().add(i);
-                    
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            for (PlanDeEstudio plan : planes) {
+                if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
+                    ArrayList<Asignatura> a = plan.getAsignaturas();
+                    for (Asignatura asignatura : a) {
+                        if (ag.equals(asignatura)) {
+                            Regimen i = new Regimen(this, asignatura, false);
+                            asignatura.getCursantes().add(i);
+                        }
+                    }
                 }
             }
         }
     }
     public void DarseDeBaja(Asignatura ag) {
-         ArrayList<Carrera>carreras= RegistroDeCarreras.getCarreras();
+        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
         for (Carrera carrera : carreras) {
-            ArrayList<Asignatura> a= carrera.getPlanDeEstudio().getAsignaturas();
-            for (Asignatura asignatura : a) {
-                if (ag.equals(asignatura)){
-                    ArrayList<Regimen> r= (ArrayList) asignatura.getCursantes();
-                    for (Regimen regimen : r) {
-                        if (regimen.getAlumno().equals(this)){
-                            r.remove(regimen);
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            for (PlanDeEstudio plan : planes) {
+                ArrayList<Asignatura> a = plan.getAsignaturas();
+                for (Asignatura asignatura : a) {
+                    if (ag.equals(asignatura)) {
+                        ArrayList<Regimen> r = (ArrayList) asignatura.getCursantes();
+                        for (Regimen regimen : r) {
+                            if (regimen.getAlumno().equals(this)) {
+                                r.remove(regimen);
+                            }
                         }
                     }
                 }

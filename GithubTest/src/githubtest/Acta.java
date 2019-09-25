@@ -5,10 +5,17 @@
  */
 package githubtest;
 
+import java.util.List;
+
 /**
  *
  * @author juanc
  */
-class Acta {
+public abstract class Acta {
+    private List<InscripcionAExamen> inscripciones;
     
+    public abstract void imprimirActa();
+    public  List<Alumno> getHabilitados(){
+        return null;
+    }  
 }
