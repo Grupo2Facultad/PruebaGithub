@@ -39,6 +39,14 @@ public abstract class PlanDeEstudio {
     public void setAñosCarrera(int añosCarrera) {
         this.añosCarrera = añosCarrera;
     }
+
+    public ArrayList<Asignatura> getAsignaturas() {
+        return Asignaturas;
+    }
+
+    public void setAsignaturas(ArrayList<Asignatura> Asignaturas) {
+        this.Asignaturas = Asignaturas;
+    }
     
     
    
