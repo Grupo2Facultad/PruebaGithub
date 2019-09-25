@@ -12,6 +12,7 @@ import java.time.LocalDate;
  * @author juanc
  */
 public abstract class Examen {
+    private int numero;
     private String periodo;
     private LocalDate fecha;
    private int horario;

@@ -11,12 +11,11 @@ import java.time.LocalDate;
  *
  * @author juanc
  */
-public class Inscripcion {
+public class InscripcionAExamen {
 
     private Alumno alumno;
     private LocalDate fecha;
     private Examen examen;
-    
     private boolean habilitado,
             asistencia;
     private double notaObtenida;
