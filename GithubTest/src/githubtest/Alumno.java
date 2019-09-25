@@ -34,7 +34,6 @@ private ArrayList<Cursada> cursadas;
             ArrayList<Asignatura> a= carrera.getPlanDeEstudio().getAsignaturas();
             for (Asignatura asignatura : a) {
                 if (ag.equals(asignatura)){
-                    asignatura.getAlumnosCursantes().add(this);
                      Cursada i= new Cursada(LocalDate.now(),ag.getPeriodoLectivo(),this,asignatura,true);
                     asignatura.getCursantes().add(i);
                     
@@ -48,7 +47,6 @@ private ArrayList<Cursada> cursadas;
             ArrayList<Asignatura> a= carrera.getPlanDeEstudio().getAsignaturas();
             for (Asignatura asignatura : a) {
                 if (ag.equals(asignatura)){
-                    asignatura.getAlumnosCursantes().remove(this);
                     ArrayList<Regimen> r= (ArrayList) asignatura.getCursantes();
                     for (Regimen regimen : r) {
                         if (regimen.getAlumno().equals(this)){

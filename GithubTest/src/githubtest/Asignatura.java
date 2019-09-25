@@ -13,7 +13,6 @@ public class Asignatura {
   private boolean promocional;
   private int cantidadParciales;
   private Equipo equipo;
-  private List<Alumno> alumnosCursantes;
   private BitacoraFinal bitacora;
   private List<TrabajoPractico> listadoTrabajosPracticos;
   private List<Examen> examenes; 
@@ -28,7 +27,7 @@ public class Asignatura {
         this.promocional = promocional;
         this.cantidadParciales = cantidadParciales;
         this.equipo = equipo;
-        this.alumnosCursantes = alumnosCursantes;
+
         this.bitacora = bitacora;
         this.listadoTrabajosPracticos = listadoTrabajosPracticos;
         this.examenes = examenes;
@@ -99,13 +98,6 @@ public class Asignatura {
         this.equipo = equipo;
     }
 
-    public List<Alumno> getAlumnosCursantes() {
-        return alumnosCursantes;
-    }
-
-    public void setAlumnosCursantes(List<Alumno> alumnosCursantes) {
-        this.alumnosCursantes = alumnosCursantes;
-    }
 
     public BitacoraFinal getBitacora() {
         return bitacora;
