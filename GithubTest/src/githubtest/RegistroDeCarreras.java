@@ -48,9 +48,9 @@ public class RegistroDeCarreras {
         for (Carrera carrera : carreras) {
             ArrayList<Asignatura> b= carrera.getPlanDeEstudio().getAsignaturas();
             for (Asignatura asignatura : b) {
-                ArrayList<Alumno> k= (ArrayList) asignatura.getAlumnosCursantes();  
-                for (Alumno alumno : k) {
-                    if (alumno.getDNI().equals(DNI)){
+                ArrayList<Regimen> k= (ArrayList) asignatura.getCursantes();  
+                for (Regimen regimen : k) {
+                    if (regimen.getAlumno().getDNI().equals(DNI)){
                         asignaturas.add(asignatura);
                     }
                 }
