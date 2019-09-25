@@ -1,6 +1,7 @@
 
 package githubtest;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Alumno extends Persona{
 
@@ -12,6 +13,7 @@ private String domicilio,
 private LocalDate fechaNacimiento,
         fechaInscripcion;
 private int numeroMatricula;
+private ArrayList<Cursada> cursadas;  
 
     public Alumno(String domicilio, String localidad, String provincia, String paisDeResidencia, String correoElectronico, LocalDate fechaNacimiento, LocalDate fechaInscripcion, int numeroMatricula, String nombre, String apellido, String DNI) {
         super(nombre, apellido, DNI);
@@ -26,10 +28,38 @@ private int numeroMatricula;
     }
 
 
-    //public void Inscribirse() {
-        
+    public void Inscribirse(Asignatura ag) {
+        ArrayList<Carrera>carreras= RegistroDeCarreras.getCarreras();
+        for (Carrera carrera : carreras) {
+            ArrayList<Asignatura> a= carrera.getPlanDeEstudio().getAsignaturas();
+            for (Asignatura asignatura : a) {
+                if (ag.equals(asignatura)){
+                    asignatura.getAlumnosCursantes().add(this);
+                     Cursada i= new Cursada(LocalDate.now(),ag.getPeriodoLectivo(),this,asignatura,true);
+                    asignatura.getCursantes().add(i);
+                    
+                }
+            }
+        }
+    }
+    public void DarseDeBaja(Asignatura ag) {
+         ArrayList<Carrera>carreras= RegistroDeCarreras.getCarreras();
+        for (Carrera carrera : carreras) {
+            ArrayList<Asignatura> a= carrera.getPlanDeEstudio().getAsignaturas();
+            for (Asignatura asignatura : a) {
+                if (ag.equals(asignatura)){
+                    asignatura.getAlumnosCursantes().remove(this);
+                    ArrayList<Regimen> r= (ArrayList) asignatura.getCursantes();
+                    for (Regimen regimen : r) {
+                        if (regimen.getAlumno().equals(this)){
+                            r.remove(regimen);
+                        }
+                    }
+                }
+            }
+        }
+    }
     
-    //public void DarseDeBaja() {
 
     public String getDomicilio() {
         return domicilio;

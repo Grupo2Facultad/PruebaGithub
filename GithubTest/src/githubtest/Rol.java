@@ -9,6 +9,12 @@ public class Rol {
     private String cargo;
     private LocalDate fechaDeComienzo,
             fechaFinCargo;
+
+    @Override
+    public String toString() {
+        return "Rol{" + "docente=" + docente + ", dedicacion=" + dedicacion + ", cargo=" + cargo + ", fechaDeComienzo=" + fechaDeComienzo + ", fechaFinCargo=" + fechaFinCargo + '}';
+    }
+    
     
     
     

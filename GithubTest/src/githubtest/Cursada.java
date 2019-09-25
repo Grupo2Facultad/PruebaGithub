@@ -16,8 +16,15 @@ extends Regimen{
     private LocalDate fechaDeInscripcion;
   private PeriodoLectivoEnum periodoLectivo;
   private int notaFinalCurso;
-    
-    
-    
-    
+
+    public Cursada(LocalDate fechaDeInscripcion, PeriodoLectivoEnum periodoLectivo, Alumno alumno, Asignatura asignatura, boolean regularidad) {
+        super(alumno, asignatura, regularidad);
+        this.fechaDeInscripcion = fechaDeInscripcion;
+        this.periodoLectivo = periodoLectivo;
+    }
+
+  
+
+
+     
 }
