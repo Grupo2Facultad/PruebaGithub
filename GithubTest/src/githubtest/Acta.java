@@ -7,6 +7,7 @@ package githubtest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -15,6 +16,12 @@ import java.util.List;
 public abstract class Acta {
     private List<InscripcionAExamen> inscripciones;
     private Examen examen;
+
+    public Acta(Examen examen) {
+        this.examen = examen;
+    }
+
+    
 
     public abstract void imprimirActa();
 
@@ -52,6 +59,35 @@ public abstract class Acta {
         }
         return s;
 
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.inscripciones);
+        hash = 23 * hash + Objects.hashCode(this.examen);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Acta other = (Acta) obj;
+        if (!Objects.equals(this.inscripciones, other.inscripciones)) {
+            return false;
+        }
+        if (!Objects.equals(this.examen, other.examen)) {
+            return false;
+        }
+        return true;
     }
 
 }

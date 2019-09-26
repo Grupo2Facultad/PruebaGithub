@@ -3,6 +3,7 @@ package githubtest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 public class Asignatura {
 
   private int codigo,
@@ -20,22 +21,25 @@ public class Asignatura {
   private List<Examen> examenes;
   private List<Regimen>cursantes;
 
-
-    public Asignatura(int codigo, int cargaHoraria, String nombre, int añoalQuePertenece, PeriodoLectivoEnum periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, List<Alumno> alumnosCursantes, BitacoraFinal bitacora, List<TrabajoPractico> listadoTrabajosPracticos, List<Examen> examenes, List<Regimen> cursantes) {
+    public Asignatura(int codigo, int cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera, int añoDeCarreraAlQuePertenece, PeriodoLectivoEnum periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, BitacoraFinal bitacora, List<TrabajoPractico> listadoTrabajosPracticos, List<Examen> examenes, List<Regimen> cursantes) {
         this.codigo = codigo;
         this.cargaHoraria = cargaHoraria;
         this.nombre = nombre;
-        this.añoDeCarreraAlQuePertenece = añoalQuePertenece;
+        this.planDeEstudio = planDeEstudio;
+        this.carrera = carrera;
+        this.añoDeCarreraAlQuePertenece = añoDeCarreraAlQuePertenece;
         this.periodoLectivo = periodoLectivo;
         this.promocional = promocional;
         this.cantidadParciales = cantidadParciales;
         this.equipo = equipo;
-
         this.bitacora = bitacora;
         this.listadoTrabajosPracticos = listadoTrabajosPracticos;
         this.examenes = examenes;
         this.cursantes = cursantes;
     }
+
+
+  
 
  
 
@@ -159,6 +163,40 @@ public class Asignatura {
 
     public void setCursantes(List<Regimen> cursantes) {
         this.cursantes = cursantes;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + this.codigo;
+        hash = 67 * hash + Objects.hashCode(this.nombre);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Asignatura other = (Asignatura) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Asignatura{" + "codigo=" + codigo + ", cargaHoraria=" + cargaHoraria + ", nombre=" + nombre + ", planDeEstudio=" + planDeEstudio + ", carrera=" + carrera + ", a\u00f1oDeCarreraAlQuePertenece=" + añoDeCarreraAlQuePertenece + ", periodoLectivo=" + periodoLectivo + ", promocional=" + promocional + ", cantidadParciales=" + cantidadParciales + ", equipo=" + equipo + ", bitacora=" + bitacora + ", listadoTrabajosPracticos=" + listadoTrabajosPracticos + ", examenes=" + examenes + ", cursantes=" + cursantes + '}';
     }
 
 

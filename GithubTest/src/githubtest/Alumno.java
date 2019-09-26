@@ -25,9 +25,10 @@ private int numeroMatricula;
         this.fechaInscripcion = fechaInscripcion;
         this.numeroMatricula = numeroMatricula;
     }
+    
 
-    public void InscribirseAAsignaturaComoRegular(Asignatura ag, int año) {
-        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
+    public void InscribirseAAsignaturaComoRegular(Asignatura ag, int año,RegistroDeCarreras registro) {
+        ArrayList<Carrera> carreras = registro.getCarreras();
         for (Carrera carrera : carreras) {
             ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
             for (PlanDeEstudio plan : planes) {
@@ -44,8 +45,8 @@ private int numeroMatricula;
             }
         }
     }
-    public void InscribirseAAsignaturaComoLibre(Asignatura ag,int año) {
-        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
+    public void InscribirseAAsignaturaComoLibre(Asignatura ag,int año,RegistroDeCarreras registro) {
+        ArrayList<Carrera> carreras = registro.getCarreras();
         for (Carrera carrera : carreras) {
             ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
             for (PlanDeEstudio plan : planes) {
@@ -61,8 +62,8 @@ private int numeroMatricula;
             }
         }
     }
-    public void DarseDeBaja(Asignatura ag) {
-        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
+    public void DarseDeBaja(Asignatura ag,RegistroDeCarreras registro) {
+        ArrayList<Carrera> carreras = registro.getCarreras();
         for (Carrera carrera : carreras) {
             ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
             for (PlanDeEstudio plan : planes) {

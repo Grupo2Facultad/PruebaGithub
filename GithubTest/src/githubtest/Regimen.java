@@ -5,6 +5,8 @@
  */
 package githubtest;
 
+import java.util.Objects;
+
 /**
  *
  * @author juanc
@@ -43,6 +45,40 @@ public class Regimen {
 
     public void setRegularidad(boolean regularidad) {
         this.regularidad = regularidad;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.alumno);
+        hash = 37 * hash + Objects.hashCode(this.asignatura);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Regimen other = (Regimen) obj;
+        if (!Objects.equals(this.alumno, other.alumno)) {
+            return false;
+        }
+        if (!Objects.equals(this.asignatura, other.asignatura)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Regimen{" + "alumno=" + alumno + ", asignatura=" + asignatura + ", regularidad=" + regularidad + '}';
     }
 
 

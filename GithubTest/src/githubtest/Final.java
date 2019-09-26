@@ -5,6 +5,7 @@
  */
 package githubtest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -15,6 +16,13 @@ public class Final extends Examen {
     private boolean puedenRegulares;
     private boolean puedenLibres;
     private List<DocenteExamen> docenteExamen;
+
+    public Final(boolean puedenRegulares, boolean puedenLibres, List<DocenteExamen> docenteExamen, Asignatura asignatura, int numero, String periodo, LocalDate fecha, int horario, Acta acta) {
+        super(asignatura, numero, periodo, fecha, horario, acta);
+        this.puedenRegulares = puedenRegulares;
+        this.puedenLibres = puedenLibres;
+        this.docenteExamen = docenteExamen;
+    }
 
     public boolean isPuedenRegulares() {
         return puedenRegulares;

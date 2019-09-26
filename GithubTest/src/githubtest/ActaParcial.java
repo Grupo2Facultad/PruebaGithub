@@ -13,6 +13,10 @@ import java.util.List;
  * @author juanc
  */
 public class ActaParcial extends Acta{
+
+    public ActaParcial(Examen examen) {
+        super(examen);
+    }
     
 
     @Override
