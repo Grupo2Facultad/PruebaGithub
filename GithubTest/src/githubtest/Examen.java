@@ -6,6 +6,7 @@
 package githubtest;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  *
@@ -13,15 +14,13 @@ import java.time.LocalDate;
  */
 public abstract class Examen {
     private Asignatura asignatura;
-    private int numero;
-    private String periodo;
+    private PeriodoLectivoEnum periodo;
     private LocalDate fecha;
    private int horario;
    private Acta acta;
 
-    public Examen(Asignatura asignatura, int numero, String periodo, LocalDate fecha, int horario, Acta acta) {
+    public Examen(Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario, Acta acta) {
         this.asignatura = asignatura;
-        this.numero = numero;
         this.periodo = periodo;
         this.fecha = fecha;
         this.horario = horario;
@@ -36,19 +35,11 @@ public abstract class Examen {
         this.asignatura = asignatura;
     }
 
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public String getPeriodo() {
+    public PeriodoLectivoEnum  getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(String periodo) {
+    public void setPeriodo(PeriodoLectivoEnum  periodo) {
         this.periodo = periodo;
     }
 
@@ -79,7 +70,9 @@ public abstract class Examen {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 83 * hash + this.numero;
+        hash = 23 * hash + Objects.hashCode(this.asignatura);
+        hash = 23 * hash + Objects.hashCode(this.fecha);
+        hash = 23 * hash + Objects.hashCode(this.acta);
         return hash;
     }
 
@@ -95,7 +88,13 @@ public abstract class Examen {
             return false;
         }
         final Examen other = (Examen) obj;
-        if (this.numero != other.numero) {
+        if (!Objects.equals(this.asignatura, other.asignatura)) {
+            return false;
+        }
+        if (!Objects.equals(this.fecha, other.fecha)) {
+            return false;
+        }
+        if (!Objects.equals(this.acta, other.acta)) {
             return false;
         }
         return true;
@@ -103,8 +102,12 @@ public abstract class Examen {
 
     @Override
     public String toString() {
-        return "Examen{" + "asignatura=" + asignatura + ", numero=" + numero + ", periodo=" + periodo + ", fecha=" + fecha + ", horario=" + horario + ", acta=" + acta + '}';
+        return "Examen{" + "asignatura=" + asignatura + ", periodo=" + periodo + ", fecha=" + fecha + ", horario=" + horario + ", acta=" + acta + '}';
     }
+
+
+
+   
     
     
     
