@@ -89,7 +89,31 @@ public class RegistroDeCarreras {
         }
         return "error al buscar el equipo";
     }
-
+    public List<Alumno> HabilitadosParcial(Asignatura asignatura,PeriodoLectivoEnum periodo, boolean isPrimeroTrueSegundoFalse) {
+        //Una asignatura de por si pertenece a una carrera y plan de estudio,y se desarrolla en un año determinado
+        ArrayList<Examen>examenes= (ArrayList)asignatura.getExamenes();
+        for (Examen examene : examenes) {
+            if (examene.getPeriodo().equals(periodo)){
+            if (((Parcial)examene).isPrimeroTrueSegundoFalse()==isPrimeroTrueSegundoFalse){
+                return examene.getActa().getHabilitados();
+            }
+            }
+        }
+        return null;
+    }
+    public List<Alumno> HabilitadosFinal(Asignatura asignatura,LocalDate fecha) {
+        //Una asignatura de por si pertenece a una carrera y plan de estudio
+        ArrayList<Examen>examenes= (ArrayList)asignatura.getExamenes();
+        for (Examen examene : examenes) {
+        if (examene instanceof Final){
+            if (examene.getFecha().equals(fecha)){
+                return examene.getActa().getHabilitados();
+            }
+        }
+       
+    }
+         return null;
+    }
     public  ArrayList<Carrera> getCarreras() {
         return carreras;
     }
