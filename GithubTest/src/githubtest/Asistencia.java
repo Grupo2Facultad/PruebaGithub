@@ -5,8 +5,24 @@ import java.util.List;
 
 
  public class Asistencia {
-  private String agua;
     private Alumno alumno;
     private boolean asistio;
-    private List<TrabajoPractico> l;
+ 
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
+    public boolean getAsistio() {
+        return asistio;
+    }
+
+    public void setAsistio(boolean asistio) {
+        this.asistio = asistio;
+    }
+    
 }
