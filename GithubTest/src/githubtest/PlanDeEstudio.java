@@ -7,6 +7,7 @@ public abstract class PlanDeEstudio {
 
     private LocalDate fechaDeImplementacion,
             fechadeVigencia;
+    private Carrera carrera;
     private int añosCarrera;
 
     private ArrayList<Asignatura> Asignaturas;

@@ -5,6 +5,7 @@
  */
 package githubtest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,14 +14,51 @@ import java.util.List;
  */
 public class ActaFinal extends Acta{
     private boolean cerrada;
-
-    @Override
-    public List<Alumno> getHabilitados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  
+    public void cerrarActa() {
+        boolean existen=existenDocentes();
+        if(existen){
+            cerrada=true;
+        }
+        else{
+            cerrada=false;
+        }
+       
     }
-
+    public boolean existenDocentes() {
+        boolean existen=true;
+        Final fin=(Final)super.getExamen();
+        ArrayList<DocenteExamen>docentes=(ArrayList)fin.getDocenteExamen();  
+        Carrera carrera=fin.getAsignatura().getCarrera();
+        List<PlanDeEstudio> planes=carrera.getPlanDeEstudio();
+        for (DocenteExamen docentex : docentes) {
+            boolean existe=false;
+          Docente doc=docentex.getDocente();
+            for (PlanDeEstudio plane : planes) {
+                ArrayList<Asignatura> asig=plane.getAsignaturas();
+                for (Asignatura asignatura : asig) {
+                    ArrayList<Rol> roles=(ArrayList)asignatura.getEquipo().getRoles();
+                    for (Rol rol : roles) {
+                        if (doc.equals(rol.getDocente())){
+                            existe=true;
+                        }
+                    }
+                }
+            }
+            if(!existe){
+                existen=false;
+            }
+        }
+        return existen;
+    }
     @Override
     public void imprimirActa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     //Esto va a cambiar cuando se pase a Swing
+     if (cerrada){
+         System.out.println(this);
+     }
+     else{
+         System.out.println("todavia no esta cerrada");
+     }
     }
 }

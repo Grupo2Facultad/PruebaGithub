@@ -12,5 +12,21 @@ package githubtest;
 public class DocenteExamen {
     private RolExamenEnum rol;
     private Docente docente;
+
+    public RolExamenEnum getRol() {
+        return rol;
+    }
+
+    public void setRol(RolExamenEnum rol) {
+        this.rol = rol;
+    }
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
     
 }
