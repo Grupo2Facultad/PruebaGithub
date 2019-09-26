@@ -11,6 +11,23 @@ package githubtest;
  */
 public class Parcial extends Examen{
     private boolean recuperatorio;
+    private boolean primeroTrueSegundoFalse;
+
+    public boolean isRecuperatorio() {
+        return recuperatorio;
+    }
+
+    public void setRecuperatorio(boolean recuperatorio) {
+        this.recuperatorio = recuperatorio;
+    }
+
+    public boolean isPrimeroTrueSegundoFalse() {
+        return primeroTrueSegundoFalse;
+    }
+
+    public void setPrimeroTrueSegundoFalse(boolean primeroTrueSegundoFalse) {
+        this.primeroTrueSegundoFalse = primeroTrueSegundoFalse;
+    }
 
     @Override
     public Acta HacerActa() {
