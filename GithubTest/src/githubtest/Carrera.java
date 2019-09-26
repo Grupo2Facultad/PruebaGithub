@@ -3,6 +3,7 @@ package githubtest;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class Carrera {
    private String nombre;
@@ -64,6 +65,52 @@ public class Carrera {
 
     public void setPlanDeEstudio(List<PlanDeEstudio> planDeEstudio) {
         this.planesDeEstudio = planDeEstudio;
+    }
+
+    public List<PlanDeEstudio> getPlanesDeEstudio() {
+        return planesDeEstudio;
+    }
+
+    public void setPlanesDeEstudio(List<PlanDeEstudio> planesDeEstudio) {
+        this.planesDeEstudio = planesDeEstudio;
+    }
+
+    public void setAlumnos(List<Alumno> alumnos) {
+        this.alumnos = alumnos;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.nombre);
+        hash = 23 * hash + this.codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Carrera other = (Carrera) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrera{" + "nombre=" + nombre + ", codigo=" + codigo + ", fechaCreacion=" + fechaCreacion + ", cantidadA\u00f1os=" + cantidadAños + ", planesDeEstudio=" + planesDeEstudio + ", alumnos=" + alumnos + '}';
     }
     
 }

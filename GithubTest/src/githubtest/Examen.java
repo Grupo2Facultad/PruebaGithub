@@ -19,6 +19,15 @@ public abstract class Examen {
    private int horario;
    private Acta acta;
 
+    public Examen(Asignatura asignatura, int numero, String periodo, LocalDate fecha, int horario, Acta acta) {
+        this.asignatura = asignatura;
+        this.numero = numero;
+        this.periodo = periodo;
+        this.fecha = fecha;
+        this.horario = horario;
+        this.acta = acta;
+    }
+
     public Asignatura getAsignatura() {
         return asignatura;
     }
@@ -65,6 +74,36 @@ public abstract class Examen {
 
     public void setActa(Acta acta) {
         this.acta = acta;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 83 * hash + this.numero;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Examen other = (Examen) obj;
+        if (this.numero != other.numero) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Examen{" + "asignatura=" + asignatura + ", numero=" + numero + ", periodo=" + periodo + ", fecha=" + fecha + ", horario=" + horario + ", acta=" + acta + '}';
     }
     
     

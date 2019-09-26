@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -28,9 +29,9 @@ public class InscripcionAExamen {
 
     
 
-    public InscripcionAExamen(Alumno alumno, LocalDate fecha, Examen examen) {
+    public InscripcionAExamen(Alumno alumno, Examen examen) {
         this.alumno = alumno;
-        this.fecha = fecha;
+        this.fecha = LocalDate.now();
         this.examen = examen;
         this.habilitado=false;
         if(examen instanceof Parcial){
@@ -102,13 +103,7 @@ public class InscripcionAExamen {
     public void verificarParcial() {
         BitacoraFinal bitacora=null;
         List<TrabajoPractico> trabajos=null;
-        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
-        for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
-            for (PlanDeEstudio plane : planes) {
-                ArrayList<Asignatura> asig = plane.getAsignaturas();
-                for (Asignatura asignatura : asig) {
-                    ArrayList<Examen> examenes = (ArrayList) asignatura.getExamenes();
+          List<Examen> examenes=getElRestoDeExamenes();
                     for (Examen examene : examenes) {
                         if(examene instanceof Parcial){
                             if (!((Parcial)examene).isPrimeroTrueSegundoFalse()){
@@ -117,13 +112,12 @@ public class InscripcionAExamen {
                             }                               
                         }
                         if (examene.equals(examen)) {
-                            bitacora = asignatura.getBitacora();
-                            trabajos=(ArrayList)asignatura.getListadoTrabajosPracticos();
+                            bitacora = examene.getAsignatura().getBitacora();
+                            trabajos=(ArrayList)examene.getAsignatura().getListadoTrabajosPracticos();
                         }
                     }
-                }
-            }
-        }
+                
+            
         verificarAsistencia(bitacora);
         verificarNotasPracticos(trabajos);
         habilitarParcial();
@@ -263,6 +257,65 @@ public class InscripcionAExamen {
 
     public void setNotaObtenida(String  notaObtenida) {
         this.notaObtenida = notaObtenida;
+    }
+
+    public boolean isNotasPracticosBuenas() {
+        return notasPracticosBuenas;
+    }
+
+    public void setNotasPracticosBuenas(boolean notasPracticosBuenas) {
+        this.notasPracticosBuenas = notasPracticosBuenas;
+    }
+
+    public boolean isAproboPrimerParcial() {
+        return aproboPrimerParcial;
+    }
+
+    public void setAproboPrimerParcial(boolean aproboPrimerParcial) {
+        this.aproboPrimerParcial = aproboPrimerParcial;
+    }
+
+    public boolean isTiene2Parciales() {
+        return tiene2Parciales;
+    }
+
+    public void setTiene2Parciales(boolean tiene2Parciales) {
+        this.tiene2Parciales = tiene2Parciales;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.alumno);
+        hash = 37 * hash + Objects.hashCode(this.fecha);
+        hash = 37 * hash + Objects.hashCode(this.examen);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final InscripcionAExamen other = (InscripcionAExamen) obj;
+        if (!Objects.equals(this.alumno, other.alumno)) {
+            return false;
+        }
+        if (!Objects.equals(this.fecha, other.fecha)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "InscripcionAExamen{" + "alumno=" + alumno + ", fecha=" + fecha + ", examen=" + examen + ", habilitado=" + habilitado + ", notasPracticosBuenas=" + notasPracticosBuenas + ", aproboPrimerParcial=" + aproboPrimerParcial + ", asistencia=" + asistencia + ", notaObtenida=" + notaObtenida + ", tiene2Parciales=" + tiene2Parciales + '}';
     }
 
 
