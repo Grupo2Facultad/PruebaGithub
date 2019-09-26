@@ -14,6 +14,19 @@ import java.util.List;
  */
 public class ActaFinal extends Acta{
     private boolean cerrada;
+
+    public ActaFinal(boolean cerrada, Examen examen) {
+        super(examen);
+        this.cerrada = cerrada;
+    }
+
+    public boolean isCerrada() {
+        return cerrada;
+    }
+
+    public void setCerrada(boolean cerrada) {
+        this.cerrada = cerrada;
+    }
   
     public void cerrarActa() {
         boolean existen=existenDocentes();
@@ -61,4 +74,5 @@ public class ActaFinal extends Acta{
          System.out.println("todavia no esta cerrada");
      }
     }
+    
 }

@@ -5,6 +5,8 @@
  */
 package githubtest;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author juanc
@@ -12,6 +14,13 @@ package githubtest;
 public class Parcial extends Examen{
     private boolean recuperatorio;
     private boolean primeroTrueSegundoFalse;
+
+    public Parcial(boolean recuperatorio, boolean primeroTrueSegundoFalse, Asignatura asignatura, int numero, String periodo, LocalDate fecha, int horario, Acta acta) {
+        super(asignatura, numero, periodo, fecha, horario, acta);
+        this.recuperatorio = recuperatorio;
+        this.primeroTrueSegundoFalse = primeroTrueSegundoFalse;
+    }
+    
 
     public boolean isRecuperatorio() {
         return recuperatorio;
