@@ -33,7 +33,7 @@ private int numeroMatricula;
             for (PlanDeEstudio plan : planes) {
                 if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
                     ArrayList<Asignatura> a = plan.getAsignaturas();
-                    for (Asignatura asignatura : a) {
+                    for (Asignatura asignatura : a) { 
                         if (ag.equals(asignatura)) {
                             Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(ag.getPeriodoLectivo(), año), this, asignatura, true);
                             asignatura.getCursantes().add(i);

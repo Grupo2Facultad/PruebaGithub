@@ -6,6 +6,7 @@
 package githubtest;
 
 import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,11 @@ public class InscripcionAExamen {
     private LocalDate fecha;
     private Examen examen;
     private boolean habilitado,
-            notas,
+            notasPracticosBuenas,
             aproboPrimerParcial,
             asistencia;
     private double notaObtenida;
-           private boolean hayPrimero;
+    private boolean tiene2Parciales;
 
     
 
@@ -31,9 +32,74 @@ public class InscripcionAExamen {
         this.alumno = alumno;
         this.fecha = fecha;
         this.examen = examen;
+        this.habilitado=false;
+        if(examen instanceof Parcial){
+            verificarParcial();
+        }
+        else{
+            verificarFinal();
+        }
     }
 
-    public void verificar() {
+    public void verificarFinal() {
+        if(DAYS.between(examen.getFecha(),LocalDate.now())<=3){
+        boolean regular;
+        if(getNotaCurso()>=6){
+        regular=true;
+    }
+        else{
+            regular=false;
+        }
+        if (((Final)examen).isPuedenRegulares()&&regular){
+        habilitado=true;
+    }
+        else{
+            habilitado=false;
+        }
+        if(((Final)examen).isPuedenLibres()){
+        habilitado=true;
+    }
+    }
+    }
+    public Double getNotaCurso() {
+        double notaPrimero=0,
+                notaSegundo=0;
+        double notaCurso;
+        List<Examen> examenes = getElRestoDeExamenes();
+        for (Examen examene : examenes) {
+            if (!((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                this.tiene2Parciales = true;
+                ArrayList<InscripcionAExamen> inscripciones=(ArrayList)examene.getActa().getInscripciones();
+                for (InscripcionAExamen inscripcione : inscripciones) {
+                    if(this.alumno.equals(inscripcione.alumno)){
+                        notaSegundo=inscripcione.notaObtenida;
+                    }
+                }
+            }
+            if(((Parcial) examene).isPrimeroTrueSegundoFalse()){
+                   ArrayList<InscripcionAExamen> inscripciones=(ArrayList)examene.getActa().getInscripciones();
+                    for (InscripcionAExamen inscripcione : inscripciones) {
+                    if(this.alumno.equals(inscripcione.alumno)){
+                        notaPrimero=inscripcione.notaObtenida;
+                    }
+                }
+            }
+        }
+        if (this.tiene2Parciales){
+            notaCurso=(notaPrimero + notaSegundo)/2;
+        }
+        else{
+            notaCurso=notaPrimero;
+        }
+        return notaCurso;
+    }
+  
+       
+    public List<Examen> getElRestoDeExamenes() {
+        return this.examen.getAsignatura().getExamenes();
+    }
+        
+    public void verificarParcial() {
         BitacoraFinal bitacora=null;
         List<TrabajoPractico> trabajos=null;
         ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
@@ -47,6 +113,7 @@ public class InscripcionAExamen {
                         if(examene instanceof Parcial){
                             if (!((Parcial)examene).isPrimeroTrueSegundoFalse()){
                               verificarPrimero(examenes);
+                              this.tiene2Parciales=true;
                             }                               
                         }
                         if (examene.equals(examen)) {
@@ -59,15 +126,14 @@ public class InscripcionAExamen {
         }
         verificarAsistencia(bitacora);
         verificarNotasPracticos(trabajos);
-        habilitar();
-       
+        habilitarParcial();
     }
 
-    public void habilitar() {
-        if (asistencia && notas && !hayPrimero) {
+    public void habilitarParcial() {
+        if (asistencia && notasPracticosBuenas && !tiene2Parciales) {
             this.habilitado = true;
         }
-        if (hayPrimero&&asistencia&&notas&&aproboPrimerParcial) {
+        if (tiene2Parciales&&asistencia&&notasPracticosBuenas&&aproboPrimerParcial) {
             this.habilitado=true;
         }
     }
@@ -104,10 +170,10 @@ public class InscripcionAExamen {
         }
         double promedio=notas/totalTrabajos;
         if(promedio>=6){
-            this.notas=true;
+            this.notasPracticosBuenas=true;
         }
         else{
-            this.notas=false;
+            this.notasPracticosBuenas=false;
         }
     }
     public void verificarAsistencia(BitacoraFinal bitacora) {
@@ -168,11 +234,11 @@ public class InscripcionAExamen {
     }
 
     public boolean isNotas() {
-        return notas;
+        return notasPracticosBuenas;
     }
 
     public void setNotas(boolean notas) {
-        this.notas = notas;
+        this.notasPracticosBuenas = notas;
     }
 
     public boolean isPrimerParcial() {

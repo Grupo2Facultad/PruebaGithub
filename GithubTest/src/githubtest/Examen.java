@@ -12,14 +12,20 @@ import java.time.LocalDate;
  * @author juanc
  */
 public abstract class Examen {
+    private Asignatura asignatura;
     private int numero;
     private String periodo;
     private LocalDate fecha;
    private int horario;
    private Acta acta;
-   //sets-gets
-   public abstract Acta HacerActa();// acta todavia no existe
-   public abstract boolean controlarNotas();
+
+    public Asignatura getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
+    }
 
     public int getNumero() {
         return numero;

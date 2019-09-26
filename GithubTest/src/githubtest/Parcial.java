@@ -29,14 +29,4 @@ public class Parcial extends Examen{
         this.primeroTrueSegundoFalse = primeroTrueSegundoFalse;
     }
 
-    @Override
-    public Acta HacerActa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean controlarNotas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
