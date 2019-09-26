@@ -20,4 +20,21 @@ public abstract class Acta {
     public  List<Alumno> getHabilitados(){
         return null;
     }  
+
+    public ArrayList<InscripcionAExamen> getIns() {
+        return ins;
+    }
+
+    public void setIns(ArrayList<InscripcionAExamen> ins) {
+        this.ins = ins;
+    }
+
+    public List<InscripcionAExamen> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(List<InscripcionAExamen> inscripciones) {
+        this.inscripciones = inscripciones;
+    }
+    
 }

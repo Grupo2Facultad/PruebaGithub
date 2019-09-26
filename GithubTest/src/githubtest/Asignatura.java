@@ -15,8 +15,9 @@ public class Asignatura {
   private Equipo equipo;
   private BitacoraFinal bitacora;
   private List<TrabajoPractico> listadoTrabajosPracticos;
-  private List<Examen> examenes; 
+  private List<Examen> examenes;
   private List<Regimen>cursantes;
+
 
     public Asignatura(int codigo, int cargaHoraria, String nombre, int añoalQuePertenece, PeriodoLectivoEnum periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, List<Alumno> alumnosCursantes, BitacoraFinal bitacora, List<TrabajoPractico> listadoTrabajosPracticos, List<Examen> examenes, List<Regimen> cursantes) {
         this.codigo = codigo;
@@ -33,6 +34,8 @@ public class Asignatura {
         this.examenes = examenes;
         this.cursantes = cursantes;
     }
+
+ 
 
     public int getCodigo() {
         return codigo;

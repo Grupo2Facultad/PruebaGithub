@@ -20,8 +20,10 @@ public class InscripcionAExamen {
     private Examen examen;
     private boolean habilitado,
             notas,
+            aproboPrimerParcial,
             asistencia;
     private double notaObtenida;
+           private boolean hayPrimero;
 
     
 
@@ -34,7 +36,6 @@ public class InscripcionAExamen {
     public void verificar() {
         BitacoraFinal bitacora=null;
         List<TrabajoPractico> trabajos=null;
-
         ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
         for (Carrera carrera : carreras) {
             ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
@@ -43,6 +44,11 @@ public class InscripcionAExamen {
                 for (Asignatura asignatura : asig) {
                     ArrayList<Examen> examenes = (ArrayList) asignatura.getExamenes();
                     for (Examen examene : examenes) {
+                        if(examene instanceof Parcial){
+                            if (!((Parcial)examene).isPrimeroTrueSegundoFalse()){
+                              verificarPrimero(examenes);
+                            }                               
+                        }
                         if (examene.equals(examen)) {
                             bitacora = asignatura.getBitacora();
                             trabajos=(ArrayList)asignatura.getListadoTrabajosPracticos();
@@ -53,8 +59,36 @@ public class InscripcionAExamen {
         }
         verificarAsistencia(bitacora);
         verificarNotasPracticos(trabajos);
-        
+        habilitar();
+       
+    }
 
+    public void habilitar() {
+        if (asistencia && notas && !hayPrimero) {
+            this.habilitado = true;
+        }
+        if (hayPrimero&&asistencia&&notas&&aproboPrimerParcial) {
+            this.habilitado=true;
+        }
+    }
+
+    public void verificarPrimero(List<Examen>examenes) {
+        for (Examen examene : examenes) {
+            if (((Parcial)examene).isPrimeroTrueSegundoFalse()){
+                ArrayList<InscripcionAExamen> inscripciones= (ArrayList)examene.getActa().getInscripciones();
+                for (InscripcionAExamen inscripcione : inscripciones) {
+                    if(inscripcione.getAlumno().equals(alumno)){
+                        if (inscripcione.getNotaObtenida()>6){
+                            this.aproboPrimerParcial=true;                                   
+                        }
+                        else{
+                            this.aproboPrimerParcial=false;
+                        }
+                    }
+                }
+            }
+        }
+      
     }
     public void verificarNotasPracticos(List<TrabajoPractico> trabajos) {
        int totalTrabajos=0;
@@ -99,6 +133,70 @@ public class InscripcionAExamen {
         } else {
             this.asistencia = false;
         }
+    }
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public Examen getExamen() {
+        return examen;
+    }
+
+    public void setExamen(Examen examen) {
+        this.examen = examen;
+    }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+
+    public boolean isNotas() {
+        return notas;
+    }
+
+    public void setNotas(boolean notas) {
+        this.notas = notas;
+    }
+
+    public boolean isPrimerParcial() {
+        return aproboPrimerParcial;
+    }
+
+    public void setPrimerParcial(boolean primerParcial) {
+        this.aproboPrimerParcial = primerParcial;
+    }
+
+    public boolean isAsistencia() {
+        return asistencia;
+    }
+
+    public void setAsistencia(boolean asistencia) {
+        this.asistencia = asistencia;
+    }
+
+    public double getNotaObtenida() {
+        return notaObtenida;
+    }
+
+    public void setNotaObtenida(double notaObtenida) {
+        this.notaObtenida = notaObtenida;
     }
 
 
