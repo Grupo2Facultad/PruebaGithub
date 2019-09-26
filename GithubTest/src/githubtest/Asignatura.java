@@ -8,6 +8,8 @@ public class Asignatura {
   private int codigo,
           cargaHoraria;
   private String nombre;
+  private PlanDeEstudio planDeEstudio;
+  private Carrera carrera;
   private int añoDeCarreraAlQuePertenece;
   private PeriodoLectivoEnum periodoLectivo;
   private boolean promocional;
@@ -60,6 +62,31 @@ public class Asignatura {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public PlanDeEstudio getPlanDeEstudio() {
+        return planDeEstudio;
+    }
+
+    public void setPlanDeEstudio(PlanDeEstudio planDeEstudio) {
+        this.planDeEstudio = planDeEstudio;
+    }
+
+    public Carrera getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
+    }
+
+    public int getAñoDeCarreraAlQuePertenece() {
+        return añoDeCarreraAlQuePertenece;
+    }
+
+    public void setAñoDeCarreraAlQuePertenece(int añoDeCarreraAlQuePertenece) {
+        this.añoDeCarreraAlQuePertenece = añoDeCarreraAlQuePertenece;
+    }
+    
 
     public int getAñoalQuePertenece() {
         return añoDeCarreraAlQuePertenece;

@@ -23,7 +23,7 @@ public class InscripcionAExamen {
             notasPracticosBuenas,
             aproboPrimerParcial,
             asistencia;
-    private double notaObtenida;
+    private String  notaObtenida;
     private boolean tiene2Parciales;
 
     
@@ -72,7 +72,7 @@ public class InscripcionAExamen {
                 ArrayList<InscripcionAExamen> inscripciones=(ArrayList)examene.getActa().getInscripciones();
                 for (InscripcionAExamen inscripcione : inscripciones) {
                     if(this.alumno.equals(inscripcione.alumno)){
-                        notaSegundo=inscripcione.notaObtenida;
+                        notaSegundo=Double.parseDouble(inscripcione.notaObtenida);
                     }
                 }
             }
@@ -80,7 +80,7 @@ public class InscripcionAExamen {
                    ArrayList<InscripcionAExamen> inscripciones=(ArrayList)examene.getActa().getInscripciones();
                     for (InscripcionAExamen inscripcione : inscripciones) {
                     if(this.alumno.equals(inscripcione.alumno)){
-                        notaPrimero=inscripcione.notaObtenida;
+                        notaPrimero=Double.parseDouble(inscripcione.notaObtenida);
                     }
                 }
             }
@@ -144,7 +144,7 @@ public class InscripcionAExamen {
                 ArrayList<InscripcionAExamen> inscripciones= (ArrayList)examene.getActa().getInscripciones();
                 for (InscripcionAExamen inscripcione : inscripciones) {
                     if(inscripcione.getAlumno().equals(alumno)){
-                        if (inscripcione.getNotaObtenida()>6){
+                        if (Double.parseDouble(inscripcione.getNotaObtenida())>6){
                             this.aproboPrimerParcial=true;                                   
                         }
                         else{
@@ -257,11 +257,11 @@ public class InscripcionAExamen {
         this.asistencia = asistencia;
     }
 
-    public double getNotaObtenida() {
+    public String  getNotaObtenida() {
         return notaObtenida;
     }
 
-    public void setNotaObtenida(double notaObtenida) {
+    public void setNotaObtenida(String  notaObtenida) {
         this.notaObtenida = notaObtenida;
     }
 

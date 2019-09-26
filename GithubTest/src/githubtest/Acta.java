@@ -14,11 +14,19 @@ import java.util.List;
  */
 public abstract class Acta {
     private List<InscripcionAExamen> inscripciones;
-    
+    private Examen examen;
+
     public abstract void imprimirActa();
-    public  List<Alumno> getHabilitados(){
-        return null;
-    }  
+
+    public List<Alumno> getHabilitados() {
+        ArrayList<Alumno> habilitados = new ArrayList<Alumno>();
+        for (InscripcionAExamen inscripcion : inscripciones) {
+            if (inscripcion.isHabilitado()) {
+                habilitados.add(inscripcion.getAlumno());
+            }
+        }
+        return habilitados;
+    }
 
     public List<InscripcionAExamen> getInscripciones() {
         return inscripciones;
@@ -27,5 +35,23 @@ public abstract class Acta {
     public void setInscripciones(List<InscripcionAExamen> inscripciones) {
         this.inscripciones = inscripciones;
     }
-    
+
+    public Examen getExamen() {
+        return examen;
+    }
+
+    public void setExamen(Examen examen) {
+        this.examen = examen;
+    }
+
+    @Override
+    public String toString() {
+        String s = "Examen de" + examen.getAsignatura() + "realizado el dia" + examen.getFecha() + "\n";
+        for (InscripcionAExamen inscripcione : inscripciones) {
+            s = s + inscripcione + "\n";
+        }
+        return s;
+
+    }
+
 }
