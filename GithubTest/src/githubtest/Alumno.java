@@ -13,7 +13,6 @@ private String domicilio,
 private LocalDate fechaNacimiento,
         fechaInscripcion;
 private int numeroMatricula;
-private ArrayList<Cursada> cursadas;  
 
     public Alumno(String domicilio, String localidad, String provincia, String paisDeResidencia, String correoElectronico, LocalDate fechaNacimiento, LocalDate fechaInscripcion, int numeroMatricula, String nombre, String apellido, String DNI) {
         super(nombre, apellido, DNI);

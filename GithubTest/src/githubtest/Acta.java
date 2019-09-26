@@ -5,6 +5,7 @@
  */
 package githubtest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
  * @author juanc
  */
 public abstract class Acta {
+    private ArrayList<InscripcionAExamen> ins;
     private List<InscripcionAExamen> inscripciones;
     
     public abstract void imprimirActa();

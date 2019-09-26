@@ -5,6 +5,7 @@
  */
 package githubtest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,9 +13,21 @@ import java.util.List;
  * @author juanc
  */
 public class ActaParcial extends Acta{
+    
+    
 
     public List<Alumno> getHabilitados(Carrera carrera, PlanDeEstudio planDeEstudio, Asignatura asignatura,PeriodoLectivoConAño periodo,int numeroDeParcial) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<PlanDeEstudio> planes=(ArrayList)carrera.getPlanDeEstudio();
+        for (PlanDeEstudio plane : planes) {
+            if (plane.equals(planDeEstudio)){
+                ArrayList<Asignatura> asignaturas= plane.getAsignaturas();
+                for (Asignatura asignatura1 : asignaturas) {
+                    if (asignatura1.equals(asignatura)){
+                        
+                    }
+                }
+            }
+        }
     }
     //No Listo
     public boolean verificarParcialAnterior () {
