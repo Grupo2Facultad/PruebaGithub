@@ -1,8 +1,10 @@
 
 package githubtest;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Alumno extends Persona{
+
 private String domicilio,
         localidad,
         provincia,
@@ -23,6 +25,62 @@ private int numeroMatricula;
         this.fechaInscripcion = fechaInscripcion;
         this.numeroMatricula = numeroMatricula;
     }
+
+    public void InscribirseAAsignaturaComoRegular(Asignatura ag, int año) {
+        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
+        for (Carrera carrera : carreras) {
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            for (PlanDeEstudio plan : planes) {
+                if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
+                    ArrayList<Asignatura> a = plan.getAsignaturas();
+                    for (Asignatura asignatura : a) { 
+                        if (ag.equals(asignatura)) {
+                            Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(ag.getPeriodoLectivo(), año), this, asignatura, true);
+                            asignatura.getCursantes().add(i);
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void InscribirseAAsignaturaComoLibre(Asignatura ag,int año) {
+        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
+        for (Carrera carrera : carreras) {
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            for (PlanDeEstudio plan : planes) {
+                if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
+                    ArrayList<Asignatura> a = plan.getAsignaturas();
+                    for (Asignatura asignatura : a) {
+                        if (ag.equals(asignatura)) {
+                            Regimen i = new Regimen(this, asignatura, false);
+                            asignatura.getCursantes().add(i);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void DarseDeBaja(Asignatura ag) {
+        ArrayList<Carrera> carreras = RegistroDeCarreras.getCarreras();
+        for (Carrera carrera : carreras) {
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            for (PlanDeEstudio plan : planes) {
+                ArrayList<Asignatura> a = plan.getAsignaturas();
+                for (Asignatura asignatura : a) {
+                    if (ag.equals(asignatura)) {
+                        ArrayList<Regimen> r = (ArrayList) asignatura.getCursantes();
+                        for (Regimen regimen : r) {
+                            if (regimen.getAlumno().equals(this)) {
+                                r.remove(regimen);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 
     public String getDomicilio() {
         return domicilio;
@@ -87,35 +145,8 @@ private int numeroMatricula;
     public void setNumeroMatricula(int numeroMatricula) {
         this.numeroMatricula = numeroMatricula;
     }
+        
+    
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.numeroMatricula;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Alumno other = (Alumno) obj;
-        if (this.numeroMatricula != other.numeroMatricula) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Alumno{" + "domicilio=" + domicilio + ", localidad=" + localidad + ", provincia=" + provincia + ", paisDeResidencia=" + paisDeResidencia + ", correoElectronico=" + correoElectronico + ", fechaNacimiento=" + fechaNacimiento + ", fechaInscripcion=" + fechaInscripcion + ", numeroMatricula=" + numeroMatricula + '}';
-    }
     
 }
