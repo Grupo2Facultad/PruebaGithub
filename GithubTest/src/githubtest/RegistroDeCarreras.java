@@ -18,8 +18,8 @@ public class RegistroDeCarreras {
 
     private  ArrayList<Carrera> carreras;
 
-    public RegistroDeCarreras(ArrayList<Carrera> carreras) {
-        this.carreras = carreras;
+    public RegistroDeCarreras() {
+        this.carreras = new ArrayList<>()  ;
     }
      
 

@@ -1,0 +1,18 @@
+Alumnado:
+
+a)RegistroDeCarreras.getAlumnosPorCarrera()
+
+b)RegistroDeCarreras.getCarreraPorDNI()
+
+Bedelia:
+
+a) RegistroDeCarreras.HabiltadosParcial()
+
+b) RegistroDeCarreras.HabilitadosFinal()
+
+c)RegistroDeCarreras.getAsigPorDNI()
+
+d)RegistroDeCarreras.getDocentesAsignatura()
+
+e)ActaFinal.cerrarActa() y despues ActaFinal.imprimirActa()
+

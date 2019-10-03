@@ -10,15 +10,14 @@ public abstract class PlanDeEstudio {
             fechadeVigencia;
     private Carrera carrera;
     private int añosCarrera;
-
     private ArrayList<Asignatura> Asignaturas;
 
-    public PlanDeEstudio(LocalDate fechaDeImplementacion, LocalDate fechadeVigencia, Carrera carrera, int añosCarrera, ArrayList<Asignatura> Asignaturas) {
+    public PlanDeEstudio(LocalDate fechaDeImplementacion, LocalDate fechadeVigencia, Carrera carrera, int añosCarrera) {
         this.fechaDeImplementacion = fechaDeImplementacion;
         this.fechadeVigencia = fechadeVigencia;
         this.carrera = carrera;
         this.añosCarrera = añosCarrera;
-        this.Asignaturas = Asignaturas;
+        this.Asignaturas = new ArrayList<>();
     }
 
  

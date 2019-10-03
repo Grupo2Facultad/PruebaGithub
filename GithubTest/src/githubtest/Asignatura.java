@@ -21,7 +21,7 @@ public class Asignatura {
   private List<Examen> examenes;
   private List<Regimen>cursantes;
 
-    public Asignatura(int codigo, int cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera, int añoDeCarreraAlQuePertenece, PeriodoLectivoEnum periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, BitacoraFinal bitacora, List<TrabajoPractico> listadoTrabajosPracticos, List<Examen> examenes, List<Regimen> cursantes) {
+    public Asignatura(int codigo, int cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera, int añoDeCarreraAlQuePertenece, PeriodoLectivoEnum periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, BitacoraFinal bitacora) {
         this.codigo = codigo;
         this.cargaHoraria = cargaHoraria;
         this.nombre = nombre;
@@ -33,9 +33,9 @@ public class Asignatura {
         this.cantidadParciales = cantidadParciales;
         this.equipo = equipo;
         this.bitacora = bitacora;
-        this.listadoTrabajosPracticos = listadoTrabajosPracticos;
-        this.examenes = examenes;
-        this.cursantes = cursantes;
+        this.listadoTrabajosPracticos = new ArrayList<>()  ;
+        this.examenes =new ArrayList<>()  ;
+        this.cursantes = new ArrayList<>()  ;
     }
 
 
