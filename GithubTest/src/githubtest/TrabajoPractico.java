@@ -1,6 +1,7 @@
 
 package githubtest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,8 +9,8 @@ import java.util.Objects;
 public class TrabajoPractico {
     private List<TrabajoDeAlumno> notasIndividuales;
 
-    public TrabajoPractico(List<TrabajoDeAlumno> notasIndividuales) {
-        this.notasIndividuales = notasIndividuales;
+    public TrabajoPractico() {
+        this.notasIndividuales = new ArrayList<>()  ;
     }
 
     public List<TrabajoDeAlumno> getNotasIndividuales() {

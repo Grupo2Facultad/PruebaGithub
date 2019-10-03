@@ -6,6 +6,8 @@
 package GUI;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,15 +22,20 @@ public class PanelIngresos extends JPanel {
     protected JButton ingresarAlumno,
             ingresarDocente;
 
+
+    
     public PanelIngresos() {
         super();
         this.setLayout(new FlowLayout());
         label3 = new JLabel("Ingresos");
         ingresarAlumno = new JButton("ingresarAlumno");
+        ingresarAlumno.addActionListener(new IngresarAlumno());
         ingresarDocente = new JButton("ingresarDocente");
+        ingresarDocente.addActionListener(new IngresarDocente ());
         this.add(label3);
         this.add(ingresarAlumno);
         this.add(ingresarDocente);
     }
+ 
 
 }

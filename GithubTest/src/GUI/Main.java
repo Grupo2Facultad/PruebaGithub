@@ -24,6 +24,7 @@ import javax.swing.JPanel;
  */ 
 
 public class Main {
+    static RegistroDeCarreras registroDeCarreras;
     public static void main(String[] args) {
     añadirInformacionPorDefecto();
     Frame frame=new Frame("TallerPOO");
@@ -35,8 +36,14 @@ public class Main {
     frame.setVisible(true); 
     }
     public static void añadirInformacionPorDefecto() { 
-     RegistroDeCarreras registroDeCarreras=new RegistroDeCarreras(new ArrayList<>());
+        registroDeCarreras=new RegistroDeCarreras();
         ArrayList<Carrera>carreras= registroDeCarreras.getCarreras();
-        carreras.add(new Carrera("LicenciaturaDeSistemas",1,LocalDate.of(2000,4,15),5,new ArrayList<>(),new ArrayList<>()));
+        carreras.add(new Carrera("LicenciaturaSistemas",1,LocalDate.of(2000,4,15),5));
+        
     }
+
+    public static RegistroDeCarreras getRegistroDeCarreras() {
+        return registroDeCarreras;
+    }
+    
 }

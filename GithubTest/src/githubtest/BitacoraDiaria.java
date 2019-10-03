@@ -2,6 +2,7 @@
 package githubtest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,10 +11,10 @@ public class BitacoraDiaria {
     private String TemaClase;
     private List<Asistencia> listadoAsistencias;
 
-    public BitacoraDiaria(LocalDate fechaClase, String TemaClase, List<Asistencia> listadoAsistencias) {
+    public BitacoraDiaria(LocalDate fechaClase, String TemaClase) {
         this.fechaClase = fechaClase;
         this.TemaClase = TemaClase;
-        this.listadoAsistencias = listadoAsistencias;
+        this.listadoAsistencias = new ArrayList<>() ;
     }
     
 

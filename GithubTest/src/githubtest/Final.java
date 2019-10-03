@@ -6,6 +6,7 @@
 package githubtest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,11 +18,11 @@ public class Final extends Examen {
     private boolean puedenLibres;
     private List<DocenteExamen> docenteExamen;
 
-    public Final(boolean puedenRegulares, boolean puedenLibres, List<DocenteExamen> docenteExamen, Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario, Acta acta) {
+    public Final(boolean puedenRegulares, boolean puedenLibres, Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario, Acta acta) {
         super(asignatura, periodo, fecha, horario, acta);
         this.puedenRegulares = puedenRegulares;
         this.puedenLibres = puedenLibres;
-        this.docenteExamen = docenteExamen;
+        this.docenteExamen = new ArrayList<>();
     }
 
     public boolean isPuedenRegulares() {

@@ -2,6 +2,7 @@
 package githubtest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,13 +14,13 @@ public class Carrera {
    private List<PlanDeEstudio> planesDeEstudio;
    private List<Alumno> alumnos;
 
-    public Carrera(String nombre, int codigo, LocalDate fechaCreacion, int cantidadAños, List<PlanDeEstudio> planesDeEstudio, List<Alumno> alumnos) {
+    public Carrera(String nombre, int codigo, LocalDate fechaCreacion, int cantidadAños) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.fechaCreacion = fechaCreacion;
         this.cantidadAños = cantidadAños;
-        this.planesDeEstudio = planesDeEstudio;
-        this.alumnos = alumnos;
+        this.planesDeEstudio = new ArrayList<>()  ;;
+        this.alumnos = new ArrayList<>()  ;;
     }
    
    
