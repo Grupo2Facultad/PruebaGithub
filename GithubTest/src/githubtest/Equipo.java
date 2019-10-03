@@ -1,14 +1,15 @@
 
 package githubtest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Equipo {
     private List<Rol> roles;
 
-    public Equipo(List<Rol> roles) {
-        this.roles = roles;
+    public Equipo() {
+        this.roles = new ArrayList<>();
     }
     
 

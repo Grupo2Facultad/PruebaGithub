@@ -12,9 +12,9 @@ private String domicilio,
         correoElectronico;
 private LocalDate fechaNacimiento,
         fechaInscripcion;
-private int numeroMatricula;
+private String  numeroMatricula;
 
-    public Alumno(String domicilio, String localidad, String provincia, String paisDeResidencia, String correoElectronico, LocalDate fechaNacimiento, LocalDate fechaInscripcion, int numeroMatricula, String nombre, String apellido, String DNI) {
+    public Alumno(String domicilio, String localidad, String provincia, String paisDeResidencia, String correoElectronico, LocalDate fechaNacimiento, LocalDate fechaInscripcion, String  numeroMatricula, String nombre, String apellido, String DNI) {
         super(nombre, apellido, DNI);
         this.domicilio = domicilio;
         this.localidad = localidad;
@@ -23,6 +23,11 @@ private int numeroMatricula;
         this.correoElectronico = correoElectronico;
         this.fechaNacimiento = fechaNacimiento;
         this.fechaInscripcion = fechaInscripcion;
+        this.numeroMatricula = numeroMatricula;
+    }
+
+    public Alumno(String nombre, String apellido, String DNI,String  numeroMatricula) {
+        super(nombre, apellido, DNI);
         this.numeroMatricula = numeroMatricula;
     }
     
@@ -139,11 +144,11 @@ private int numeroMatricula;
         this.fechaInscripcion = fechaInscripcion;
     }
 
-    public int getNumeroMatricula() {
+    public String  getNumeroMatricula() {
         return numeroMatricula;
     }
 
-    public void setNumeroMatricula(int numeroMatricula) {
+    public void setNumeroMatricula(String  numeroMatricula) {
         this.numeroMatricula = numeroMatricula;
     }
         

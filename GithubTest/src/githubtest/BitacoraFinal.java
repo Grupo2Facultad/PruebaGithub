@@ -1,14 +1,15 @@
 
 package githubtest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class BitacoraFinal {
     private List<BitacoraDiaria> bitacorasDiarias; 
 
-    public BitacoraFinal(List<BitacoraDiaria> bitacorasDiarias) {
-        this.bitacorasDiarias = bitacorasDiarias;
+    public BitacoraFinal() {
+        this.bitacorasDiarias = new ArrayList<>()  ;;
     }
 
     public List<BitacoraDiaria> getBitacorasDiarias() {
