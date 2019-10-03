@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Alumno extends Persona{
-private String algo;
+private String algo,
+        lago;
 private String domicilio,
         localidad,
         provincia,
