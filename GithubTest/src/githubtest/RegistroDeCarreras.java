@@ -67,10 +67,10 @@ public class RegistroDeCarreras {
         return y;
     }
 
-    public   ArrayList<Carrera>  getCarreraPorDNI(String DNI) {
-        ArrayList<Carrera> carrerasPorDNI = new ArrayList<Carrera>();  
-         for (Carrera carrera : carrerasPorDNI) {
-             ArrayList<Alumno> alumnos=(ArrayList)carrera.getAlumnos();
+    public   Set<Carrera>  getCarreraPorDNI(String DNI) {
+        Set<Carrera> carrerasPorDNI = new HashSet<>();  
+         for (Carrera carrera : this.carreras) {
+             Set<Alumno> alumnos=carrera.getAlumnos();
              for (Alumno alumno : alumnos) {
                  if (alumno.getDNI().equals(DNI)){
                      carrerasPorDNI.add(carrera);
@@ -179,5 +179,7 @@ public class RegistroDeCarreras {
     public String toString() {
         return "RegistroDeCarreras{" + "carreras=" + carreras + '}';
     }
+
+
 
 }

@@ -21,10 +21,18 @@ public class IngresarAlumnoActionListener implements ActionListener{
    private final IngresarAlumno info;
    private  Carrera seleccionada;
 
+    /**
+     *
+     * @param info
+     */
     public IngresarAlumnoActionListener(IngresarAlumno info) {
         this.info = info;
     }
    
+    /**
+     *
+     * @param arg0
+     */
     @Override
     public void actionPerformed(ActionEvent arg0) {
          try{
@@ -36,12 +44,17 @@ public class IngresarAlumnoActionListener implements ActionListener{
              Main.POO.getCursantes().add(new Regimen(alumno,Main.POO,true));
              JOptionPane.showMessageDialog(null,"operacion exitosa");
              info.getFrame().setVisible(false);
-       
+         
          } 
          catch(Exception e){
              JOptionPane.showMessageDialog(null,"Falto Ingresar Algo o la Carrera es Invalida");
          }
     }
+
+    /**
+     *
+     * @throws Exception
+     */
     public void check() throws Exception{
         boolean e=true;
         if (info.getIngresoApellido().getText().equals("Apellido")||info.getIngresoApellido().getText().equals("")){

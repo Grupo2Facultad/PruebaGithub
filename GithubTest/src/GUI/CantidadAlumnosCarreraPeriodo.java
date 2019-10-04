@@ -38,6 +38,11 @@ class MostrarCantidadAlumnos implements ActionListener{
           JOptionPane.showMessageDialog(null,cantidadEs);
         }
 }
+
+    /**
+     *
+     * @param arg0
+     */
     @Override
     public void actionPerformed(ActionEvent arg0) {
         Frame frame=new Frame("Cantidad De Alumnos Por Carrera en un Periodo");

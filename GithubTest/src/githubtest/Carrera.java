@@ -109,7 +109,9 @@ public class Carrera {
 
     @Override
     public String toString() {
-        return "Carrera{" + "nombre=" + nombre + ", codigo=" + codigo + ", fechaCreacion=" + fechaCreacion + ", cantidadA\u00f1os=" + cantidadAños + ", planesDeEstudio=" + planesDeEstudio + ", alumnos=" + alumnos + '}';
+        return "Carrera{" + "nombre=" + nombre + ", codigo=" + codigo + '}';
     }
+
+  
     
 }
