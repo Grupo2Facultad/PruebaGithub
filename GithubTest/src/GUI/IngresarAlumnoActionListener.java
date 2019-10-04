@@ -7,6 +7,7 @@ package GUI;
 
 import githubtest.Alumno;
 import githubtest.Carrera;
+import githubtest.Regimen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,23 +17,26 @@ import javax.swing.JOptionPane;
  *
  * @author juanc
  */
-public class Ingresar implements ActionListener{
+public class IngresarAlumnoActionListener implements ActionListener{
    private final IngresarAlumno info;
    private  Carrera seleccionada;
 
-    public Ingresar(IngresarAlumno info) {
+    public IngresarAlumnoActionListener(IngresarAlumno info) {
         this.info = info;
     }
    
     @Override
     public void actionPerformed(ActionEvent arg0) {
-       
          try{
              check();
-             seleccionada.getAlumnos().add(new Alumno(info.getIngresoNombre().getText(),info.getIngresoApellido().getText(),
-                     info.getIngresoDNI().getText(),info.getIngresoNumeroMatricula().getText()));
+             Alumno alumno=new Alumno(info.getIngresoNombre().getText(),info.getIngresoApellido().getText(),
+                     info.getIngresoDNI().getText(),info.getIngresoNumeroMatricula().getText());
+             seleccionada.getAlumnos().add(alumno);
+             //Testeando añadir un alumno para probar informes
+             Main.POO.getCursantes().add(new Regimen(alumno,Main.POO,true));
              JOptionPane.showMessageDialog(null,"operacion exitosa");
              info.getFrame().setVisible(false);
+       
          } 
          catch(Exception e){
              JOptionPane.showMessageDialog(null,"Falto Ingresar Algo o la Carrera es Invalida");

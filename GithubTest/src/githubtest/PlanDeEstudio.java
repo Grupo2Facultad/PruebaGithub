@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public abstract class PlanDeEstudio {
+public class PlanDeEstudio {
 
     private LocalDate fechaDeImplementacion,
             fechadeVigencia;

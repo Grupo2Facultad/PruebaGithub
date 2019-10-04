@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -32,8 +33,9 @@ class MostrarCantidadAlumnos implements ActionListener{
           int año=Integer.parseInt(ingresoAño.getText());
           int mes=Integer.parseInt(ingresoMes.getText());
           int dia=Integer.parseInt(ingresoDia.getText());
-        JOptionPane.showMessageDialog(null,"La cantidad de alumnos es "+
-                Main.getRegistroDeCarreras().getAlumnosPorCarrera(carrera,LocalDate.of(año,mes,dia)));
+          int cantidad= Main.getRegistroDeCarreras().getAlumnosPorCarrera(carrera,LocalDate.of(año,mes,dia));
+          String cantidadEs="La cantidad de alumnos es "+cantidad;
+          JOptionPane.showMessageDialog(null,cantidadEs);
         }
 }
     @Override
@@ -53,7 +55,7 @@ class MostrarCantidadAlumnos implements ActionListener{
         container.add(ingresoDia);
         container.add(ingresar);
         frame.setVisible(true);
-        
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
 }

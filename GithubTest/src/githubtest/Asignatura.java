@@ -12,7 +12,7 @@ public class Asignatura {
   private PlanDeEstudio planDeEstudio;
   private Carrera carrera;
   private int añoDeCarreraAlQuePertenece;
-  private PeriodoLectivoEnum periodoLectivo;
+  private PeriodoLectivoConAño periodoLectivo;
   private boolean promocional;
   private int cantidadParciales;
   private Equipo equipo;
@@ -21,7 +21,7 @@ public class Asignatura {
   private List<Examen> examenes;
   private List<Regimen>cursantes;
 
-    public Asignatura(int codigo, int cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera, int añoDeCarreraAlQuePertenece, PeriodoLectivoEnum periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, BitacoraFinal bitacora) {
+    public Asignatura(int codigo, int cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera, int añoDeCarreraAlQuePertenece, PeriodoLectivoConAño periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, BitacoraFinal bitacora) {
         this.codigo = codigo;
         this.cargaHoraria = cargaHoraria;
         this.nombre = nombre;
@@ -91,20 +91,11 @@ public class Asignatura {
         this.añoDeCarreraAlQuePertenece = añoDeCarreraAlQuePertenece;
     }
     
-
-    public int getAñoalQuePertenece() {
-        return añoDeCarreraAlQuePertenece;
-    }
-
-    public void setAñoalQuePertenece(int añoalQuePertenece) {
-        this.añoDeCarreraAlQuePertenece = añoalQuePertenece;
-    }
-
-    public PeriodoLectivoEnum getPeriodoLectivo() {
+    public PeriodoLectivoConAño getPeriodoLectivo() {
         return periodoLectivo;
     }
 
-    public void setPeriodoLectivo(PeriodoLectivoEnum periodoLectivo) {
+    public void setPeriodoLectivo(PeriodoLectivoConAño periodoLectivo) {
         this.periodoLectivo = periodoLectivo;
     }
 
@@ -196,8 +187,10 @@ public class Asignatura {
 
     @Override
     public String toString() {
-        return "Asignatura{" + "codigo=" + codigo + ", cargaHoraria=" + cargaHoraria + ", nombre=" + nombre + ", planDeEstudio=" + planDeEstudio + ", carrera=" + carrera + ", a\u00f1oDeCarreraAlQuePertenece=" + añoDeCarreraAlQuePertenece + ", periodoLectivo=" + periodoLectivo + ", promocional=" + promocional + ", cantidadParciales=" + cantidadParciales + ", equipo=" + equipo + ", bitacora=" + bitacora + ", listadoTrabajosPracticos=" + listadoTrabajosPracticos + ", examenes=" + examenes + ", cursantes=" + cursantes + '}';
+        return "Asignatura{" + "codigo=" + codigo + ", nombre=" + nombre + '}';
     }
+
+   
 
 
   
