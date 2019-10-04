@@ -7,10 +7,12 @@ package GUI;
 
 import githubtest.Alumno;
 import githubtest.Carrera;
+import githubtest.Persona;
 import githubtest.Regimen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,8 +39,10 @@ public class IngresarAlumnoActionListener implements ActionListener{
     public void actionPerformed(ActionEvent arg0) {
          try{
              check();
-             Alumno alumno=new Alumno(info.getIngresoNombre().getText(),info.getIngresoApellido().getText(),
-                     info.getIngresoDNI().getText(),info.getIngresoNumeroMatricula().getText());
+             Alumno alumno=new Alumno(info.getIngresoDomicilio().getText(),info.getIngresoLocalidad().getText(),
+             info.getIngresoProvincia().getText(),info.getIngresoPaisDeResidencia().getText(),info.getIngresoCorreoElectronico().getText(),
+             info.getIngresoFechaNacimiento().getText(),info.getIngresoFechaInscripcion().getText(),info.getIngresoNumeroMatricula().getText(),
+             info.getIngresoNombre().getText(),info.getIngresoApellido().getText(),info.getIngresoDNI().getText());
              seleccionada.getAlumnos().add(alumno);
              //Testeando añadir un alumno para probar informes
              Main.POO.getCursantes().add(new Regimen(alumno,Main.POO,true));
@@ -46,6 +50,9 @@ public class IngresarAlumnoActionListener implements ActionListener{
              info.getFrame().setVisible(false);
          
          } 
+         catch(AlumnoYaExisteException ex){
+              JOptionPane.showMessageDialog(null,"Ese alumno ya existe en esa Carrera");
+         }
          catch(Exception e){
              JOptionPane.showMessageDialog(null,"Falto Ingresar Algo o la Carrera es Invalida");
          }
@@ -57,22 +64,29 @@ public class IngresarAlumnoActionListener implements ActionListener{
      */
     public void check() throws Exception{
         boolean e=true;
-        if (info.getIngresoApellido().getText().equals("Apellido")||info.getIngresoApellido().getText().equals("")){
+        if (info.getIngresoApellido().getText().equals("Apellido*")||info.getIngresoApellido().getText().equals("")){
             e=false;
         }
-        if (info.getIngresoNombre().getText().equals("Nombre")||info.getIngresoNombre().getText().equals("")){
+        if (info.getIngresoNombre().getText().equals("Nombre*")||info.getIngresoNombre().getText().equals("")){
             e=false;
         }
-        if (info.getIngresoDNI().getText().equals("DNI")||info.getIngresoDNI().getText().equals("")){
+        if (info.getIngresoDNI().getText().equals("DNI*")||info.getIngresoDNI().getText().equals("")){
             e=false;
         }
-        if (info.getIngresoNumeroMatricula().getText().equals("Numero Matricula")||info.getIngresoNumeroMatricula().getText().equals("")){
+        if (info.getIngresoNumeroMatricula().getText().equals("Numero Matricula*")||info.getIngresoNumeroMatricula().getText().equals("")){
             e=false;
         }
         ArrayList<Carrera> carreras=Main.getRegistroDeCarreras().getCarreras();
         boolean t=false;
         for (Carrera carrera : carreras) {
             if(carrera.getNombre().equals(info.getIngresoCarrera().getText())){
+                Set<Alumno>yaExiste=carrera.getAlumnos();
+                for (Alumno alumno : yaExiste) {
+                    if(alumno.equals(new Alumno (info.getIngresoNombre().getText(),info.getIngresoApellido().getText(),
+                            info.getIngresoDNI().getText()))){
+                        throw new AlumnoYaExisteException("ya existe ese alumno");
+                    }
+                }
                 t=true;
                 seleccionada=carrera;
             }
