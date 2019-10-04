@@ -31,16 +31,16 @@ private String  numeroMatricula;
     }
     
 
-    public void InscribirseAAsignaturaComoRegular(Asignatura ag, int año,RegistroDeCarreras registro) {
+    public void InscribirseAAsignaturaComoRegular(Asignatura ag,RegistroDeCarreras registro) {
         ArrayList<Carrera> carreras = registro.getCarreras();
         for (Carrera carrera : carreras) {
             ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
             for (PlanDeEstudio plan : planes) {
-                if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
+                if (plan.getFechaDeImplementacion().getYear() < ag.getPeriodoLectivo().getAño() && plan.getFechadeVigencia().getYear() > ag.getPeriodoLectivo().getAño()) {
                     ArrayList<Asignatura> a = plan.getAsignaturas();
                     for (Asignatura asignatura : a) { 
                         if (ag.equals(asignatura)) {
-                            Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(ag.getPeriodoLectivo(), año), this, asignatura, true);
+                            Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(ag.getPeriodoLectivo().getPeriodoLectivo(), ag.getPeriodoLectivo().getAño()), this, asignatura, true);
                             asignatura.getCursantes().add(i);
 
                         }

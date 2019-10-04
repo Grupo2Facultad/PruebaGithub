@@ -35,7 +35,7 @@ import javax.swing.JFrame;
             Container container=frame.getContentPane();
             container.setLayout(new FlowLayout());
             this.ingresar=new JButton("INGRESAR");
-            this.ingresar.addActionListener(new Ingresar(this));
+            this.ingresar.addActionListener(new IngresarAlumnoActionListener(this));
             this.ingresoApellido=new TextField(20);
             this.ingresoApellido.setText("Apellido");
             this.ingresoNombre=new TextField(20);
