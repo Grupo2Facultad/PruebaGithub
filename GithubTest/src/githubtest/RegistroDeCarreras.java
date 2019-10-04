@@ -24,8 +24,7 @@ public class RegistroDeCarreras {
         this.carreras = new ArrayList<>();
     }
 
-    public int getAlumnosPorCarrera(String nombreCarrera, LocalDate fechaParaPeriodo) {
-        //Hay que mejorar para que considere Asignaturas  y no repita Alumnos
+    public int getAlumnosPorCarrera(String nombreCarrera, LocalDate fechaParaPeriodo){
         Set<Alumno> e = new HashSet();
         for (Carrera carrera1 : carreras) {
             ArrayList<PlanDeEstudio> planes = (ArrayList) carrera1.getPlanesDeEstudio();
@@ -50,11 +49,11 @@ public class RegistroDeCarreras {
                                         }
                                     }
                                 }
-                                if(asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.Anual)){
-                                     ArrayList<Regimen> alumnos = (ArrayList) asignatura.getCursantes();
-                                        for (Regimen alumno : alumnos) {
-                                            e.add(alumno.getAlumno());
-                                        }
+                                if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.Anual)) {
+                                    ArrayList<Regimen> alumnos = (ArrayList) asignatura.getCursantes();
+                                    for (Regimen alumno : alumnos) {
+                                        e.add(alumno.getAlumno());
+                                    }
                                 }
                             }
                         }
@@ -63,45 +62,69 @@ public class RegistroDeCarreras {
             }
 
         }
-        int y=e.size();
+        int y = e.size();
         return y;
     }
 
-    public   Set<Carrera>  getCarreraPorDNI(String DNI) {
-        Set<Carrera> carrerasPorDNI = new HashSet<>();  
-         for (Carrera carrera : this.carreras) {
-             Set<Alumno> alumnos=carrera.getAlumnos();
-             for (Alumno alumno : alumnos) {
-                 if (alumno.getDNI().equals(DNI)){
-                     carrerasPorDNI.add(carrera);
-                 }
-             }
+    public Set<Carrera> getCarreraPorDNI(String DNI) {
+        Set<Carrera> carrerasPorDNI = new HashSet<>();
+        for (Carrera carrera : this.carreras) {
+            Set<Alumno> alumnos = carrera.getAlumnos();
+            for (Alumno alumno : alumnos) {
+                if (alumno.getDNI().equals(DNI)) {
+                    carrerasPorDNI.add(carrera);
+                }
+            }
         }
-        return carrerasPorDNI; 
-    } 
+        return carrerasPorDNI;
+    }
 
-    public  List<Asignatura> getAsigPorDNI(Asignatura a, String DNI, int año) {
-        ArrayList<Asignatura> asignaturas=new ArrayList<Asignatura>();    
+    public Set<Asignatura> getAsigPorDNI(String DNI, LocalDate date) {
+        Set<Asignatura> asignaturas = new HashSet<>();
         for (Carrera carrera : carreras) {
-         ArrayList<PlanDeEstudio> planes=(ArrayList) carrera.getPlanesDeEstudio();
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
             for (PlanDeEstudio plan : planes) {
-                if(plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año){
-              ArrayList<Asignatura> b=plan.getAsignaturas();
-            for (Asignatura asignatura : b) {
-                ArrayList<Regimen> k= (ArrayList) asignatura.getCursantes();  
-                for (Regimen regimen : k) {
-                    if (regimen.getAlumno().getDNI().equals(DNI)&&((Cursada)regimen).getPeriodoLectivo().getAño()==año){
-                        asignaturas.add(asignatura);
+                if (plan.getFechaDeImplementacion().isBefore(date) && plan.getFechadeVigencia().isAfter(date)) {
+                    ArrayList<Asignatura> b = plan.getAsignaturas();
+                    for (Asignatura asignatura : b) {
+                        if (asignatura.getPeriodoLectivo().getAño() == date.getYear()) {
+                            if (date.getMonthValue() <= 6) {
+                                if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre)) {
+                                    ArrayList<Regimen> alumnos = (ArrayList) asignatura.getCursantes();
+                                    for (Regimen alumno : alumnos) {
+                                        if (alumno.getAlumno().getDNI().equals(DNI)) {
+                                            asignaturas.add(asignatura);
+                                        }
+                                    }
+                                } else {
+                                    if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.segundoCuatrimestre)) {
+                                        ArrayList<Regimen> alumnos = (ArrayList) asignatura.getCursantes();
+                                        for (Regimen alumno : alumnos) {
+                                            if (alumno.getAlumno().getDNI().equals(DNI)) {
+                                                asignaturas.add(asignatura);
+                                            }
+                                        }
+                                    }
+                                }
+                                if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.Anual)) {
+                                    ArrayList<Regimen> alumnos = (ArrayList) asignatura.getCursantes();
+                                    for (Regimen alumno : alumnos) {
+                                        if (alumno.getAlumno().getDNI().equals(DNI)) {
+                                            asignaturas.add(asignatura);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
-            }
-            }
-          
+
         }
         return asignaturas;
     }
-    public  String getDocentesAsignatura(Asignatura ag, int año) {
+
+    public String getDocentesAsignatura(Asignatura ag, int año) {
         for (Carrera carrera : carreras) {
             ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
             for (PlanDeEstudio plane : planes) {
