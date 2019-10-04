@@ -24,9 +24,10 @@ public class RegistroDeCarreras {
      
 
     public  int getAlumnosPorCarrera(String nombreCarrera, LocalDate fechaParaPlanDeEstudio) {
+        //Hay que mejorar para que considere Asignaturas  y no repita Alumnos
         int e = 0;
         for (Carrera carrera1 : carreras) {
-            ArrayList<PlanDeEstudio> planes=(ArrayList) carrera1.getPlanDeEstudio();
+            ArrayList<PlanDeEstudio> planes=(ArrayList) carrera1.getPlanesDeEstudio();
             for (PlanDeEstudio plan : planes) {
                   if (carrera1.getNombre().equals(nombreCarrera)
                     && plan.getFechaDeImplementacion().isBefore(fechaParaPlanDeEstudio)
@@ -55,7 +56,7 @@ public class RegistroDeCarreras {
     public  List<Asignatura> getAsigPorDNI(Asignatura a, String DNI, int año) {
         ArrayList<Asignatura> asignaturas=new ArrayList<Asignatura>();    
         for (Carrera carrera : carreras) {
-         ArrayList<PlanDeEstudio> planes=(ArrayList) carrera.getPlanDeEstudio();
+         ArrayList<PlanDeEstudio> planes=(ArrayList) carrera.getPlanesDeEstudio();
             for (PlanDeEstudio plan : planes) {
                 if(plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año){
               ArrayList<Asignatura> b=plan.getAsignaturas();
@@ -75,7 +76,7 @@ public class RegistroDeCarreras {
     }
     public  String getDocentesAsignatura(Asignatura ag, int año) {
         for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
             for (PlanDeEstudio plane : planes) {
                 if (plane.getFechaDeImplementacion().getYear() < año && plane.getFechadeVigencia().getYear() > año) {
                     ArrayList<Asignatura> b = plane.getAsignaturas();
