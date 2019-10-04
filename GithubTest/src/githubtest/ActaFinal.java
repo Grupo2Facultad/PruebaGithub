@@ -43,7 +43,7 @@ public class ActaFinal extends Acta{
         Final fin=(Final)super.getExamen();
         ArrayList<DocenteExamen>docentes=(ArrayList)fin.getDocenteExamen();  
         Carrera carrera=fin.getAsignatura().getCarrera();
-        List<PlanDeEstudio> planes=carrera.getPlanDeEstudio();
+        List<PlanDeEstudio> planes=carrera.getPlanesDeEstudio();
         for (DocenteExamen docentex : docentes) {
             boolean existe=false;
           Docente doc=docentex.getDocente();

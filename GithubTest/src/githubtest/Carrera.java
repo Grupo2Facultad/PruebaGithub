@@ -60,10 +60,6 @@ public class Carrera {
         this.cantidadAños = cantidadAños;
     }
 
-    public List<PlanDeEstudio> getPlanDeEstudio() {
-        return planesDeEstudio;
-    }
-
     public void setPlanDeEstudio(List<PlanDeEstudio> planDeEstudio) {
         this.planesDeEstudio = planDeEstudio;
     }

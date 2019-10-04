@@ -22,6 +22,7 @@ public class PanelInformesAlumnado extends JPanel{
         super();
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         cantidadAlumnosCarreraPeriodo=new JButton("CantidadDeAlumnosCarreraPeriodo");
+        cantidadAlumnosCarreraPeriodo.addActionListener(new CantidadAlumnosCarreraPeriodo());
         carrerasPorDNI=new JButton("CarrerasPorDNI");
         label1=new JLabel("Informes Alumnado");
         this.add(label1);

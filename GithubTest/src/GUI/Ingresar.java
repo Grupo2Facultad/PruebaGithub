@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author juanc
  */
 public class Ingresar implements ActionListener{
-   private IngresarAlumno info;
+   private final IngresarAlumno info;
    private  Carrera seleccionada;
 
     public Ingresar(IngresarAlumno info) {
@@ -60,10 +60,7 @@ public class Ingresar implements ActionListener{
                 seleccionada=carrera;
             }
         }
-        if(e==false){
-            throw new Exception();
-        }
-        if(t==false){
+        if(!e||!t){
             throw new Exception();
         }
  

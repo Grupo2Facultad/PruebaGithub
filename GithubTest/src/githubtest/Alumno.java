@@ -34,7 +34,7 @@ private String  numeroMatricula;
     public void InscribirseAAsignaturaComoRegular(Asignatura ag, int año,RegistroDeCarreras registro) {
         ArrayList<Carrera> carreras = registro.getCarreras();
         for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
             for (PlanDeEstudio plan : planes) {
                 if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
                     ArrayList<Asignatura> a = plan.getAsignaturas();
@@ -52,7 +52,7 @@ private String  numeroMatricula;
     public void InscribirseAAsignaturaComoLibre(Asignatura ag,int año,RegistroDeCarreras registro) {
         ArrayList<Carrera> carreras = registro.getCarreras();
         for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
             for (PlanDeEstudio plan : planes) {
                 if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
                     ArrayList<Asignatura> a = plan.getAsignaturas();
@@ -69,7 +69,7 @@ private String  numeroMatricula;
     public void DarseDeBaja(Asignatura ag,RegistroDeCarreras registro) {
         ArrayList<Carrera> carreras = registro.getCarreras();
         for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
             for (PlanDeEstudio plan : planes) {
                 ArrayList<Asignatura> a = plan.getAsignaturas();
                 for (Asignatura asignatura : a) {
