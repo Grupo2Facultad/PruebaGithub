@@ -39,7 +39,7 @@ public class Main {
     }
     public static void añadirInformacionPorDefecto() { 
         registroDeCarreras=new RegistroDeCarreras();
-        ArrayList<Carrera>carreras= registroDeCarreras.getCarreras();
+        //Comienza zona LicenciaturaSistemas
         LicenciaturaEnSistemas=new Carrera("LicenciaturaSistemas",1,LocalDate.of(2000,4,15),5);
         PlanDeEstudio DosMilQuince=new PlanDeEstudio(LocalDate.of(2015, Month.JANUARY, 14),
                 LocalDate.of(2020, Month.DECEMBER, 31),LicenciaturaEnSistemas,5);
@@ -48,6 +48,7 @@ public class Main {
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2018),true,4,new Equipo(),new BitacoraFinal());
         DosMilQuince.getAsignaturas().add(POO);
         registroDeCarreras.getCarreras().add(LicenciaturaEnSistemas);
+        //Finaliza zona LicenciaturaSistemas
     }
 
     public static Carrera getLicenciaturaEnSistemas() {

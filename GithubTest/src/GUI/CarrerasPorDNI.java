@@ -24,7 +24,6 @@ public class CarrerasPorDNI implements ActionListener{
 private JTextField ingresarDNI;
 private JButton ingresar;
 class GetCarreras implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent arg0) {
             String DNI=ingresarDNI.getText();

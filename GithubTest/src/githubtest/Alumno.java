@@ -150,6 +150,11 @@ private String  numeroMatricula;
     public void setNumeroMatricula(String  numeroMatricula) {
         this.numeroMatricula = numeroMatricula;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"Alumno{" + "numeroMatricula=" + numeroMatricula + '}';
+    }
         
     
 
