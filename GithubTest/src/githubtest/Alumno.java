@@ -1,7 +1,9 @@
 
 package githubtest;
+import GUI.Main;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  *
@@ -221,6 +223,10 @@ private String  numeroMatricula;
      */
     public String  getFechaNacimiento() {
         return fechaNacimiento;
+    }
+    
+    public Set<Carrera> carrerasQueCursa() {
+        return Main.getRegistroDeCarreras().getCarreraPorDNI(super.getDNI());
     }
 
     /**
