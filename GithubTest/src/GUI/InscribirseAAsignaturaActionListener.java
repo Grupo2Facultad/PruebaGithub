@@ -40,7 +40,7 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
                     if(alumno.getDNI().equals(DNI)){
                         if(alumno.InscribirseAAsignaturaComoRegular(asignaturaCod.getText(),Main.registroDeCarreras)){
                         JOptionPane.showMessageDialog(null,"Operacion Exitosa");
-                         frame.setVisible(false);  
+                        frame.setVisible(false);  
                         }
                         else{
                         JOptionPane.showMessageDialog(null,"Codigo Invalido");

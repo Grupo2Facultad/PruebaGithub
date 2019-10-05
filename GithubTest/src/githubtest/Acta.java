@@ -19,6 +19,7 @@ public abstract class Acta {
 
     public Acta(Examen examen) {
         this.examen = examen;
+        this.inscripciones=new ArrayList<>();  
     }
 
     
