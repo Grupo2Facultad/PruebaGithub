@@ -4,6 +4,7 @@ import GUI.Main;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import javax.swing.JOptionPane;
 
@@ -72,6 +73,7 @@ private String  numeroMatricula;
      * @param registro
      */
     public boolean  InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro) {
+        Random r= new Random();
         boolean e=false;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
@@ -94,6 +96,22 @@ private String  numeroMatricula;
                 }
                 Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(), asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
                 asignatura.getCursantes().add(i);
+                 ArrayList<TrabajoPractico>trabajos=(ArrayList)asignatura.getListadoTrabajosPracticos();
+                    for (TrabajoPractico trabajo : trabajos) {
+                        trabajo.getNotasIndividuales().add(new TrabajoDeAlumno(this,r.nextInt(9)+1));
+                    }
+                 ArrayList<BitacoraDiaria>bitacoras=(ArrayList)asignatura.getBitacora().getBitacorasDiarias();
+                    for (BitacoraDiaria bitacora : bitacoras) {
+                        boolean n;
+                        int x=r.nextInt(1);
+                        if(x==0){
+                            n=false;
+                        }
+                        else{
+                            n=true;
+                        }
+                        bitacora.getListadoAsistencias().add(new Asistencia(this,n));
+                    }
                 e=true;
             }
                 else{
@@ -110,6 +128,7 @@ private String  numeroMatricula;
      * @param año
      * @param registro
      */
+    
     public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) {
         boolean e = false;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
@@ -158,7 +177,35 @@ private String  numeroMatricula;
         }
         return e;
     }
-    
+    public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod) {
+        Asignatura asig=null;
+        Examen exa=null;
+        ArrayList<Asignatura> asignaturas=Main.getRegistroDeCarreras().getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+        for (Asignatura asignatura : asignaturas) {
+              if(asignatura.getCodigo().equals(asignaturaCod)){
+                  ArrayList<Examen> examenes=(ArrayList)asignatura.getExamenes();
+                  for (Examen examen : examenes) {
+                      if(examen.getFecha().equals(fecha)){
+                          exa=examen;
+                      }
+                  }
+              }
+        }
+        if(exa==null){
+            JOptionPane.showMessageDialog(null,"Ese Examen no existe");
+        }
+        else{
+           if(exa.getFecha().isBefore(LocalDate.now())){
+            Acta acta=exa.getActa();
+            acta.getInscripciones().add(new InscripcionAExamen(this,exa));
+            return true;
+           }
+           else{
+               JOptionPane.showMessageDialog(null,"Examen Viejo,no puede inscribirse");
+           }
+        }
+        return false;
+    }
     /**
      *
      * @return

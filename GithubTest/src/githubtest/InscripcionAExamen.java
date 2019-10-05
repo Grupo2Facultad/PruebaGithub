@@ -8,7 +8,9 @@ package githubtest;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -42,7 +44,7 @@ public class InscripcionAExamen {
         }
     }
 
-    public void verificarFinal() {
+    private void verificarFinal() {
         if(DAYS.between(examen.getFecha(),LocalDate.now())<=3){
         boolean regular;
         if(getNotaCurso()>=6){
@@ -66,7 +68,7 @@ public class InscripcionAExamen {
         double notaPrimero=0,
                 notaSegundo=0;
         double notaCurso;
-        List<Examen> examenes = getElRestoDeExamenes();
+        List<Examen> examenes =getElRestoDeExamenes();
         for (Examen examene : examenes) {
             if (!((Parcial) examene).isPrimeroTrueSegundoFalse()) {
                 this.tiene2Parciales = true;
@@ -100,7 +102,7 @@ public class InscripcionAExamen {
         return this.examen.getAsignatura().getExamenes();
     }
         
-    public void verificarParcial() {
+       private  void verificarParcial() {
         BitacoraFinal bitacora = null;
         List<TrabajoPractico> trabajos = null;
         List<Examen> examenes = getElRestoDeExamenes();

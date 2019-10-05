@@ -13,6 +13,7 @@ import java.util.Objects;
  * @author juanc
  */
 public abstract class Examen {
+    
     private Asignatura asignatura;
     private PeriodoLectivoEnum periodo;
     private LocalDate fecha;

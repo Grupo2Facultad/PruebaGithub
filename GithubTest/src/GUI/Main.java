@@ -49,8 +49,8 @@ public class Main {
                 LocalDate.of(2020, Month.DECEMBER, 31),LicenciaturaEnSistemas,5);
         LicenciaturaEnSistemas.getPlanesDeEstudio().add(DosMilQuince);
         POO= new Asignatura("1","300","POO",DosMilQuince,LicenciaturaEnSistemas,
-                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2018),true,4,new Equipo(),new BitacoraFinal());
-        parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2018, Month.MARCH, 5),18);
+                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2019),true,4,new Equipo(),new BitacoraFinal());
+        parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2019, Month.MARCH, 5),18);
         POO.getExamenes().add(parcial);
         Acta acta=new ActaParcial(parcial);
         parcial.setActa(acta);
