@@ -21,13 +21,10 @@ public abstract class Acta {
         this.examen = examen;
         this.inscripciones=new ArrayList<>();  
     }
-
-    
-
     public abstract void imprimirActa();
 
     public List<Alumno> getHabilitados() {
-        ArrayList<Alumno> habilitados = new ArrayList<Alumno>();
+        ArrayList<Alumno> habilitados = new ArrayList<>();
         for (InscripcionAExamen inscripcion : inscripciones) {
             if (inscripcion.isHabilitado()) {
                 habilitados.add(inscripcion.getAlumno());
