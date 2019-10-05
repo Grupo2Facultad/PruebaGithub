@@ -171,14 +171,15 @@ public class InscripcionAExamen {
         }
     }
     public void verificarAsistencia(BitacoraFinal bitacora){
-        int asistio = 0;
-        int asistenciasTotal = 0;
+        double asistio = 0;
+        double asistenciasTotal = 0;
         ArrayList<BitacoraDiaria> bitac = (ArrayList) bitacora.getBitacorasDiarias();
         for (BitacoraDiaria bitacoraDiaria : bitac) {
             ArrayList<Asistencia> listadoAsistencias = (ArrayList) bitacoraDiaria.getListadoAsistencias();
             for (Asistencia asistencia : listadoAsistencias) {
                 if (asistencia.getAlumno().equals(alumno)) {
-                    if (asistencia.getAsistio() == false) {
+                    System.out.println(asistencia.getAsistio());
+                    if (!asistencia.getAsistio()) {
                         asistenciasTotal += 1;
                     } else {
                         asistenciasTotal += 1;
@@ -188,6 +189,9 @@ public class InscripcionAExamen {
             }
         }
         double calculo = asistio / asistenciasTotal;
+        System.out.println("asistencias total"+asistenciasTotal);
+        System.out.println("asistio"+asistio);
+        System.out.println(calculo);
         if (calculo >= 0.75) {
             this.asistencia = true;
         } else {
@@ -315,8 +319,9 @@ public class InscripcionAExamen {
 
     @Override
     public String toString() {
-        return "InscripcionAExamen{" + "alumno=" + alumno + ", fecha=" + fecha + ", examen=" + examen + ", habilitado=" + habilitado + ", notasPracticosBuenas=" + notasPracticosBuenas + ", aproboPrimerParcial=" + aproboPrimerParcial + ", asistencia=" + asistencia + ", notaObtenida=" + notaObtenida + ", tiene2Parciales=" + tiene2Parciales + '}';
+        return "InscripcionAExamen{" + "alumno=" + alumno + ", fecha=" + fecha + ", habilitado=" + habilitado + ", notasPracticosBuenas=" + notasPracticosBuenas + ", aproboPrimerParcial=" + aproboPrimerParcial + ", asistencia=" + asistencia + ", notaObtenida=" + notaObtenida + ", tiene2Parciales=" + tiene2Parciales + '}';
     }
+
 
 
 }

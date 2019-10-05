@@ -98,12 +98,15 @@ private String  numeroMatricula;
                 asignatura.getCursantes().add(i);
                  ArrayList<TrabajoPractico>trabajos=(ArrayList)asignatura.getListadoTrabajosPracticos();
                     for (TrabajoPractico trabajo : trabajos) {
-                        trabajo.getNotasIndividuales().add(new TrabajoDeAlumno(this,r.nextInt(9)+1));
+                        int y=r.nextInt(5)+5;
+                        System.out.println("nota"+y);
+                        trabajo.getNotasIndividuales().add(new TrabajoDeAlumno(this,y));
                     }
                  ArrayList<BitacoraDiaria>bitacoras=(ArrayList)asignatura.getBitacora().getBitacorasDiarias();
                     for (BitacoraDiaria bitacora : bitacoras) {
                         boolean n;
-                        int x=r.nextInt(1);
+                        int x=r.nextInt(10);
+                        System.out.println(x);
                         if(x==0){
                             n=false;
                         }
@@ -198,6 +201,7 @@ private String  numeroMatricula;
            if(exa.getFecha().isBefore(LocalDate.now())){
             Acta acta=exa.getActa();
             acta.getInscripciones().add(new InscripcionAExamen(this,exa));
+               System.out.println(acta.getInscripciones());
             return true;
            }
            else{
