@@ -33,19 +33,23 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
         public void actionPerformed(ActionEvent arg0) {
             String DNI=alumnoDNI.getText();
             ArrayList<Carrera>carreras= Main.registroDeCarreras.getCarreras();
-            boolean e=true;
+            boolean e=false;
             for (Carrera carrera : carreras) {
                Set<Alumno>alumnos= carrera.getAlumnos();
                 for (Alumno alumno : alumnos) {
                     if(alumno.getDNI().equals(DNI)){
-                        alumno.InscribirseAAsignaturaComoRegular(asignaturaCod.getText(),Main.registroDeCarreras);
+                        if(alumno.InscribirseAAsignaturaComoRegular(asignaturaCod.getText(),Main.registroDeCarreras)){
                         JOptionPane.showMessageDialog(null,"Operacion Exitosa");
-                        e=false;
-                        frame.setVisible(false);
+                         frame.setVisible(false);  
+                        }
+                        else{
+                        JOptionPane.showMessageDialog(null,"Codigo Invalido");
+                    }
+                        e=true;                                          
                     }
                 }
             }
-            if(e){
+            if(!e){
                 JOptionPane.showMessageDialog(null,"Ese Alumno no se encuentra en el Sistema");
             }
             
