@@ -3,6 +3,7 @@ package githubtest;
 import GUI.Main;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -69,23 +70,17 @@ private String  numeroMatricula;
      * @param ag
      * @param registro
      */
-    public void InscribirseAAsignaturaComoRegular(Asignatura ag,RegistroDeCarreras registro) {
-        ArrayList<Carrera> carreras = registro.getCarreras();
-        for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
-            for (PlanDeEstudio plan : planes) {
-                if (plan.getFechaDeImplementacion().getYear() < ag.getPeriodoLectivo().getAño() && plan.getFechadeVigencia().getYear() > ag.getPeriodoLectivo().getAño()) {
-                    ArrayList<Asignatura> a = plan.getAsignaturas();
-                    for (Asignatura asignatura : a) { 
-                        if (ag.equals(asignatura)) {
-                            Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(ag.getPeriodoLectivo().getPeriodoLectivo(), ag.getPeriodoLectivo().getAño()), this, asignatura, true);
-                            asignatura.getCursantes().add(i);
-
-                        }
-                    }
-                }
+    public boolean  InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro) {
+        boolean e=false;
+        ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura.getCodigo().equals(Cod)) {
+                Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(), asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
+                asignatura.getCursantes().add(i);
+                e=true;
             }
         }
+        return e;
     }
 
     /**
@@ -94,22 +89,17 @@ private String  numeroMatricula;
      * @param año
      * @param registro
      */
-    public void InscribirseAAsignaturaComoLibre(Asignatura ag,int año,RegistroDeCarreras registro) {
-        ArrayList<Carrera> carreras = registro.getCarreras();
-        for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
-            for (PlanDeEstudio plan : planes) {
-                if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
-                    ArrayList<Asignatura> a = plan.getAsignaturas();
-                    for (Asignatura asignatura : a) {
-                        if (ag.equals(asignatura)) {
-                            Regimen i = new Regimen(this, asignatura, false);
-                            asignatura.getCursantes().add(i);
-                        }
-                    }
-                }
+    public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) {
+        boolean e=false;
+        ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura.getCodigo().equals(Cod)) {
+                Regimen i = new Regimen(this, asignatura, false);
+                asignatura.getCursantes().add(i);
+                e=true;
             }
         }
+        return e;
     }
 
     /**
@@ -117,24 +107,20 @@ private String  numeroMatricula;
      * @param ag
      * @param registro
      */
-    public void DarseDeBaja(Asignatura ag,RegistroDeCarreras registro) {
-        ArrayList<Carrera> carreras = registro.getCarreras();
-        for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
-            for (PlanDeEstudio plan : planes) {
-                ArrayList<Asignatura> a = plan.getAsignaturas();
-                for (Asignatura asignatura : a) {
-                    if (ag.equals(asignatura)) {
-                        ArrayList<Regimen> r = (ArrayList) asignatura.getCursantes();
-                        for (Regimen regimen : r) {
-                            if (regimen.getAlumno().equals(this)) {
-                                r.remove(regimen);
-                            }
-                        }
+    public boolean DarseDeBaja(String Cod, RegistroDeCarreras registro) {
+        boolean e = false;
+        ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura.getCodigo().equals(Cod)) {
+                List<Regimen> regimenes = asignatura.getCursantes();
+                for (Regimen regimen : regimenes) {
+                    if (regimen.getAlumno().equals(this)) {
+                        regimenes.remove(regimen);
                     }
                 }
             }
         }
+        return e;
     }
     
     /**

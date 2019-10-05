@@ -7,7 +7,6 @@ package GUI;
 
 import githubtest.Alumno;
 import githubtest.Carrera;
-import githubtest.Regimen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class IngresarAlumnoActionListener implements ActionListener {
                     info.getIngresoNombre().getText(), info.getIngresoApellido().getText(), info.getIngresoDNI().getText());
             seleccionada.getAlumnos().add(alumno);
             //Testeando añadir un alumno para probar informes
-            Main.POO.getCursantes().add(new Regimen(alumno, Main.POO, true));
+            alumno.InscribirseAAsignaturaComoRegular(Main.POO.getCodigo(), Main.registroDeCarreras);
             JOptionPane.showMessageDialog(null, "operacion exitosa");
             info.getFrame().setVisible(false);
 

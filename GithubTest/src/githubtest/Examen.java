@@ -19,12 +19,11 @@ public abstract class Examen {
    private int horario;
    private Acta acta;
 
-    public Examen(Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario, Acta acta) {
+    public Examen(Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario) {
         this.asignatura = asignatura;
         this.periodo = periodo;
         this.fecha = fecha;
         this.horario = horario;
-        this.acta = acta;
     }
 
     public Asignatura getAsignatura() {
