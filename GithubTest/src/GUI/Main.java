@@ -17,7 +17,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
 /**
  *
  * @author juanc
@@ -44,7 +43,7 @@ public class Main {
         PlanDeEstudio DosMilQuince=new PlanDeEstudio(LocalDate.of(2015, Month.JANUARY, 14),
                 LocalDate.of(2020, Month.DECEMBER, 31),LicenciaturaEnSistemas,5);
         LicenciaturaEnSistemas.getPlanesDeEstudio().add(DosMilQuince);
-        POO= new Asignatura(1,300,"Programacion Orientada a Objetos",DosMilQuince,LicenciaturaEnSistemas,
+        POO= new Asignatura("1","300","POO",DosMilQuince,LicenciaturaEnSistemas,
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2018),true,4,new Equipo(),new BitacoraFinal());
         DosMilQuince.getAsignaturas().add(POO);
         registroDeCarreras.getCarreras().add(LicenciaturaEnSistemas);
