@@ -5,9 +5,8 @@
  */
 package GUI;
 
-import githubtest.Alumno;
 import githubtest.Carrera;
-import githubtest.Regimen;
+import githubtest.Docente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,54 +17,37 @@ import javax.swing.JOptionPane;
  *
  * @author juanc
  */
-public class IngresarAlumnoActionListener implements ActionListener {
+public class IngresarDocenteActionListener implements ActionListener{
 
-    private final IngresarAlumno info;
-    private Carrera seleccionada;
+private final IngresarDocente info;   
+private Carrera seleccionada;
 
-    /**
-     *
-     * @param info
-     */
-    public IngresarAlumnoActionListener(IngresarAlumno info) {
+    public IngresarDocenteActionListener(IngresarDocente info) {
         this.info = info;
     }
-
-    /**
-     *
-     * @param arg0
-     */
+    
     @Override
     public void actionPerformed(ActionEvent arg0) {
         try {
             check();
-            Alumno alumno = new Alumno(info.getIngresoDomicilio().getText(), info.getIngresoLocalidad().getText(),
-                    info.getIngresoProvincia().getText(), info.getIngresoPaisDeResidencia().getText(), info.getIngresoCorreoElectronico().getText(),
-                    info.getIngresoFechaNacimiento().getText(), info.getIngresoFechaInscripcion().getText(), info.getIngresoNumeroMatricula().getText(),
+            Docente docente = new Docente(info.getIngresoNumeroLegajo().getText(), info.getIngresoADocencia().getText(),
                     info.getIngresoNombre().getText(), info.getIngresoApellido().getText(), info.getIngresoDNI().getText());
-            seleccionada.getAlumnos().add(alumno);
-            //Testeando añadir un alumno para probar informes
-            Main.POO.getCursantes().add(new Regimen(alumno, Main.POO, true));
+            
             JOptionPane.showMessageDialog(null, "operacion exitosa");
             info.getFrame().setVisible(false);
-
         } catch (YaExisteException ex) {
-            JOptionPane.showMessageDialog(null, "Ese alumno ya existe en esa Carrera");
+            JOptionPane.showMessageDialog(null, "Ese Docente ya existe en esa Carrera");
         } catch (CodigoIDentificacionYaExisteException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Falto Ingresar Algo o la Carrera es Invalida");
         }
     }
-
-    /**
-     *
-     * @throws Exception
-     */
-    public void check() throws Exception{
-        boolean e=true;
-        if (info.getIngresoApellido().getText().equals("Apellido*")||info.getIngresoApellido().getText().equals("")){
-            e=false;
+    
+    public void check() throws Exception {
+        boolean e = true;
+        if (info.getIngresoApellido().getText().equals("Apellido*") || info.getIngresoApellido().getText().equals("")) {
+            e = false;
         }
         if (info.getIngresoNombre().getText().equals("Nombre*")||info.getIngresoNombre().getText().equals("")){
             e=false;
@@ -73,21 +55,22 @@ public class IngresarAlumnoActionListener implements ActionListener {
         if (info.getIngresoDNI().getText().equals("DNI*")||info.getIngresoDNI().getText().equals("")){
             e=false;
         }
-        if (info.getIngresoNumeroMatricula().getText().equals("Numero Matricula*")||info.getIngresoNumeroMatricula().getText().equals("")){
+        if (info.getIngresoNumeroLegajo().getText().equals("Numero Legajo*")||info.getIngresoNumeroLegajo().getText().equals("")){
             e=false;
         }
+        //MAl
         ArrayList<Carrera> carreras=Main.getRegistroDeCarreras().getCarreras();
         boolean t=false;
         for (Carrera carrera : carreras) {
             if(carrera.getNombre().equals(info.getIngresoCarrera().getText())){
-                Set<Alumno>yaExiste=carrera.getAlumnos();
-                for (Alumno alumno : yaExiste) {
-                    if(alumno.equals(new Alumno (info.getIngresoNombre().getText(),info.getIngresoApellido().getText(),
+                Set<Docente>yaExiste=carrera.getDocentes();
+                for (Docente docente : yaExiste) {
+                    if(docente.equals(new Docente (info.getIngresoNombre().getText(),info.getIngresoApellido().getText(),
                             info.getIngresoDNI().getText()))){
-                        throw new YaExisteException("ya existe ese alumno");
+                        throw new YaExisteException("ya existe ese Docente");
                     }
-                    if(alumno.getNumeroMatricula().equals(info.getIngresoNumeroMatricula().getText())){
-                        throw new CodigoIDentificacionYaExisteException("Ese numero de Matricula ya existe");
+                      if(docente.getNumeroLegajo().equals(info.getIngresoNumeroLegajo().getText())){
+                        throw new CodigoIDentificacionYaExisteException("Ese numero de Legajo ya existe");
                     }
                 }
                 t=true;
@@ -99,5 +82,6 @@ public class IngresarAlumnoActionListener implements ActionListener {
         }
  
     }
+    
     
 }

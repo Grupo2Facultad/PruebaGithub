@@ -9,10 +9,11 @@ package GUI;
  *
  * @author juanc
  */
-public class AlumnoYaExisteException extends Exception{
+public class CodigoIDentificacionYaExisteException extends Exception {
 
-    public AlumnoYaExisteException(String message) {
+    public CodigoIDentificacionYaExisteException(String message) {
         super(message);
     }
+    
     
 }
