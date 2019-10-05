@@ -26,14 +26,9 @@ public class RegistroDeCarreras {
 
     public int getAlumnosPorCarrera(String nombreCarrera, LocalDate fechaParaPeriodo){
         Set<Alumno> e = new HashSet();
-        for (Carrera carrera1 : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera1.getPlanesDeEstudio();
-            for (PlanDeEstudio plan : planes) {
-                if (carrera1.getNombre().equals(nombreCarrera)
-                        && plan.getFechaDeImplementacion().isBefore(fechaParaPeriodo)
-                        && plan.getFechadeVigencia().isAfter(fechaParaPeriodo)) {
-                    ArrayList<Asignatura> asignaturas = plan.getAsignaturas();
-                    for (Asignatura asignatura : asignaturas) {
+                    ArrayList<Asignatura> asignaturas = getAsignaturasPorFechaPlanDeEstudio(fechaParaPeriodo);
+                    for (Asignatura asignatura : asignaturas){
+                       if(asignatura.getCarrera().getNombre().equals(nombreCarrera)){
                         if (asignatura.getPeriodoLectivo().getAño() == fechaParaPeriodo.getYear()) {
                             if (fechaParaPeriodo.getMonthValue() <= 6) {
                                 if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre)) {
@@ -59,11 +54,22 @@ public class RegistroDeCarreras {
                             }
                         }
                     }
-                }
-            }
         int y = e.size();
         return y;
     }
+    
+//Version del metodo que no considera fecha, lo que puede ser Correcto puesto que la inscripcion de un alumno en una carrera no es tiene fecha
+    
+//    public int getAlumnosPorCarrera(String nombreCarrera, LocalDate fechaParaPeriodo){
+//        Set<Alumno> e = new HashSet();
+//        for (Carrera carrera : carreras) {
+//            if(carrera.getNombre().equals(nombreCarrera)){
+//                e.addAll(carrera.getAlumnos());
+//            }
+//        }
+//        int y = e.size();
+//        return y;
+//    }
 
     public Set<Carrera> getCarreraPorDNI(String DNI) {
         Set<Carrera> carrerasPorDNI = new HashSet<>();
@@ -80,11 +86,7 @@ public class RegistroDeCarreras {
 
     public Set<Asignatura> getAsigPorDNI(String DNI, LocalDate date) {
         Set<Asignatura> asignaturas = new HashSet<>();
-        for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
-            for (PlanDeEstudio plan : planes) {
-                if (plan.getFechaDeImplementacion().isBefore(date) && plan.getFechadeVigencia().isAfter(date)) {
-                    ArrayList<Asignatura> b = plan.getAsignaturas();
+                    ArrayList<Asignatura> b = getAsignaturasPorFechaPlanDeEstudio(date);
                     for (Asignatura asignatura : b) {
                         if (asignatura.getPeriodoLectivo().getAño() == date.getYear()) {
                             if (date.getMonthValue() <= 6) {
@@ -115,22 +117,13 @@ public class RegistroDeCarreras {
                                     }
                                 }
                             }
-                        }
-                    }
-                }
-            }
-
-        
+                        } 
         return asignaturas;
     }
  
     public Set<Docente> getDocentesAsignatura(String nom, String cod, LocalDate date) {
         Set<Docente> docentes = new HashSet<>();
-        for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
-            for (PlanDeEstudio plane : planes) {
-                if (plane.getFechaDeImplementacion().isBefore(date) && plane.getFechadeVigencia().isAfter(date)) {
-                    ArrayList<Asignatura> asignaturas = plane.getAsignaturas();
+                    ArrayList<Asignatura> asignaturas = getAsignaturasPorFechaPlanDeEstudio(date);
                     for (Asignatura asignatura : asignaturas) {
                         if (asignatura.equals(new Asignatura(cod, nom))) {
                             if (asignatura.getPeriodoLectivo().getAño() == date.getYear()) {
@@ -159,11 +152,20 @@ public class RegistroDeCarreras {
                                 }
                             }
                         }
-                    }
+        return docentes;
+    }
+    public ArrayList<Asignatura>  getAsignaturasPorFechaPlanDeEstudio(LocalDate fecha) {
+        ArrayList<Asignatura>asigPorFecha=new ArrayList<>();    
+        for (Carrera carrera1 : carreras) {
+            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera1.getPlanesDeEstudio();
+            for (PlanDeEstudio plan : planes) {
+                if (plan.getFechaDeImplementacion().isBefore(fecha)
+                        && plan.getFechadeVigencia().isAfter(fecha)) {
+                    asigPorFecha.addAll(plan.getAsignaturas());
                 }
             }
-        
-        return docentes;
+        }
+        return asigPorFecha;
     }
 
     public List<Alumno> HabilitadosParcial(Asignatura asignatura, PeriodoLectivoEnum periodo, boolean isPrimeroTrueSegundoFalse) {
