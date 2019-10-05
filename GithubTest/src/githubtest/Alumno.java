@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,6 +76,7 @@ private String  numeroMatricula;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
             if (asignatura.getCodigo().equals(Cod)) {
+                if(asignatura.getPeriodoLectivo().getAño()==LocalDate.now().getYear()){
                 Set<Carrera> carreras=carrerasQueCursa();
                 boolean w=false;
                 for (Carrera carrera : carreras) {
@@ -93,6 +95,10 @@ private String  numeroMatricula;
                 Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(), asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
                 asignatura.getCursantes().add(i);
                 e=true;
+            }
+                else{
+                    JOptionPane.showMessageDialog(null,"Ese Codigo Corresponde a una Asignatura de Años Anteriores");
+                }
             }
         }
         return e;
