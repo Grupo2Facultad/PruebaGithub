@@ -1,19 +1,43 @@
 
 package githubtest;
+import GUI.Main;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author juanc
+ */
 public class Alumno extends Persona{
 private String domicilio,
         localidad,
         provincia,
         paisDeResidencia,
         correoElectronico;
-private LocalDate fechaNacimiento,
+//No necesitan ser LocalDate, no se utilizan para ningun metodo
+private String fechaNacimiento,
         fechaInscripcion;
 private String  numeroMatricula;
 
-    public Alumno(String domicilio, String localidad, String provincia, String paisDeResidencia, String correoElectronico, LocalDate fechaNacimiento, LocalDate fechaInscripcion, String  numeroMatricula, String nombre, String apellido, String DNI) {
+    /**
+     *
+     * @param domicilio
+     * @param localidad
+     * @param provincia
+     * @param paisDeResidencia
+     * @param correoElectronico
+     * @param fechaNacimiento
+     * @param fechaInscripcion
+     * @param numeroMatricula
+     * @param nombre
+     * @param apellido
+     * @param DNI
+     */
+    public Alumno(String domicilio, String localidad, String provincia, String paisDeResidencia, String correoElectronico,
+            String  fechaNacimiento, String  fechaInscripcion, String  numeroMatricula, String nombre, String apellido, String DNI) {
         super(nombre, apellido, DNI);
         this.domicilio = domicilio;
         this.localidad = localidad;
@@ -24,131 +48,256 @@ private String  numeroMatricula;
         this.fechaInscripcion = fechaInscripcion;
         this.numeroMatricula = numeroMatricula;
     }
-
+    
+    /**
+     *
+     * @param nombre
+     * @param apellido
+     * @param DNI
+     * @param numeroMatricula
+     */
     public Alumno(String nombre, String apellido, String DNI,String  numeroMatricula) {
         super(nombre, apellido, DNI);
         this.numeroMatricula = numeroMatricula;
     }
-    
 
-    public void InscribirseAAsignaturaComoRegular(Asignatura ag, int año,RegistroDeCarreras registro) {
-        ArrayList<Carrera> carreras = registro.getCarreras();
-        for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
-            for (PlanDeEstudio plan : planes) {
-                if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
-                    ArrayList<Asignatura> a = plan.getAsignaturas();
-                    for (Asignatura asignatura : a) { 
-                        if (ag.equals(asignatura)) {
-                            Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(ag.getPeriodoLectivo(), año), this, asignatura, true);
-                            asignatura.getCursantes().add(i);
-
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public void InscribirseAAsignaturaComoLibre(Asignatura ag,int año,RegistroDeCarreras registro) {
-        ArrayList<Carrera> carreras = registro.getCarreras();
-        for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
-            for (PlanDeEstudio plan : planes) {
-                if (plan.getFechaDeImplementacion().getYear() < año && plan.getFechadeVigencia().getYear() > año) {
-                    ArrayList<Asignatura> a = plan.getAsignaturas();
-                    for (Asignatura asignatura : a) {
-                        if (ag.equals(asignatura)) {
-                            Regimen i = new Regimen(this, asignatura, false);
-                            asignatura.getCursantes().add(i);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public void DarseDeBaja(Asignatura ag,RegistroDeCarreras registro) {
-        ArrayList<Carrera> carreras = registro.getCarreras();
-        for (Carrera carrera : carreras) {
-            ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanDeEstudio();
-            for (PlanDeEstudio plan : planes) {
-                ArrayList<Asignatura> a = plan.getAsignaturas();
-                for (Asignatura asignatura : a) {
-                    if (ag.equals(asignatura)) {
-                        ArrayList<Regimen> r = (ArrayList) asignatura.getCursantes();
-                        for (Regimen regimen : r) {
-                            if (regimen.getAlumno().equals(this)) {
-                                r.remove(regimen);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    public Alumno(String nombre, String apellido, String DNI) {
+        super(nombre, apellido, DNI);
     }
     
+    
+    /**
+     *
+     * @param ag
+     * @param registro
+     */
+    public boolean  InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro) {
+        boolean e=false;
+        ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura.getCodigo().equals(Cod)) {
+                if(asignatura.getPeriodoLectivo().getAño()==LocalDate.now().getYear()){
+                Set<Carrera> carreras=carrerasQueCursa();
+                boolean w=false;
+                for (Carrera carrera : carreras) {
+                    if(carrera.equals(asignatura.getCarrera())){
+                        w=true;
+                    }
+                }
+                if(!w){
+                  Set<Carrera> carrs=registro.getCarreraPorDNI(super.getDNI());
+                    for (Carrera carr : carrs) {
+                        if(carr.equals(asignatura.getCarrera())){
+                            carr.getAlumnos().add(this);
+                        }
+                    }
+                }
+                Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(), asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
+                asignatura.getCursantes().add(i);
+                e=true;
+            }
+                else{
+                    JOptionPane.showMessageDialog(null,"Ese Codigo Corresponde a una Asignatura de Años Anteriores");
+                }
+            }
+        }
+        return e;
+    }
 
+    /**
+     *
+     * @param ag
+     * @param año
+     * @param registro
+     */
+    public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) {
+        boolean e = false;
+        ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura.getCodigo().equals(Cod)) {
+                Set<Carrera> carreras = carrerasQueCursa();
+                boolean w = false;
+                for (Carrera carrera : carreras) {
+                    if (carrera.equals(asignatura.getCarrera())) {
+                        w = true;
+                    }
+                }
+                if (!w) {
+                    Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
+                    for (Carrera carr : carrs) {
+                        if (carr.equals(asignatura.getCarrera())) {
+                            carr.getAlumnos().add(this);
+                        }
+                    }
+                }
+                Regimen i = new Regimen(this, asignatura, false);
+                asignatura.getCursantes().add(i);
+                e = true;
+            }
+        }
+        return e;
+    }
+
+    /**
+     *
+     * @param ag
+     * @param registro
+     */
+    public boolean DarseDeBaja(String Cod, RegistroDeCarreras registro) {
+        boolean e = false;
+        ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura.getCodigo().equals(Cod)) {
+                List<Regimen> regimenes = asignatura.getCursantes();
+                for (Regimen regimen : regimenes) {
+                    if (regimen.getAlumno().equals(this)) {
+                        regimenes.remove(regimen);
+                    }
+                }
+            }
+        }
+        return e;
+    }
+    
+    /**
+     *
+     * @return
+     */
     public String getDomicilio() {
         return domicilio;
     }
 
+    /**
+     *
+     * @param domicilio
+     */
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLocalidad() {
         return localidad;
     }
 
+    /**
+     *
+     * @param localidad
+     */
     public void setLocalidad(String localidad) {
         this.localidad = localidad;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getProvincia() {
         return provincia;
     }
 
+    /**
+     *
+     * @param provincia
+     */
     public void setProvincia(String provincia) {
         this.provincia = provincia;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPaisDeResidencia() {
         return paisDeResidencia;
     }
 
+    /**
+     *
+     * @param paisDeResidencia
+     */
     public void setPaisDeResidencia(String paisDeResidencia) {
         this.paisDeResidencia = paisDeResidencia;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCorreoElectronico() {
         return correoElectronico;
     }
 
+    /**
+     *
+     * @param correoElectronico
+     */
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
 
-    public LocalDate getFechaNacimiento() {
+    /**
+     *
+     * @return
+     */
+    public String  getFechaNacimiento() {
         return fechaNacimiento;
     }
+    
+    public Set<Carrera> carrerasQueCursa() {
+        return Main.getRegistroDeCarreras().getCarreraPorDNI(super.getDNI());
+    }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    /**
+     *
+     * @param fechaNacimiento
+     */
+    public void setFechaNacimiento(String  fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public LocalDate getFechaInscripcion() {
+    /**
+     *
+     * @return
+     */
+    public String  getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(LocalDate fechaInscripcion) {
+    /**
+     *
+     * @param fechaInscripcion
+     */
+    public void setFechaInscripcion(String  fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 
+    /**
+     *
+     * @return
+     */
     public String  getNumeroMatricula() {
         return numeroMatricula;
     }
 
+    /**
+     *
+     * @param numeroMatricula
+     */
     public void setNumeroMatricula(String  numeroMatricula) {
         this.numeroMatricula = numeroMatricula;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return super.toString()+"Alumno{" + "numeroMatricula=" + numeroMatricula + '}';
     }
         
     

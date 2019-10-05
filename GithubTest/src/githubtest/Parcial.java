@@ -15,8 +15,8 @@ public class Parcial extends Examen{
     private boolean recuperatorio;
     private boolean primeroTrueSegundoFalse;
 
-    public Parcial(boolean recuperatorio, boolean primeroTrueSegundoFalse, Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario, Acta acta) {
-        super(asignatura, periodo, fecha, horario, acta);
+    public Parcial(boolean recuperatorio, boolean primeroTrueSegundoFalse, Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario) {
+        super(asignatura, periodo, fecha, horario);
         this.recuperatorio = recuperatorio;
         this.primeroTrueSegundoFalse = primeroTrueSegundoFalse;
     }

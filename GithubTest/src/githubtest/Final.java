@@ -18,8 +18,8 @@ public class Final extends Examen {
     private boolean puedenLibres;
     private List<DocenteExamen> docenteExamen;
 
-    public Final(boolean puedenRegulares, boolean puedenLibres, Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario, Acta acta) {
-        super(asignatura, periodo, fecha, horario, acta);
+    public Final(boolean puedenRegulares, boolean puedenLibres, Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario) {
+        super(asignatura, periodo, fecha, horario);
         this.puedenRegulares = puedenRegulares;
         this.puedenLibres = puedenLibres;
         this.docenteExamen = new ArrayList<>();

@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Objects;
 public class Asignatura {
 
-  private int codigo,
+  private String  codigo,
           cargaHoraria;
   private String nombre;
   private PlanDeEstudio planDeEstudio;
   private Carrera carrera;
   private int añoDeCarreraAlQuePertenece;
-  private PeriodoLectivoEnum periodoLectivo;
+  private PeriodoLectivoConAño periodoLectivo;
   private boolean promocional;
   private int cantidadParciales;
   private Equipo equipo;
@@ -21,7 +21,7 @@ public class Asignatura {
   private List<Examen> examenes;
   private List<Regimen>cursantes;
 
-    public Asignatura(int codigo, int cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera, int añoDeCarreraAlQuePertenece, PeriodoLectivoEnum periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, BitacoraFinal bitacora) {
+    public Asignatura(String  codigo, String cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera, int añoDeCarreraAlQuePertenece, PeriodoLectivoConAño periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, BitacoraFinal bitacora) {
         this.codigo = codigo;
         this.cargaHoraria = cargaHoraria;
         this.nombre = nombre;
@@ -38,24 +38,29 @@ public class Asignatura {
         this.cursantes = new ArrayList<>()  ;
     }
 
+    public Asignatura(String  codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
+
 
   
 
  
 
-    public int getCodigo() {
+    public String  getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String  codigo) {
         this.codigo = codigo;
     }
 
-    public int getCargaHoraria() {
+    public String  getCargaHoraria() {
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(int cargaHoraria) {
+    public void setCargaHoraria(String cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 
@@ -91,20 +96,11 @@ public class Asignatura {
         this.añoDeCarreraAlQuePertenece = añoDeCarreraAlQuePertenece;
     }
     
-
-    public int getAñoalQuePertenece() {
-        return añoDeCarreraAlQuePertenece;
-    }
-
-    public void setAñoalQuePertenece(int añoalQuePertenece) {
-        this.añoDeCarreraAlQuePertenece = añoalQuePertenece;
-    }
-
-    public PeriodoLectivoEnum getPeriodoLectivo() {
+    public PeriodoLectivoConAño getPeriodoLectivo() {
         return periodoLectivo;
     }
 
-    public void setPeriodoLectivo(PeriodoLectivoEnum periodoLectivo) {
+    public void setPeriodoLectivo(PeriodoLectivoConAño periodoLectivo) {
         this.periodoLectivo = periodoLectivo;
     }
 
@@ -167,9 +163,9 @@ public class Asignatura {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + this.codigo;
-        hash = 67 * hash + Objects.hashCode(this.nombre);
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.codigo);
+        hash = 37 * hash + Objects.hashCode(this.nombre);
         return hash;
     }
 
@@ -185,7 +181,7 @@ public class Asignatura {
             return false;
         }
         final Asignatura other = (Asignatura) obj;
-        if (this.codigo != other.codigo) {
+        if (!Objects.equals(this.codigo, other.codigo)) {
             return false;
         }
         if (!Objects.equals(this.nombre, other.nombre)) {
@@ -194,10 +190,14 @@ public class Asignatura {
         return true;
     }
 
+ 
+
     @Override
     public String toString() {
-        return "Asignatura{" + "codigo=" + codigo + ", cargaHoraria=" + cargaHoraria + ", nombre=" + nombre + ", planDeEstudio=" + planDeEstudio + ", carrera=" + carrera + ", a\u00f1oDeCarreraAlQuePertenece=" + añoDeCarreraAlQuePertenece + ", periodoLectivo=" + periodoLectivo + ", promocional=" + promocional + ", cantidadParciales=" + cantidadParciales + ", equipo=" + equipo + ", bitacora=" + bitacora + ", listadoTrabajosPracticos=" + listadoTrabajosPracticos + ", examenes=" + examenes + ", cursantes=" + cursantes + '}';
+        return "Asignatura{" + "codigo=" + codigo + ", nombre=" + nombre + '}';
     }
+
+   
 
 
   

@@ -5,19 +5,22 @@
  */
 package GUI;
 
-import githubtest.Alumno;
+import githubtest.Acta;
+import githubtest.ActaParcial;
+import githubtest.Asignatura;
+import githubtest.BitacoraFinal;
 import githubtest.Carrera;
+import githubtest.Equipo;
+import githubtest.Examen;
+import githubtest.Parcial;
+import githubtest.PeriodoLectivoConAño;
+import githubtest.PeriodoLectivoEnum;
 import githubtest.PlanDeEstudio;
 import githubtest.RegistroDeCarreras;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.time.Month;
 /**
  *
  * @author juanc
@@ -25,6 +28,9 @@ import javax.swing.JPanel;
 
 public class Main {
     static RegistroDeCarreras registroDeCarreras;
+    static Asignatura POO;
+    static Carrera LicenciaturaEnSistemas;
+    static Examen parcial;
     public static void main(String[] args) {
     añadirInformacionPorDefecto();
     Frame frame=new Frame("TallerPOO");
@@ -37,9 +43,28 @@ public class Main {
     }
     public static void añadirInformacionPorDefecto() { 
         registroDeCarreras=new RegistroDeCarreras();
-        ArrayList<Carrera>carreras= registroDeCarreras.getCarreras();
-        carreras.add(new Carrera("LicenciaturaSistemas",1,LocalDate.of(2000,4,15),5));
-        
+        //Comienza zona LicenciaturaSistemas
+        LicenciaturaEnSistemas=new Carrera("LicenciaturaSistemas",1,LocalDate.of(2000,4,15),5);
+        PlanDeEstudio DosMilQuince=new PlanDeEstudio(LocalDate.of(2015, Month.JANUARY, 14),
+                LocalDate.of(2020, Month.DECEMBER, 31),LicenciaturaEnSistemas,5);
+        LicenciaturaEnSistemas.getPlanesDeEstudio().add(DosMilQuince);
+        POO= new Asignatura("1","300","POO",DosMilQuince,LicenciaturaEnSistemas,
+                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2018),true,4,new Equipo(),new BitacoraFinal());
+        parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2018, Month.MARCH, 5),18);
+        POO.getExamenes().add(parcial);
+        Acta acta=new ActaParcial(parcial);
+        parcial.setActa(acta);
+        DosMilQuince.getAsignaturas().add(POO);
+        registroDeCarreras.getCarreras().add(LicenciaturaEnSistemas);
+        //Finaliza zona LicenciaturaSistemas
+    }
+    
+    public static Carrera getLicenciaturaEnSistemas() {
+        return LicenciaturaEnSistemas;
+    }
+
+    public static Asignatura getPOO() {
+        return POO;
     }
 
     public static RegistroDeCarreras getRegistroDeCarreras() {

@@ -3,8 +3,10 @@ package githubtest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Carrera {
    private String nombre;
@@ -12,19 +14,21 @@ public class Carrera {
    private LocalDate fechaCreacion;
    private int cantidadAños;
    private List<PlanDeEstudio> planesDeEstudio;
-   private List<Alumno> alumnos;
+   private Set<Alumno> alumnos;
+   private Set<Docente> docentes;
 
     public Carrera(String nombre, int codigo, LocalDate fechaCreacion, int cantidadAños) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.fechaCreacion = fechaCreacion;
         this.cantidadAños = cantidadAños;
-        this.planesDeEstudio = new ArrayList<>()  ;;
-        this.alumnos = new ArrayList<>()  ;;
+        this.planesDeEstudio = new ArrayList<>();
+        this.alumnos = new HashSet<>()  ;
+        this.docentes = new HashSet<>()  ;
     }
    
    
-    public List<Alumno> getAlumnos() {
+    public Set<Alumno> getAlumnos() {
         return alumnos;
     }
 
@@ -60,10 +64,6 @@ public class Carrera {
         this.cantidadAños = cantidadAños;
     }
 
-    public List<PlanDeEstudio> getPlanDeEstudio() {
-        return planesDeEstudio;
-    }
-
     public void setPlanDeEstudio(List<PlanDeEstudio> planDeEstudio) {
         this.planesDeEstudio = planDeEstudio;
     }
@@ -76,9 +76,18 @@ public class Carrera {
         this.planesDeEstudio = planesDeEstudio;
     }
 
-    public void setAlumnos(List<Alumno> alumnos) {
+    public void setAlumnos(Set<Alumno> alumnos) {
         this.alumnos = alumnos;
     }
+
+    public Set<Docente> getDocentes() {
+        return docentes;
+    }
+
+    public void setDocentes(Set<Docente> docentes) {
+        this.docentes = docentes;
+    }
+    
 
     @Override
     public int hashCode() {
@@ -111,7 +120,9 @@ public class Carrera {
 
     @Override
     public String toString() {
-        return "Carrera{" + "nombre=" + nombre + ", codigo=" + codigo + ", fechaCreacion=" + fechaCreacion + ", cantidadA\u00f1os=" + cantidadAños + ", planesDeEstudio=" + planesDeEstudio + ", alumnos=" + alumnos + '}';
+        return "Carrera{" + "nombre=" + nombre + ", codigo=" + codigo + '}';
     }
+
+  
     
 }

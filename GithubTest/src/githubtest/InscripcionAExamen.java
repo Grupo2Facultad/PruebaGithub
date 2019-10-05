@@ -101,23 +101,21 @@ public class InscripcionAExamen {
     }
         
     public void verificarParcial() {
-        BitacoraFinal bitacora=null;
-        List<TrabajoPractico> trabajos=null;
-          List<Examen> examenes=getElRestoDeExamenes();
-                    for (Examen examene : examenes) {
-                        if(examene instanceof Parcial){
-                            if (!((Parcial)examene).isPrimeroTrueSegundoFalse()){
-                              verificarPrimero(examenes);
-                              this.tiene2Parciales=true;
-                            }                               
-                        }
-                        if (examene.equals(examen)) {
-                            bitacora = examene.getAsignatura().getBitacora();
-                            trabajos=(ArrayList)examene.getAsignatura().getListadoTrabajosPracticos();
-                        }
-                    }
-                
-            
+        BitacoraFinal bitacora = null;
+        List<TrabajoPractico> trabajos = null;
+        List<Examen> examenes = getElRestoDeExamenes();
+        for (Examen examene : examenes) {
+            if (examene instanceof Parcial) {
+                if (examene.getAsignatura().equals(examen.getAsignatura())) {
+                    if (!((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                        verificarPrimero(examenes);
+                        this.tiene2Parciales = true;
+                    } 
+                }
+            }
+        }
+        bitacora = this.examen.getAsignatura().getBitacora();
+        trabajos = (ArrayList) this.examen.getAsignatura().getListadoTrabajosPracticos();
         verificarAsistencia(bitacora);
         verificarNotasPracticos(trabajos);
         habilitarParcial();
@@ -170,8 +168,8 @@ public class InscripcionAExamen {
             this.notasPracticosBuenas=false;
         }
     }
-    public void verificarAsistencia(BitacoraFinal bitacora) {
-                int asistio = 0;
+    public void verificarAsistencia(BitacoraFinal bitacora){
+        int asistio = 0;
         int asistenciasTotal = 0;
         ArrayList<BitacoraDiaria> bitac = (ArrayList) bitacora.getBitacorasDiarias();
         for (BitacoraDiaria bitacoraDiaria : bitac) {
