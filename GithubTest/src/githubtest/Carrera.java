@@ -15,6 +15,7 @@ public class Carrera {
    private int cantidadAños;
    private List<PlanDeEstudio> planesDeEstudio;
    private Set<Alumno> alumnos;
+   private Set<Docente> docentes;
 
     public Carrera(String nombre, int codigo, LocalDate fechaCreacion, int cantidadAños) {
         this.nombre = nombre;
@@ -23,6 +24,7 @@ public class Carrera {
         this.cantidadAños = cantidadAños;
         this.planesDeEstudio = new ArrayList<>();
         this.alumnos = new HashSet<>()  ;
+        this.docentes = new HashSet<>()  ;
     }
    
    
@@ -77,6 +79,15 @@ public class Carrera {
     public void setAlumnos(Set<Alumno> alumnos) {
         this.alumnos = alumnos;
     }
+
+    public Set<Docente> getDocentes() {
+        return docentes;
+    }
+
+    public void setDocentes(Set<Docente> docentes) {
+        this.docentes = docentes;
+    }
+    
 
     @Override
     public int hashCode() {
