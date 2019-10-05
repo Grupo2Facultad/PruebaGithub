@@ -5,10 +5,12 @@
  */
 package GUI;
 
+import githubtest.Acta;
 import githubtest.Asignatura;
 import githubtest.BitacoraFinal;
 import githubtest.Carrera;
 import githubtest.Equipo;
+import githubtest.Parcial;
 import githubtest.PeriodoLectivoConAño;
 import githubtest.PeriodoLectivoEnum;
 import githubtest.PlanDeEstudio;
@@ -45,11 +47,13 @@ public class Main {
         LicenciaturaEnSistemas.getPlanesDeEstudio().add(DosMilQuince);
         POO= new Asignatura("1","300","POO",DosMilQuince,LicenciaturaEnSistemas,
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2018),true,4,new Equipo(),new BitacoraFinal());
+        Parcial parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2018, Month.MARCH, 5),18);
+        POO.getExamenes().add(parcial);
         DosMilQuince.getAsignaturas().add(POO);
         registroDeCarreras.getCarreras().add(LicenciaturaEnSistemas);
         //Finaliza zona LicenciaturaSistemas
     }
-
+    
     public static Carrera getLicenciaturaEnSistemas() {
         return LicenciaturaEnSistemas;
     }

@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -19,12 +20,14 @@ import javax.swing.JTextField;
  *
  * @author juanc
  */
-public class CantidadAlumnosCarreraPeriodo implements ActionListener{
+public class CantidadAlumnosCarreraPeriodoActionListener implements ActionListener{
 private JButton ingresar;
 private JTextField ingresoNombre;
 private JTextField ingresoAño;
 private JTextField ingresoMes;
 private JTextField ingresoDia;
+private JLabel slash,
+        slash2;
 private String carrera;
 class MostrarCantidadAlumnos implements ActionListener{
         @Override
@@ -48,15 +51,20 @@ class MostrarCantidadAlumnos implements ActionListener{
         Frame frame=new Frame("Cantidad De Alumnos Por Carrera en un Periodo");
         Container container=frame.getContentPane();
         ingresoNombre=new JTextField(20);
-        ingresoAño=new JTextField(20);
-        ingresoMes=new JTextField(20);
-        ingresoDia=new JTextField(20);
+        ingresoNombre.setToolTipText("Carrera");
+        ingresoAño=new JTextField("año",5);
+        ingresoMes=new JTextField("mes",3);
+        ingresoDia=new JTextField("dia",3);
         ingresar=new JButton("inrgesar");
+        slash=new JLabel("/");
+        slash2=new JLabel("/");
         ingresar.addActionListener(new MostrarCantidadAlumnos());
         container.setLayout(new FlowLayout());
         container.add(ingresoNombre);
         container.add(ingresoAño);
+        container.add(slash);
         container.add(ingresoMes);
+        container.add(slash2);
         container.add(ingresoDia);
         container.add(ingresar);
         frame.setVisible(true);
