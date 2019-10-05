@@ -41,6 +41,7 @@ public class RegistroDeCarreras {
                                     for (Regimen alumno : alumnos) {
                                         e.add(alumno.getAlumno());
                                     }
+                                }
                                 } else {
                                     if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.segundoCuatrimestre)) {
                                         ArrayList<Regimen> alumnos = (ArrayList) asignatura.getCursantes();
@@ -60,8 +61,6 @@ public class RegistroDeCarreras {
                     }
                 }
             }
-
-        }
         int y = e.size();
         return y;
     }
@@ -96,6 +95,7 @@ public class RegistroDeCarreras {
                                             asignaturas.add(asignatura);
                                         }
                                     }
+                                }
                                 } else {
                                     if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.segundoCuatrimestre)) {
                                         ArrayList<Regimen> alumnos = (ArrayList) asignatura.getCursantes();
@@ -120,29 +120,55 @@ public class RegistroDeCarreras {
                 }
             }
 
-        }
+        
         return asignaturas;
     }
-
-    public String getDocentesAsignatura(Asignatura ag, int año) {
+ 
+    public Set<Docente> getDocentesAsignatura(String nom, String cod, LocalDate date) {
+        Set<Docente> docentes = new HashSet<>();
         for (Carrera carrera : carreras) {
             ArrayList<PlanDeEstudio> planes = (ArrayList) carrera.getPlanesDeEstudio();
             for (PlanDeEstudio plane : planes) {
-                if (plane.getFechaDeImplementacion().getYear() < año && plane.getFechadeVigencia().getYear() > año) {
-                    ArrayList<Asignatura> b = plane.getAsignaturas();
-                    for (Asignatura asignatura : b) {
-                        if (ag.equals(asignatura)) {
-                            return asignatura.getEquipo().toString();
+                if (plane.getFechaDeImplementacion().isBefore(date) && plane.getFechadeVigencia().isAfter(date)) {
+                    ArrayList<Asignatura> asignaturas = plane.getAsignaturas();
+                    for (Asignatura asignatura : asignaturas) {
+                        if (asignatura.equals(new Asignatura(cod, nom))) {
+                            if (asignatura.getPeriodoLectivo().getAño() == date.getYear()) {
+                                if (date.getMonthValue() <= 6) {
+                                    if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre)) {
+                                        ArrayList<Rol> profesores = (ArrayList) asignatura.getEquipo().getRoles();
+                                        for (Rol docente :profesores) {
+                                            
+                                            docentes.add(docente.getDocente());
+                                        }
+                                    }
+                                    } else {
+                                        if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.segundoCuatrimestre)) {
+                                           ArrayList<Rol> profesores = (ArrayList) asignatura.getEquipo().getRoles();
+                                        for (Rol docente : profesores) {
+                                           docentes.add(docente.getDocente());
+                                        }
+                                        }
+                                    }
+                                    if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.Anual)) {
+                                        ArrayList<Rol> profesores = (ArrayList) asignatura.getEquipo().getRoles();
+                                        for (Rol docente : profesores) {
+                                         docentes.add(docente.getDocente());
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
-        }
-        return "error al buscar el equipo";
+        
+        return docentes;
     }
-    public List<Alumno> HabilitadosParcial(Asignatura asignatura,PeriodoLectivoEnum periodo, boolean isPrimeroTrueSegundoFalse) {
+
+    public List<Alumno> HabilitadosParcial(Asignatura asignatura, PeriodoLectivoEnum periodo, boolean isPrimeroTrueSegundoFalse) {
         //Una asignatura de por si pertenece a una carrera y plan de estudio,y se desarrolla en un año determinado
-        ArrayList<Examen>examenes= (ArrayList)asignatura.getExamenes();
+        ArrayList<Examen> examenes = (ArrayList) asignatura.getExamenes();
         for (Examen examene : examenes) {
             if (examene.getPeriodo().equals(periodo)){
             if (((Parcial)examene).isPrimeroTrueSegundoFalse()==isPrimeroTrueSegundoFalse){

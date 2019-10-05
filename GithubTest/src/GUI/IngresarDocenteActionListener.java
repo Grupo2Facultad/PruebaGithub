@@ -7,8 +7,10 @@ package GUI;
 
 import githubtest.Carrera;
 import githubtest.Docente;
+import githubtest.Rol;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -32,7 +34,8 @@ private Carrera seleccionada;
             check();
             Docente docente = new Docente(info.getIngresoNumeroLegajo().getText(), info.getIngresoADocencia().getText(),
                     info.getIngresoNombre().getText(), info.getIngresoApellido().getText(), info.getIngresoDNI().getText());
-            
+            //Docente de prueba para probar Informes
+          Main.POO.getEquipo().getRoles().add(new Rol(docente,"dedicacion","titular",LocalDate.of(2018,1,1),LocalDate.of(2018,12,1)));
             JOptionPane.showMessageDialog(null, "operacion exitosa");
             info.getFrame().setVisible(false);
         } catch (YaExisteException ex) {
