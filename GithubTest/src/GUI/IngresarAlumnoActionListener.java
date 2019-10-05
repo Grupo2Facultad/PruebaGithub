@@ -5,8 +5,11 @@
  */
 package GUI;
 
+import githubtest.Acta;
+import githubtest.ActaParcial;
 import githubtest.Alumno;
 import githubtest.Carrera;
+import githubtest.InscripcionAExamen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -43,17 +46,17 @@ public class IngresarAlumnoActionListener implements ActionListener {
                     info.getIngresoFechaNacimiento().getText(), info.getIngresoFechaInscripcion().getText(), info.getIngresoNumeroMatricula().getText(),
                     info.getIngresoNombre().getText(), info.getIngresoApellido().getText(), info.getIngresoDNI().getText());
             seleccionada.getAlumnos().add(alumno);
-            //Testeando añadir un alumno para probar informes
-            alumno.InscribirseAAsignaturaComoRegular(Main.POO.getCodigo(), Main.registroDeCarreras);
             JOptionPane.showMessageDialog(null, "operacion exitosa");
             info.getFrame().setVisible(false);
-
         } catch (YaExisteException ex) {
             JOptionPane.showMessageDialog(null, "Ese alumno ya existe en esa Carrera");
         } catch (CodigoIDentificacionYaExisteException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Falto Ingresar Algo o la Carrera es Invalida");
+        } catch (FaltaIngresoOCarreraInvalidaException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -94,7 +97,7 @@ public class IngresarAlumnoActionListener implements ActionListener {
             }
         }
         if(!e||!t){
-            throw new Exception();
+            throw new FaltaIngresoOCarreraInvalidaException("Falto Ingresar Algo o la Carrera es Invalida");
         }
  
     }

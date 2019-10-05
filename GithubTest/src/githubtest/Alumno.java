@@ -75,6 +75,21 @@ private String  numeroMatricula;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
             if (asignatura.getCodigo().equals(Cod)) {
+                Set<Carrera> carreras=carrerasQueCursa();
+                boolean w=false;
+                for (Carrera carrera : carreras) {
+                    if(carrera.equals(asignatura.getCarrera())){
+                        w=true;
+                    }
+                }
+                if(!w){
+                  Set<Carrera> carrs=registro.getCarreraPorDNI(super.getDNI());
+                    for (Carrera carr : carrs) {
+                        if(carr.equals(asignatura.getCarrera())){
+                            carr.getAlumnos().add(this);
+                        }
+                    }
+                }
                 Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(), asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
                 asignatura.getCursantes().add(i);
                 e=true;
@@ -90,13 +105,28 @@ private String  numeroMatricula;
      * @param registro
      */
     public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) {
-        boolean e=false;
+        boolean e = false;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
             if (asignatura.getCodigo().equals(Cod)) {
+                Set<Carrera> carreras = carrerasQueCursa();
+                boolean w = false;
+                for (Carrera carrera : carreras) {
+                    if (carrera.equals(asignatura.getCarrera())) {
+                        w = true;
+                    }
+                }
+                if (!w) {
+                    Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
+                    for (Carrera carr : carrs) {
+                        if (carr.equals(asignatura.getCarrera())) {
+                            carr.getAlumnos().add(this);
+                        }
+                    }
+                }
                 Regimen i = new Regimen(this, asignatura, false);
                 asignatura.getCursantes().add(i);
-                e=true;
+                e = true;
             }
         }
         return e;
