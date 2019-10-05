@@ -20,7 +20,8 @@ public class PanelIngresos extends JPanel {
 
     protected JLabel label3;
     protected JButton ingresarAlumno,
-            ingresarDocente;
+            ingresarDocente,
+            inscribirAAsignatura;
 
 
     
@@ -32,9 +33,12 @@ public class PanelIngresos extends JPanel {
         ingresarAlumno.addActionListener(new IngresarAlumno());
         ingresarDocente = new JButton("ingresarDocente");
         ingresarDocente.addActionListener(new IngresarDocente ());
+        inscribirAAsignatura = new JButton("Inscribirse a Asignatura");
+        inscribirAAsignatura.addActionListener(new InscribirseAAsignaturaActionListener());
         this.add(label3);
         this.add(ingresarAlumno);
         this.add(ingresarDocente);
+        this.add(inscribirAAsignatura);
     }
  
 
