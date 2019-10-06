@@ -5,11 +5,13 @@
  */
 package GUI;
 
+import githubtest.Carrera;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,7 +29,8 @@ private JTextField ingresoAño;
 private JTextField ingresoMes;
 private JTextField ingresoDia;
 private JLabel slash,
-        slash2;
+        slash2,
+        carrerasDisponibles;
 private String carrera;
 class MostrarCantidadAlumnos implements ActionListener{
         @Override
@@ -59,6 +62,13 @@ class MostrarCantidadAlumnos implements ActionListener{
         slash=new JLabel("/");
         slash2=new JLabel("/");
         ingresar.addActionListener(new MostrarCantidadAlumnos());
+        this.carrerasDisponibles=new JLabel();
+            String disponibles="Carreras Disponibles: ";
+            ArrayList<Carrera>carreras=Main.registroDeCarreras.getCarreras();
+            for (Carrera carrera : carreras) {
+               disponibles+=carrera+"\n";
+           }
+            this.carrerasDisponibles.setText(disponibles);
         container.setLayout(new FlowLayout());
         container.add(ingresoNombre);
         container.add(ingresoAño);
@@ -67,6 +77,7 @@ class MostrarCantidadAlumnos implements ActionListener{
         container.add(slash2);
         container.add(ingresoDia);
         container.add(ingresar);
+        container.add(carrerasDisponibles);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
