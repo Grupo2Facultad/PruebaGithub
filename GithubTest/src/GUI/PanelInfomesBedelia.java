@@ -35,6 +35,7 @@ public class PanelInfomesBedelia extends JPanel{
         profesoresProAsignatura = new JButton("ProfesoesAsignatura");
         profesoresProAsignatura.addActionListener(new ProfesoresPorAsignaturaActionListener ());
         imprimirActa = new JButton("ImprimirActa");
+        imprimirActa.addActionListener(new ImprimirActaActionListener());
         this.add(label2);
         this.add(habilitadosParcial);
         this.add(habilitadosFinal);

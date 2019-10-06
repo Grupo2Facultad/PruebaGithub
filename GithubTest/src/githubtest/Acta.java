@@ -53,7 +53,7 @@ public abstract class Acta {
     public String toString() {
         String s = "Examen de" + examen.getAsignatura() + "realizado el dia" + examen.getFecha() + "\n";
         for (InscripcionAExamen inscripcione : inscripciones) {
-            s = s + inscripcione + "\n";
+            s = s + " "+ inscripcione.getAlumno()+" " +"Nota: "+inscripcione.getNotaObtenida()+ "\n";
         }
         return s;
 

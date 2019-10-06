@@ -5,8 +5,11 @@
  */
 package githubtest;
 
+import GUI.Main;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,31 +33,30 @@ public class ActaFinal extends Acta{
   
     public void cerrarActa() {
         boolean existen=existenDocentes();
+        System.out.println("Existen?"+existen);
         if(existen){
             cerrada=true;
         }
         else{
             cerrada=false;
+            JOptionPane.showMessageDialog(null,"Por lo menos un Docente es invalido");
         }
        
     }
-    public boolean existenDocentes() {
+   private  boolean existenDocentes() {
         boolean existen=true;
         Final fin=(Final)super.getExamen();
         ArrayList<DocenteExamen>docentes=(ArrayList)fin.getDocenteExamen();  
-        Carrera carrera=fin.getAsignatura().getCarrera();
-        List<PlanDeEstudio> planes=carrera.getPlanesDeEstudio();
         for (DocenteExamen docentex : docentes) {
             boolean existe=false;
           Docente doc=docentex.getDocente();
-            for (PlanDeEstudio plane : planes) {
-                ArrayList<Asignatura> asig=plane.getAsignaturas();
-                for (Asignatura asignatura : asig) {
-                    ArrayList<Rol> roles=(ArrayList)asignatura.getEquipo().getRoles();
-                    for (Rol rol : roles) {
-                        if (doc.equals(rol.getDocente())){
-                            existe=true;
-                        }
+            System.out.println("El profesor es"+doc);
+           List<Carrera>carreras=Main.getRegistroDeCarreras().getCarreras();
+            for (Carrera carrera1 : carreras) {
+                Set<Docente>profesores=carrera1.getDocentes();
+                for (Docente profesor : profesores) {
+                    if(profesor.equals(doc)){
+                        existe=true;
                     }
                 }
             }
@@ -66,13 +68,9 @@ public class ActaFinal extends Acta{
     }
     @Override
     public void imprimirActa() {
-     //Esto va a cambiar cuando se pase a Swing
+     System.out.println("Cerrada?"+cerrada);
      if (cerrada){
-         System.out.println(this);
-     }
-     else{
-         System.out.println("todavia no esta cerrada");
+         JOptionPane.showMessageDialog(null,super.toString());
      }
     }
-    
 }
