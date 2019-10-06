@@ -7,6 +7,7 @@ package GUI;
 
 import githubtest.Alumno;
 import githubtest.Carrera;
+import githubtest.NoSeInscribioException;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -50,9 +51,13 @@ public class InscripcionAExamenActionListener implements ActionListener {
                 Set<Alumno> alumnos = carrera.getAlumnos();
                 for (Alumno alumno : alumnos) {
                     if (alumno.getDNI().equals(DNI)) {
+                        try{
                         if (alumno.InscibirseAExamen(fecha,asignaturaCod.getText())) {
                             JOptionPane.showMessageDialog(null, "Operacion Exitosa");
                             frame.setVisible(false);
+                        }
+                        }
+                        catch(NoSeInscribioException t){
                         }
                         e = true;
                     }

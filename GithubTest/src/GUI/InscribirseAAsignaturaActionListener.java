@@ -7,14 +7,17 @@ package GUI;
 
 import githubtest.Alumno;
 import githubtest.Carrera;
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -26,7 +29,9 @@ import javax.swing.JTextField;
 public class InscribirseAAsignaturaActionListener implements ActionListener{
     private JTextField alumnoDNI,
             asignaturaCod;
+           
     private JButton inscribirse;
+    private JButton buscarCodigo;
     private JRadioButton radioButton;
     private Frame frame;
     class Ingresar implements ActionListener{
@@ -75,16 +80,26 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Container container = frame.getContentPane();
-        container.setLayout(new FlowLayout());
+        container.setLayout(new BorderLayout());
         alumnoDNI=new JTextField("AlumnoDNI",20);
+        
         asignaturaCod=new JTextField("Codigo",6);
+    
         this.radioButton = new JRadioButton("Regular");
         inscribirse=new JButton("ingresar");
+        
         inscribirse.addActionListener(new Ingresar());
-        container.add(alumnoDNI);
-        container.add(asignaturaCod);
-        container.add(radioButton);
-        container.add(inscribirse);
+        Panel panel2=new Panel();
+        panel2.setLayout(new FlowLayout());
+        panel2.add(alumnoDNI);
+        panel2.add(asignaturaCod);
+        panel2.add(radioButton);
+        panel2.add(inscribirse);
+        Panel panel=new Panel();
+        panel.setLayout(new FlowLayout());
+        panel.add(buscarCodigo);
+        container.add(panel2,BorderLayout.NORTH);
+        container.add(panel,BorderLayout.SOUTH);
         }
     }
 
