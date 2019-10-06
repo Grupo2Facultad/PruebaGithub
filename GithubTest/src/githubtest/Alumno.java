@@ -94,7 +94,9 @@ private String  numeroMatricula;
                         }
                     }
                 }
-                Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(), asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
+                Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(),
+                        asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
+                    System.out.println(i);
                 asignatura.getCursantes().add(i);
                  ArrayList<TrabajoPractico>trabajos=(ArrayList)asignatura.getListadoTrabajosPracticos();
                     for (TrabajoPractico trabajo : trabajos) {
@@ -153,6 +155,7 @@ private String  numeroMatricula;
                     }
                 }
                 Regimen i = new Regimen(this, asignatura, false);
+                System.out.println(i);
                 asignatura.getCursantes().add(i);
                 e = true;
             }
@@ -198,10 +201,11 @@ private String  numeroMatricula;
             JOptionPane.showMessageDialog(null,"Ese Examen no existe");
         }
         else{
-           if(exa.getFecha().isBefore(LocalDate.now())){
+           if(exa.getFecha().isAfter(LocalDate.now())){
+            System.out.println(exa);
             Acta acta=exa.getActa();
             acta.getInscripciones().add(new InscripcionAExamen(this,exa));
-               System.out.println(acta.getInscripciones());
+           
             return true;
            }
            else{

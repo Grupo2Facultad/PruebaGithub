@@ -16,6 +16,7 @@ import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
@@ -26,6 +27,7 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
     private JTextField alumnoDNI,
             asignaturaCod;
     private JButton inscribirse;
+    private JRadioButton radioButton;
     private Frame frame;
     class Ingresar implements ActionListener{
 
@@ -37,19 +39,30 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
             for (Carrera carrera : carreras) {
                Set<Alumno>alumnos= carrera.getAlumnos();
                 for (Alumno alumno : alumnos) {
-                    if(alumno.getDNI().equals(DNI)){
-                        if(alumno.InscribirseAAsignaturaComoRegular(asignaturaCod.getText(),Main.registroDeCarreras)){
-                        JOptionPane.showMessageDialog(null,"Operacion Exitosa");
-                        frame.setVisible(false);  
+                    if (alumno.getDNI().equals(DNI)) {
+                        if (radioButton.getSelectedObjects() != null) {
+                            if (alumno.InscribirseAAsignaturaComoRegular(asignaturaCod.getText(), Main.registroDeCarreras)) {
+                                JOptionPane.showMessageDialog(null, "Operacion Exitosa");
+                                frame.setVisible(false);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Codigo Invalido");
+                            }
+                            e = true;
                         }
                         else{
-                        JOptionPane.showMessageDialog(null,"Codigo Invalido");
-                    }
-                        e=true;                                          
+                            if (alumno.InscribirseAAsignaturaComoLibre(asignaturaCod.getText(), Main.registroDeCarreras)) {
+                                JOptionPane.showMessageDialog(null, "Operacion Exitosa");
+                                frame.setVisible(false);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Codigo Invalido");
+                            }
+                            e = true;
+                            
+                        }
                     }
                 }
             }
-            if(!e){
+            if (!e) {
                 JOptionPane.showMessageDialog(null,"Ese Alumno no se encuentra en el Sistema");
             }
             
@@ -65,10 +78,12 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
         container.setLayout(new FlowLayout());
         alumnoDNI=new JTextField("AlumnoDNI",20);
         asignaturaCod=new JTextField("Codigo",6);
+        this.radioButton = new JRadioButton("Regular");
         inscribirse=new JButton("ingresar");
         inscribirse.addActionListener(new Ingresar());
         container.add(alumnoDNI);
         container.add(asignaturaCod);
+        container.add(radioButton);
         container.add(inscribirse);
         }
     }

@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 
    public class IngresarAlumno implements ActionListener {
        private TextField ingresoNombre,
@@ -32,6 +33,7 @@ import javax.swing.JLabel;
                ingresoPaisDeResidencia,
                ingresoCorreoElectronico,
                ingresoFechaNacimiento,
+               
                ingresoFechaInscripcion;
        private JLabel obligatorios;
        private JButton ingresar;
@@ -68,6 +70,7 @@ import javax.swing.JLabel;
             this.ingresoProvincia.setText("provincia");
             this.ingresoFechaInscripcion=new TextField("fecha de inscripcion",20);
             this.ingresoFechaNacimiento=new TextField("fecha de nacimiento", 20);
+
             obligatorios=new JLabel("Campos Obligatorios: Apellido, Nombre,DNI,NumeroMatricula, Carrera (Marcados con *)");
             container.add(this.ingresar);
             container.add(this.ingresoNombre);
