@@ -24,7 +24,7 @@ import javax.swing.JTextField;
  *
  * @author juanc
  */
-public class HabilitadosParcialActionListener implements ActionListener{
+public class HabiltiadosExamenActionListener implements ActionListener{
 private JTextField codigoAsig,
          ingresoAño,
             ingresoMes,
@@ -79,7 +79,7 @@ class Ingresar implements ActionListener{
 }
     @Override
     public void actionPerformed(ActionEvent arg0) {
-       Frame frame=new Frame("Habilitados al Parcial");
+       Frame frame=new Frame("Habilitados al Examen");
        frame.setVisible(true);
        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Container container=frame.getContentPane();

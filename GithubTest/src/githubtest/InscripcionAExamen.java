@@ -8,10 +8,9 @@ package githubtest;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,64 +25,70 @@ public class InscripcionAExamen {
             notasPracticosBuenas,
             aproboPrimerParcial,
             asistencia;
-    private String  notaObtenida;
+    private String notaObtenida;
     private boolean tiene2Parciales;
-
-    
 
     public InscripcionAExamen(Alumno alumno, Examen examen) {
         this.alumno = alumno;
         this.fecha = LocalDate.now();
         this.examen = examen;
-        this.habilitado=false;
-        if(examen instanceof Parcial){
+        this.habilitado = false;
+        System.out.println("LLegue al constructor");
+        if (examen instanceof Parcial) {
             verificarParcial();
-        }
-        else{
+        } else {
             verificarFinal();
         }
     }
 
     private void verificarFinal() {
-        if(DAYS.between(examen.getFecha(),LocalDate.now())<=3){
-        boolean regular;
-        if(getNotaCurso()>=6){
-        regular=true;
-    }
-        else{
-            regular=false;
+        System.out.println("LLegue hasta verificarFinal");
+        System.out.println(DAYS.between(examen.getFecha(), LocalDate.now()) < 3);
+        if (DAYS.between(examen.getFecha(), LocalDate.now()) < 3) {
+            boolean regular;
+            System.out.println(getNotaCurso());
+            if (getNotaCurso() >= 6) {
+                regular = true;
+            } else {
+                regular = false;
+            }
+            if (((Final) examen).isPuedenRegulares() && regular) {
+                habilitado = true;
+            } else {
+                habilitado = false;
+            }
+            if (((Final) examen).isPuedenLibres()) {
+
+                System.out.println("Pueden Libres?" + ((Final) examen).isPuedenLibres());
+                habilitado = true;
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
         }
-        if (((Final)examen).isPuedenRegulares()&&regular){
-        habilitado=true;
     }
-        else{
-            habilitado=false;
-        }
-        if(((Final)examen).isPuedenLibres()){
-        habilitado=true;
-    }
-    }
-    }
+
     public Double getNotaCurso() {
-        double notaPrimero=0,
-                notaSegundo=0;
+        double notaPrimero = 0,
+                notaSegundo = 0;
         double notaCurso;
-        List<Examen> examenes =getElRestoDeExamenes();
+        List<Examen> examenes = getElRestoDeExamenes();
         for (Examen examene : examenes) {
-            if (!((Parcial) examene).isPrimeroTrueSegundoFalse()) {
-                this.tiene2Parciales = true;
-                ArrayList<InscripcionAExamen> inscripciones=(ArrayList)examene.getActa().getInscripciones();
-                for (InscripcionAExamen inscripcione : inscripciones) {
-                    if(this.alumno.equals(inscripcione.alumno)){
-                        notaSegundo=Double.parseDouble(inscripcione.notaObtenida);
+            if (examene instanceof Parcial) {
+                if (!((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                    this.tiene2Parciales = true;
+                    ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
+                    for (InscripcionAExamen inscripcione : inscripciones) {
+                        if (this.alumno.equals(inscripcione.alumno)) {
+                            notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
+                        }
                     }
                 }
-            }
-            if(((Parcial) examene).isPrimeroTrueSegundoFalse()){
-                   ArrayList<InscripcionAExamen> inscripciones=(ArrayList)examene.getActa().getInscripciones();
+                if (((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                    ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
                     for (InscripcionAExamen inscripcione : inscripciones) {
-                    if(this.alumno.equals(inscripcione.alumno)){
-                        notaPrimero=Double.parseDouble(inscripcione.notaObtenida);
+                        if (this.alumno.equals(inscripcione.alumno)) {
+                            notaPrimero = Double.parseDouble(inscripcione.notaObtenida);
+                        }
                     }
                 }
             }
@@ -94,6 +99,7 @@ public class InscripcionAExamen {
         else{
             notaCurso=notaPrimero;
         }
+        System.out.println("nota del Curso es:");
         return notaCurso;
     }
   
