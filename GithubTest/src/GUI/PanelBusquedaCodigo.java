@@ -33,7 +33,7 @@ public class PanelBusquedaCodigo extends JPanel {
         slash = new JLabel("/");
         slash2 = new JLabel("/");
         carrera = new JTextField("Carrera", 20);
-        buscarCodigo = new JButton("buscar Codigo");
+        buscarCodigo = new JButton("BuscarCodigosDeAsignaturaDisponibles");
         buscarCodigo.addActionListener(new BuscarCodigoAsignaturaActionListener(ingresoAño,
                 ingresoMes, ingresoDia, carrera));
         this.add(carrera);
