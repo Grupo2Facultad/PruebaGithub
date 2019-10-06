@@ -5,15 +5,16 @@
  */
 package GUI;
 
+import githubtest.Carrera;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -26,7 +27,8 @@ public class IngresarDocente implements ActionListener {
                ingresoNumeroLegajo,
                ingresoCarrera,
                ingresoADocencia;
-      private JLabel obligatorios;
+      private JLabel obligatorios,
+              carrerasDisponibles;
        private JButton ingresar;
        private Frame frame;
         @Override
@@ -49,6 +51,13 @@ public class IngresarDocente implements ActionListener {
             this.ingresoCarrera=new TextField(20);
             this.ingresoCarrera.setText("Carrera*");
             this.ingresoADocencia=new TextField("ingreso A Docencia",20);
+            this.carrerasDisponibles=new JLabel();
+            String disponibles="Carreras Disponibles: ";
+            ArrayList<Carrera>carreras=Main.registroDeCarreras.getCarreras();
+            for (Carrera carrera : carreras) {
+               disponibles+=carrera+"\n";
+           }
+            this.carrerasDisponibles.setText(disponibles);
             obligatorios=new JLabel("Campos Obligatorios: Apellido, Nombre,DNI,NumeroMatricula, Carrera (Marcados con *)");
             container.add(this.ingresar);
             container.add(this.ingresoNombre);
@@ -58,6 +67,7 @@ public class IngresarDocente implements ActionListener {
             container.add(this.ingresoCarrera);
             container.add(ingresoADocencia);
             container.add(obligatorios);
+            container.add(carrerasDisponibles);
             
         }
 

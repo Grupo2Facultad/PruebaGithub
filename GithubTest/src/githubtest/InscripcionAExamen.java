@@ -57,7 +57,7 @@ public class InscripcionAExamen {
                 habilitado = false;
             }
             if (((Final) examen).isPuedenLibres()) {
-
+ 
                 System.out.println("Pueden Libres?" + ((Final) examen).isPuedenLibres());
                 habilitado = true;
                 setNotaObtenida();
