@@ -29,7 +29,7 @@ public class InscripcionAExamen {
     private String notaObtenida;
     private boolean tiene2Parciales;
 
-    public InscripcionAExamen(Alumno alumno, Examen examen) {
+    public InscripcionAExamen(Alumno alumno, Examen examen) throws NoSeInscribioException{
         this.alumno = alumno;
         this.fecha = LocalDate.now();
         this.examen = examen;
@@ -41,7 +41,7 @@ public class InscripcionAExamen {
         }
     }
 
-    private void verificarFinal() {
+    private void verificarFinal() throws NoSeInscribioException{
         if (DAYS.between(examen.getFecha(), LocalDate.now()) < 3) {
             boolean regular;
             System.out.println(getNotaCurso());
@@ -51,16 +51,21 @@ public class InscripcionAExamen {
                 regular = false;
             }
             if (((Final) examen).isPuedenRegulares() && regular) {
+                JOptionPane.showMessageDialog(null,"InsciptoComoRegular");
                 habilitado = true;
                 setNotaObtenida();
             } else {
                 habilitado = false;
             }
-            if (((Final) examen).isPuedenLibres()) {
- 
-                System.out.println("Pueden Libres?" + ((Final) examen).isPuedenLibres());
+            if (((Final) examen).isPuedenLibres()&&notaObtenida==null) {
+                JOptionPane.showMessageDialog(null,"InsciptoComoLibre");
                 habilitado = true;
                 setNotaObtenida();
+            }
+            if(notaObtenida==null){
+                JOptionPane.showMessageDialog(null,"No se puede inscibir");
+                throw new NoSeInscribioException("no se pudo inscribir");
+                 
             }
         } else {
             JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
@@ -92,6 +97,7 @@ public class InscripcionAExamen {
                     for (InscripcionAExamen inscripcione : inscripciones) {
                         if (this.alumno.equals(inscripcione.alumno)) {
                             notaPrimero = Double.parseDouble(inscripcione.notaObtenida);
+                            System.out.println("notaPrimero"+notaPrimero);
                         }
                     }
                 }
@@ -103,7 +109,7 @@ public class InscripcionAExamen {
         else{
             notaCurso=notaPrimero;
         }
-        System.out.println("nota del Curso es:");
+        System.out.println("notacurso"+notaCurso);
         return notaCurso;
     }
   
@@ -113,8 +119,8 @@ public class InscripcionAExamen {
     }
         
        private  void verificarParcial() {
-        BitacoraFinal bitacora = null;
-        List<TrabajoPractico> trabajos = null;
+        BitacoraFinal bitacora = new BitacoraFinal();
+        List<TrabajoPractico> trabajos = new ArrayList<>()  ;
         List<Examen> examenes = getElRestoDeExamenes();
         for (Examen examene : examenes) {
             if (examene instanceof Parcial) {
@@ -137,6 +143,7 @@ public class InscripcionAExamen {
         if (asistencia && notasPracticosBuenas && !tiene2Parciales) {
             this.habilitado = true;
             setNotaObtenida();
+            System.out.println("Nota btenida"+notaObtenida);
         }
         if (tiene2Parciales&&asistencia&&notasPracticosBuenas&&aproboPrimerParcial) {
             this.habilitado=true;
@@ -175,6 +182,7 @@ public class InscripcionAExamen {
             }
         }
         double promedio=notas/totalTrabajos;
+        System.out.println("promedio"+promedio);
         if(promedio>=6){
             this.notasPracticosBuenas=true;
         }

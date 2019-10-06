@@ -183,7 +183,7 @@ private String  numeroMatricula;
         }
         return e;
     }
-    public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod) {
+    public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod) throws NoSeInscribioException{
         Asignatura asig=null;
         Examen exa=null;
         ArrayList<Asignatura> asignaturas=Main.getRegistroDeCarreras().getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
@@ -205,7 +205,6 @@ private String  numeroMatricula;
             System.out.println(exa);
             Acta acta=exa.getActa();
             acta.getInscripciones().add(new InscripcionAExamen(this,exa));
-           
             return true;
            }
            else{

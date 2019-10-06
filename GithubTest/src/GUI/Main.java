@@ -11,7 +11,6 @@ import githubtest.Asignatura;
 import githubtest.BitacoraFinal;
 import githubtest.Carrera;
 import githubtest.Equipo;
-import githubtest.Examen;
 import githubtest.Final;
 import githubtest.Parcial;
 import githubtest.PeriodoLectivoConAño;
@@ -29,10 +28,10 @@ import java.time.Month;
 
 public class Main {
     static RegistroDeCarreras registroDeCarreras;
-    static Asignatura POO;
-    static Carrera LicenciaturaEnSistemas;
-    static Parcial parcial;
-    static Final eFinal;
+    private static Asignatura POO;
+    private static Carrera LicenciaturaEnSistemas;
+    private static Parcial parcial;
+    private static Final eFinal;
     public static void main(String[] args) {
     añadirInformacionPorDefecto();
     Frame frame=new Frame("TallerPOO");
@@ -41,6 +40,7 @@ public class Main {
     container.add(new PanelInfomesBedelia(),BorderLayout.WEST);
     container.add(new PanelIngresos(),BorderLayout.CENTER);
     container.add(new PanelInformesAlumnado(),BorderLayout.EAST);
+    container.add(new PanelBusquedaCodigo(),BorderLayout.SOUTH);
     frame.setVisible(true); 
     }
     public static void añadirInformacionPorDefecto() { 
@@ -52,8 +52,8 @@ public class Main {
         LicenciaturaEnSistemas.getPlanesDeEstudio().add(DosMilQuince);
         POO= new Asignatura("1","300","POO",DosMilQuince,LicenciaturaEnSistemas,
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2019),true,4,new Equipo(),new BitacoraFinal());
-        parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2019, Month.MARCH, 5),18);
-        eFinal=new Final(true,true,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
+        parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,1),18);
+        eFinal=new Final(true,false,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
         POO.getExamenes().add(parcial);
         POO.getExamenes().add(eFinal);
         ActaParcial acta=new ActaParcial(parcial);
