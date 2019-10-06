@@ -10,6 +10,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,7 +34,6 @@ public class InscripcionAExamen {
         this.fecha = LocalDate.now();
         this.examen = examen;
         this.habilitado = false;
-        System.out.println("LLegue al constructor");
         if (examen instanceof Parcial) {
             verificarParcial();
         } else {
@@ -42,8 +42,6 @@ public class InscripcionAExamen {
     }
 
     private void verificarFinal() {
-        System.out.println("LLegue hasta verificarFinal");
-        System.out.println(DAYS.between(examen.getFecha(), LocalDate.now()) < 3);
         if (DAYS.between(examen.getFecha(), LocalDate.now()) < 3) {
             boolean regular;
             System.out.println(getNotaCurso());
@@ -54,6 +52,7 @@ public class InscripcionAExamen {
             }
             if (((Final) examen).isPuedenRegulares() && regular) {
                 habilitado = true;
+                setNotaObtenida();
             } else {
                 habilitado = false;
             }
@@ -61,12 +60,17 @@ public class InscripcionAExamen {
 
                 System.out.println("Pueden Libres?" + ((Final) examen).isPuedenLibres());
                 habilitado = true;
+                setNotaObtenida();
             }
         } else {
             JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
         }
     }
-
+    public void setNotaObtenida() {
+        Random r=new Random();
+        int  ran=r.nextInt(9)+1;
+        this.notaObtenida=Integer.toString(ran);
+    }
     public Double getNotaCurso() {
         double notaPrimero = 0,
                 notaSegundo = 0;
@@ -132,9 +136,11 @@ public class InscripcionAExamen {
     public void habilitarParcial() {
         if (asistencia && notasPracticosBuenas && !tiene2Parciales) {
             this.habilitado = true;
+            setNotaObtenida();
         }
         if (tiene2Parciales&&asistencia&&notasPracticosBuenas&&aproboPrimerParcial) {
             this.habilitado=true;
+            setNotaObtenida();
         }
     }
 
