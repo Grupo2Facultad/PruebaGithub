@@ -50,8 +50,18 @@ public class Main {
         PlanDeEstudio DosMilQuince=new PlanDeEstudio(LocalDate.of(2015, Month.JANUARY, 14),
                 LocalDate.of(2020, Month.DECEMBER, 31),LicenciaturaEnSistemas,5);
         LicenciaturaEnSistemas.getPlanesDeEstudio().add(DosMilQuince);
-        POO= new Asignatura("1","300","POO",DosMilQuince,LicenciaturaEnSistemas,
+        POO= new Asignatura("POO","300","Programacion Orientada A Objetos",DosMilQuince,LicenciaturaEnSistemas,
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2019),true,4,new Equipo(),new BitacoraFinal());
+        Asignatura OE= new Asignatura("OE","250","Organizacion De Empresas",DosMilQuince,LicenciaturaEnSistemas,
+                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2019),true,4,new Equipo(),new BitacoraFinal());
+        Asignatura AM= new Asignatura("AM","400","Analisis Matematico",DosMilQuince,LicenciaturaEnSistemas,
+                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2019),true,4,new Equipo(),new BitacoraFinal());
+        Asignatura IN= new Asignatura("IN","200","Ingles Tecnico",DosMilQuince,LicenciaturaEnSistemas,
+                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.Anual,2019),true,4,new Equipo(),new BitacoraFinal());
+        Asignatura ED= new Asignatura("ED","100","Estructura De Datos",DosMilQuince,LicenciaturaEnSistemas,
+                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.segundoCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
+        Asignatura AC= new Asignatura("AC","100","Arquitectura De Computadoras",DosMilQuince,LicenciaturaEnSistemas,
+                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.segundoCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
         parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,1),18);
         eFinal=new Final(true,false,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
         POO.getExamenes().add(parcial);
@@ -61,6 +71,11 @@ public class Main {
         parcial.setActa(acta);
         eFinal.setActa(actaFinal);
         DosMilQuince.getAsignaturas().add(POO);
+        DosMilQuince.getAsignaturas().add(ED);
+        DosMilQuince.getAsignaturas().add(OE);
+        DosMilQuince.getAsignaturas().add(AM);
+        DosMilQuince.getAsignaturas().add(IN);
+        DosMilQuince.getAsignaturas().add(AC);
         registroDeCarreras.getCarreras().add(LicenciaturaEnSistemas);
         //Finaliza zona LicenciaturaSistemas
     }

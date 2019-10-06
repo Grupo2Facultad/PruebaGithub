@@ -21,7 +21,9 @@ public class Asignatura {
   private List<Examen> examenes;
   private List<Regimen>cursantes;
 
-    public Asignatura(String  codigo, String cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera, int añoDeCarreraAlQuePertenece, PeriodoLectivoConAño periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, BitacoraFinal bitacora) {
+    public Asignatura(String  codigo, String cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera,
+            int añoDeCarreraAlQuePertenece, PeriodoLectivoConAño periodoLectivo, boolean promocional,
+            int cantidadParciales, Equipo equipo, BitacoraFinal bitacora) {
         this.codigo = codigo;
         this.cargaHoraria = cargaHoraria;
         this.nombre = nombre;
@@ -223,7 +225,7 @@ public class Asignatura {
 
     @Override
     public String toString() {
-        return "Asignatura{" + "codigo=" + codigo + ", nombre=" + nombre + '}';
+        return nombre + "{codigo=" + codigo + "}";
     }
 
    

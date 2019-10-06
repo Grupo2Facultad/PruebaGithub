@@ -38,7 +38,7 @@ private String  numeroMatricula;
      * @param DNI
      */
     public Alumno(String domicilio, String localidad, String provincia, String paisDeResidencia, String correoElectronico,
-            String  fechaNacimiento, String  fechaInscripcion, String  numeroMatricula, String nombre, String apellido, String DNI) {
+            String fechaNacimiento, String fechaInscripcion, String numeroMatricula, String nombre, String apellido, String DNI) {
         super(nombre, apellido, DNI);
         this.domicilio = domicilio;
         this.localidad = localidad;
@@ -49,7 +49,7 @@ private String  numeroMatricula;
         this.fechaInscripcion = fechaInscripcion;
         this.numeroMatricula = numeroMatricula;
     }
-    
+
     /**
      *
      * @param nombre
@@ -57,7 +57,7 @@ private String  numeroMatricula;
      * @param DNI
      * @param numeroMatricula
      */
-    public Alumno(String nombre, String apellido, String DNI,String  numeroMatricula) {
+    public Alumno(String nombre, String apellido, String DNI, String numeroMatricula) {
         super(nombre, apellido, DNI);
         this.numeroMatricula = numeroMatricula;
     }
@@ -65,62 +65,59 @@ private String  numeroMatricula;
     public Alumno(String nombre, String apellido, String DNI) {
         super(nombre, apellido, DNI);
     }
-    
-    
+
     /**
      *
      * @param ag
      * @param registro
      */
-    public boolean  InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro) {
-        Random r= new Random();
-        boolean e=false;
+    public boolean InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro) {
+        Random r = new Random();
+        boolean e = false;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
             if (asignatura.getCodigo().equals(Cod)) {
-                if(asignatura.getPeriodoLectivo().getAño()==LocalDate.now().getYear()){
-                Set<Carrera> carreras=carrerasQueCursa();
-                boolean w=false;
-                for (Carrera carrera : carreras) {
-                    if(carrera.equals(asignatura.getCarrera())){
-                        w=true;
-                    }
-                }
-                if(!w){
-                  Set<Carrera> carrs=registro.getCarreraPorDNI(super.getDNI());
-                    for (Carrera carr : carrs) {
-                        if(carr.equals(asignatura.getCarrera())){
-                            carr.getAlumnos().add(this);
+                if (asignatura.getPeriodoLectivo().getAño() == LocalDate.now().getYear()) {
+                    Set<Carrera> carreras = carrerasQueCursa();
+                    boolean w = false;
+                    for (Carrera carrera : carreras) {
+                        if (carrera.equals(asignatura.getCarrera())) {
+                            w = true;
                         }
                     }
-                }
-                Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(),
-                        asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
-                    System.out.println(i);
-                asignatura.getCursantes().add(i);
-                 ArrayList<TrabajoPractico>trabajos=(ArrayList)asignatura.getListadoTrabajosPracticos();
-                    for (TrabajoPractico trabajo : trabajos) {
-                        int y=r.nextInt(5)+5;
-                        System.out.println("nota"+y);
-                        trabajo.getNotasIndividuales().add(new TrabajoDeAlumno(this,y));
+                    if (!w) {
+                        Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
+                        for (Carrera carr : carrs) {
+                            if (carr.equals(asignatura.getCarrera())) {
+                                carr.getAlumnos().add(this);
+                            }
+                        }
                     }
-                 ArrayList<BitacoraDiaria>bitacoras=(ArrayList)asignatura.getBitacora().getBitacorasDiarias();
+                    Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(),
+                            asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
+                    System.out.println(i);
+                    asignatura.getCursantes().add(i);
+                    ArrayList<TrabajoPractico> trabajos = (ArrayList) asignatura.getListadoTrabajosPracticos();
+                    for (TrabajoPractico trabajo : trabajos) {
+                        int y = r.nextInt(5) + 5;
+                        System.out.println("nota" + y);
+                        trabajo.getNotasIndividuales().add(new TrabajoDeAlumno(this, y));
+                    }
+                    ArrayList<BitacoraDiaria> bitacoras = (ArrayList) asignatura.getBitacora().getBitacorasDiarias();
                     for (BitacoraDiaria bitacora : bitacoras) {
                         boolean n;
-                        int x=r.nextInt(10);
+                        int x = r.nextInt(10);
                         System.out.println(x);
-                        if(x==0){
-                            n=false;
+                        if (x == 0) {
+                            n = false;
+                        } else {
+                            n = true;
                         }
-                        else{
-                            n=true;
-                        }
-                        bitacora.getListadoAsistencias().add(new Asistencia(this,n));
+                        bitacora.getListadoAsistencias().add(new Asistencia(this, n));
                     }
-                e=true;
-            }
-                else{
-                    JOptionPane.showMessageDialog(null,"Ese Codigo Corresponde a una Asignatura de Años Anteriores");
+                    e = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ese Codigo Corresponde a una Asignatura de Años Anteriores");
                 }
             }
         }
@@ -133,31 +130,35 @@ private String  numeroMatricula;
      * @param año
      * @param registro
      */
-    
     public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) {
         boolean e = false;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
             if (asignatura.getCodigo().equals(Cod)) {
-                Set<Carrera> carreras = carrerasQueCursa();
-                boolean w = false;
-                for (Carrera carrera : carreras) {
-                    if (carrera.equals(asignatura.getCarrera())) {
-                        w = true;
-                    }
-                }
-                if (!w) {
-                    Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
-                    for (Carrera carr : carrs) {
-                        if (carr.equals(asignatura.getCarrera())) {
-                            carr.getAlumnos().add(this);
+                if (asignatura.getPeriodoLectivo().getAño() == LocalDate.now().getYear()) {
+                    Set<Carrera> carreras = carrerasQueCursa();
+                    boolean w = false;
+                    for (Carrera carrera : carreras) {
+                        if (carrera.equals(asignatura.getCarrera())) {
+                            w = true;
                         }
                     }
+                    if (!w) {
+                        Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
+                        for (Carrera carr : carrs) {
+                            if (carr.equals(asignatura.getCarrera())) {
+                                carr.getAlumnos().add(this);
+                            }
+                        }
+                    }
+                    Regimen i = new Regimen(this, asignatura, false);
+                    System.out.println(i);
+                    asignatura.getCursantes().add(i);
+                    e = true;
                 }
-                Regimen i = new Regimen(this, asignatura, false);
-                System.out.println(i);
-                asignatura.getCursantes().add(i);
-                e = true;
+                else{
+                  JOptionPane.showMessageDialog(null, "Ese Codigo Corresponde a una Asignatura de Años Anteriores");
+                }
             }
         }
         return e;
