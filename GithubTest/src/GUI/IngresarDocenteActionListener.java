@@ -36,6 +36,7 @@ private Carrera seleccionada;
                     info.getIngresoNombre().getText(), info.getIngresoApellido().getText(), info.getIngresoDNI().getText());
             //Docente de prueba para probar Informes
           Main.getPOO().getEquipo().getRoles().add(new Rol(docente,"dedicacion","titular",LocalDate.of(2018,1,1),LocalDate.of(2018,12,1)));
+          seleccionada.getDocentes().add(docente);
             JOptionPane.showMessageDialog(null, "operacion exitosa");
             info.getFrame().setVisible(false);
         } catch (YaExisteException ex) {

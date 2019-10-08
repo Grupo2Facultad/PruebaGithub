@@ -20,10 +20,11 @@ public class PanelIngresos extends JPanel {
     protected JButton ingresarAlumno,
             ingresarDocente,
             inscribirAAsignatura,
-            inscribirAExamen;
+            inscribirAExamen,
+            anotarDocenteEnExamen;
 
 
-    
+
     public PanelIngresos() {
         super();
         this.setLayout(new FlowLayout());
@@ -36,11 +37,14 @@ public class PanelIngresos extends JPanel {
         ingresarDocente.addActionListener(new IngresarDocente ());
         inscribirAAsignatura = new JButton("Inscribir a Asignatura");
         inscribirAAsignatura.addActionListener(new InscribirseAAsignaturaActionListener());
+        anotarDocenteEnExamen= new JButton ("Anotar Docente En Examen");
+        anotarDocenteEnExamen.addActionListener(new AnotarDocenteActionListener());
         this.add(label3);
         this.add(ingresarAlumno);
         this.add(ingresarDocente);
         this.add(inscribirAAsignatura);
         this.add(inscribirAExamen);
+        this.add(anotarDocenteEnExamen);
     }
  
 

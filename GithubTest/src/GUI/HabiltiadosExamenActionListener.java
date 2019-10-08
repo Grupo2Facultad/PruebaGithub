@@ -66,7 +66,7 @@ class Ingresar implements ActionListener{
             String alumnos="Alumnos:";
             if(!habilitados.isEmpty()){
             for (Alumno habilitado : habilitados) {            
-                alumnos+=habilitado;
+                alumnos+=habilitado+"\n";
             }
             JOptionPane.showMessageDialog(null,alumnos);
              System.out.println(habilitados);
