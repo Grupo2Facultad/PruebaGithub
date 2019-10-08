@@ -25,11 +25,13 @@ public class RegistroDeCarreras {
         this.carreras = new ArrayList<>();
     }
 
-    public int getAlumnosPorCarrera(String nombreCarrera, LocalDate fechaParaPeriodo){
+    public int getAlumnosPorCarrera(JTextField nombreCarrera, LocalDate fechaParaPeriodo){
+        System.out.println(nombreCarrera.getText());
+        System.out.println(fechaParaPeriodo);
         Set<Alumno> e = new HashSet();
                     ArrayList<Asignatura> asignaturas = getAsignaturasPorFechaPlanDeEstudio(fechaParaPeriodo);
                     for (Asignatura asignatura : asignaturas){
-                       if(asignatura.getCarrera().getNombre().equals(nombreCarrera)){
+                       if(asignatura.getCarrera().getNombre().equals(nombreCarrera.getText())){
                         if (asignatura.getPeriodoLectivo().getAño() == fechaParaPeriodo.getYear()) {
                             if (fechaParaPeriodo.getMonthValue() <= 6) {
                                 if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre)) {

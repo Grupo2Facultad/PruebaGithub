@@ -1,5 +1,6 @@
 
 package githubtest;
+import GUI.NoSeInscribioException;
 import GUI.Main;
 import java.time.LocalDate;
 import java.util.ArrayList;

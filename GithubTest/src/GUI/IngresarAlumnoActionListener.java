@@ -45,7 +45,9 @@ public class IngresarAlumnoActionListener implements ActionListener {
                     info.getIngresoProvincia().getText(), info.getIngresoPaisDeResidencia().getText(), info.getIngresoCorreoElectronico().getText(),
                     info.getIngresoFechaNacimiento().getText(), info.getIngresoFechaInscripcion().getText(), info.getIngresoNumeroMatricula().getText(),
                     info.getIngresoNombre().getText(), info.getIngresoApellido().getText(), info.getIngresoDNI().getText());
+            System.out.println(alumno);
             seleccionada.getAlumnos().add(alumno);
+            System.out.println(seleccionada.getAlumnos());
             JOptionPane.showMessageDialog(null, "operacion exitosa");
             info.getFrame().setVisible(false);
         } catch (YaExisteException ex) {
