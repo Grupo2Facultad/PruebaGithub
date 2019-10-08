@@ -10,11 +10,13 @@ package GUI;
  * @author juanc
  */
 
+import githubtest.Carrera;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,7 +35,8 @@ import javax.swing.JLabel;
                ingresoCorreoElectronico,
                ingresoFechaNacimiento,
                ingresoFechaInscripcion;
-       private JLabel obligatorios;
+       private JLabel obligatorios,
+               carrerasDisponibles;
        private JButton ingresar;
        private Frame frame;
 
@@ -68,6 +71,13 @@ import javax.swing.JLabel;
             this.ingresoProvincia.setText("provincia");
             this.ingresoFechaInscripcion=new TextField("fecha de inscripcion",20);
             this.ingresoFechaNacimiento=new TextField("fecha de nacimiento", 20);
+            this.carrerasDisponibles=new JLabel();
+            String disponibles="Carreras Disponibles: ";
+            ArrayList<Carrera>carreras=Main.registroDeCarreras.getCarreras();
+            for (Carrera carrera : carreras) {
+               disponibles+=carrera+"\n";
+           }
+            this.carrerasDisponibles.setText(disponibles);
             obligatorios=new JLabel("Campos Obligatorios: Apellido, Nombre,DNI,NumeroMatricula, Carrera (Marcados con *)");
             container.add(this.ingresar);
             container.add(this.ingresoNombre);
@@ -83,6 +93,7 @@ import javax.swing.JLabel;
             container.add(this.ingresoFechaInscripcion);
             container.add(this.ingresoFechaNacimiento);
             container.add(obligatorios);
+            container.add(carrerasDisponibles);
             }
 
     public TextField getIngresoDomicilio() {

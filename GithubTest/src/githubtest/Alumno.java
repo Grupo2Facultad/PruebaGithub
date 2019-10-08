@@ -4,6 +4,7 @@ import GUI.Main;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import javax.swing.JOptionPane;
 
@@ -37,7 +38,7 @@ private String  numeroMatricula;
      * @param DNI
      */
     public Alumno(String domicilio, String localidad, String provincia, String paisDeResidencia, String correoElectronico,
-            String  fechaNacimiento, String  fechaInscripcion, String  numeroMatricula, String nombre, String apellido, String DNI) {
+            String fechaNacimiento, String fechaInscripcion, String numeroMatricula, String nombre, String apellido, String DNI) {
         super(nombre, apellido, DNI);
         this.domicilio = domicilio;
         this.localidad = localidad;
@@ -48,7 +49,7 @@ private String  numeroMatricula;
         this.fechaInscripcion = fechaInscripcion;
         this.numeroMatricula = numeroMatricula;
     }
-    
+
     /**
      *
      * @param nombre
@@ -56,7 +57,7 @@ private String  numeroMatricula;
      * @param DNI
      * @param numeroMatricula
      */
-    public Alumno(String nombre, String apellido, String DNI,String  numeroMatricula) {
+    public Alumno(String nombre, String apellido, String DNI, String numeroMatricula) {
         super(nombre, apellido, DNI);
         this.numeroMatricula = numeroMatricula;
     }
@@ -64,40 +65,59 @@ private String  numeroMatricula;
     public Alumno(String nombre, String apellido, String DNI) {
         super(nombre, apellido, DNI);
     }
-    
-    
+
     /**
      *
      * @param ag
      * @param registro
      */
-    public boolean  InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro) {
-        boolean e=false;
+    public boolean InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro) {
+        Random r = new Random();
+        boolean e = false;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
             if (asignatura.getCodigo().equals(Cod)) {
-                if(asignatura.getPeriodoLectivo().getAño()==LocalDate.now().getYear()){
-                Set<Carrera> carreras=carrerasQueCursa();
-                boolean w=false;
-                for (Carrera carrera : carreras) {
-                    if(carrera.equals(asignatura.getCarrera())){
-                        w=true;
-                    }
-                }
-                if(!w){
-                  Set<Carrera> carrs=registro.getCarreraPorDNI(super.getDNI());
-                    for (Carrera carr : carrs) {
-                        if(carr.equals(asignatura.getCarrera())){
-                            carr.getAlumnos().add(this);
+                if (asignatura.getPeriodoLectivo().getAño() == LocalDate.now().getYear()) {
+                    Set<Carrera> carreras = carrerasQueCursa();
+                    boolean w = false;
+                    for (Carrera carrera : carreras) {
+                        if (carrera.equals(asignatura.getCarrera())) {
+                            w = true;
                         }
                     }
-                }
-                Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(), asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
-                asignatura.getCursantes().add(i);
-                e=true;
-            }
-                else{
-                    JOptionPane.showMessageDialog(null,"Ese Codigo Corresponde a una Asignatura de Años Anteriores");
+                    if (!w) {
+                        Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
+                        for (Carrera carr : carrs) {
+                            if (carr.equals(asignatura.getCarrera())) {
+                                carr.getAlumnos().add(this);
+                            }
+                        }
+                    }
+                    Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(),
+                            asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
+                    System.out.println(i);
+                    asignatura.getCursantes().add(i);
+                    ArrayList<TrabajoPractico> trabajos = (ArrayList) asignatura.getListadoTrabajosPracticos();
+                    for (TrabajoPractico trabajo : trabajos) {
+                        int y = r.nextInt(5) + 5;
+                        System.out.println("nota" + y);
+                        trabajo.getNotasIndividuales().add(new TrabajoDeAlumno(this, y));
+                    }
+                    ArrayList<BitacoraDiaria> bitacoras = (ArrayList) asignatura.getBitacora().getBitacorasDiarias();
+                    for (BitacoraDiaria bitacora : bitacoras) {
+                        boolean n;
+                        int x = r.nextInt(10);
+                        System.out.println(x);
+                        if (x == 0) {
+                            n = false;
+                        } else {
+                            n = true;
+                        }
+                        bitacora.getListadoAsistencias().add(new Asistencia(this, n));
+                    }
+                    e = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ese Codigo Corresponde a una Asignatura de Años Anteriores");
                 }
             }
         }
@@ -115,24 +135,30 @@ private String  numeroMatricula;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
             if (asignatura.getCodigo().equals(Cod)) {
-                Set<Carrera> carreras = carrerasQueCursa();
-                boolean w = false;
-                for (Carrera carrera : carreras) {
-                    if (carrera.equals(asignatura.getCarrera())) {
-                        w = true;
-                    }
-                }
-                if (!w) {
-                    Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
-                    for (Carrera carr : carrs) {
-                        if (carr.equals(asignatura.getCarrera())) {
-                            carr.getAlumnos().add(this);
+                if (asignatura.getPeriodoLectivo().getAño() == LocalDate.now().getYear()) {
+                    Set<Carrera> carreras = carrerasQueCursa();
+                    boolean w = false;
+                    for (Carrera carrera : carreras) {
+                        if (carrera.equals(asignatura.getCarrera())) {
+                            w = true;
                         }
                     }
+                    if (!w) {
+                        Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
+                        for (Carrera carr : carrs) {
+                            if (carr.equals(asignatura.getCarrera())) {
+                                carr.getAlumnos().add(this);
+                            }
+                        }
+                    }
+                    Regimen i = new Regimen(this, asignatura, false);
+                    System.out.println(i);
+                    asignatura.getCursantes().add(i);
+                    e = true;
                 }
-                Regimen i = new Regimen(this, asignatura, false);
-                asignatura.getCursantes().add(i);
-                e = true;
+                else{
+                  JOptionPane.showMessageDialog(null, "Ese Codigo Corresponde a una Asignatura de Años Anteriores");
+                }
             }
         }
         return e;
@@ -158,7 +184,36 @@ private String  numeroMatricula;
         }
         return e;
     }
-    
+    public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod) throws NoSeInscribioException{
+        Asignatura asig=null;
+        Examen exa=null;
+        ArrayList<Asignatura> asignaturas=Main.getRegistroDeCarreras().getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+        for (Asignatura asignatura : asignaturas) {
+              if(asignatura.getCodigo().equals(asignaturaCod)){
+                  ArrayList<Examen> examenes=(ArrayList)asignatura.getExamenes();
+                  for (Examen examen : examenes) {
+                      if(examen.getFecha().equals(fecha)){
+                          exa=examen;
+                      }
+                  }
+              }
+        }
+        if(exa==null){
+            JOptionPane.showMessageDialog(null,"Ese Examen no existe");
+        }
+        else{
+           if(exa.getFecha().isAfter(LocalDate.now())){
+            System.out.println(exa);
+            Acta acta=exa.getActa();
+            acta.getInscripciones().add(new InscripcionAExamen(this,exa));
+            return true;
+           }
+           else{
+               JOptionPane.showMessageDialog(null,"Examen Viejo,no puede inscribirse");
+           }
+        }
+        return false;
+    }
     /**
      *
      * @return

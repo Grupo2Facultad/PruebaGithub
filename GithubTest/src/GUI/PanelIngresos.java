@@ -6,8 +6,6 @@
 package GUI;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,10 +19,12 @@ public class PanelIngresos extends JPanel {
     protected JLabel label3;
     protected JButton ingresarAlumno,
             ingresarDocente,
-            inscribirAAsignatura;
+            inscribirAAsignatura,
+            inscribirAExamen,
+            anotarDocenteEnExamen;
 
 
-    
+
     public PanelIngresos() {
         super();
         this.setLayout(new FlowLayout());
@@ -32,13 +32,19 @@ public class PanelIngresos extends JPanel {
         ingresarAlumno = new JButton("ingresarAlumno");
         ingresarAlumno.addActionListener(new IngresarAlumno());
         ingresarDocente = new JButton("ingresarDocente");
+        inscribirAExamen = new JButton("Inscribir a Examen");
+        inscribirAExamen.addActionListener(new InscripcionAExamenActionListener ());
         ingresarDocente.addActionListener(new IngresarDocente ());
-        inscribirAAsignatura = new JButton("Inscribirse a Asignatura");
+        inscribirAAsignatura = new JButton("Inscribir a Asignatura");
         inscribirAAsignatura.addActionListener(new InscribirseAAsignaturaActionListener());
+        anotarDocenteEnExamen= new JButton ("Anotar Docente En Examen");
+        anotarDocenteEnExamen.addActionListener(new AnotarDocenteActionListener());
         this.add(label3);
         this.add(ingresarAlumno);
         this.add(ingresarDocente);
         this.add(inscribirAAsignatura);
+        this.add(inscribirAExamen);
+        this.add(anotarDocenteEnExamen);
     }
  
 

@@ -10,6 +10,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,64 +26,79 @@ public class InscripcionAExamen {
             notasPracticosBuenas,
             aproboPrimerParcial,
             asistencia;
-    private String  notaObtenida;
+    private String notaObtenida;
     private boolean tiene2Parciales;
 
-    
-
-    public InscripcionAExamen(Alumno alumno, Examen examen) {
+    public InscripcionAExamen(Alumno alumno, Examen examen) throws NoSeInscribioException{
         this.alumno = alumno;
         this.fecha = LocalDate.now();
         this.examen = examen;
-        this.habilitado=false;
-        if(examen instanceof Parcial){
+        this.habilitado = false;
+        if (examen instanceof Parcial) {
             verificarParcial();
-        }
-        else{
+        } else {
             verificarFinal();
         }
     }
 
-    public void verificarFinal() {
-        if(DAYS.between(examen.getFecha(),LocalDate.now())<=3){
-        boolean regular;
-        if(getNotaCurso()>=6){
-        regular=true;
-    }
-        else{
-            regular=false;
+    private void verificarFinal() throws NoSeInscribioException{
+        if (DAYS.between(examen.getFecha(), LocalDate.now()) < 3) {
+            boolean regular;
+            System.out.println(getNotaCurso());
+            if (getNotaCurso() >= 6) {
+                regular = true;
+            } else {
+                regular = false;
+            }
+            if (((Final) examen).isPuedenRegulares() && regular) {
+                JOptionPane.showMessageDialog(null,"InsciptoComoRegular");
+                habilitado = true;
+                setNotaObtenida();
+            } else {
+                habilitado = false;
+            }
+            if (((Final) examen).isPuedenLibres()&&notaObtenida==null) {
+                JOptionPane.showMessageDialog(null,"InsciptoComoLibre");
+                habilitado = true;
+                setNotaObtenida();
+            }
+            if(notaObtenida==null){
+                JOptionPane.showMessageDialog(null,"No se puede inscibir");
+                throw new NoSeInscribioException("no se pudo inscribir");
+                 
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
         }
-        if (((Final)examen).isPuedenRegulares()&&regular){
-        habilitado=true;
     }
-        else{
-            habilitado=false;
-        }
-        if(((Final)examen).isPuedenLibres()){
-        habilitado=true;
-    }
-    }
+    public void setNotaObtenida() {
+        Random r=new Random();
+        int  ran=r.nextInt(9)+1;
+        this.notaObtenida=Integer.toString(ran);
     }
     public Double getNotaCurso() {
-        double notaPrimero=0,
-                notaSegundo=0;
+        double notaPrimero = 0,
+                notaSegundo = 0;
         double notaCurso;
         List<Examen> examenes = getElRestoDeExamenes();
         for (Examen examene : examenes) {
-            if (!((Parcial) examene).isPrimeroTrueSegundoFalse()) {
-                this.tiene2Parciales = true;
-                ArrayList<InscripcionAExamen> inscripciones=(ArrayList)examene.getActa().getInscripciones();
-                for (InscripcionAExamen inscripcione : inscripciones) {
-                    if(this.alumno.equals(inscripcione.alumno)){
-                        notaSegundo=Double.parseDouble(inscripcione.notaObtenida);
+            if (examene instanceof Parcial) {
+                if (!((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                    this.tiene2Parciales = true;
+                    ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
+                    for (InscripcionAExamen inscripcione : inscripciones) {
+                        if (this.alumno.equals(inscripcione.alumno)) {
+                            notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
+                        }
                     }
                 }
-            }
-            if(((Parcial) examene).isPrimeroTrueSegundoFalse()){
-                   ArrayList<InscripcionAExamen> inscripciones=(ArrayList)examene.getActa().getInscripciones();
+                if (((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                    ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
                     for (InscripcionAExamen inscripcione : inscripciones) {
-                    if(this.alumno.equals(inscripcione.alumno)){
-                        notaPrimero=Double.parseDouble(inscripcione.notaObtenida);
+                        if (this.alumno.equals(inscripcione.alumno)) {
+                            notaPrimero = Double.parseDouble(inscripcione.notaObtenida);
+                            System.out.println("notaPrimero"+notaPrimero);
+                        }
                     }
                 }
             }
@@ -92,6 +109,7 @@ public class InscripcionAExamen {
         else{
             notaCurso=notaPrimero;
         }
+        System.out.println("notacurso"+notaCurso);
         return notaCurso;
     }
   
@@ -100,9 +118,9 @@ public class InscripcionAExamen {
         return this.examen.getAsignatura().getExamenes();
     }
         
-    public void verificarParcial() {
-        BitacoraFinal bitacora = null;
-        List<TrabajoPractico> trabajos = null;
+       private  void verificarParcial() {
+        BitacoraFinal bitacora = new BitacoraFinal();
+        List<TrabajoPractico> trabajos = new ArrayList<>()  ;
         List<Examen> examenes = getElRestoDeExamenes();
         for (Examen examene : examenes) {
             if (examene instanceof Parcial) {
@@ -124,9 +142,12 @@ public class InscripcionAExamen {
     public void habilitarParcial() {
         if (asistencia && notasPracticosBuenas && !tiene2Parciales) {
             this.habilitado = true;
+            setNotaObtenida();
+            System.out.println("Nota btenida"+notaObtenida);
         }
         if (tiene2Parciales&&asistencia&&notasPracticosBuenas&&aproboPrimerParcial) {
             this.habilitado=true;
+            setNotaObtenida();
         }
     }
 
@@ -161,6 +182,7 @@ public class InscripcionAExamen {
             }
         }
         double promedio=notas/totalTrabajos;
+        System.out.println("promedio"+promedio);
         if(promedio>=6){
             this.notasPracticosBuenas=true;
         }
@@ -169,14 +191,15 @@ public class InscripcionAExamen {
         }
     }
     public void verificarAsistencia(BitacoraFinal bitacora){
-        int asistio = 0;
-        int asistenciasTotal = 0;
+        double asistio = 0;
+        double asistenciasTotal = 0;
         ArrayList<BitacoraDiaria> bitac = (ArrayList) bitacora.getBitacorasDiarias();
         for (BitacoraDiaria bitacoraDiaria : bitac) {
             ArrayList<Asistencia> listadoAsistencias = (ArrayList) bitacoraDiaria.getListadoAsistencias();
             for (Asistencia asistencia : listadoAsistencias) {
                 if (asistencia.getAlumno().equals(alumno)) {
-                    if (asistencia.getAsistio() == false) {
+                    System.out.println(asistencia.getAsistio());
+                    if (!asistencia.getAsistio()) {
                         asistenciasTotal += 1;
                     } else {
                         asistenciasTotal += 1;
@@ -186,6 +209,9 @@ public class InscripcionAExamen {
             }
         }
         double calculo = asistio / asistenciasTotal;
+        System.out.println("asistencias total"+asistenciasTotal);
+        System.out.println("asistio"+asistio);
+        System.out.println(calculo);
         if (calculo >= 0.75) {
             this.asistencia = true;
         } else {
@@ -313,8 +339,9 @@ public class InscripcionAExamen {
 
     @Override
     public String toString() {
-        return "InscripcionAExamen{" + "alumno=" + alumno + ", fecha=" + fecha + ", examen=" + examen + ", habilitado=" + habilitado + ", notasPracticosBuenas=" + notasPracticosBuenas + ", aproboPrimerParcial=" + aproboPrimerParcial + ", asistencia=" + asistencia + ", notaObtenida=" + notaObtenida + ", tiene2Parciales=" + tiene2Parciales + '}';
+        return "InscripcionAExamen{" + "alumno=" + alumno + ", fecha=" + fecha + ", habilitado=" + habilitado + ", notasPracticosBuenas=" + notasPracticosBuenas + ", aproboPrimerParcial=" + aproboPrimerParcial + ", asistencia=" + asistencia + ", notaObtenida=" + notaObtenida + ", tiene2Parciales=" + tiene2Parciales + '}';
     }
+
 
 
 }

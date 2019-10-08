@@ -1,11 +1,11 @@
 
 package githubtest;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 public class Asignatura {
-
   private String  codigo,
           cargaHoraria;
   private String nombre;
@@ -21,7 +21,9 @@ public class Asignatura {
   private List<Examen> examenes;
   private List<Regimen>cursantes;
 
-    public Asignatura(String  codigo, String cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera, int añoDeCarreraAlQuePertenece, PeriodoLectivoConAño periodoLectivo, boolean promocional, int cantidadParciales, Equipo equipo, BitacoraFinal bitacora) {
+    public Asignatura(String  codigo, String cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera,
+            int añoDeCarreraAlQuePertenece, PeriodoLectivoConAño periodoLectivo, boolean promocional,
+            int cantidadParciales, Equipo equipo, BitacoraFinal bitacora) {
         this.codigo = codigo;
         this.cargaHoraria = cargaHoraria;
         this.nombre = nombre;
@@ -33,20 +35,17 @@ public class Asignatura {
         this.cantidadParciales = cantidadParciales;
         this.equipo = equipo;
         this.bitacora = bitacora;
-        this.listadoTrabajosPracticos = new ArrayList<>()  ;
-        this.examenes =new ArrayList<>()  ;
-        this.cursantes = new ArrayList<>()  ;
+        generarBitacora();
+        this.listadoTrabajosPracticos = new ArrayList<>();
+        generarPracticos();
+        this.examenes =new ArrayList<>();
+        this.cursantes = new ArrayList<>();
     }
 
     public Asignatura(String  codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
     }
-
-
-  
-
- 
 
     public String  getCodigo() {
         return codigo;
@@ -145,20 +144,52 @@ public class Asignatura {
         this.listadoTrabajosPracticos = listadoTrabajosPracticos;
     }
 
-    public List<Examen> getExamenes() {
+    public List<Examen>  getExamenes() {
         return examenes;
     }
-
-    public void setExamenes(List<Examen> examenes) {
-        this.examenes = examenes;
-    }
-
     public List<Regimen> getCursantes() {
         return cursantes;
     }
 
     public void setCursantes(List<Regimen> cursantes) {
         this.cursantes = cursantes;
+    }
+    private void generarBitacora(){
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,1),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,2),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,3),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,4),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,5),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,6),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,7),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,8),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,9),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,10),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,11),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,12),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,13),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,14),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,17),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,18),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,19),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,20),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,21),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,24),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,25),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,27),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,30),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,12),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,13),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,14),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,15),"tema"));
+        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,16),"tema"));
+    }
+    private  void generarPracticos() {
+        getListadoTrabajosPracticos().add(new TrabajoPractico());
+        getListadoTrabajosPracticos().add(new TrabajoPractico());
+        getListadoTrabajosPracticos().add(new TrabajoPractico());
+        getListadoTrabajosPracticos().add(new TrabajoPractico());
+        getListadoTrabajosPracticos().add(new TrabajoPractico());
     }
 
     @Override
@@ -194,7 +225,7 @@ public class Asignatura {
 
     @Override
     public String toString() {
-        return "Asignatura{" + "codigo=" + codigo + ", nombre=" + nombre + '}';
+        return nombre + "{codigo=" + codigo + "}";
     }
 
    

@@ -6,6 +6,8 @@
 package githubtest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,10 +15,12 @@ import java.util.Objects;
  * @author juanc
  */
 public abstract class Examen {
+    
     private Asignatura asignatura;
     private PeriodoLectivoEnum periodo;
     private LocalDate fecha;
    private int horario;
+   private List<DocenteExamen> docenteExamen;
    private Acta acta;
 
     public Examen(Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario) {
@@ -24,6 +28,15 @@ public abstract class Examen {
         this.periodo = periodo;
         this.fecha = fecha;
         this.horario = horario;
+        this.docenteExamen=new ArrayList<>();  
+    }
+
+    public List<DocenteExamen> getDocenteExamen() {
+        return docenteExamen;
+    }
+
+    public void setDocenteExamen(List<DocenteExamen> docenteExamen) {
+        this.docenteExamen = docenteExamen;
     }
 
     public Asignatura getAsignatura() {

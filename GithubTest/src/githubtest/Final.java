@@ -6,8 +6,6 @@
 package githubtest;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -16,13 +14,12 @@ import java.util.List;
 public class Final extends Examen {
     private boolean puedenRegulares;
     private boolean puedenLibres;
-    private List<DocenteExamen> docenteExamen;
+
 
     public Final(boolean puedenRegulares, boolean puedenLibres, Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario) {
         super(asignatura, periodo, fecha, horario);
         this.puedenRegulares = puedenRegulares;
         this.puedenLibres = puedenLibres;
-        this.docenteExamen = new ArrayList<>();
     }
 
     public boolean isPuedenRegulares() {
@@ -39,15 +36,6 @@ public class Final extends Examen {
 
     public void setPuedenLibres(boolean puedenLibres) {
         this.puedenLibres = puedenLibres;
-    }
-
-
-    public List<DocenteExamen> getDocenteExamen() {
-        return docenteExamen;
-    }
-
-    public void setDocenteExamen(List<DocenteExamen> docenteExamen) {
-        this.docenteExamen = docenteExamen;
     }
 
 }

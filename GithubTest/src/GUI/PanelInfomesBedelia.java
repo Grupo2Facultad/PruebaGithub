@@ -27,13 +27,15 @@ public class PanelInfomesBedelia extends JPanel{
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         label2 = new JLabel("Informes Bedelia");
         habilitadosParcial = new JButton("HabiltiadosParcial");
-        habilitadosParcial.addActionListener(new HabilitadosParcialActionListener ());
+        habilitadosParcial.addActionListener(new HabiltiadosExamenActionListener());
         habilitadosFinal = new JButton("HabilitadosFinal");
+        habilitadosFinal.addActionListener(new HabiltiadosExamenActionListener());
         asignaturasPorDNI = new JButton("AsignaturasPorDNI");
         asignaturasPorDNI.addActionListener(new AsignaturasPorDni());
         profesoresProAsignatura = new JButton("ProfesoesAsignatura");
         profesoresProAsignatura.addActionListener(new ProfesoresPorAsignaturaActionListener ());
         imprimirActa = new JButton("ImprimirActa");
+        imprimirActa.addActionListener(new ImprimirActaActionListener());
         this.add(label2);
         this.add(habilitadosParcial);
         this.add(habilitadosFinal);
