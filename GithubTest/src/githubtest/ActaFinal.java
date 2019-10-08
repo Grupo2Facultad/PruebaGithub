@@ -46,7 +46,10 @@ public class ActaFinal extends Acta{
    private  boolean existenDocentes() {
         boolean existen=true;
         Final fin=(Final)super.getExamen();
-        ArrayList<DocenteExamen>docentes=(ArrayList)fin.getDocenteExamen();  
+        ArrayList<DocenteExamen>docentes=(ArrayList)fin.getDocenteExamen(); 
+        if(docentes.size()<3){
+        existen=false;
+        }
         for (DocenteExamen docentex : docentes) {
             boolean existe=false;
           Docente doc=docentex.getDocente();

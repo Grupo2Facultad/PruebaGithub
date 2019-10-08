@@ -33,7 +33,7 @@ public class IngresarDocente implements ActionListener {
        private Frame frame;
         @Override
         public void actionPerformed(ActionEvent e){
-            frame = new Frame("IngresoDeAlumno");
+            frame = new Frame("IngresoDeDocente");
             frame.setVisible(true);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             Container container=frame.getContentPane();

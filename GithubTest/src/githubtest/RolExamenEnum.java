@@ -9,7 +9,7 @@ package githubtest;
  *
  * @author juanc
  */
-enum RolExamenEnum {
+public enum RolExamenEnum {
     TITULAR("titular"),
     VVOCAL1("Vocal1"),
     VOCAL2("Vocal2"),
@@ -27,7 +27,7 @@ enum RolExamenEnum {
 
     @Override
     public String toString() {
-        return "RolExamenEnum{" + "descripcion=" + descripcion + '}';
+        return descripcion;
     }
     
     

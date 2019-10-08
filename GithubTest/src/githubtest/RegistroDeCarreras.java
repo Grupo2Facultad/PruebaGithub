@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import javax.swing.JTextField;
 
 /**
  *
@@ -229,6 +230,21 @@ public class RegistroDeCarreras {
     @Override
     public String toString() {
         return "RegistroDeCarreras{" + "carreras=" + carreras + '}';
+    }
+
+    public Docente getDocentesPorLegajo(JTextField s) {
+        for (Carrera carrera : carreras) {
+            Set<Docente>docentes = carrera.getDocentes();  
+            System.out.println(docentes);
+            for (Docente docente : docentes) {
+                System.out.println("Llego aca");
+                System.out.println(docente);
+                if(docente.getNumeroLegajo().equals(s.getText())){
+                    return docente;
+                }
+            }
+        }
+        return null;
     }
 
 
