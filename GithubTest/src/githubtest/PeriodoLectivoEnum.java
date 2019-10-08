@@ -1,8 +1,9 @@
 package githubtest;
 
-enum PeriodoLectivoEnum {
-    Cuatrimestral("cuatrimestral"),
-    Anual("cuatrimestral");
+public enum PeriodoLectivoEnum {
+    primerCuatrimestre("perimer cuatrimestre"),
+    segundoCuatrimestre("segundo cuatrimestre"),
+    Anual("anual");
 
 private String descripcion;
  
