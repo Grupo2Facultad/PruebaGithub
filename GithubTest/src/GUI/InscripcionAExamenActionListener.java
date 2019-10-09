@@ -7,7 +7,6 @@ package GUI;
 
 import githubtest.Alumno;
 import githubtest.Carrera;
-import githubtest.NoSeInscribioException;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
