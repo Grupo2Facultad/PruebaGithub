@@ -10,10 +10,16 @@ import githubtest.ActaParcial;
 import githubtest.Alumno;
 import githubtest.Carrera;
 import githubtest.InscripcionAExamen;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Set;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +30,7 @@ public class IngresarAlumnoActionListener implements ActionListener {
 
     private final IngresarAlumno info;
     private Carrera seleccionada;
+    private boolean no;
 
     /**
      *
@@ -49,7 +56,6 @@ public class IngresarAlumnoActionListener implements ActionListener {
             seleccionada.getAlumnos().add(alumno);
             System.out.println(seleccionada.getAlumnos());
             JOptionPane.showMessageDialog(null, "operacion exitosa");
-            info.getFrame().setVisible(false);
         } catch (YaExisteException ex) {
             JOptionPane.showMessageDialog(null, "Ese alumno ya existe en esa Carrera");
         } catch (CodigoIDentificacionYaExisteException e) {
@@ -57,9 +63,14 @@ public class IngresarAlumnoActionListener implements ActionListener {
         } catch (FaltaIngresoOCarreraInvalidaException e) {
             JOptionPane.showMessageDialog(null, e);
         }
+         catch(NoException e){
+         JOptionPane.showMessageDialog(null,"Operacion Cancelada");
+        }
         catch(Exception e){
             e.printStackTrace();
         }
+      
+        
     }
 
     /**
@@ -86,13 +97,29 @@ public class IngresarAlumnoActionListener implements ActionListener {
             if(carrera.getNombre().equals(info.getIngresoCarrera().getText())){
                 Set<Alumno>yaExiste=carrera.getAlumnos();
                 for (Alumno alumno : yaExiste) {
-                    if(alumno.equals(new Alumno (info.getIngresoNombre().getText(),info.getIngresoApellido().getText(),
-                            info.getIngresoDNI().getText()))){
-                        throw new YaExisteException("ya existe ese alumno");
+                    if (alumno.equals(new Alumno(info.getIngresoNombre().getText(), info.getIngresoApellido().getText(),
+                         info.getIngresoDNI().getText())) || alumno.getNumeroMatricula().equals(info.getIngresoNumeroMatricula().getText())) {
+                        JLabel label= new JLabel("Desea sobreescribir el alumno? ");
+                        JLabel alumnoViejo= new JLabel("Informacion del alumno"+alumno.toString());
+                        JButton boton1= new JButton("guardar");
+                        boton1.addActionListener(new Guardar(carrera,alumno));
+                        JButton boton2= new JButton("no");
+                        boton2.addActionListener(new No());
+                      
+                        Frame frame = new Frame("Insribirse a Asignatura");
+                        frame.setVisible(true);
+                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        Container container = frame.getContentPane();
+                        container.setLayout(new FlowLayout());
+                        container.add(alumnoViejo);
+                        container.add(label);
+                        container.add(boton1);
+                        container.add(boton2);
                     }
-                    if(alumno.getNumeroMatricula().equals(info.getIngresoNumeroMatricula().getText())){
-                        throw new CodigoIDentificacionYaExisteException("Ese numero de Matricula ya existe");
-                    }
+                      if(no=true){
+                            throw new NoException();
+                        }
+
                 }
                 t=true;
                 seleccionada=carrera;
@@ -101,7 +128,40 @@ public class IngresarAlumnoActionListener implements ActionListener {
         if(!e||!t){
             throw new FaltaIngresoOCarreraInvalidaException("Falto Ingresar Algo o la Carrera es Invalida");
         }
- 
+
+    }
+
+    class Guardar implements ActionListener {
+
+        private Carrera carrera;
+        private Alumno alumno;
+
+        public Guardar(Carrera carrera, Alumno alumno) {
+            this.carrera = carrera;
+            this.alumno = alumno;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            ArrayList<Alumno> alumnos = (ArrayList) carrera.getAlumnos();
+            for (Alumno alumno1 : alumnos) {
+                if (alumno1.getDNI().equals(alumno.getDNI())) {
+                    carrera.getAlumnos().remove(alumno);
+                }
+            }
+        }
+
+    }
+    class No implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+                no=true;
+            }
+        
+    }
+    class NoException extends Exception{
+        
     }
     
 }
