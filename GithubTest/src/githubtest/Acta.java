@@ -17,12 +17,24 @@ public abstract class Acta {
     private List<InscripcionAExamen> inscripciones;
     private Examen examen;
 
+    /**
+     *
+     * @param examen
+     */
     public Acta(Examen examen) {
         this.examen = examen;
         this.inscripciones=new ArrayList<>();  
     }
+
+    /**
+     *
+     */
     public abstract void imprimirActa();
 
+    /**
+     *
+     * @return
+     */
     public List<Alumno> getHabilitados() {
         ArrayList<Alumno> habilitados = new ArrayList<>();
         for (InscripcionAExamen inscripcion : inscripciones) {
@@ -33,22 +45,42 @@ public abstract class Acta {
         return habilitados;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<InscripcionAExamen> getInscripciones() {
         return inscripciones;
     }
 
+    /**
+     *
+     * @param inscripciones
+     */
     public void setInscripciones(List<InscripcionAExamen> inscripciones) {
         this.inscripciones = inscripciones;
     }
 
+    /**
+     *
+     * @return
+     */
     public Examen getExamen() {
         return examen;
     }
 
+    /**
+     *
+     * @param examen
+     */
     public void setExamen(Examen examen) {
         this.examen = examen;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         String s = "Examen de" + examen.getAsignatura() + "realizado el dia" + examen.getFecha() + "\n";
@@ -59,6 +91,10 @@ public abstract class Acta {
 
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -67,6 +103,11 @@ public abstract class Acta {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
