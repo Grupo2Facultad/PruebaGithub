@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 public class Asignatura {
-  private String  codigo,
+  private String codigo,
           cargaHoraria;
   private String nombre;
   private PlanDeEstudio planDeEstudio;

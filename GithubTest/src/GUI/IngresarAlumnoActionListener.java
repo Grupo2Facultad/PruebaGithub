@@ -37,6 +37,7 @@ public class IngresarAlumnoActionListener implements ActionListener {
      * @param info
      */
     public IngresarAlumnoActionListener(IngresarAlumno info) {
+        
         this.info = info;
     }
 
@@ -99,16 +100,16 @@ public class IngresarAlumnoActionListener implements ActionListener {
                 for (Alumno alumno : yaExiste) {
                     if (alumno.equals(new Alumno(info.getIngresoNombre().getText(), info.getIngresoApellido().getText(),
                          info.getIngresoDNI().getText())) || alumno.getNumeroMatricula().equals(info.getIngresoNumeroMatricula().getText())) {
-                        JLabel label= new JLabel("Desea sobreescribir el alumno? ");
+                        JLabel label= new JLabel("Desea sobreescribir el alumno?");
                         JLabel alumnoViejo= new JLabel("Informacion del alumno"+alumno.toString());
                         JButton boton1= new JButton("guardar");
-                        boton1.addActionListener(new Guardar(carrera,alumno));
                         JButton boton2= new JButton("no");
-                        boton2.addActionListener(new No());
-                      
+                   
                         Frame frame = new Frame("Insribirse a Asignatura");
                         frame.setVisible(true);
                         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        boton1.addActionListener(new Guardar(carrera,alumno,frame));
+                             boton2.addActionListener(new No(frame));
                         Container container = frame.getContentPane();
                         container.setLayout(new FlowLayout());
                         container.add(alumnoViejo);
@@ -135,30 +136,36 @@ public class IngresarAlumnoActionListener implements ActionListener {
 
         private Carrera carrera;
         private Alumno alumno;
-
-        public Guardar(Carrera carrera, Alumno alumno) {
+        private Frame frame;
+        public Guardar(Carrera carrera, Alumno alumno,Frame frame) {
             this.carrera = carrera;
             this.alumno = alumno;
+            this.frame=frame;
         }
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            ArrayList<Alumno> alumnos = (ArrayList) carrera.getAlumnos();
+            Set<Alumno> alumnos =  carrera.getAlumnos();
             for (Alumno alumno1 : alumnos) {
                 if (alumno1.getDNI().equals(alumno.getDNI())) {
                     carrera.getAlumnos().remove(alumno);
+                    carrera.getAlumnos().add(alumno);
+                    JOptionPane.showMessageDialog(null,"Guardado Exitosamente");
+                    frame.setVisible(false);
                 }
             }
         }
-
     }
     class No implements ActionListener{
-
+Frame frame;
+        public No(Frame frame) {
+            this.frame=frame;
+        }
+        
         @Override
         public void actionPerformed(ActionEvent ae) {
-                no=true;
+                frame.setVisible(false);
             }
-        
     }
     class NoException extends Exception{
         

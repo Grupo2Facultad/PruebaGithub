@@ -85,8 +85,11 @@ public class Main {
         DosMilQuince.getAsignaturas().add(AC);
         registroDeCarreras.getCarreras().add(LicenciaturaEnSistemas);
         //Finaliza zona LicenciaturaSistemas
-        Carrera ContadorPublico=new Carrera("ContadorPublica",2,LocalDate.of(2000,3,15),5);
+        Carrera ContadorPublico=new Carrera("ContadorPublico",2,LocalDate.of(2000,3,15),5);
         registroDeCarreras.getCarreras().add(ContadorPublico);
+        ///
+         Carrera LicenciaturaAdministracion=new Carrera("LicenciaturaAdministracion",3,LocalDate.of(1985,3,15),5);
+        registroDeCarreras.getCarreras().add(LicenciaturaAdministracion);
     }
     
     public static Carrera getLicenciaturaEnSistemas() {
