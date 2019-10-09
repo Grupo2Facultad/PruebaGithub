@@ -38,6 +38,7 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent arg0) {
+            try{
             if(!check()){
             String DNI=alumnoDNI.getText();
             ArrayList<Carrera>carreras= Main.registroDeCarreras.getCarreras();
@@ -72,14 +73,18 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
                 JOptionPane.showMessageDialog(null,"Ese Alumno no se encuentra en el Sistema");
             }
             }
-            else{
-                JOptionPane.showMessageDialog(null,"el alumno ya esta inscripto");
+                else {
+                    JOptionPane.showMessageDialog(null, "el alumno ya esta inscripto");
+                }
+
+            } catch (Alumno.NoInscritoException e) {
+                JOptionPane.showMessageDialog(null,e);
             }
-            
         }
-        public boolean  check(){
-            boolean e=false;
-           Set<Asignatura>asignaturas= Main.registroDeCarreras.getAsigPorDNI(alumnoDNI.getText(), LocalDate.now());
+
+        public boolean check() {
+            boolean e = false;
+            Set<Asignatura>asignaturas= Main.registroDeCarreras.getAsigPorDNI(alumnoDNI.getText(), LocalDate.now());
             for (Asignatura asignatura : asignaturas) {
                 if(asignatura.getCodigo().equals(asignaturaCod.getText())){
                     e=true;

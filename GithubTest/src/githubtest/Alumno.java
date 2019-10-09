@@ -72,7 +72,7 @@ private String  numeroMatricula;
      * @param ag
      * @param registro
      */
-    public boolean InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro) {
+    public boolean InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro)throws NoInscritoException{
         Random r = new Random();
         boolean e = false;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
@@ -87,12 +87,7 @@ private String  numeroMatricula;
                         }
                     }
                     if (!w) {
-                        Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
-                        for (Carrera carr : carrs) {
-                            if (carr.equals(asignatura.getCarrera())) {
-                                carr.getAlumnos().add(this);
-                            }
-                        }
+                       throw new NoInscritoException("El alumno no esta cursando esa carrera");
                     }
                     Cursada i = new Cursada(LocalDate.now(), new PeriodoLectivoConAño(asignatura.getPeriodoLectivo().getPeriodoLectivo(),
                             asignatura.getPeriodoLectivo().getAño()), this, asignatura, true);
@@ -131,7 +126,7 @@ private String  numeroMatricula;
      * @param año
      * @param registro
      */
-    public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) {
+    public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) throws NoInscritoException{
         boolean e = false;
         ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
@@ -145,12 +140,7 @@ private String  numeroMatricula;
                         }
                     }
                     if (!w) {
-                        Set<Carrera> carrs = registro.getCarreraPorDNI(super.getDNI());
-                        for (Carrera carr : carrs) {
-                            if (carr.equals(asignatura.getCarrera())) {
-                                carr.getAlumnos().add(this);
-                            }
-                        }
+                      throw new NoInscritoException("El alumno no esta cursando esa carrera");
                     }
                     Regimen i = new Regimen(this, asignatura, false);
                     System.out.println(i);
@@ -299,10 +289,10 @@ private String  numeroMatricula;
      *
      * @return
      */
-    public String  getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
-    
+
     public Set<Carrera> carrerasQueCursa() {
         return Main.getRegistroDeCarreras().getCarreraPorDNI(super.getDNI());
     }
@@ -311,7 +301,7 @@ private String  numeroMatricula;
      *
      * @param fechaNacimiento
      */
-    public void setFechaNacimiento(String  fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -319,7 +309,7 @@ private String  numeroMatricula;
      *
      * @return
      */
-    public String  getFechaInscripcion() {
+    public String getFechaInscripcion() {
         return fechaInscripcion;
     }
 
@@ -327,7 +317,7 @@ private String  numeroMatricula;
      *
      * @param fechaInscripcion
      */
-    public void setFechaInscripcion(String  fechaInscripcion) {
+    public void setFechaInscripcion(String fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 
@@ -335,7 +325,7 @@ private String  numeroMatricula;
      *
      * @return
      */
-    public String  getNumeroMatricula() {
+    public String getNumeroMatricula() {
         return numeroMatricula;
     }
 
@@ -343,7 +333,7 @@ private String  numeroMatricula;
      *
      * @param numeroMatricula
      */
-    public void setNumeroMatricula(String  numeroMatricula) {
+    public void setNumeroMatricula(String numeroMatricula) {
         this.numeroMatricula = numeroMatricula;
     }
 
@@ -353,10 +343,15 @@ private String  numeroMatricula;
      */
     @Override
     public String toString() {
-        return super.toString()+"Alumno{" + "numeroMatricula=" + numeroMatricula + '}';
+        return super.toString() + "Alumno{" + "numeroMatricula=" + numeroMatricula + '}';
     }
-        
-    
 
-    
+    public class NoInscritoException extends Exception {
+
+        public NoInscritoException(String string) {
+            super(string);
+        }
+
+    }
+
 }
