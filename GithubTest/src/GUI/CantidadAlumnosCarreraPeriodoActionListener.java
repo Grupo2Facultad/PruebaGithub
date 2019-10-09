@@ -31,15 +31,16 @@ private JTextField ingresoDia;
 private JLabel slash,
         slash2,
         carrerasDisponibles;
-private String carrera;
+          
 class MostrarCantidadAlumnos implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent arg0){
-          carrera=ingresoNombre.getText();
+          ingresoNombre.getText();
           int año=Integer.parseInt(ingresoAño.getText());
           int mes=Integer.parseInt(ingresoMes.getText());
           int dia=Integer.parseInt(ingresoDia.getText());
-          int cantidad= Main.getRegistroDeCarreras().getAlumnosPorCarrera(carrera,LocalDate.of(año,mes,dia));
+          int cantidad= Main.getRegistroDeCarreras().getAlumnosPorCarrera(ingresoNombre,LocalDate.of(año,mes,dia));
+            System.out.println("cantidad"+cantidad);
           String cantidadEs="La cantidad de alumnos es "+cantidad;
           JOptionPane.showMessageDialog(null,cantidadEs);
         }

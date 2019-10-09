@@ -19,8 +19,11 @@ import githubtest.PlanDeEstudio;
 import githubtest.RegistroDeCarreras;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.Month;
+import javax.swing.JButton;
 /**
  *
  * @author juanc
@@ -32,15 +35,19 @@ public class Main {
     private static Carrera LicenciaturaEnSistemas;
     private static Parcial parcial;
     private static Final eFinal;
+    private static JButton bedelia;
+    private static JButton alumnado;
     public static void main(String[] args) {
     añadirInformacionPorDefecto();
     Frame frame=new Frame("TallerPOO");
     Container container=frame.getContentPane();
-    container.setLayout(new BorderLayout());
-    container.add(new PanelInfomesBedelia(),BorderLayout.WEST);
-    container.add(new PanelIngresos(),BorderLayout.CENTER);
-    container.add(new PanelInformesAlumnado(),BorderLayout.EAST);
-    container.add(new PanelBusquedaCodigo(),BorderLayout.SOUTH);
+    container.setLayout(new FlowLayout());
+    bedelia=new JButton("Bedelia");
+    bedelia.addActionListener((ActionListener)new Bedelia());
+    alumnado= new JButton("Alumnado");
+    alumnado.addActionListener(new Alumnado());
+    container.add(bedelia);
+    container.add(alumnado);
     frame.setVisible(true); 
     }
     public static void añadirInformacionPorDefecto() { 
@@ -78,6 +85,8 @@ public class Main {
         DosMilQuince.getAsignaturas().add(AC);
         registroDeCarreras.getCarreras().add(LicenciaturaEnSistemas);
         //Finaliza zona LicenciaturaSistemas
+        Carrera ContadorPublico=new Carrera("ContadorPublica",2,LocalDate.of(2000,3,15),5);
+        registroDeCarreras.getCarreras().add(ContadorPublico);
     }
     
     public static Carrera getLicenciaturaEnSistemas() {

@@ -5,6 +5,7 @@
  */
 package githubtest;
 
+import GUI.NoSeInscribioException;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
