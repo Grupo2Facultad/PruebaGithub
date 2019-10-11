@@ -171,7 +171,7 @@ public class RegistroDeCarreras {
         return asigPorFecha;
     }
 
-    public List<Alumno> HabilitadosParcial(Asignatura asignatura, PeriodoLectivoEnum periodo, boolean isPrimeroTrueSegundoFalse) {
+    public List<InscripcionAExamen> HabilitadosParcial(Asignatura asignatura, PeriodoLectivoEnum periodo, boolean isPrimeroTrueSegundoFalse) {
         //Una asignatura de por si pertenece a una carrera y plan de estudio,y se desarrolla en un año determinado
         ArrayList<Examen> examenes = (ArrayList) asignatura.getExamenes();
         for (Examen examene : examenes) {
@@ -183,7 +183,7 @@ public class RegistroDeCarreras {
         }
         return null;
     }
-    public List<Alumno> HabilitadosFinal(Asignatura asignatura,LocalDate fecha) {
+    public List<InscripcionAExamen> HabilitadosFinal(Asignatura asignatura,LocalDate fecha) {
         //Una asignatura de por si pertenece a una carrera y plan de estudio
         ArrayList<Examen>examenes= (ArrayList)asignatura.getExamenes();
         for (Examen examene : examenes) {

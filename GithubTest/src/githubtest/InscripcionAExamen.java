@@ -54,14 +54,12 @@ public class InscripcionAExamen {
             if (((Final) examen).isPuedenRegulares() && regular) {
                 JOptionPane.showMessageDialog(null,"InsciptoComoRegular");
                 habilitado = true;
-                setNotaObtenida();
             } else {
                 habilitado = false;
             }
             if (((Final) examen).isPuedenLibres()&&notaObtenida==null) {
                 JOptionPane.showMessageDialog(null,"InsciptoComoLibre");
                 habilitado = true;
-                setNotaObtenida();
             }
             if(notaObtenida==null){
                 JOptionPane.showMessageDialog(null,"No se puede inscibir");
@@ -72,11 +70,7 @@ public class InscripcionAExamen {
             JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
         }
     }
-    public void setNotaObtenida() {
-        Random r=new Random();
-        int  ran=r.nextInt(9)+1;
-        this.notaObtenida=Integer.toString(ran);
-    }
+ 
     public Double getNotaCurso() {
         double notaPrimero = 0,
                 notaSegundo = 0;
@@ -143,12 +137,10 @@ public class InscripcionAExamen {
     public void habilitarParcial() {
         if (asistencia && notasPracticosBuenas && !tiene2Parciales) {
             this.habilitado = true;
-            setNotaObtenida();
             System.out.println("Nota btenida"+notaObtenida);
         }
         if (tiene2Parciales&&asistencia&&notasPracticosBuenas&&aproboPrimerParcial) {
             this.habilitado=true;
-            setNotaObtenida();
         }
     }
 

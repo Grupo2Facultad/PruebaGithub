@@ -8,6 +8,7 @@ package GUI;
 import githubtest.Alumno;
 import githubtest.Asignatura;
 import githubtest.Examen;
+import githubtest.InscripcionAExamen;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -33,12 +34,13 @@ private JTextField codigoAsig,
             slash2;
 private JButton ingresar;
 class Ingresar implements ActionListener{
+    private Examen ex;
         @Override
         public void actionPerformed(ActionEvent arg0) {
             int año=Integer.parseInt(ingresoAño.getText());
           int mes=Integer.parseInt(ingresoMes.getText());
           int dia=Integer.parseInt(ingresoDia.getText());
-          ArrayList<Alumno>habilitados=new ArrayList<>();
+          ArrayList<InscripcionAExamen>habilitados=new ArrayList<>();
             LocalDate fecha=LocalDate .of(año,mes,dia); 
             ArrayList<Asignatura>asignaturas=Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(fecha);
             boolean t=false;
@@ -49,6 +51,7 @@ class Ingresar implements ActionListener{
                     ArrayList<Examen> examenes=(ArrayList)asignatura.getExamenes();
                     for (Examen examene : examenes) {
                         if(examene.getFecha().equals(fecha)){
+                            ex=examene;
                             f=true;
                            habilitados=(ArrayList)examene.getActa().getHabilitados();
                         }
@@ -65,14 +68,15 @@ class Ingresar implements ActionListener{
             } 
             String alumnos="Alumnos:";
             if(!habilitados.isEmpty()){
-            for (Alumno habilitado : habilitados) {            
-                alumnos+=habilitado+"\n";
+            for (InscripcionAExamen habilitado : habilitados) {            
+                
+                alumnos+=habilitado.getAlumno()+"\n";
             }
-            JOptionPane.showMessageDialog(null,alumnos);
-             System.out.println(habilitados);
+            ImpresionListadoExamen imp= new ImpresionListadoExamen();
+            imp.Imprimir(alumnos, ex);
             }
             else{
-                JOptionPane.showMessageDialog(null, "No hay nadie habilitado");
+                ImpresionListado.Imprimir("no hay nadie habilitado");
             }
             
         }

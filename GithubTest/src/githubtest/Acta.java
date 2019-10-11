@@ -35,11 +35,11 @@ public abstract class Acta {
      *
      * @return
      */
-    public List<Alumno> getHabilitados() {
-        ArrayList<Alumno> habilitados = new ArrayList<>();
+    public List<InscripcionAExamen> getHabilitados() {
+        ArrayList<InscripcionAExamen> habilitados = new ArrayList<>();
         for (InscripcionAExamen inscripcion : inscripciones) {
             if (inscripcion.isHabilitado()) {
-                habilitados.add(inscripcion.getAlumno());
+                habilitados.add(inscripcion);
             }
         }
         return habilitados;
