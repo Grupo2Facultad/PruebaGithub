@@ -69,8 +69,12 @@ private String  numeroMatricula;
 
     /**
      *
-     * @param ag
+     * @param Cod
      * @param registro
+     * @return Booleano sobre si existe la materia en la que se desea inscribir al alumno
+     * @throws NoInscritoException (Una excepcion en el caso de que el alumno no se encuentre cursando la carrera a la que pertenece la materia)
+     * Genera notas de los trabajos practicos y las asistencias en la clase Cursada, inscribe alumnos en la modalidad regular a las asignaturas 
+     * Busca las asignaturas segun la fecha en la que se encuentra realizando la inscripcion para no realizar la busqueda dentro de todos los planes de estudio
      */
     public boolean InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro)throws NoInscritoException{
         Random r = new Random();
@@ -122,9 +126,12 @@ private String  numeroMatricula;
 
     /**
      *
-     * @param ag
-     * @param año
+     * @param Cod
      * @param registro
+     * @return Booleano sobre si existe la materia en la que se desea inscribir al alumno
+     * @throws NoInscritoException (Una excepcion en el caso de que el alumno no se encuentre cursando la carrera a la que pertenece la materia)
+     * Inscribe alumnos en modalidad libre a las asignaturas 
+     * Busca las asignaturas segun la fecha en la que se encuentra realizando la inscripcion para no realizar la busqueda dentro de todos los planes de estudio
      */
     public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) throws NoInscritoException{
         boolean e = false;
@@ -156,24 +163,41 @@ private String  numeroMatricula;
     }
 
     /**
-     *
-     * @param ag
-     * @param registro
+     * 
+     * @param fecha
+     * @param asig
+     * @return Booleano que indica si se pudo dar de baja a un alumno de un examen
+     * Da de baja a un alumno de un examen
      */
-    public boolean DarseDeBaja(String Cod, RegistroDeCarreras registro) {
-        boolean e = false;
-        ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+    public boolean DarseDeBaja(LocalDate fecha,String asignaturaCod)throws NoSeInscribioException {
+       Asignatura asig=null;
+        Examen exa=null;
+        ArrayList<Asignatura> asignaturas=Main.getRegistroDeCarreras().getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
-            if (asignatura.getCodigo().equals(Cod)) {
-                List<Regimen> regimenes = asignatura.getCursantes();
-                for (Regimen regimen : regimenes) {
-                    if (regimen.getAlumno().equals(this)) {
-                        regimenes.remove(regimen);
-                    }
-                }
-            }
+              if(asignatura.getCodigo().equals(asignaturaCod)){
+                  ArrayList<Examen> examenes=(ArrayList)asignatura.getExamenes();
+                  for (Examen examen : examenes) {
+                      if(examen.getFecha().equals(fecha)){
+                          exa=examen;
+                      }
+                  }
+              }
         }
-        return e;
+        if(exa==null){
+            JOptionPane.showMessageDialog(null,"Ese Examen no existe");
+        }
+        else{
+           if(exa.getFecha().isAfter(LocalDate.now())){
+            System.out.println(exa);
+            Acta acta=exa.getActa();
+            acta.getInscripciones().remove(new InscripcionAExamen(this,exa));
+            return true;
+           }
+           else{
+               JOptionPane.showMessageDialog(null,"Examen Viejo,no puede inscribirse");
+           }
+        }
+        return false;
     }
     public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod) throws NoSeInscribioException{
         Asignatura asig=null;

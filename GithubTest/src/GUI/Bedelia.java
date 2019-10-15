@@ -33,16 +33,19 @@ public Bedelia(){
             inscribirAAsignatura,
             inscribirAExamen,
             anotarDocenteEnExamen,
-             inscribirDocenteAsignatura;
+             inscribirDocenteAsignatura,
+                 darAlumnoDeBaja;
         Frame frame = new Frame("Bedelia");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Container container = frame.getContentPane();
         container.setLayout(new FlowLayout());
         habilitadosParcial = new JButton("HabiltiadosParcial");
-        habilitadosParcial.addActionListener(new HabiltiadosExamenActionListener());
+        habilitadosParcial.addActionListener(new HabiltiadosExamenActionListener(true));
+        darAlumnoDeBaja=new JButton("Dar de Baja de Examen");
+        darAlumnoDeBaja.addActionListener(new DarDeBajaExamenActionListener());
         habilitadosFinal = new JButton("HabilitadosFinal");
-        habilitadosFinal.addActionListener(new HabiltiadosExamenActionListener());
+        habilitadosFinal.addActionListener(new HabiltiadosExamenActionListener(false));
         asignaturasPorDNI = new JButton("AsignaturasPorDNI");
         asignaturasPorDNI.addActionListener(new AsignaturasPorDni());
         inscribirDocenteAsignatura= new JButton("Inscribir Docente A Asignatura");
@@ -62,10 +65,11 @@ public Bedelia(){
         container.add(asignaturasPorDNI);
         container.add(profesoresProAsignatura);
         container.add(imprimirActa);
-         container.add(inscribirAAsignatura);
+        container.add(inscribirAAsignatura);
         container.add(inscribirAExamen);
         container.add(anotarDocenteEnExamen);
         container.add(inscribirDocenteAsignatura);
+        container.add(darAlumnoDeBaja);
         container.add(new PanelBusquedaCodigo());
         
     }

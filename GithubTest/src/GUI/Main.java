@@ -70,7 +70,7 @@ public class Main {
         Asignatura AC= new Asignatura("AC","100","Arquitectura De Computadoras",DosMilQuince,LicenciaturaEnSistemas,
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.segundoCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
         parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,1),18);
-        eFinal=new Final(true,false,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
+        eFinal=new Final(true,true,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
         POO.getExamenes().add(parcial);
         POO.getExamenes().add(eFinal);
         ActaParcial acta=new ActaParcial(parcial);

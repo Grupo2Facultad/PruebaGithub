@@ -17,12 +17,12 @@ public class ActaParcial extends Acta{
     public ActaParcial(Examen examen) {
         super(examen);
     }
-    
-
+    /**
+     * No se implementa porque no se usa
+     */
     @Override
     public void imprimirActa() {
-        //Esto va a cambiar cuando se pase a Swing
-        System.out.println(this);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
