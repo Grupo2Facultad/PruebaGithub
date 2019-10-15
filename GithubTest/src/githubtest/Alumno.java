@@ -69,7 +69,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @param ag
+     * @param Cod
      * @param registro
      */
     public boolean InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro)throws NoInscritoException{
@@ -122,8 +122,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @param ag
-     * @param año
+     * @param Cod
      * @param registro
      */
     public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) throws NoInscritoException{
@@ -156,24 +155,40 @@ private String  numeroMatricula;
     }
 
     /**
-     *
-     * @param ag
-     * @param registro
+     * 
+     * @param fecha
+     * @param asig
+     * @return 
      */
-    public boolean DarseDeBaja(String Cod, RegistroDeCarreras registro) {
-        boolean e = false;
-        ArrayList<Asignatura> asignaturas = registro.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+    public boolean DarseDeBaja(LocalDate fecha,String asignaturaCod)throws NoSeInscribioException {
+       Asignatura asig=null;
+        Examen exa=null;
+        ArrayList<Asignatura> asignaturas=Main.getRegistroDeCarreras().getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
         for (Asignatura asignatura : asignaturas) {
-            if (asignatura.getCodigo().equals(Cod)) {
-                List<Regimen> regimenes = asignatura.getCursantes();
-                for (Regimen regimen : regimenes) {
-                    if (regimen.getAlumno().equals(this)) {
-                        regimenes.remove(regimen);
-                    }
-                }
-            }
+              if(asignatura.getCodigo().equals(asignaturaCod)){
+                  ArrayList<Examen> examenes=(ArrayList)asignatura.getExamenes();
+                  for (Examen examen : examenes) {
+                      if(examen.getFecha().equals(fecha)){
+                          exa=examen;
+                      }
+                  }
+              }
         }
-        return e;
+        if(exa==null){
+            JOptionPane.showMessageDialog(null,"Ese Examen no existe");
+        }
+        else{
+           if(exa.getFecha().isAfter(LocalDate.now())){
+            System.out.println(exa);
+            Acta acta=exa.getActa();
+            acta.getInscripciones().remove(new InscripcionAExamen(this,exa));
+            return true;
+           }
+           else{
+               JOptionPane.showMessageDialog(null,"Examen Viejo,no puede inscribirse");
+           }
+        }
+        return false;
     }
     public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod) throws NoSeInscribioException{
         Asignatura asig=null;
