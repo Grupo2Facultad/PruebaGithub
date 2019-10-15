@@ -52,20 +52,17 @@ public class InscripcionAExamen {
                 regular = false;
             }
             if (((Final) examen).isPuedenRegulares() && regular) {
-                JOptionPane.showMessageDialog(null,"InsciptoComoRegular");
+                JOptionPane.showMessageDialog(null,"Regular");
                 habilitado = true;
             } else {
                 habilitado = false;
             }
             if (((Final) examen).isPuedenLibres()&&notaObtenida==null) {
-                JOptionPane.showMessageDialog(null,"InsciptoComoLibre");
+                JOptionPane.showMessageDialog(null,"Libre");
                 habilitado = true;
             }
-            if(notaObtenida==null){
-                JOptionPane.showMessageDialog(null,"No se puede inscibir");
-                throw new NoSeInscribioException("no se pudo inscribir");
-                 
-            }
+  
+            
         } else {
             JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
         }

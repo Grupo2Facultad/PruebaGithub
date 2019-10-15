@@ -22,11 +22,10 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author juanc
+ * @author Alumno
  */
-public class InscripcionAExamenActionListener implements ActionListener {
-
-    private JTextField alumnoDNI,
+public class DarDeBajaExamenActionListener implements ActionListener{
+private JTextField alumnoDNI,
             asignaturaCod,
             ingresoAño,
             ingresoMes,
@@ -35,9 +34,8 @@ public class InscripcionAExamenActionListener implements ActionListener {
             slash2;
     private JButton inscribirse;
     private Frame frame;
-
-    class Inscribirse implements ActionListener{
-        @Override
+    class DarseDeBaja implements ActionListener{
+            @Override
         public void actionPerformed(ActionEvent arg0) {
             String DNI = alumnoDNI.getText();
            int año=Integer.parseInt(ingresoAño.getText());
@@ -51,7 +49,7 @@ public class InscripcionAExamenActionListener implements ActionListener {
                 for (Alumno alumno : alumnos) {
                     if (alumno.getDNI().equals(DNI)) {
                         try{
-                        if (alumno.InscibirseAExamen(fecha,asignaturaCod.getText())) {
+                        if (alumno.DarseDeBaja(fecha,asignaturaCod.getText())) {
                             JOptionPane.showMessageDialog(null, "Operacion Exitosa");
                             frame.setVisible(false);
                         }
@@ -60,19 +58,16 @@ public class InscripcionAExamenActionListener implements ActionListener {
                         }
                         e = true;
                     }
-
                 }
             }
 
             if (!e) {
                 JOptionPane.showMessageDialog(null, "Ese Alumno no se encuentra en el Sistema");
             }
-        }
+        }  
     }
-
-    
     @Override
-    public void actionPerformed(ActionEvent arg0) {
+    public void actionPerformed(ActionEvent ae) {
         frame = new Frame("Insribirse a Examen");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -86,7 +81,7 @@ public class InscripcionAExamenActionListener implements ActionListener {
         slash2=new JLabel("/");
         asignaturaCod = new JTextField("Codigo de Asignatura",20);
         inscribirse=new JButton("ingresar");
-        inscribirse.addActionListener(new Inscribirse());
+        inscribirse.addActionListener(new DarseDeBaja());
         container.add(alumnoDNI);
         container.add(asignaturaCod);
         container.add(ingresoAño);

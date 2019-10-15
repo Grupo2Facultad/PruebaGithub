@@ -67,6 +67,13 @@ public class ActaFinal extends Acta{
                 existen=false;
             }
         }
+        for (InscripcionAExamen habilitado : super.getHabilitados()) {
+           if(habilitado.getNotaObtenida()==null){
+               JOptionPane.showMessageDialog(null,"falta poner notas");
+               existen=false;
+               break;
+           }
+       }
         return existen;
     }
     @Override
