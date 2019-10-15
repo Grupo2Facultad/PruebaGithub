@@ -18,19 +18,33 @@ import javax.swing.JOptionPane;
 public class ActaFinal extends Acta{
     private boolean cerrada;
 
+    /**
+     * @param examen
+     */
     public ActaFinal( Examen examen) {
         super(examen);
         this.cerrada = false;
     }
 
+    /**
+     *
+     * @return Retorna si está cerrado
+     */
     public boolean isCerrada() {
         return cerrada;
     }
 
+    /**
+     *
+     * @param cerrada
+     */
     public void setCerrada(boolean cerrada) {
         this.cerrada = cerrada;
     }
   
+    /**
+     *Cierra el Acta
+     */
     public void cerrarActa() {
         boolean existen=existenDocentes();
         System.out.println("Existen?"+existen);
@@ -43,6 +57,9 @@ public class ActaFinal extends Acta{
         }
        
     }
+    /**
+  *    Retorna un booleano sobre la existencia de los docentes que se declararon en el acta y chequea que se hayan instanciado todas las notas 
+*/
    private  boolean existenDocentes() {
         boolean existen=true;
         Final fin=(Final)super.getExamen();
@@ -76,7 +93,10 @@ public class ActaFinal extends Acta{
        }
         return existen;
     }
-    @Override
+   /** 
+    * Imprime el Acta
+    */ 
+   @Override
     public void imprimirActa() {
      System.out.println("Cerrada?"+cerrada);
      if (cerrada){
