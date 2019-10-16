@@ -5,22 +5,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ *
+ * @author Alumno
+ */
 public class Equipo {
     private List<Rol> roles;
 
+    /**
+     *
+     */
     public Equipo() {
         this.roles = new ArrayList<>();
     }
     
-
+    /**
+     *
+     * @return Un listado con los roles del equipo docente
+     */
     public List<Rol> getRoles() {
         return roles;
     }
 
+    /**
+     *
+     * @param roles
+     */
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
     }
 
+    /**
+     *
+     * @return el hashCode
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -28,6 +46,11 @@ public class Equipo {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return La igualdad entre este objeto y otro del mismo tipo
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -46,8 +69,10 @@ public class Equipo {
         return true;
     }
 
-    
-    
+    /**
+     *
+     * @return Una cadena de caracteres con los roles del equipo docente
+     */
     @Override
     public String toString() {
         return "Equipo{" + "roles=" + roles + '}';

@@ -165,8 +165,9 @@ private String  numeroMatricula;
     /**
      * 
      * @param fecha
-     * @param asig
-     * @return Booleano que indica si se pudo dar de baja a un alumno de un examen
+     * @param asignaturaCod
+     * @throws NoSeInscribioException
+     * @return Booleano que indica si la o peracion dar de baja a un alumno de un examen fue exitosa
      * Da de baja a un alumno de un examen
      */
     public boolean DarseDeBaja(LocalDate fecha,String asignaturaCod)throws NoSeInscribioException {
@@ -199,6 +200,13 @@ private String  numeroMatricula;
         }
         return false;
     }
+    /**
+     * 
+     * @param fecha
+     * @param asignaturaCod
+     * @return Booleano que indica si la operacion Inscribirse a examen fue exitosa
+     * @throws NoSeInscribioException 
+     */
     public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod) throws NoSeInscribioException{
         Asignatura asig=null;
         Examen exa=null;
@@ -231,7 +239,7 @@ private String  numeroMatricula;
     }
     /**
      *
-     * @return
+     * @return Domicilio
      */
     public String getDomicilio() {
         return domicilio;
@@ -247,7 +255,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @return
+     * @return Localidad
      */
     public String getLocalidad() {
         return localidad;
@@ -263,7 +271,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @return
+     * @return Provincia
      */
     public String getProvincia() {
         return provincia;
@@ -279,7 +287,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @return
+     * @return Pais de residencia
      */
     public String getPaisDeResidencia() {
         return paisDeResidencia;
@@ -295,7 +303,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @return
+     * @return Correo Electronico
      */
     public String getCorreoElectronico() {
         return correoElectronico;
@@ -311,12 +319,16 @@ private String  numeroMatricula;
 
     /**
      *
-     * @return
+     * @return Fecha nacimiento
      */
     public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
+    /**
+     * 
+     * @return Las carreras que cursa un alumno
+     */
     public Set<Carrera> carrerasQueCursa() {
         return Main.getRegistroDeCarreras().getCarreraPorDNI(super.getDNI());
     }
@@ -331,7 +343,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @return
+     * @return La fecha de inscripcion a la carrera
      */
     public String getFechaInscripcion() {
         return fechaInscripcion;
@@ -339,7 +351,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @param fechaInscripcion
+     * @param fechaInscripcion 
      */
     public void setFechaInscripcion(String fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
@@ -347,7 +359,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @return
+     * @return El numero de matricula de un alumno
      */
     public String getNumeroMatricula() {
         return numeroMatricula;
@@ -363,7 +375,7 @@ private String  numeroMatricula;
 
     /**
      *
-     * @return
+     * @return Los datos del alumno concatenados en un String
      */
     @Override
     public String toString() {

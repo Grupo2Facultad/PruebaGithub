@@ -33,7 +33,7 @@ extends Regimen{
 
     /**
      *
-     * @return
+     * @return La fecha de inscripcion de un alumno a la asignatura
      */
     public LocalDate getFechaDeInscripcion() {
         return fechaDeInscripcion;
@@ -49,7 +49,7 @@ extends Regimen{
 
     /**
      *
-     * @return
+     * @return El periodo lectivo de la cursada
      */
     public PeriodoLectivoConAño getPeriodoLectivo() {
         return periodoLectivo;
@@ -65,7 +65,7 @@ extends Regimen{
 
     /**
      *
-     * @return
+     * @return La nota final de un ciclo lectivo
      */
     public int getNotaFinalCurso() {
         return notaFinalCurso;
