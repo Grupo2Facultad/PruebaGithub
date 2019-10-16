@@ -5,22 +5,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ *
+ * @author Alumno
+ */
 public class TrabajoPractico {
     private List<TrabajoDeAlumno> notasIndividuales;
 
+    /**
+     *
+     */
     public TrabajoPractico() {
         this.notasIndividuales = new ArrayList<>()  ;
     }
 
+    /**
+     *
+     * @return Un listado con las notas de los trabajos de los alumnos
+     */
     public List<TrabajoDeAlumno> getNotasIndividuales() {
         return notasIndividuales;
     }
 
+    /**
+     *
+     * @param notasIndividuales
+     */
     public void setNotasIndividuales(List<TrabajoDeAlumno> notasIndividuales) {
         this.notasIndividuales = notasIndividuales;
     }
 
+    /**
+     *
+     * @return hashCode
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -28,6 +46,11 @@ public class TrabajoPractico {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return La igualdad entre este objeto y otro del mismo tipo
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -46,6 +69,10 @@ public class TrabajoPractico {
         return true;
     }
 
+    /**
+     *
+     * @return Una cadena de caracteres con caracteristicas de un trabajo practico
+     */
     @Override
     public String toString() {
         return "TrabajoPractico{" + "notasIndividuales=" + notasIndividuales + '}';

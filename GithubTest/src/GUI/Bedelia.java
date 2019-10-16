@@ -35,7 +35,8 @@ public Bedelia(){
             inscribirAAsignatura,
             inscribirAExamen,
             anotarDocenteEnExamen,
-             inscribirDocenteAsignatura;
+             inscribirDocenteAsignatura,
+                 darAlumnoDeBaja;
         Frame frame = new Frame("Bedelia");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);Toolkit pantalla = Toolkit.getDefaultToolkit();
@@ -44,6 +45,8 @@ public Bedelia(){
         int w = mip.width;
         frame.setBounds(200, h/4, 1080, h/2);
         Container container = frame.getContentPane();
+        darAlumnoDeBaja=new JButton("Dar de Baja de Examen");
+        darAlumnoDeBaja.addActionListener(new DarDeBajaExamenActionListener());
         container.setLayout(null);
         habilitadosParcial = new JButton("Habiltiados al parcial");
         habilitadosParcial.addActionListener(new HabiltiadosExamenActionListener());
@@ -77,10 +80,11 @@ public Bedelia(){
         container.add(asignaturasPorDNI);
         container.add(profesoresProAsignatura);
         container.add(imprimirActa);
-         container.add(inscribirAAsignatura);
+        container.add(inscribirAAsignatura);
         container.add(inscribirAExamen);
         container.add(anotarDocenteEnExamen);
         container.add(inscribirDocenteAsignatura);
+        container.add(darAlumnoDeBaja);
         container.add(new PanelBusquedaCodigo());
         container.getComponent(9).setBounds(100, 290, 800, 50);
         

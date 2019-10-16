@@ -8,7 +8,9 @@ package GUI;
 import githubtest.Alumno;
 import githubtest.Asignatura;
 import githubtest.Examen;
+import githubtest.Final;
 import githubtest.InscripcionAExamen;
+import githubtest.Parcial;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -32,12 +34,13 @@ private JTextField codigoAsig,
             ingresoDia;
     private JLabel slash,
             slash2;
+    private boolean tipo;
 private JButton ingresar;
 class Ingresar implements ActionListener{
     private Examen ex;
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            int año=Integer.parseInt(ingresoAño.getText());
+          int año=Integer.parseInt(ingresoAño.getText());
           int mes=Integer.parseInt(ingresoMes.getText());
           int dia=Integer.parseInt(ingresoDia.getText());
           ArrayList<InscripcionAExamen>habilitados=new ArrayList<>();
@@ -53,7 +56,22 @@ class Ingresar implements ActionListener{
                         if(examene.getFecha().equals(fecha)){
                             ex=examene;
                             f=true;
+                            if(tipo&& examene instanceof Parcial){
+                            ex=examene;
                            habilitados=(ArrayList)examene.getActa().getHabilitados();
+                            }
+                            if(tipo&& examene instanceof Final){
+                                JOptionPane.showMessageDialog(null,"Ese Examen es de tipo Final");
+                                return;
+                            }
+                            if(!tipo&&examene instanceof Final){
+                            ex=examene;
+                           habilitados=(ArrayList)examene.getActa().getHabilitados();
+                            }
+                            if(!tipo && examene instanceof Parcial){
+                                JOptionPane.showMessageDialog(null,"Ese Examen es de tipo Parcial");
+                                return;
+                            }
                         }
                     }
                 }
@@ -81,6 +99,11 @@ class Ingresar implements ActionListener{
             
         }
 }
+
+    public HabiltiadosExamenActionListener(boolean tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public void actionPerformed(ActionEvent arg0) {
        Frame frame=new Frame("Habilitados al Examen");

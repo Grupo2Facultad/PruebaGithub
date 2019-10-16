@@ -33,7 +33,8 @@ public abstract class Acta {
 
     /**
      *
-     * @return
+     * @return Lista de habilitados a examen
+
      */
     public List<InscripcionAExamen> getHabilitados() {
         ArrayList<InscripcionAExamen> habilitados = new ArrayList<>();
@@ -47,7 +48,8 @@ public abstract class Acta {
 
     /**
      *
-     * @return
+
+     * @return Lista de inscriptos al examen
      */
     public List<InscripcionAExamen> getInscripciones() {
         return inscripciones;
@@ -63,7 +65,7 @@ public abstract class Acta {
 
     /**
      *
-     * @return
+     * @return Examen al que corresponde el acta
      */
     public Examen getExamen() {
         return examen;
@@ -79,7 +81,7 @@ public abstract class Acta {
 
     /**
      *
-     * @return
+     * @return Acta en forma de cadena de caracteres
      */
     @Override
     public String toString() {
@@ -93,7 +95,7 @@ public abstract class Acta {
 
     /**
      *
-     * @return
+     * @return Hashcode
      */
     @Override
     public int hashCode() {
@@ -106,7 +108,7 @@ public abstract class Acta {
     /**
      *
      * @param obj
-     * @return
+     * @return Booleano sobre la igualdad del objeto acta
      */
     @Override
     public boolean equals(Object obj) {

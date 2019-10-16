@@ -72,6 +72,7 @@ private JTextField matricula,
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
+
             frame = new Frame("Ingreso De Docente");
             frame.setVisible(true);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
