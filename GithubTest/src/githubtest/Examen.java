@@ -23,6 +23,13 @@ public abstract class Examen {
    private List<DocenteExamen> docenteExamen;
    private Acta acta;
 
+    /**
+     *
+     * @param asignatura
+     * @param periodo
+     * @param fecha
+     * @param horario
+     */
     public Examen(Asignatura asignatura, PeriodoLectivoEnum periodo, LocalDate fecha, int horario) {
         this.asignatura = asignatura;
         this.periodo = periodo;
@@ -31,54 +38,106 @@ public abstract class Examen {
         this.docenteExamen=new ArrayList<>();  
     }
 
+    /**
+     *
+     * @return un listado con los docentes en el examen
+     */
     public List<DocenteExamen> getDocenteExamen() {
         return docenteExamen;
     }
 
+    /**
+     *
+     * @param docenteExamen
+     */
     public void setDocenteExamen(List<DocenteExamen> docenteExamen) {
         this.docenteExamen = docenteExamen;
     }
 
+    /**
+     *
+     * @return La asignatura sobre la que es el examen
+     */
     public Asignatura getAsignatura() {
         return asignatura;
     }
 
+    /**
+     *
+     * @param asignatura
+     */
     public void setAsignatura(Asignatura asignatura) {
         this.asignatura = asignatura;
     }
 
+    /**
+     *
+     * @return El periodo lectivo al que pertecene el examen
+     */
     public PeriodoLectivoEnum  getPeriodo() {
         return periodo;
     }
 
+    /**
+     *
+     * @param periodo
+     */
     public void setPeriodo(PeriodoLectivoEnum  periodo) {
         this.periodo = periodo;
     }
 
+    /**
+     *
+     * @return La fecha del examen
+     */
     public LocalDate getFecha() {
         return fecha;
     }
 
+    /**
+     *
+     * @param fecha
+     */
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     *
+     * @return El horario del examen
+     */
     public int getHorario() {
         return horario;
     }
 
+    /**
+     *
+     * @param horario
+     */
     public void setHorario(int horario) {
         this.horario = horario;
     }
 
+    /**
+     *
+     * @return Un acta del examen
+     */
     public Acta getActa() {
         return acta;
     }
 
+    /**
+     *
+     * @param acta
+     */
     public void setActa(Acta acta) {
         this.acta = acta;
     }
 
+    /**
+     *
+     * @return el hashCode
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -88,6 +147,11 @@ public abstract class Examen {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return La igualdad entre este objeto y otro del mismo tipo
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -112,6 +176,10 @@ public abstract class Examen {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Examen{" + "asignatura=" + asignatura + ", periodo=" + periodo + ", fecha=" + fecha + ", horario=" + horario + ", acta=" + acta + '}';

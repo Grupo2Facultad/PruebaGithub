@@ -75,7 +75,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return El codigo de la Asignatura
      */
     public String  getCodigo() {
         return codigo;
@@ -91,7 +91,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return La carga horaria de la asignatura
      */
     public String  getCargaHoraria() {
         return cargaHoraria;
@@ -107,7 +107,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return El nombre de la asignatura
      */
     public String getNombre() {
         return nombre;
@@ -123,7 +123,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return El plan de estudio de la asignatura
      */
     public PlanDeEstudio getPlanDeEstudio() {
         return planDeEstudio;
@@ -139,7 +139,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return La carrera a la que pertenece la Asignatura
      */
     public Carrera getCarrera() {
         return carrera;
@@ -155,7 +155,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return El año de carrera al que pertenece la Asignatura
      */
     public int getAñoDeCarreraAlQuePertenece() {
         return añoDeCarreraAlQuePertenece;
@@ -171,7 +171,7 @@ public class Asignatura {
     
     /**
      *
-     * @return
+     * @return El periodo lectivo al que pertenece la Asignatura
      */
     public PeriodoLectivoConAño getPeriodoLectivo() {
         return periodoLectivo;
@@ -187,7 +187,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return Si la asignatura es promocionable
      */
     public boolean isPromocional() {
         return promocional;
@@ -203,7 +203,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return La cantidad de parciales que posee la Asignatura
      */
     public int getCantidadParciales() {
         return cantidadParciales;
@@ -219,7 +219,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return El equipo docente perteneciente a la asignatura
      */
     public Equipo getEquipo() {
         return equipo;
@@ -235,7 +235,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return La bitacora completa de una asignatura
      */
     public BitacoraFinal getBitacora() {
         return bitacora;
@@ -251,7 +251,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return Un listado con los trabajos practicos de una asignatura
      */
     public List<TrabajoPractico> getListadoTrabajosPracticos() {
         return listadoTrabajosPracticos;
@@ -267,7 +267,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return Un listado con los examenes de la Asignatura
      */
     public List<Examen>  getExamenes() {
         return examenes;
@@ -275,7 +275,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return Los alumnos cursantes de la Asignatura
      */
     public List<Regimen> getCursantes() {
         return cursantes;
@@ -288,6 +288,9 @@ public class Asignatura {
     public void setCursantes(List<Regimen> cursantes) {
         this.cursantes = cursantes;
     }
+/**
+ * Crea bitacoras diarias
+ */
     private void generarBitacora(){
         this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,1),"tema"));
         this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,2),"tema"));
@@ -318,6 +321,9 @@ public class Asignatura {
         this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,15),"tema"));
         this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,16),"tema"));
     }
+    /**
+     * Genera trabajos practicos 
+     */
     private  void generarPracticos() {
         getListadoTrabajosPracticos().add(new TrabajoPractico());
         getListadoTrabajosPracticos().add(new TrabajoPractico());
@@ -328,7 +334,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return El hashCode
      */
     @Override
     public int hashCode() {
@@ -341,7 +347,7 @@ public class Asignatura {
     /**
      *
      * @param obj
-     * @return
+     * @return La igualdad entre este objeto y otro del mismo tipo
      */
     @Override
     public boolean equals(Object obj) {
@@ -366,7 +372,7 @@ public class Asignatura {
 
     /**
      *
-     * @return
+     * @return Una cadena de caracteres con algunas de las caracteristicas de la Asignatura
      */
     @Override
     public String toString() {

@@ -5,21 +5,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ *
+ * @author Alumno
+ */
 public class BitacoraFinal {
     private List<BitacoraDiaria> bitacorasDiarias; 
 
+    /**
+     * Crea un listado que contiene las bitacoras diarias
+     */
     public BitacoraFinal() {
         this.bitacorasDiarias = new ArrayList<>()  ;;
     }
 
+    /**
+     *
+     * @return Un listado de las bitacoras diarias
+     */
     public List<BitacoraDiaria> getBitacorasDiarias() {
         return bitacorasDiarias;
     }
 
+    /**
+     *
+     * @param bitacorasDiarias
+     */
     public void setBitacorasDiarias(List<BitacoraDiaria> bitacorasDiarias) {
         this.bitacorasDiarias = bitacorasDiarias;
     }
 
+    /**
+     *
+     * @return el hashCode
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -27,6 +46,11 @@ public class BitacoraFinal {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return La igualdad entre este objeto y otro del mismo tipo
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -45,6 +69,10 @@ public class BitacoraFinal {
         return true;
     }
 
+    /**
+     *
+     * @return Una cadena de caracteres con el listado de bitacoras diarias
+     */
     @Override
     public String toString() {
         return "BitacoraFinal{" + "bitacorasDiarias=" + bitacorasDiarias + '}';
