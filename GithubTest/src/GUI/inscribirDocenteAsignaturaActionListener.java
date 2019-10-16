@@ -72,19 +72,28 @@ private JTextField matricula,
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
-            frame = new Frame("IngresoDeAlumno");
+
+            frame = new Frame("Ingreso De Docente");
             frame.setVisible(true);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setBounds(250, 200, 650, 450);
             Container container=frame.getContentPane();
-            container.setLayout(new FlowLayout());
-            this.inscribir=new JButton("INGRESAR");
+            container.setLayout(null);
+            this.inscribir=new JButton("Ingresar");
+            inscribir.setBounds(270, 300, 120, 30);
             inscribir.addActionListener(new Inscribir());
             matricula = new JTextField("Matricula",5);
+            matricula.setBounds(100, 100, 120, 25);
             cargo= new JTextField("Cargo",20);
+            cargo.setBounds(270, 100, 120, 25);
             dedicacion=new JTextField("Dedicacion", 20);
+            dedicacion.setBounds(430, 100, 120, 25);
             codigoAsig = new JTextField("Codigo de Asignatura",20);
+            codigoAsig.setBounds(100, 200, 120, 25);
             fechaIngreso = new JTextField("Fecha de Ingreso",20);
+            fechaIngreso.setBounds(270, 200, 120, 25);
             fechaFinal = new JTextField("Fecha de Final",20);
+            fechaFinal.setBounds(430, 200, 120, 25);
             container.add(matricula);
             container.add(codigoAsig);
             container.add(fechaIngreso);

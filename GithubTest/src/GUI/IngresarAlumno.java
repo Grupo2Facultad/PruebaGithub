@@ -36,23 +36,26 @@ import javax.swing.JLabel;
                ingresoFechaNacimiento,
                ingresoFechaInscripcion;
        private JLabel obligatorios,
+               nombre, appellido,
                carrerasDisponibles;
        private JButton ingresar;
        private Frame frame;
 
        @Override
        public void actionPerformed(ActionEvent e){
-            frame = new Frame("IngresoDeAlumno");
+            frame = new Frame("Ingreso De Alumno");
             frame.setVisible(true);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setBounds(150, 100, 1200, 700);
             Container container=frame.getContentPane();
             container.setLayout(new FlowLayout());
-            this.ingresar=new JButton("INGRESAR");
+            this.ingresar=new JButton("Ingresar");
             this.ingresar.addActionListener(new IngresarAlumnoActionListener(this));
-            this.ingresoApellido=new TextField(20);
-            this.ingresoApellido.setText("Apellido*");
-            this.ingresoNombre=new TextField(20);
-            this.ingresoNombre.setText("Nombre*");
+            this.ingresoApellido=new TextField("Apellido*");
+            this.ingresoNombre=new TextField("Nombre*");
+            ingresoNombre.setBounds(100, 100, 100, 25);
+            nombre = new JLabel("Nombre: ");
+            nombre.setBounds(0, 100, 100, 25);
             this.ingresoDNI=new TextField(20);
             this.ingresoDNI.setText("DNI*");
             this.ingresoNumeroMatricula=new TextField(20);
@@ -93,6 +96,7 @@ import javax.swing.JLabel;
             container.add(this.ingresoFechaInscripcion);
             container.add(this.ingresoFechaNacimiento);
             container.add(obligatorios);
+            container.add(nombre);
             container.add(carrerasDisponibles);
             }
 

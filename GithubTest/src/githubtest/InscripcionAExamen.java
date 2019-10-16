@@ -76,11 +76,11 @@ public class InscripcionAExamen {
             JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
         }
     }
- 
     /**
      *
      * @return La nota del Curso del alumno que se quiere inscribir
      */
+
     public Double getNotaCurso() {
         double notaPrimero = 0,
                 notaSegundo = 0;

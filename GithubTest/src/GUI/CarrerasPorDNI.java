@@ -40,8 +40,9 @@ class GetCarreras implements ActionListener{
     public void actionPerformed(ActionEvent arg0) {
          Frame frame=new Frame("Carreras Cursadas Por El Alumno con Determinado DNI" );
         Container container=frame.getContentPane();
+        frame.setBounds(350, 250, 700, 400);
         ingresarDNI=new JTextField(20);
-        ingresar=new JButton("IngesarDNI");
+        ingresar=new JButton("Ingesar DNI");
         ingresar.addActionListener(new GetCarreras());
         container.setLayout(new FlowLayout());
         container.add(ingresarDNI);

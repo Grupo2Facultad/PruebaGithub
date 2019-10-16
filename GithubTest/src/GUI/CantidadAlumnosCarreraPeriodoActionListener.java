@@ -53,17 +53,24 @@ class MostrarCantidadAlumnos implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0) {
         Frame frame=new Frame("Cantidad De Alumnos Por Carrera en un Periodo");
+        frame.setBounds(200, 150, 1080, 600);
         Container container=frame.getContentPane();
         ingresoNombre=new JTextField(20);
+        ingresoNombre.setBounds(100, 150, 120, 25);
         ingresoNombre.setToolTipText("Carrera");
-        ingresoAño=new JTextField("año",5);
-        ingresoMes=new JTextField("mes",3);
-        ingresoDia=new JTextField("dia",3);
-        ingresar=new JButton("inrgesar");
+        ingresoAño=new JTextField("Año",5);
+        ingresoAño.setBounds(240, 150, 50, 25);
+        ingresoMes=new JTextField("Mes",3);
+        ingresoMes.setBounds(310, 150, 40, 25);
+        ingresoDia=new JTextField("Dia",3);
+        ingresoDia.setBounds(370, 150, 40, 25);
+        ingresar=new JButton("Inrgesar");
+        ingresar.setBounds(430, 148, 100, 30);
         slash=new JLabel("/");
         slash2=new JLabel("/");
         ingresar.addActionListener(new MostrarCantidadAlumnos());
         this.carrerasDisponibles=new JLabel();
+        carrerasDisponibles.setBounds(100, 200, 600, 25);
             String disponibles="Carreras Disponibles: ";
             ArrayList<Carrera>carreras=Main.registroDeCarreras.getCarreras();
             for (Carrera carrera : carreras) {

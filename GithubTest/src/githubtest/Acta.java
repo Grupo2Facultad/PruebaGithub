@@ -34,6 +34,7 @@ public abstract class Acta {
     /**
      *
      * @return Lista de habilitados a examen
+
      */
     public List<InscripcionAExamen> getHabilitados() {
         ArrayList<InscripcionAExamen> habilitados = new ArrayList<>();
@@ -47,6 +48,7 @@ public abstract class Acta {
 
     /**
      *
+
      * @return Lista de inscriptos al examen
      */
     public List<InscripcionAExamen> getInscripciones() {
