@@ -7,7 +7,9 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.*;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -32,28 +34,44 @@ public Bedelia(){
             imprimirActa,
             inscribirAAsignatura,
             inscribirAExamen,
-            anotarDocenteEnExamen;
+            anotarDocenteEnExamen,
+             inscribirDocenteAsignatura;
         Frame frame = new Frame("Bedelia");
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);Toolkit pantalla = Toolkit.getDefaultToolkit();
+        Dimension mip = pantalla.getScreenSize();
+        int h = mip.height;
+        int w = mip.width;
+        frame.setBounds(200, h/4, 1080, h/2);
         Container container = frame.getContentPane();
-        container.setLayout(new FlowLayout());
-        habilitadosParcial = new JButton("HabiltiadosParcial");
+        container.setLayout(null);
+        habilitadosParcial = new JButton("Habiltiados al parcial");
         habilitadosParcial.addActionListener(new HabiltiadosExamenActionListener());
-        habilitadosFinal = new JButton("HabilitadosFinal");
+        habilitadosParcial.setBounds(50, 50, 170, 30);
+        habilitadosFinal = new JButton("Habilitados al final");
         habilitadosFinal.addActionListener(new HabiltiadosExamenActionListener());
-        asignaturasPorDNI = new JButton("AsignaturasPorDNI");
+        habilitadosFinal.setBounds(270, 50, 170, 30);
+        asignaturasPorDNI = new JButton("Asignaturas por DNI");
         asignaturasPorDNI.addActionListener(new AsignaturasPorDni());
-        profesoresProAsignatura = new JButton("ProfesoesAsignatura");
+        asignaturasPorDNI.setBounds(490, 50, 170, 30);
+        inscribirDocenteAsignatura= new JButton("Inscribir docente a asignatura");
+        inscribirDocenteAsignatura.addActionListener(new inscribirDocenteAsignaturaActionListener());
+        inscribirDocenteAsignatura.setBounds(710, 50, 220, 30);
+        profesoresProAsignatura = new JButton("Profesoes Asignatura");
         profesoresProAsignatura.addActionListener(new ProfesoresPorAsignaturaActionListener ());
-        inscribirAExamen = new JButton("Inscribir a Examen");
+        profesoresProAsignatura.setBounds(50, 130, 170, 30);
+        inscribirAExamen = new JButton("Inscribir a examen");
         inscribirAExamen.addActionListener(new InscripcionAExamenActionListener ());
-        inscribirAAsignatura = new JButton("Inscribir a Asignatura");
+        inscribirAExamen.setBounds(270, 130, 170, 30);
+        inscribirAAsignatura = new JButton("Inscribir a asignatura");
         inscribirAAsignatura.addActionListener(new InscribirseAAsignaturaActionListener());
-        anotarDocenteEnExamen= new JButton ("Anotar Docente En Examen");
+        inscribirAAsignatura.setBounds(490, 130, 170, 30);
+        anotarDocenteEnExamen= new JButton ("Anotar docente en examen");
         anotarDocenteEnExamen.addActionListener(new AnotarDocenteActionListener());
-        imprimirActa = new JButton("ImprimirActa");
+        anotarDocenteEnExamen.setBounds(710, 130, 220, 30);
+        imprimirActa = new JButton("Imprimir acta");
         imprimirActa.addActionListener(new ImprimirActaActionListener());
+        imprimirActa.setBounds(420, 210, 170, 30);
         container.add(habilitadosParcial);
         container.add(habilitadosFinal);
         container.add(asignaturasPorDNI);
@@ -62,7 +80,10 @@ public Bedelia(){
          container.add(inscribirAAsignatura);
         container.add(inscribirAExamen);
         container.add(anotarDocenteEnExamen);
+        container.add(inscribirDocenteAsignatura);
         container.add(new PanelBusquedaCodigo());
+        container.getComponent(9).setBounds(100, 290, 800, 50);
+        
     }
     
 }

@@ -19,7 +19,9 @@ import githubtest.PlanDeEstudio;
 import githubtest.RegistroDeCarreras;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.*;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.Month;
@@ -40,12 +42,19 @@ public class Main {
     public static void main(String[] args) {
     añadirInformacionPorDefecto();
     Frame frame=new Frame("TallerPOO");
+    Toolkit pantalla = Toolkit.getDefaultToolkit();
+    Dimension mip = pantalla.getScreenSize();
+    int h = mip.height;
+    int w = mip.width;
+    frame.setBounds(w/4, h/4, w/2, h/2);
     Container container=frame.getContentPane();
-    container.setLayout(new FlowLayout());
+    container.setLayout(null);
     bedelia=new JButton("Bedelia");
     bedelia.addActionListener((ActionListener)new Bedelia());
+    bedelia.setBounds(150, frame.getHeight()/4, frame.getWidth()/4, frame.getHeight()/4);
     alumnado= new JButton("Alumnado");
     alumnado.addActionListener(new Alumnado());
+    alumnado.setBounds(450, frame.getHeight()/4, frame.getWidth()/4, frame.getHeight()/4);
     container.add(bedelia);
     container.add(alumnado);
     frame.setVisible(true); 
@@ -70,7 +79,7 @@ public class Main {
         Asignatura AC= new Asignatura("AC","100","Arquitectura De Computadoras",DosMilQuince,LicenciaturaEnSistemas,
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.segundoCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
         parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,1),18);
-        eFinal=new Final(true,false,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
+        eFinal=new Final(true,true,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
         POO.getExamenes().add(parcial);
         POO.getExamenes().add(eFinal);
         ActaParcial acta=new ActaParcial(parcial);
@@ -85,8 +94,11 @@ public class Main {
         DosMilQuince.getAsignaturas().add(AC);
         registroDeCarreras.getCarreras().add(LicenciaturaEnSistemas);
         //Finaliza zona LicenciaturaSistemas
-        Carrera ContadorPublico=new Carrera("ContadorPublica",2,LocalDate.of(2000,3,15),5);
+        Carrera ContadorPublico=new Carrera("ContadorPublico",2,LocalDate.of(2000,3,15),5);
         registroDeCarreras.getCarreras().add(ContadorPublico);
+        ///
+         Carrera LicenciaturaAdministracion=new Carrera("LicenciaturaAdministracion",3,LocalDate.of(1985,3,15),5);
+        registroDeCarreras.getCarreras().add(LicenciaturaAdministracion);
     }
     
     public static Carrera getLicenciaturaEnSistemas() {

@@ -63,7 +63,8 @@ public class BuscarCodigoAsignaturaActionListener implements ActionListener {
             todas +=coincidencia+ "\n";
 
         }
-        JOptionPane.showMessageDialog(null, todas);
+       ImpresionListado.Imprimir(todas);
+       
     }
 
     public void check() {

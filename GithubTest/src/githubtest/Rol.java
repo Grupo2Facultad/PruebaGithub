@@ -8,10 +8,10 @@ public class Rol {
     private Docente docente;
     private String dedicacion;
     private String cargo;
-    private LocalDate fechaDeComienzo,
+    private String fechaDeComienzo,
             fechaFinCargo;
 
-    public Rol(Docente docente, String dedicacion, String cargo, LocalDate fechaDeComienzo, LocalDate fechaFinCargo) {
+    public Rol(Docente docente, String dedicacion, String cargo, String fechaDeComienzo, String fechaFinCargo) {
         this.docente = docente;
         this.dedicacion = dedicacion;
         this.cargo = cargo;
@@ -43,19 +43,19 @@ public class Rol {
         this.cargo = cargo;
     }
 
-    public LocalDate getFechaDeComienzo() {
+    public String getFechaDeComienzo() {
         return fechaDeComienzo;
     }
 
-    public void setFechaDeComienzo(LocalDate fechaDeComienzo) {
+    public void setFechaDeComienzo(String fechaDeComienzo) {
         this.fechaDeComienzo = fechaDeComienzo;
     }
 
-    public LocalDate getFechaFinCargo() {
+    public String getFechaFinCargo() {
         return fechaFinCargo;
     }
 
-    public void setFechaFinCargo(LocalDate fechaFinCargo) {
+    public void setFechaFinCargo(String fechaFinCargo) {
         this.fechaFinCargo = fechaFinCargo;
     }
 
