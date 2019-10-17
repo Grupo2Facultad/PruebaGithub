@@ -5,6 +5,7 @@
  */
 package githubtest;
 
+import GUI.ImpresionListado;
 import GUI.Main;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +19,35 @@ import javax.swing.JOptionPane;
 public class ActaFinal extends Acta{
     private boolean cerrada;
 
+    /**
+     * @param examen
+     */
     public ActaFinal( Examen examen) {
         super(examen);
         this.cerrada = false;
     }
 
+    /**
+     *
+     * @return Retorna si está cerrado
+     */
     public boolean isCerrada() {
         return cerrada;
     }
 
+    /**
+     *
+     * @param cerrada
+     */
     public void setCerrada(boolean cerrada) {
         this.cerrada = cerrada;
     }
   
+    /**
+     *Intenta cerrar el Acta
+     */
     public void cerrarActa() {
-        boolean existen=existenDocentes();
+        boolean existen=existenDocentesYNotas();
         System.out.println("Existen?"+existen);
         if(existen){
             cerrada=true;
@@ -43,7 +58,10 @@ public class ActaFinal extends Acta{
         }
        
     }
-   private  boolean existenDocentes() {
+    /**
+  *    Retorna un booleano sobre la existencia de los docentes que se declararon en el acta y chequea que se hayan puesto todas las notas 
+*/
+   private  boolean existenDocentesYNotas() {
         boolean existen=true;
         Final fin=(Final)super.getExamen();
         ArrayList<DocenteExamen>docentes=(ArrayList)fin.getDocenteExamen(); 
@@ -67,13 +85,26 @@ public class ActaFinal extends Acta{
                 existen=false;
             }
         }
+        for (InscripcionAExamen habilitado : super.getHabilitados()) {
+           if(habilitado.getNotaObtenida()==null){
+               JOptionPane.showMessageDialog(null,"falta poner notas");
+               existen=false;
+               break;
+           }
+       }
         return existen;
     }
-    @Override
+   /** 
+    * Imprime el Acta
+    */ 
+   @Override
     public void imprimirActa() {
-     System.out.println("Cerrada?"+cerrada);
+        String s="Acta del examen "+super.getExamen()+ "\n";
+        for (InscripcionAExamen habilitado : super.getHabilitados()) {
+           s=s+habilitado+"\n" ;
+       }
      if (cerrada){
-         JOptionPane.showMessageDialog(null,super.toString());
+         ImpresionListado.Imprimir(s);
      }
     }
 }

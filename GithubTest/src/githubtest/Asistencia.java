@@ -4,37 +4,66 @@ package githubtest;
 import java.util.List;
 import java.util.Objects;
 
-
- public class Asistencia {
+/**
+ *
+ * @author Alumno
+ */
+public class Asistencia {
     private Alumno alumno;
     private boolean asistio;
-
+/**
+ * @param alumno
+ * @param asistio 
+ */
     public Asistencia(Alumno alumno, boolean asistio) {
         this.alumno = alumno;
         this.asistio = asistio;
     }
 
+ /**
+  * 
+  * @return Si el alumno asistió a clase
+  */
     public boolean isAsistio() {
         return asistio;
     }
  
-
+    /**
+     *
+     * @return Un alumno
+     */
     public Alumno getAlumno() {
         return alumno;
     }
 
+    /**
+     *
+     * @param alumno
+     */
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
 
+    /**
+     *
+     * @return Si el alumno asistió a clase
+     */
     public boolean getAsistio() {
         return asistio;
     }
 
+    /**
+     *
+     * @param asistio
+     */
     public void setAsistio(boolean asistio) {
         this.asistio = asistio;
     }
 
+    /**
+     *
+     * @return El hashCode
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -43,6 +72,11 @@ import java.util.Objects;
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return La igualdad entre este objeto y otro del mismo tipo
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -64,6 +98,10 @@ import java.util.Objects;
         return true;
     }
 
+    /**
+     *
+     * @return Una cadena de caracteres con la identidad del objeto
+     */
     @Override
     public String toString() {
         return "Asistencia{" + "alumno=" + alumno + ", asistio=" + asistio + '}';

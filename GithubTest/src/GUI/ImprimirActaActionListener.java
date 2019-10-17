@@ -59,13 +59,10 @@ public class ImprimirActaActionListener implements ActionListener {
                             f=true;
                             if (examene instanceof Final) {
                                 s=true;
-//                                if (HOURS.between(examene.getFecha(), LocalDate.now()) > 2) {
                                     ActaFinal actaFinal = (ActaFinal) examene.getActa();
                                     actaFinal.cerrarActa();
                                     actaFinal.imprimirActa();
-//                                } else {
-//                                    JOptionPane.showMessageDialog(null, "El examen todavia no concluyo");
-//                                }
+
                             }
                         }
                     }
@@ -90,17 +87,25 @@ public class ImprimirActaActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0) {
          Frame frame=new Frame("Imprimir Acta");
-       frame.setVisible(true);
-       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setBounds(300, 250, 600, 400);
         Container container=frame.getContentPane();
-        container.setLayout(new FlowLayout());
+        container.setLayout(null);
         codigoAsig=new JTextField("Codigo de Asignatura",20);
-        ingresar = new JButton("ingresar");
-        ingresoAño=new JTextField("año",5);
-        ingresoMes=new JTextField("mes",3);
-        ingresoDia=new JTextField("dia",3);
+        codigoAsig.setBounds(100, 100, 150, 25);
+        ingresar = new JButton("Ingresar");
+        ingresar.setBounds(190, 160, 150, 30);
+        ingresoAño=new JTextField("Año",5);
+        ingresoAño.setBounds(270, 100, 50, 25);
+        ingresoMes=new JTextField("Mes",3);
+        ingresoMes.setBounds(340, 100, 40, 25);
+        ingresoDia=new JTextField("Dia",3);
+        ingresoDia.setBounds(400, 100, 40, 25);
         slash=new JLabel("/");
+        slash.setBounds(325, 98, 15, 25);
         slash2=new JLabel("/");
+        slash2.setBounds(385, 98, 15, 25);
         ingresar.addActionListener(new ImprimirActa ());
         container.add(codigoAsig);
         container.add(ingresoAño);

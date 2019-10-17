@@ -36,6 +36,7 @@ public class IngresarDocente implements ActionListener {
             frame = new Frame("IngresoDeDocente");
             frame.setVisible(true);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setBounds(150, 100, 1200, 700);
             Container container=frame.getContentPane();
             container.setLayout(new FlowLayout());
             this.ingresar=new JButton("INGRESAR");

@@ -21,10 +21,19 @@ public class RegistroDeCarreras {
 
     private ArrayList<Carrera> carreras;
 
+    /**
+     * Crea una lista con las carreras que posee la facultad
+     */
     public RegistroDeCarreras() {
         this.carreras = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param nombreCarrera
+     * @param fechaParaPeriodo
+     * @return La cantidad de alumnos de la carrera pasada por parametro
+     */
     public int getAlumnosPorCarrera(JTextField nombreCarrera, LocalDate fechaParaPeriodo){
         System.out.println(nombreCarrera.getText());
         System.out.println(fechaParaPeriodo);
@@ -60,19 +69,12 @@ public class RegistroDeCarreras {
         int y = e.size();
         return y;
     }
-    
-//Version del metodo que no considera fecha, lo que puede ser Correcto puesto que la inscripcion de un alumno en una carrera no es tiene fecha
-    
-//    public int getAlumnosPorCarrera(String nombreCarrera, LocalDate fechaParaPeriodo){
-//        Set<Alumno> e = new HashSet();
-//        for (Carrera carrera : carreras) {
-//            if(carrera.getNombre().equals(nombreCarrera)){
-//                e.addAll(carrera.getAlumnos());
-//            }
-//        }
-//        int y = e.size();
-//        return y;
-//    }
+
+    /**
+     *
+     * @param DNI
+     * @return Las carreras que se encuentra cursando el alumno con el DNI pasado por parametro
+     */
 
     public Set<Carrera> getCarreraPorDNI(String DNI) {
         Set<Carrera> carrerasPorDNI = new HashSet<>();
@@ -87,6 +89,12 @@ public class RegistroDeCarreras {
         return carrerasPorDNI;
     }
 
+    /**
+     *
+     * @param DNI
+     * @param date
+     * @return Las asignaturas que se encuentra cursando el alumno con el DNI pasado por parametro
+     */
     public Set<Asignatura> getAsigPorDNI(String DNI, LocalDate date) {
         Set<Asignatura> asignaturas = new HashSet<>();
                     ArrayList<Asignatura> b = getAsignaturasPorFechaPlanDeEstudio(date);
@@ -124,6 +132,13 @@ public class RegistroDeCarreras {
         return asignaturas;
     }
  
+    /**
+     *
+     * @param nom
+     * @param cod
+     * @param date
+     * @return Los docentes que pertenecen a la asignatura pasada por parametro
+     */
     public Set<Docente> getDocentesAsignatura(String nom, String cod, LocalDate date) {
         Set<Docente> docentes = new HashSet<>();
                     ArrayList<Asignatura> asignaturas = getAsignaturasPorFechaPlanDeEstudio(date);
@@ -157,6 +172,12 @@ public class RegistroDeCarreras {
                         }
         return docentes;
     }
+
+    /**
+     *
+     * @param fecha
+     * @return Las asignaturas correspondientes a la fecha del plan de estudio pasado por parametro
+     */
     public ArrayList<Asignatura>  getAsignaturasPorFechaPlanDeEstudio(LocalDate fecha) {
         ArrayList<Asignatura>asigPorFecha=new ArrayList<>();    
         for (Carrera carrera1 : carreras) {
@@ -170,40 +191,26 @@ public class RegistroDeCarreras {
         }
         return asigPorFecha;
     }
-
-    public List<Alumno> HabilitadosParcial(Asignatura asignatura, PeriodoLectivoEnum periodo, boolean isPrimeroTrueSegundoFalse) {
-        //Una asignatura de por si pertenece a una carrera y plan de estudio,y se desarrolla en un año determinado
-        ArrayList<Examen> examenes = (ArrayList) asignatura.getExamenes();
-        for (Examen examene : examenes) {
-            if (examene.getPeriodo().equals(periodo)){
-            if (((Parcial)examene).isPrimeroTrueSegundoFalse()==isPrimeroTrueSegundoFalse){
-                return examene.getActa().getHabilitados();
-            }
-            }
-        }
-        return null;
-    }
-    public List<Alumno> HabilitadosFinal(Asignatura asignatura,LocalDate fecha) {
-        //Una asignatura de por si pertenece a una carrera y plan de estudio
-        ArrayList<Examen>examenes= (ArrayList)asignatura.getExamenes();
-        for (Examen examene : examenes) {
-        if (examene instanceof Final){
-            if (examene.getFecha().equals(fecha)){
-                return examene.getActa().getHabilitados();
-            }
-        }
-       
-    }
-         return null;
-    }
+    /**
+     *
+     * @return Las carreras
+     */
     public  ArrayList<Carrera> getCarreras() {
         return carreras;
     }
 
+    /**
+     *
+     * @param carreras
+     */
     public void setCarreras(ArrayList<Carrera> carreras) {
         this.carreras = carreras;
     }   
 
+    /**
+     *
+     * @return hashCode
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -211,6 +218,11 @@ public class RegistroDeCarreras {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return La igualdad entre este objeto y otro del mismo tipo
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -229,11 +241,20 @@ public class RegistroDeCarreras {
         return true;
     }
 
+    /**
+     *
+     * @return Una cadera de caracteres con las caracteristicas del registro de carreras
+     */
     @Override
     public String toString() {
         return "RegistroDeCarreras{" + "carreras=" + carreras + '}';
     }
 
+    /**
+     *
+     * @param s
+     * @return Los docnetes por legajo
+     */
     public Docente getDocentesPorLegajo(JTextField s) {
         for (Carrera carrera : carreras) {
             Set<Docente>docentes = carrera.getDocentes();  

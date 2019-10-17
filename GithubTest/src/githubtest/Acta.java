@@ -17,38 +17,72 @@ public abstract class Acta {
     private List<InscripcionAExamen> inscripciones;
     private Examen examen;
 
+    /**
+     *
+     * @param examen
+     */
     public Acta(Examen examen) {
         this.examen = examen;
         this.inscripciones=new ArrayList<>();  
     }
+
+    /**
+     *
+     */
     public abstract void imprimirActa();
 
-    public List<Alumno> getHabilitados() {
-        ArrayList<Alumno> habilitados = new ArrayList<>();
+    /**
+     *
+     * @return Lista de habilitados a examen
+
+     */
+    public List<InscripcionAExamen> getHabilitados() {
+        ArrayList<InscripcionAExamen> habilitados = new ArrayList<>();
         for (InscripcionAExamen inscripcion : inscripciones) {
             if (inscripcion.isHabilitado()) {
-                habilitados.add(inscripcion.getAlumno());
+                habilitados.add(inscripcion);
             }
         }
         return habilitados;
     }
 
+    /**
+     *
+
+     * @return Lista de inscriptos al examen
+     */
     public List<InscripcionAExamen> getInscripciones() {
         return inscripciones;
     }
 
+    /**
+     *
+     * @param inscripciones
+     */
     public void setInscripciones(List<InscripcionAExamen> inscripciones) {
         this.inscripciones = inscripciones;
     }
 
+    /**
+     *
+     * @return Examen al que corresponde el acta
+     */
     public Examen getExamen() {
         return examen;
     }
 
+    /**
+     *
+     * @param examen
+     */
     public void setExamen(Examen examen) {
         this.examen = examen;
     }
 
+    /**
+     *
+     * @return Acta en forma de cadena de caracteres
+     */
     @Override
     public String toString() {
         String s = "Examen de" + examen.getAsignatura() + "realizado el dia" + examen.getFecha() + "\n";
@@ -59,6 +93,10 @@ public abstract class Acta {
 
     }
 
+    /**
+     *
+     * @return Hashcode
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -67,6 +105,11 @@ public abstract class Acta {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return Booleano sobre la igualdad del objeto acta
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

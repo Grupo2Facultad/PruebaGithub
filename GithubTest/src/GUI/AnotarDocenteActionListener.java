@@ -52,7 +52,7 @@ public class AnotarDocenteActionListener implements ActionListener {
                 ArrayList<Asignatura> asignaturas = Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(fecha);
                 Docente docente=Main.getRegistroDeCarreras().getDocentesPorLegajo(numeroLegajo);
                 if(docente==null){
-                    throw new DocenteException("ese docente no existe");
+                    throw new DocenteException("El docente no existe");
                 }
                 boolean v=false;
                 for (Asignatura asignatura : asignaturas) {
@@ -63,7 +63,7 @@ public class AnotarDocenteActionListener implements ActionListener {
                             if (examene.getFecha().equals(fecha)) {
                                 check(examene,rol);
                                 examene.getDocenteExamen().add(new DocenteExamen(rol,docente));
-                                JOptionPane.showMessageDialog(null,"operacion exitosa");
+                                JOptionPane.showMessageDialog(null,"Operacion exitosa");
                              }
                         }
                     }
@@ -80,10 +80,10 @@ public class AnotarDocenteActionListener implements ActionListener {
             ArrayList<DocenteExamen> docentes = (ArrayList) exa.getDocenteExamen();
             for (DocenteExamen docente : docentes) {
                 if (docente.getDocente().getNumeroLegajo().equals(numeroLegajo.getText())) {
-                    throw new DocenteException("ese docente ya esta en el examen");
+                    throw new DocenteException("El docente ya se encuentra en el examen");
                 }
                 if (rol.equals(docente.getRol())) {
-                    throw new DocenteException("ya existe ese puesto");
+                    throw new DocenteException("Ya existe ese puesto");
                 }
             }
         }
@@ -102,15 +102,22 @@ public class AnotarDocenteActionListener implements ActionListener {
         Frame frame = new Frame("Anotar Docente En Examen");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setBounds(250, 250, 750, 450);
         Container container = frame.getContentPane();
-        container.setLayout(new FlowLayout());
-        ingresar = new JButton("ingresar");
+        container.setLayout(null);
+        ingresar = new JButton("Ingresar");
+        ingresar.setBounds(600, 147, 100, 30);
         ingresar.addActionListener(new Ingresar());
-        numeroLegajo = new JTextField("numero de legajo", 20);
+        numeroLegajo = new JTextField("Numero de legajo", 20);
+        numeroLegajo.setBounds(50, 150, 120, 25);
         asignaturaCod = new JTextField("Codigo Asignatura", 15);
-        ingresoAño = new JTextField("año", 5);
-        ingresoMes = new JTextField("mes", 3);
-        ingresoDia = new JTextField("dia", 3);
+        asignaturaCod.setBounds(185, 150, 120, 25);
+        ingresoAño = new JTextField("Año", 5);
+        ingresoAño.setBounds(320, 150, 40, 25);
+        ingresoMes = new JTextField("Mes", 3);
+        ingresoMes.setBounds(375, 150, 40, 25);
+        ingresoDia = new JTextField("Dia", 3);
+        ingresoDia.setBounds(430, 150, 40, 25);
         slash = new JLabel("/");
         slash2 = new JLabel("/");
         box = new JComboBox();
@@ -118,6 +125,7 @@ public class AnotarDocenteActionListener implements ActionListener {
         box.addItem(RolExamenEnum.VVOCAL1);
         box.addItem(RolExamenEnum.VOCAL2);
         box.addItem(RolExamenEnum.SUPLENTE);
+        box.setBounds(485, 147, 100, 30);
         container.add(numeroLegajo);
         container.add(asignaturaCod);
         container.add(ingresoAño);
