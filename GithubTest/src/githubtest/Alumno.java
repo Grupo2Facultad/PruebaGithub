@@ -19,7 +19,6 @@ private String domicilio,
         provincia,
         paisDeResidencia,
         correoElectronico;
-//No necesitan ser LocalDate, no se utilizan para ningun metodo
 private String fechaNacimiento,
         fechaInscripcion;
 private String  numeroMatricula;
@@ -68,13 +67,12 @@ private String  numeroMatricula;
     }
 
     /**
-     *
+     * Genera notas de los trabajos practicos y las asistencias en la clase Cursada, inscribe alumnos en la modalidad regular a las asignaturas 
      * @param Cod
      * @param registro
      * @return Booleano sobre si existe la materia en la que se desea inscribir al alumno
      * @throws NoInscritoException (Una excepcion en el caso de que el alumno no se encuentre cursando la carrera a la que pertenece la materia)
-     * Genera notas de los trabajos practicos y las asistencias en la clase Cursada, inscribe alumnos en la modalidad regular a las asignaturas 
-     * Busca las asignaturas segun la fecha en la que se encuentra realizando la inscripcion para no realizar la busqueda dentro de todos los planes de estudio
+    
      */
     public boolean InscribirseAAsignaturaComoRegular(String Cod, RegistroDeCarreras registro)throws NoInscritoException{
         Random r = new Random();
@@ -125,13 +123,11 @@ private String  numeroMatricula;
     }
 
     /**
-     *
+     *Inscribe alumnos en modalidad libre a las asignaturas 
      * @param Cod
      * @param registro
      * @return Booleano sobre si existe la materia en la que se desea inscribir al alumno
      * @throws NoInscritoException (Una excepcion en el caso de que el alumno no se encuentre cursando la carrera a la que pertenece la materia)
-     * Inscribe alumnos en modalidad libre a las asignaturas 
-     * Busca las asignaturas segun la fecha en la que se encuentra realizando la inscripcion para no realizar la busqueda dentro de todos los planes de estudio
      */
     public boolean InscribirseAAsignaturaComoLibre(String Cod, RegistroDeCarreras registro) throws NoInscritoException{
         boolean e = false;
@@ -163,12 +159,12 @@ private String  numeroMatricula;
     }
 
     /**
-     * 
+     * Da de baja a un alumno de un examen
      * @param fecha
      * @param asignaturaCod
      * @throws NoSeInscribioException
      * @return Booleano que indica si la o peracion dar de baja a un alumno de un examen fue exitosa
-     * Da de baja a un alumno de un examen
+     * 
      */
     public boolean DarseDeBaja(LocalDate fecha,String asignaturaCod)throws NoSeInscribioException {
        Asignatura asig=null;

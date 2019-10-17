@@ -17,10 +17,8 @@ import githubtest.PeriodoLectivoConAño;
 import githubtest.PeriodoLectivoEnum;
 import githubtest.PlanDeEstudio;
 import githubtest.RegistroDeCarreras;
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.*;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -36,6 +34,7 @@ public class Main {
     private static Asignatura POO;
     private static Carrera LicenciaturaEnSistemas;
     private static Parcial parcial;
+    private static Parcial parcialRecuperatorio;
     private static Final eFinal;
     private static JButton bedelia;
     private static JButton alumnado;
@@ -78,13 +77,16 @@ public class Main {
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.segundoCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
         Asignatura AC= new Asignatura("AC","100","Arquitectura De Computadoras",DosMilQuince,LicenciaturaEnSistemas,
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.segundoCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
-        parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.primerCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,1),18);
+        parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,1),18);
+        parcialRecuperatorio=new Parcial(true,true,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,3),18);
         eFinal=new Final(true,true,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
         POO.getExamenes().add(parcial);
         POO.getExamenes().add(eFinal);
         ActaParcial acta=new ActaParcial(parcial);
+        ActaParcial actaRecuperatorio=new ActaParcial(parcialRecuperatorio);
         ActaFinal actaFinal=new ActaFinal(eFinal);
         parcial.setActa(acta);
+        parcialRecuperatorio.setActa(actaRecuperatorio);
         eFinal.setActa(actaFinal);
         DosMilQuince.getAsignaturas().add(POO);
         DosMilQuince.getAsignaturas().add(ED);
