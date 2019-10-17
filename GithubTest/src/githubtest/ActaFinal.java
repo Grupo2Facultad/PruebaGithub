@@ -5,6 +5,7 @@
  */
 package githubtest;
 
+import GUI.ImpresionListado;
 import GUI.Main;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +44,10 @@ public class ActaFinal extends Acta{
     }
   
     /**
-     *Cierra el Acta
+     *Intenta cerrar el Acta
      */
     public void cerrarActa() {
-        boolean existen=existenDocentes();
+        boolean existen=existenDocentesYNotas();
         System.out.println("Existen?"+existen);
         if(existen){
             cerrada=true;
@@ -58,9 +59,9 @@ public class ActaFinal extends Acta{
        
     }
     /**
-  *    Retorna un booleano sobre la existencia de los docentes que se declararon en el acta y chequea que se hayan instanciado todas las notas 
+  *    Retorna un booleano sobre la existencia de los docentes que se declararon en el acta y chequea que se hayan puesto todas las notas 
 */
-   private  boolean existenDocentes() {
+   private  boolean existenDocentesYNotas() {
         boolean existen=true;
         Final fin=(Final)super.getExamen();
         ArrayList<DocenteExamen>docentes=(ArrayList)fin.getDocenteExamen(); 
@@ -98,9 +99,12 @@ public class ActaFinal extends Acta{
     */ 
    @Override
     public void imprimirActa() {
-     System.out.println("Cerrada?"+cerrada);
+        String s="Acta del examen "+super.getExamen()+ "\n";
+        for (InscripcionAExamen habilitado : super.getHabilitados()) {
+           s=s+habilitado+"\n" ;
+       }
      if (cerrada){
-         JOptionPane.showMessageDialog(null,super.toString());
+         ImpresionListado.Imprimir(s);
      }
     }
 }

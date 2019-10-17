@@ -39,7 +39,6 @@ public class Asignatura {
      * @param cantidadParciales
      * @param equipo
      * @param bitacora
-     * Constructor totalmente parametrizado de la clase asignatura
      */
     public Asignatura(String  codigo, String cargaHoraria, String nombre, PlanDeEstudio planDeEstudio, Carrera carrera,
             int añoDeCarreraAlQuePertenece, PeriodoLectivoConAño periodoLectivo, boolean promocional,
