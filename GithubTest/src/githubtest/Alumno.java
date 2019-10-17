@@ -222,6 +222,12 @@ private String  numeroMatricula;
         }
         else{
            if(exa.getFecha().isAfter(LocalDate.now())){
+               for (InscripcionAExamen inscripcione : exa.getActa().getInscripciones()) {
+                   if(inscripcione.getAlumno().equals(this)){
+                       JOptionPane.showMessageDialog(null, "Ese alumno ya se encuentra inscripto a ese Examen");
+                       return false;
+                   }
+               }
             System.out.println(exa);
             Acta acta=exa.getActa();
             acta.getInscripciones().add(new InscripcionAExamen(this,exa));

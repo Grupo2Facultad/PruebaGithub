@@ -69,7 +69,7 @@ public class InscripcionAExamen {
             } else {
                 habilitado = false;
             }
-            if (((Final) examen).isPuedenLibres() && notaObtenida == null) {
+            if (((Final) examen).isPuedenLibres() && notaObtenida == null&&!habilitado) {
                 JOptionPane.showMessageDialog(null, "Libre");
                 habilitado = true;
             }
@@ -88,23 +88,69 @@ public class InscripcionAExamen {
         double notaPrimero = 0,
                 notaSegundo = 0;
         double notaCurso;
+        boolean paso1=false;
+        boolean paso2=false;
         List<Examen> examenes = getElRestoDeExamenes();
         for (Examen examene : examenes) {
             if (examene instanceof Parcial) {
-                if (!((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                if (!((Parcial) examene).isPrimeroTrueSegundoFalse()&&((Parcial) examene).isRecuperatorio()) {
                     this.tiene2Parciales = true;
                     ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
                     for (InscripcionAExamen inscripcione : inscripciones) {
                         if (this.alumno.equals(inscripcione.alumno)) {
-                            notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
+                            paso2=true;
+                            try {
+                                notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
+                            } catch (NullPointerException e) {
+                                JOptionPane.showMessageDialog(null, "Ese alumno todavia no tiene la nota del recuperatorio del segundo parcial");
+                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
                         }
                     }
                 }
-                if (((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                if (!((Parcial) examene).isPrimeroTrueSegundoFalse()&&!paso2) {
+                    this.tiene2Parciales = true;
                     ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
                     for (InscripcionAExamen inscripcione : inscripciones) {
                         if (this.alumno.equals(inscripcione.alumno)) {
+                            paso2=true;
+                            try {
+                                notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
+                            } catch (NullPointerException e) {
+                                JOptionPane.showMessageDialog(null, "Ese alumno todavia no tiene la nota del segundo parcial");
+                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
+                        }
+                    }
+                }
+                if (((Parcial) examene).isPrimeroTrueSegundoFalse()&&((Parcial) examene).isRecuperatorio()) {
+                    ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
+                    for (InscripcionAExamen inscripcione : inscripciones) {
+                        if (this.alumno.equals(inscripcione.alumno)) {
+                            paso1=true;
+                            try{
                             notaPrimero = Double.parseDouble(inscripcione.notaObtenida);
+                            }
+                            catch(NullPointerException e){
+                                JOptionPane.showMessageDialog(null,"Ese alumno todavia no tiene la nota del recuperatorio del primer parcial");
+                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
+                            System.out.println("notaPrimero" + notaPrimero);
+                        }
+                    }
+                }
+                if (((Parcial) examene).isPrimeroTrueSegundoFalse()&&!paso1) {
+                    ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
+                    for (InscripcionAExamen inscripcione : inscripciones) {
+                        if (this.alumno.equals(inscripcione.alumno)) {
+                            paso1=true;
+                            try{
+                            notaPrimero = Double.parseDouble(inscripcione.notaObtenida);
+                            }
+                            catch(NullPointerException e){
+                                JOptionPane.showMessageDialog(null,"Ese alumno todavia no tiene la nota del primer parcial");
+                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
                             System.out.println("notaPrimero" + notaPrimero);
                         }
                     }
