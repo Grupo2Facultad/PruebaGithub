@@ -13,10 +13,10 @@ public class BitacoraFinal {
     private List<BitacoraDiaria> bitacorasDiarias; 
 
     /**
-     * Crea un listado que contiene las bitacoras diarias
+     * 
      */
     public BitacoraFinal() {
-        this.bitacorasDiarias = new ArrayList<>()  ;;
+        this.bitacorasDiarias = new ArrayList<>();
     }
 
     /**

@@ -9,7 +9,6 @@ import java.time.LocalDate;
  */
 public class Docente extends Persona {
    private String  numeroLegajo;
-   //No necesita ser LcoalDate, no se utiliza para nada
    private String  ingresoADocencia;
 
     /**

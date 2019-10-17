@@ -45,16 +45,24 @@ public class AsignaturasPorDni implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0) {
         Frame frame=new Frame("Asignaturas Cursadas Por El Alumno con Determinado DNI en una determinada Fecha");
+        frame.setBounds(300, 200, 600, 500);
         Container container=frame.getContentPane();
-        ingresar=new JButton("ingresar");
+        ingresar=new JButton("Ingresar");
         ingresar.addActionListener(new MostrarCantidadAlumnos ());
-        ingresoDNI=new JTextField("dni",20);
-        ingresoAño=new JTextField("año",5);
-        ingresoMes=new JTextField("mes",3);
-        ingresoDia=new JTextField("dia",3);
+        ingresar.setBounds(400, 198, 120, 30);
+        ingresoDNI=new JTextField("DNI",20);
+        ingresoDNI.setBounds(40,200, 125,25);
+        ingresoAño=new JTextField("Año",5);
+         ingresoAño.setBounds(185, 200,50 ,25);
+        ingresoMes=new JTextField("Mes",3);
+        ingresoMes.setBounds(255, 200,70, 25);
+        ingresoDia=new JTextField("Dia",3);
+        ingresoDia.setBounds(345,200,35,25);
         slash=new JLabel("/");
+        slash.setBounds(240, 198,15, 25);
         slash2=new JLabel("/");
-        container.setLayout(new FlowLayout());
+        slash2.setBounds(330,198,15,25);
+        container.setLayout(null);
         container.add(ingresoDNI);
         container.add(ingresoAño);
         container.add(slash);

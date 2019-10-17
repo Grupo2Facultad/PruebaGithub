@@ -14,7 +14,6 @@ public class Rol {
     private String cargo;
     private String fechaDeComienzo,
             fechaFinCargo;
-
     /**
      *
      * @param docente
@@ -78,35 +77,35 @@ public class Rol {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-
     /**
      *
      * @return La fecha de comienzo del cargo del docente en el Rol
      */
+
     public String getFechaDeComienzo() {
         return fechaDeComienzo;
     }
-
     /**
      *
      * @param fechaDeComienzo
      */
+
     public void setFechaDeComienzo(String fechaDeComienzo) {
         this.fechaDeComienzo = fechaDeComienzo;
     }
-
     /**
      *
      * @return La fecha de fin del cargo del docente en el Rol
      */
+
     public String getFechaFinCargo() {
         return fechaFinCargo;
     }
-
     /**
      *
      * @param fechaFinCargo
      */
+
     public void setFechaFinCargo(String fechaFinCargo) {
         this.fechaFinCargo = fechaFinCargo;
     }

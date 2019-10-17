@@ -54,6 +54,7 @@ class Ingresar implements ActionListener{
                     ArrayList<Examen> examenes=(ArrayList)asignatura.getExamenes();
                     for (Examen examene : examenes) {
                         if(examene.getFecha().equals(fecha)){
+                            ex=examene;
                             f=true;
                             if(tipo&& examene instanceof Parcial){
                             ex=examene;
@@ -108,15 +109,23 @@ class Ingresar implements ActionListener{
        Frame frame=new Frame("Habilitados al Examen");
        frame.setVisible(true);
        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       frame.setBounds(300, 200, 600, 500);
         Container container=frame.getContentPane();
-        container.setLayout(new FlowLayout());
+        container.setLayout(null);
         codigoAsig=new JTextField("Codigo de Asignatura",20);
-        ingresar = new JButton("ingresar");
-        ingresoAño=new JTextField("año",5);
-        ingresoMes=new JTextField("mes",3);
-        ingresoDia=new JTextField("dia",3);
+        codigoAsig.setBounds(50, 200, 130, 25);
+        ingresar = new JButton("Ingresar");
+        ingresar.setBounds(400, 198, 120, 30);
+        ingresoAño=new JTextField("Año",5);
+        ingresoAño.setBounds(200, 200, 50, 25);
+        ingresoMes=new JTextField("Mes",3);
+        ingresoMes.setBounds(270, 200,40, 25);
+        ingresoDia=new JTextField("Dia",3);
+        ingresoDia.setBounds(330,200,40,25);
         slash=new JLabel("/");
+        slash.setBounds(255, 198,15, 25);
         slash2=new JLabel("/");
+        slash2.setBounds(315, 198,15, 25);
         ingresar.addActionListener(new Ingresar());
         container.add(codigoAsig);
         container.add(ingresoAño);
