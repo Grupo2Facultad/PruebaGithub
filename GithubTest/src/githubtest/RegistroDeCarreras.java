@@ -191,7 +191,6 @@ public class RegistroDeCarreras {
         }
         return asigPorFecha;
     }
-
     /**
      *
      * @return Las carreras

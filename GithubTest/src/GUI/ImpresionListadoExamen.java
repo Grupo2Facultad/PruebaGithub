@@ -10,7 +10,9 @@ import githubtest.Examen;
 import githubtest.InscripcionAExamen;
 import githubtest.Parcial;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+
 import javax.swing.JTextField;
 
 /**
@@ -60,6 +63,7 @@ public class ImpresionListadoExamen{
             }
         }
         class Confirmar implements ActionListener{
+
 private final InscripcionAExamen alumno;
 private final JTextField nota;
 private final JRadioButton boton;
@@ -91,7 +95,11 @@ private final JRadioButton boton;
             Frame fra= new Frame("Impresion");
             fra.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             fra.setVisible(true);
-            fra.setSize(550,800);
+            Toolkit pantalla = Toolkit.getDefaultToolkit();
+            Dimension mip = pantalla.getScreenSize();
+            int h = mip.height;
+            int w = mip.width;
+            fra.setBounds(0, 0, w, h);
             Container con=fra.getContentPane();
             con.setLayout(new FlowLayout());
             con.add(texto);

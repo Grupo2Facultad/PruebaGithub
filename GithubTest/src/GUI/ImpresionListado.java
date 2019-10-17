@@ -6,7 +6,9 @@
 package GUI;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
@@ -23,7 +25,11 @@ public class ImpresionListado{
             Frame fra= new Frame("Imresion");
             fra.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             fra.setVisible(true);
-            fra.setSize(550,800);
+            Toolkit pantalla = Toolkit.getDefaultToolkit();
+            Dimension mip = pantalla.getScreenSize();
+            int h = mip.height;
+            int w = mip.width;
+            fra.setBounds(0, 0, w, h);
             Container con=fra.getContentPane();
             con.setLayout(new FlowLayout());
             con.add(texto);

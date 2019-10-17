@@ -74,7 +74,7 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
             }
             }
                 else {
-                    JOptionPane.showMessageDialog(null, "el alumno ya esta inscripto");
+                    JOptionPane.showMessageDialog(null, "El alumno ya esta inscripto");
                 }
 
             } catch (Alumno.NoInscritoException e) {
@@ -100,23 +100,22 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
         frame = new Frame("Insribirse a Asignatura");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setBounds(250, 250, 700, 400);
         Container container = frame.getContentPane();
-        container.setLayout(new BorderLayout());
+        container.setLayout(null);
         alumnoDNI = new JTextField("AlumnoDNI", 20);
+        alumnoDNI.setBounds(50, 150, 120, 25);
         asignaturaCod = new JTextField("Codigo", 6);
+        asignaturaCod.setBounds(190, 150, 120, 25);
         this.radioButton = new JRadioButton("Regular");
-        inscribirse = new JButton("ingresar");
+        radioButton.setBounds(330, 150, 120, 25);
+        inscribirse = new JButton("Ingresar");
+        inscribirse.setBounds(450, 148, 120, 30);
         inscribirse.addActionListener(new Ingresar());
-        Panel panel2 = new Panel();
-        panel2.setLayout(new FlowLayout());
-        panel2.add(alumnoDNI);
-        panel2.add(asignaturaCod);
-        panel2.add(radioButton);
-        panel2.add(inscribirse);
-        Panel panel=new Panel();
-        panel.setLayout(new FlowLayout());
-        container.add(panel2,BorderLayout.NORTH);
-        container.add(panel,BorderLayout.SOUTH);
+        container.add(alumnoDNI);
+        container.add(asignaturaCod);
+        container.add(radioButton);
+        container.add(inscribirse);
         }
     }
 
