@@ -4,7 +4,6 @@ import GUI.NoSeInscribioException;
 import GUI.Main;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -185,9 +184,9 @@ private String  numeroMatricula;
         }
         else{
            if(exa.getFecha().isAfter(LocalDate.now())){
-            System.out.println(exa);
             Acta acta=exa.getActa();
-            acta.getInscripciones().remove(new InscripcionAExamen(this,exa));
+            acta.getInscripciones().remove(new InscripcionAExamen(this,exa,false));
+            acta.getInscripciones().remove(new InscripcionAExamen(this,exa,true));
             return true;
            }
            else{
@@ -201,9 +200,10 @@ private String  numeroMatricula;
      * @param fecha
      * @param asignaturaCod
      * @return Booleano que indica si la operacion Inscribirse a examen fue exitosa
+     * @throws GUI.NoSeInscribioException
      * 
      */
-    public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod, boolean libre){
+    public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod, boolean libre)throws NoSeInscribioException{
         Asignatura asig=null;
         Examen exa=null;
         ArrayList<Asignatura> asignaturas=Main.getRegistroDeCarreras().getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
@@ -212,39 +212,37 @@ private String  numeroMatricula;
                   ArrayList<Examen> examenes=(ArrayList)asignatura.getExamenes();
                   for (Examen examen : examenes) {
                       if(examen.getFecha().equals(fecha)){
-                          exa=examen;
-                      }
-                  }
-              }
-        }
-        if(exa==null){
-            JOptionPane.showMessageDialog(null,"Ese Examen no existe");
-        }
-        else{
-           if(exa.getFecha().isAfter(LocalDate.now())){
-               for (InscripcionAExamen inscripcione : exa.getActa().getInscripciones()) {
-                   if(inscripcione.getAlumno().equals(this)){
-                       JOptionPane.showMessageDialog(null, "Ese alumno ya se encuentra inscripto a ese Examen");
-                       return false;
-                   }
-               }
-            System.out.println(exa);
-            Acta acta=exa.getActa();
-            if(exa instanceof Parcial){
-            acta.getInscripciones().add(new InscripcionAExamen(this,exa));
-            return true;
+                        exa = examen;
+                    }
+                }
             }
-            else{
-             acta.getInscripciones().add(new InscripcionAExamen(this,exa,libre));
-            return true; 
+        }
+        if (exa == null) {
+            JOptionPane.showMessageDialog(null, "Ese Examen no existe");
+        } else {
+            if (exa.getFecha().isAfter(LocalDate.now())) {
+                for (InscripcionAExamen inscripcione : exa.getActa().getInscripciones()) {
+                    if (inscripcione.getAlumno().equals(this)) {
+                        JOptionPane.showMessageDialog(null, "Ese alumno ya se encuentra inscripto a ese Examen");
+                        return false;
+                    }
+                }
+                System.out.println(exa);
+                Acta acta = exa.getActa();
+                    try {
+                        System.out.println("libre?"+libre);
+                        acta.getInscripciones().add(new InscripcionAExamen(this, exa, libre));
+                        return true;
+                    } catch (NoSeInscribioException e) {
+                        throw new NoSeInscribioException("no quedo habilitado");
+                    }
+            } else {
+                JOptionPane.showMessageDialog(null, "Examen Viejo,no puede inscribirse");
             }
-           }
-           else{
-               JOptionPane.showMessageDialog(null,"Examen Viejo,no puede inscribirse");
-           }
         }
         return false;
     }
+
     /**
      *
      * @return Domicilio

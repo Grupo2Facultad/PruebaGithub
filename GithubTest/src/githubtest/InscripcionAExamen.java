@@ -36,9 +36,10 @@ public class InscripcionAExamen {
     * 
     * @param alumno
     * @param examen
-    * @param libre 
+    * @param libre
+    * @throws NoSeInscribioException 
     */
-    public InscripcionAExamen(Alumno alumno, Examen examen,boolean libre) {
+    public InscripcionAExamen(Alumno alumno, Examen examen,boolean libre) throws NoSeInscribioException{
         this.libre=libre;
         this.alumno = alumno;
         this.fecha = LocalDate.now();
@@ -51,28 +52,10 @@ public class InscripcionAExamen {
         }
     }
     /**
-     * 
-     * @param alumno
-     * @param examen 
-     */
-    public InscripcionAExamen(Alumno alumno, Examen examen) {
-        this.alumno = alumno;
-        this.fecha = LocalDate.now();
-        this.examen = examen;
-        this.habilitado = false;
-        if (examen instanceof Parcial) {
-            verificarParcial();
-        } else {
-            verificarFinal();
-        }
-    }
-
-    /**
      * Habilita al alumno para rendir un examen final
      */
 
-    private void verificarFinal() {
-        System.out.println(DAYS.between(examen.getFecha(), LocalDate.now()));
+    private void verificarFinal()throws NoSeInscribioException{
         if (DAYS.between(examen.getFecha(), LocalDate.now()) <= -3) {
             if (!libre) {
                 boolean regular;
@@ -87,14 +70,18 @@ public class InscripcionAExamen {
                 } else {
                     habilitado = false;
                 }
+                System.out.println(habilitado);
             } else {
                 if (((Final) examen).isPuedenLibres() && !habilitado) {
                     JOptionPane.showMessageDialog(null, "Libre");
                     habilitado = true;
                 }
             }
-            if(habilitado=false){
+            System.out.println(habilitado+ "esto");
+            if(!habilitado){
+                System.out.println(("porque no legggaaa"));
                 JOptionPane.showMessageDialog(null,"No Habilitado");
+                throw new NoSeInscribioException("No quedo habilitado");
             }
         } else {
             JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
@@ -198,8 +185,10 @@ public class InscripcionAExamen {
 
     /**
      * Verifica si el alumno se encuentra habilitado para rendir un parcial
+     *
+     * @throws NoSeInscribioException
      */
-    private void verificarParcial() {
+    private void verificarParcial() throws NoSeInscribioException {
         BitacoraFinal bitacora;
         List<TrabajoPractico> trabajos;
         List<Examen> examenes = getElRestoDeExamenes();
@@ -228,6 +217,10 @@ public class InscripcionAExamen {
         verificarAsistencia(bitacora);
         verificarNotasPracticos(trabajos);
         habilitarParcial();
+        if(!habilitado){
+            JOptionPane.showMessageDialog(null,"No Esta Habilitado para rendir");
+            throw new NoSeInscribioException("No esta habiltiado");
+        }
     }
 
     /**

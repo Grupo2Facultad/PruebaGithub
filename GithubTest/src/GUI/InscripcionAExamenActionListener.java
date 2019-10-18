@@ -8,7 +8,6 @@ package GUI;
 import githubtest.Alumno;
 import githubtest.Carrera;
 import java.awt.Container;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -39,38 +38,44 @@ public class InscripcionAExamenActionListener implements ActionListener {
     private JRadioButton libre;
     private Frame frame;
 
-    class Inscribirse implements ActionListener{
+    class Inscribirse implements ActionListener {
+
         @Override
-        public void actionPerformed(ActionEvent arg0) {      
-            String DNI = alumnoDNI.getText();
-           int año=Integer.parseInt(ingresoAño.getText());
-          int mes=Integer.parseInt(ingresoMes.getText());
-          int dia=Integer.parseInt(ingresoDia.getText());
-            LocalDate fecha=LocalDate .of(año,mes,dia); 
-            ArrayList<Carrera> carreras = Main.registroDeCarreras.getCarreras();
-            boolean e = false;
-            for (Carrera carrera : carreras) {
-                Set<Alumno> alumnos = carrera.getAlumnos();
-                for (Alumno alumno : alumnos) {
-                    if (alumno.getDNI().equals(DNI)) {
-                        boolean noRegular=false;
-                        if(libre.getSelectedObjects()!=null){
-                            noRegular=true;
+        public void actionPerformed(ActionEvent arg0) {
+            try {
+                String DNI = alumnoDNI.getText();
+                int año = Integer.parseInt(ingresoAño.getText());
+                int mes = Integer.parseInt(ingresoMes.getText());
+                int dia = Integer.parseInt(ingresoDia.getText());
+                LocalDate fecha = LocalDate.of(año, mes, dia);
+                ArrayList<Carrera> carreras = Main.registroDeCarreras.getCarreras();
+                boolean e = false;
+                for (Carrera carrera : carreras) {
+                    Set<Alumno> alumnos = carrera.getAlumnos();
+                    for (Alumno alumno : alumnos) {
+                        if (alumno.getDNI().equals(DNI)) {
+                            boolean noRegular = false;
+                            if (libre.getSelectedObjects() != null) {
+                                noRegular = true;
+                            }
+                            if (alumno.InscibirseAExamen(fecha, asignaturaCod.getText(), noRegular)) {
+                                JOptionPane.showMessageDialog(null, "Operacion Exitosa");
+                                frame.setVisible(false);
+                            }
+                            e = true;
                         }
-                        if (alumno.InscibirseAExamen(fecha,asignaturaCod.getText(),noRegular)){
-                            JOptionPane.showMessageDialog(null, "Operacion Exitosa");
-                            frame.setVisible(false);
-                        }
-                        e = true;
+
                     }
-
                 }
-            }
 
-            if (!e) {
-                JOptionPane.showMessageDialog(null, "Ese Alumno no se encuentra en el Sistema");
+                if (!e) {
+                    JOptionPane.showMessageDialog(null, "Ese Alumno no se encuentra en el Sistema");
+                }
+            } catch (NoSeInscribioException e) {
+
             }
         }
+
     }
 
     

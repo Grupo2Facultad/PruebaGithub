@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -32,11 +33,20 @@ public class RegistroDeCarreras {
      *
      * @param nombreCarrera
      * @param fechaParaPeriodo
-     * @return La cantidad de alumnos de la carrera pasada por parametro
+     * @return La cantidad de alumnos de la carrera pasada por parametro que se encuentran cursando alguna asignatura en la fecha dada
+     * @throws java.lang.Exception
      */
-    public int getAlumnosPorCarrera(JTextField nombreCarrera, LocalDate fechaParaPeriodo){
-        System.out.println(nombreCarrera.getText());
-        System.out.println(fechaParaPeriodo);
+    public int getAlumnosPorCarrera(JTextField nombreCarrera, LocalDate fechaParaPeriodo)throws Exception{
+        boolean r=false;
+        for (Carrera carrera : carreras) {
+            if(carrera.getNombre().equals(nombreCarrera.getText())){
+               r=true;
+            }
+        }
+        if(!r){
+            JOptionPane.showMessageDialog(null,"Esa carrera no existe");
+            throw new Exception("Esa carrera no existe");
+        }
         Set<Alumno> e = new HashSet();
                     ArrayList<Asignatura> asignaturas = getAsignaturasPorFechaPlanDeEstudio(fechaParaPeriodo);
                     for (Asignatura asignatura : asignaturas){
