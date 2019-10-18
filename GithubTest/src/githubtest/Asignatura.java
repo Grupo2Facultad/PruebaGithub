@@ -288,47 +288,38 @@ public class Asignatura {
         this.cursantes = cursantes;
     }
 /**
- * Crea bitacoras diarias
+ * Crea bitacoras diarias con una cantidad de clases aproximada a la que corresponde segun el periodo en el que se desarrolla la asignatura
  */
     private void generarBitacora(){
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,1),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,2),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,3),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,4),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,5),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,6),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,7),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,8),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,9),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,10),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,11),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,12),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,13),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,14),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,17),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,18),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,19),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,20),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,21),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,24),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,25),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,27),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),3,30),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,12),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,13),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,14),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,15),"tema"));
-        this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),4,16),"tema"));
+        if(this.periodoLectivo.getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre)){
+            for (int i = 3; i < 6; i++) {
+                for (int j = 1; j < 30; j++) {
+                  this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),i,j),"tema"));
+                }
+            }
+        }
+        if(this.periodoLectivo.getPeriodoLectivo().equals(PeriodoLectivoEnum.segundoCuatrimestre)){
+            for (int i = 7; i < 10; i++) {
+                for (int j = 1; j < 30; j++) {
+                  this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),i,j),"tema"));
+                }
+            }
+        }
+        if(this.periodoLectivo.getPeriodoLectivo().equals(PeriodoLectivoEnum.Anual)){
+            for (int i = 3; i < 10; i++) {
+                for (int j = 1; j < 30; j++) {
+                  this.bitacora.getBitacorasDiarias().add(new BitacoraDiaria(LocalDate.of(this.periodoLectivo.getAño(),i,j),"tema"));
+                }
+            }
+        }
     }
     /**
      * Genera trabajos practicos 
      */
     private  void generarPracticos() {
-        getListadoTrabajosPracticos().add(new TrabajoPractico());
-        getListadoTrabajosPracticos().add(new TrabajoPractico());
-        getListadoTrabajosPracticos().add(new TrabajoPractico());
-        getListadoTrabajosPracticos().add(new TrabajoPractico());
-        getListadoTrabajosPracticos().add(new TrabajoPractico());
+        for (int i = 0; i <10; i++) {
+            getListadoTrabajosPracticos().add(new TrabajoPractico());
+        }
     }
 
     /**
