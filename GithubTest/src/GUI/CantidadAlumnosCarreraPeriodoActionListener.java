@@ -35,6 +35,7 @@ private JLabel slash,
 class MostrarCantidadAlumnos implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent arg0){
+            try{
           ingresoNombre.getText();
           int año=Integer.parseInt(ingresoAño.getText());
           int mes=Integer.parseInt(ingresoMes.getText());
@@ -43,6 +44,9 @@ class MostrarCantidadAlumnos implements ActionListener{
             System.out.println("cantidad"+cantidad);
           String cantidadEs="La cantidad de alumnos es "+cantidad;
           JOptionPane.showMessageDialog(null,cantidadEs);
+            }
+            catch(Exception e){
+            }
         }
 }
 

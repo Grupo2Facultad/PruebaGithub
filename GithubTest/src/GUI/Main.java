@@ -81,6 +81,7 @@ public class Main {
         parcialRecuperatorio=new Parcial(true,true,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,3),18);
         eFinal=new Final(true,true,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
         POO.getExamenes().add(parcial);
+        POO.getExamenes().add(parcialRecuperatorio);
         POO.getExamenes().add(eFinal);
         ActaParcial acta=new ActaParcial(parcial);
         ActaParcial actaRecuperatorio=new ActaParcial(parcialRecuperatorio);
