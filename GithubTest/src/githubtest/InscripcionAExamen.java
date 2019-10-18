@@ -28,15 +28,19 @@ public class InscripcionAExamen {
             asistencia;
     private String notaObtenida;
     private boolean tiene2Parciales;
-    private boolean asitioAlExamen;
+    private boolean asitioAlExamen,
+            libre;
+    
 
-    /**
-     *
-     * @param alumno
-     * @param examen
-     * @throws NoSeInscribioException
-     */
-    public InscripcionAExamen(Alumno alumno, Examen examen) throws NoSeInscribioException {
+   /**
+    * 
+    * @param alumno
+    * @param examen
+    * @param libre
+    * @throws NoSeInscribioException 
+    */
+    public InscripcionAExamen(Alumno alumno, Examen examen,boolean libre) throws NoSeInscribioException{
+        this.libre=libre;
         this.alumno = alumno;
         this.fecha = LocalDate.now();
         this.examen = examen;
@@ -47,33 +51,38 @@ public class InscripcionAExamen {
             verificarFinal();
         }
     }
-
     /**
      * Habilita al alumno para rendir un examen final
-     *
-     * @throws NoSeInscribioException
-     *
      */
 
-    private void verificarFinal() throws NoSeInscribioException {
-        if (DAYS.between(examen.getFecha(), LocalDate.now()) < 3) {
-            boolean regular;
-            if (getNotaCurso() >= 6) {
-                regular = true;
+    private void verificarFinal()throws NoSeInscribioException{
+        if (DAYS.between(examen.getFecha(), LocalDate.now()) <= -3) {
+            if (!libre) {
+                boolean regular;
+                if (getNotaCurso() >= 6) {
+                    regular = true;
+                } else {
+                    regular = false;
+                }
+                if (((Final) examen).isPuedenRegulares() && regular) {
+                    JOptionPane.showMessageDialog(null, "Regular");
+                    habilitado = true;
+                } else {
+                    habilitado = false;
+                }
+                System.out.println(habilitado);
             } else {
-                regular = false;
+                if (((Final) examen).isPuedenLibres() && !habilitado) {
+                    JOptionPane.showMessageDialog(null, "Libre");
+                    habilitado = true;
+                }
             }
-            if (((Final) examen).isPuedenRegulares() && regular) {
-                JOptionPane.showMessageDialog(null, "Regular");
-                habilitado = true;
-            } else {
-                habilitado = false;
+            System.out.println(habilitado+ "esto");
+            if(!habilitado){
+                System.out.println(("porque no legggaaa"));
+                JOptionPane.showMessageDialog(null,"No Habilitado");
+                throw new NoSeInscribioException("No quedo habilitado");
             }
-            if (((Final) examen).isPuedenLibres() && notaObtenida == null) {
-                JOptionPane.showMessageDialog(null, "Libre");
-                habilitado = true;
-            }
-
         } else {
             JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
         }
@@ -88,23 +97,69 @@ public class InscripcionAExamen {
         double notaPrimero = 0,
                 notaSegundo = 0;
         double notaCurso;
+        boolean paso1=false;
+        boolean paso2=false;
         List<Examen> examenes = getElRestoDeExamenes();
         for (Examen examene : examenes) {
             if (examene instanceof Parcial) {
-                if (!((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                if (!((Parcial) examene).isPrimeroTrueSegundoFalse()&&((Parcial) examene).isRecuperatorio()) {
                     this.tiene2Parciales = true;
                     ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
                     for (InscripcionAExamen inscripcione : inscripciones) {
                         if (this.alumno.equals(inscripcione.alumno)) {
-                            notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
+                            paso2=true;
+                            try {
+                                notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
+                            } catch (NullPointerException e) {
+                                JOptionPane.showMessageDialog(null, "Ese alumno todavia no tiene la nota del recuperatorio del segundo parcial");
+                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
                         }
                     }
                 }
-                if (((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                if (!((Parcial) examene).isPrimeroTrueSegundoFalse()&&!paso2) {
+                    this.tiene2Parciales = true;
                     ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
                     for (InscripcionAExamen inscripcione : inscripciones) {
                         if (this.alumno.equals(inscripcione.alumno)) {
+                            paso2=true;
+                            try {
+                                notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
+                            } catch (NullPointerException e) {
+                                JOptionPane.showMessageDialog(null, "Ese alumno todavia no tiene la nota del segundo parcial");
+                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
+                        }
+                    }
+                }
+                if (((Parcial) examene).isPrimeroTrueSegundoFalse()&&((Parcial) examene).isRecuperatorio()) {
+                    ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
+                    for (InscripcionAExamen inscripcione : inscripciones) {
+                        if (this.alumno.equals(inscripcione.alumno)) {
+                            paso1=true;
+                            try{
                             notaPrimero = Double.parseDouble(inscripcione.notaObtenida);
+                            }
+                            catch(NullPointerException e){
+                                JOptionPane.showMessageDialog(null,"Ese alumno todavia no tiene la nota del recuperatorio del primer parcial");
+                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
+                            System.out.println("notaPrimero" + notaPrimero);
+                        }
+                    }
+                }
+                if (((Parcial) examene).isPrimeroTrueSegundoFalse()&&!paso1) {
+                    ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
+                    for (InscripcionAExamen inscripcione : inscripciones) {
+                        if (this.alumno.equals(inscripcione.alumno)) {
+                            paso1=true;
+                            try{
+                            notaPrimero = Double.parseDouble(inscripcione.notaObtenida);
+                            }
+                            catch(NullPointerException e){
+                                JOptionPane.showMessageDialog(null,"Ese alumno todavia no tiene la nota del primer parcial");
+                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
                             System.out.println("notaPrimero" + notaPrimero);
                         }
                     }
@@ -130,8 +185,10 @@ public class InscripcionAExamen {
 
     /**
      * Verifica si el alumno se encuentra habilitado para rendir un parcial
+     *
+     * @throws NoSeInscribioException
      */
-    private void verificarParcial() {
+    private void verificarParcial() throws NoSeInscribioException {
         BitacoraFinal bitacora;
         List<TrabajoPractico> trabajos;
         List<Examen> examenes = getElRestoDeExamenes();
@@ -160,6 +217,10 @@ public class InscripcionAExamen {
         verificarAsistencia(bitacora);
         verificarNotasPracticos(trabajos);
         habilitarParcial();
+        if(!habilitado){
+            JOptionPane.showMessageDialog(null,"No Esta Habilitado para rendir");
+            throw new NoSeInscribioException("No esta habiltiado");
+        }
     }
 
     /**
