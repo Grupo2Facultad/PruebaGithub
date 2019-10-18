@@ -8,7 +8,6 @@ package GUI;
 import githubtest.Alumno;
 import githubtest.Carrera;
 import java.awt.Container;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -18,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
@@ -32,42 +32,50 @@ public class InscripcionAExamenActionListener implements ActionListener {
             ingresoMes,
             ingresoDia;
     private JLabel slash,
-            slash2;
+            slash2,
+            paraFinales;
     private JButton inscribirse;
+    private JRadioButton libre;
     private Frame frame;
 
-    class Inscribirse implements ActionListener{
+    class Inscribirse implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            String DNI = alumnoDNI.getText();
-           int año=Integer.parseInt(ingresoAño.getText());
-          int mes=Integer.parseInt(ingresoMes.getText());
-          int dia=Integer.parseInt(ingresoDia.getText());
-            LocalDate fecha=LocalDate .of(año,mes,dia); 
-            ArrayList<Carrera> carreras = Main.registroDeCarreras.getCarreras();
-            boolean e = false;
-            for (Carrera carrera : carreras) {
-                Set<Alumno> alumnos = carrera.getAlumnos();
-                for (Alumno alumno : alumnos) {
-                    if (alumno.getDNI().equals(DNI)) {
-                        try{
-                        if (alumno.InscibirseAExamen(fecha,asignaturaCod.getText())) {
-                            JOptionPane.showMessageDialog(null, "Operacion Exitosa");
-                            frame.setVisible(false);
+            try {
+                String DNI = alumnoDNI.getText();
+                int año = Integer.parseInt(ingresoAño.getText());
+                int mes = Integer.parseInt(ingresoMes.getText());
+                int dia = Integer.parseInt(ingresoDia.getText());
+                LocalDate fecha = LocalDate.of(año, mes, dia);
+                ArrayList<Carrera> carreras = Main.registroDeCarreras.getCarreras();
+                boolean e = false;
+                for (Carrera carrera : carreras) {
+                    Set<Alumno> alumnos = carrera.getAlumnos();
+                    for (Alumno alumno : alumnos) {
+                        if (alumno.getDNI().equals(DNI)) {
+                            boolean noRegular = false;
+                            if (libre.getSelectedObjects() != null) {
+                                noRegular = true;
+                            }
+                            if (alumno.InscibirseAExamen(fecha, asignaturaCod.getText(), noRegular)) {
+                                JOptionPane.showMessageDialog(null, "Operacion Exitosa");
+                                frame.setVisible(false);
+                            }
+                            e = true;
                         }
-                        }
-                        catch(NoSeInscribioException t){
-                        }
-                        e = true;
+
                     }
-
                 }
-            }
 
-            if (!e) {
-                JOptionPane.showMessageDialog(null, "Ese Alumno no se encuentra en el Sistema");
+                if (!e) {
+                    JOptionPane.showMessageDialog(null, "Ese Alumno no se encuentra en el Sistema");
+                }
+            } catch (NoSeInscribioException e) {
+
             }
         }
+
     }
 
     
@@ -93,6 +101,10 @@ public class InscripcionAExamenActionListener implements ActionListener {
         slash2.setBounds(515, 197, 15, 30);
         asignaturaCod = new JTextField("Codigo de Asignatura",20);
         asignaturaCod.setBounds(80,200, 170,25);
+        libre = new JRadioButton("libre");
+        libre.setBounds(170,260,170,25);
+        paraFinales = new JLabel("Para Finales: ");
+        paraFinales.setBounds(80, 260, 170, 25);
         inscribirse=new JButton("Ingresar");
         inscribirse.setBounds(600, 198, 140, 30);
         inscribirse.addActionListener(new Inscribirse());
@@ -103,6 +115,8 @@ public class InscripcionAExamenActionListener implements ActionListener {
         container.add(ingresoMes);
         container.add(slash2);
         container.add(ingresoDia);
+        container.add(libre);
+        container.add(paraFinales);
         container.add(inscribirse);
     }
     
