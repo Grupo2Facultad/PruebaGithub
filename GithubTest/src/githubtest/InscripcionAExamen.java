@@ -28,15 +28,34 @@ public class InscripcionAExamen {
             asistencia;
     private String notaObtenida;
     private boolean tiene2Parciales;
-    private boolean asitioAlExamen;
+    private boolean asitioAlExamen,
+            libre;
+    
 
+   /**
+    * 
+    * @param alumno
+    * @param examen
+    * @param libre 
+    */
+    public InscripcionAExamen(Alumno alumno, Examen examen,boolean libre) {
+        this.libre=libre;
+        this.alumno = alumno;
+        this.fecha = LocalDate.now();
+        this.examen = examen;
+        this.habilitado = false;
+        if (examen instanceof Parcial) {
+            verificarParcial();
+        } else {
+            verificarFinal();
+        }
+    }
     /**
-     *
+     * 
      * @param alumno
-     * @param examen
-     * @throws NoSeInscribioException
+     * @param examen 
      */
-    public InscripcionAExamen(Alumno alumno, Examen examen) throws NoSeInscribioException {
+    public InscripcionAExamen(Alumno alumno, Examen examen) {
         this.alumno = alumno;
         this.fecha = LocalDate.now();
         this.examen = examen;
@@ -50,30 +69,33 @@ public class InscripcionAExamen {
 
     /**
      * Habilita al alumno para rendir un examen final
-     *
-     * @throws NoSeInscribioException
-     *
      */
 
-    private void verificarFinal() throws NoSeInscribioException {
-        if (DAYS.between(examen.getFecha(), LocalDate.now()) < 3) {
-            boolean regular;
-            if (getNotaCurso() >= 6) {
-                regular = true;
+    private void verificarFinal() {
+        System.out.println(DAYS.between(examen.getFecha(), LocalDate.now()));
+        if (DAYS.between(examen.getFecha(), LocalDate.now()) <= -3) {
+            if (!libre) {
+                boolean regular;
+                if (getNotaCurso() >= 6) {
+                    regular = true;
+                } else {
+                    regular = false;
+                }
+                if (((Final) examen).isPuedenRegulares() && regular) {
+                    JOptionPane.showMessageDialog(null, "Regular");
+                    habilitado = true;
+                } else {
+                    habilitado = false;
+                }
             } else {
-                regular = false;
+                if (((Final) examen).isPuedenLibres() && !habilitado) {
+                    JOptionPane.showMessageDialog(null, "Libre");
+                    habilitado = true;
+                }
             }
-            if (((Final) examen).isPuedenRegulares() && regular) {
-                JOptionPane.showMessageDialog(null, "Regular");
-                habilitado = true;
-            } else {
-                habilitado = false;
+            if(habilitado=false){
+                JOptionPane.showMessageDialog(null,"No Habilitado");
             }
-            if (((Final) examen).isPuedenLibres() && notaObtenida == null&&!habilitado) {
-                JOptionPane.showMessageDialog(null, "Libre");
-                habilitado = true;
-            }
-
         } else {
             JOptionPane.showMessageDialog(null, "el periodo de Inscripcion ya finalizo");
         }

@@ -197,13 +197,13 @@ private String  numeroMatricula;
         return false;
     }
     /**
-     * 
+     * @param libre
      * @param fecha
      * @param asignaturaCod
      * @return Booleano que indica si la operacion Inscribirse a examen fue exitosa
-     * @throws NoSeInscribioException 
+     * 
      */
-    public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod) throws NoSeInscribioException{
+    public boolean InscibirseAExamen(LocalDate fecha,String asignaturaCod, boolean libre){
         Asignatura asig=null;
         Examen exa=null;
         ArrayList<Asignatura> asignaturas=Main.getRegistroDeCarreras().getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
@@ -230,8 +230,14 @@ private String  numeroMatricula;
                }
             System.out.println(exa);
             Acta acta=exa.getActa();
+            if(exa instanceof Parcial){
             acta.getInscripciones().add(new InscripcionAExamen(this,exa));
             return true;
+            }
+            else{
+             acta.getInscripciones().add(new InscripcionAExamen(this,exa,libre));
+            return true; 
+            }
            }
            else{
                JOptionPane.showMessageDialog(null,"Examen Viejo,no puede inscribirse");
