@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- *
+ *Cotiene un Docente con su cargo, dedicacion, etc
  * @author Alumno
  */
 public class Rol {

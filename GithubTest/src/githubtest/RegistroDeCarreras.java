@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- *
+ *Listado de Todas las Carreras y metodos de uso general para generacion de informes, etc, que se beneficien del acceso a dicho listado
  * @author juanc
  */
 public class RegistroDeCarreras {

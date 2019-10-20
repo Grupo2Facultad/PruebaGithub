@@ -14,7 +14,8 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *Clase que contitne un alumno y los datos de su incripcion a un examen,
+ * contiene mecanismos para verificar si el alumno esta habilitado para rendir dicho examen, ya sea Parcial o Final
  * @author juanc
  */
 public class InscripcionAExamen {
