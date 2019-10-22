@@ -144,22 +144,20 @@ public class RegistroDeCarreras {
  
     /**
      *
-     * @param nom
      * @param cod
      * @param date
      * @return Los docentes que pertenecen a la asignatura pasada por parametro
      */
-    public Set<Docente> getDocentesAsignatura(String nom, String cod, LocalDate date) {
+    public Set<Docente> getDocentesAsignatura(String cod, LocalDate date) {
         Set<Docente> docentes = new HashSet<>();
                     ArrayList<Asignatura> asignaturas = getAsignaturasPorFechaPlanDeEstudio(date);
                     for (Asignatura asignatura : asignaturas) {
-                        if (asignatura.equals(new Asignatura(cod, nom))) {
+                        if (asignatura.getCodigo().equals(cod)) {
                             if (asignatura.getPeriodoLectivo().getAño() == date.getYear()) {
                                 if (date.getMonthValue() <= 6) {
                                     if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre)) {
                                         ArrayList<Rol> profesores = (ArrayList) asignatura.getEquipo().getRoles();
                                         for (Rol docente :profesores) {
-                                            
                                             docentes.add(docente.getDocente());
                                         }
                                     }

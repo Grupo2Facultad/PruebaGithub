@@ -60,7 +60,6 @@ public class InscripcionAExamenActionListener implements ActionListener {
                             }
                             if (alumno.InscibirseAExamen(fecha, asignaturaCod.getText(), noRegular)) {
                                 JOptionPane.showMessageDialog(null, "Operacion Exitosa");
-                                frame.setVisible(false);
                             }
                             e = true;
                         }
