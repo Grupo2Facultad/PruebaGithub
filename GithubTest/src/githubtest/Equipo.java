@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ *Listado de Docentes con sus respectivos roles
  * @author Alumno
  */
 public class Equipo {

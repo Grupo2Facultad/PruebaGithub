@@ -4,7 +4,7 @@ package githubtest;
 import java.util.Objects;
 
 /**
- *
+ *Contiene un alumno y su nota en un trabajo practico
  * @author Alumno
  */
 public class TrabajoDeAlumno {

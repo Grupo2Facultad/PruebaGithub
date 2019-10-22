@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ *Listado de todas las btiacorias diarias de una asignatura
  * @author Alumno
  */
 public class BitacoraFinal {

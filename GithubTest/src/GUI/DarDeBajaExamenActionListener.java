@@ -55,6 +55,7 @@ private JTextField alumnoDNI,
                         }
                         }
                         catch(NoSeInscribioException t){
+                            
                         }
                         e = true;
                     }

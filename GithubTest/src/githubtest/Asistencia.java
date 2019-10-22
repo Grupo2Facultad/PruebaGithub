@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ *Una asistencia de un Alumno en una determinada clase
  * @author Alumno
  */
 public class Asistencia {
