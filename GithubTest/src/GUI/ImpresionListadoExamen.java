@@ -14,6 +14,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,6 +28,11 @@ import javax.swing.JTextField;
  * @author juanc
  */
 public class ImpresionListadoExamen{
+    protected final ArrayList<InscripcionAExamen>lista;
+
+    public ImpresionListadoExamen(ArrayList<InscripcionAExamen> lista) {
+        this.lista = lista;
+    }
     
     class PonerNotas implements ActionListener{
         private Examen ex;
@@ -43,15 +49,16 @@ public class ImpresionListadoExamen{
             for (InscripcionAExamen alumno : alumnos) {
                 if(alumno.getNotaObtenida()==null){
                     e=false;
-                    frame=new Frame("poner nota");
+                    frame = new Frame("poner nota");
                     frame.setVisible(true);
                     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     frame.setSize(800, 200);
                     JLabel label=new JLabel(alumno.getAlumno().toString());
                     JTextField nota= new JTextField("nota");
-                    JRadioButton boton=new JRadioButton("Asistio (Marcado si)");
+                    JRadioButton boton=new JRadioButton("Asistió");
+                    boton.setSelected(true);
                     JButton poner=new JButton("confirmar");
-                    poner.addActionListener(new Confirmar(alumno,nota,boton));
+                    poner.addActionListener(new Confirmar(alumno,nota,boton,frame));
                     Container con=frame.getContentPane();
                     con.setLayout(new FlowLayout());
                     con.add(label);
@@ -69,12 +76,15 @@ public class ImpresionListadoExamen{
 private final InscripcionAExamen alumno;
 private final JTextField nota;
 private final JRadioButton boton;
+private final Frame frame;
 
-            public Confirmar(InscripcionAExamen alumno, JTextField nota, JRadioButton boton) {
+            public Confirmar(InscripcionAExamen alumno, JTextField nota, JRadioButton boton,Frame frame) {
                 this.boton=boton;
                 this.alumno = alumno;
                 this.nota = nota;
+                this.frame=frame;
             }
+            
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 if(boton.getSelectedObjects()!=null){
@@ -88,9 +98,7 @@ private final JRadioButton boton;
             
         }
     }
-      public  void Imprimir(String alumnos,Examen ex){
-            JTextField texto= new JTextField(alumnos);
-            texto.setSize(750, 545);
+      public  void Imprimir(Examen ex){
             JButton ponerNotas=new JButton("Poner notas");
             ponerNotas.setSize(45,50);
             ponerNotas.addActionListener(new PonerNotas(ex));
@@ -103,8 +111,12 @@ private final JRadioButton boton;
             int w = mip.width;
             fra.setBounds(0, 0, w, h);
             Container con=fra.getContentPane();
-            con.setLayout(new FlowLayout());
-            con.add(texto);
+            con.setLayout(new BoxLayout(con,BoxLayout.Y_AXIS));
             con.add(ponerNotas);
+           if (!lista.isEmpty()) {
+              for (InscripcionAExamen habilitado : lista) {
+                  con.add(new JLabel(habilitado.getAlumno().toString()));
+              }
+           }
    }
 }

@@ -9,30 +9,34 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
  *
  * @author juanc
  */
-public class ImpresionListado{
+public class ImpresionListado {
 
-   public static void Imprimir(String alumnos){
-       System.out.println("llego aca");
-            JTextField texto= new JTextField(alumnos);
-             texto.setSize(750, 545);
-            Frame fra= new Frame("Imresion");
-            fra.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            fra.setVisible(true);
-            Toolkit pantalla = Toolkit.getDefaultToolkit();
-            Dimension mip = pantalla.getScreenSize();
-            int h = mip.height;
-            int w = mip.width;
-            fra.setBounds(0, 0, w, h);
-            Container con=fra.getContentPane();
-            con.setLayout(new FlowLayout());
-            con.add(texto);
+    public static void Imprimir(ArrayList<Object> array,String s) {
+        Dimension dimension = new Dimension(1000, 1000);
+        Frame fra = new Frame("Imresion");
+        fra.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        fra.setVisible(true);
+        Toolkit pantalla = Toolkit.getDefaultToolkit();
+        Dimension mip = pantalla.getScreenSize();
+        int h = mip.height;
+        int w = mip.width;
+        fra.setBounds(0, 0, w, h);
+        Container con = fra.getContentPane();
+        con.setLayout(new BoxLayout(con,BoxLayout.Y_AXIS));
+        con.add(new JLabel(s));
+        for (Object object : array) {
+            con.add(new JLabel(object.toString()));
+        }
    }
     
 }

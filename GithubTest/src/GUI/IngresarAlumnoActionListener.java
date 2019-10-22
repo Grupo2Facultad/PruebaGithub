@@ -16,6 +16,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -140,7 +141,7 @@ public class IngresarAlumnoActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            Set<Alumno> alumnos = carrera.getAlumnos();
+            HashSet<Alumno> alumnos = (HashSet)carrera.getAlumnos();
             for (Alumno alumno1 : alumnos) {
                 if (alumno1.getDNI().equals(alumno.getDNI())) {
                     carrera.getAlumnos().remove(alumno);
