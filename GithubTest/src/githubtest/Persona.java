@@ -3,7 +3,7 @@ package githubtest;
 import java.util.Objects;
 
 /**
- *
+ *Clase abstracta de una Persona
  * @author Alumno
  */
 public abstract class Persona {

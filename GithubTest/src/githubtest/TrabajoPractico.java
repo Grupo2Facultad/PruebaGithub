@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ *Contiene un listado con todos los alumnos y sus respectivas notas
  * @author Alumno
  */
 public class TrabajoPractico {

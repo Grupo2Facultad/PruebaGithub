@@ -8,7 +8,7 @@ package githubtest;
 import java.util.Objects;
 
 /**
- *
+ *Contiene un periodo Lectivo Enum (Anual, Primer Cuatrimestre o Segundo Cuatrimestere) y un año
  * @author juanc
  */
 public class PeriodoLectivoConAño {

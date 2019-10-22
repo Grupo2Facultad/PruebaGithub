@@ -8,7 +8,7 @@ package githubtest;
 import java.util.Objects;
 
 /**
- *
+ *Un docente y su rol en un Examen
  * @author juanc
  */
 public class DocenteExamen {

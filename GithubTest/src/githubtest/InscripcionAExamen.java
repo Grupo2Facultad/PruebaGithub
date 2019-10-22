@@ -14,7 +14,8 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *Clase que contitne un alumno y los datos de su incripcion a un examen,
+ * contiene mecanismos para verificar si el alumno esta habilitado para rendir dicho examen, ya sea Parcial o Final
  * @author juanc
  */
 public class InscripcionAExamen {
@@ -159,6 +160,9 @@ public class InscripcionAExamen {
                             catch(NullPointerException e){
                                 JOptionPane.showMessageDialog(null,"Ese alumno todavia no tiene la nota del primer parcial");
                                 throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
+                            catch(NumberFormatException e){
+                                  JOptionPane.showMessageDialog(null,"Ese alumno no saco una nota valida en el primer parcial, probablemente no asistio");
                             }
                             System.out.println("notaPrimero" + notaPrimero);
                         }
@@ -561,15 +565,16 @@ public class InscripcionAExamen {
         }
         return true;
     }
-
+    
     /**
      *
      * @return Una cadena de caracteres con caracteristicas de la inscripcion
      */
-    @Override
+      @Override
     public String toString() {
-        return "InscripcionAExamen{" + "alumno=" + alumno + ", fecha=" + fecha + ", examen=" + examen + ", habilitado=" + habilitado + ", notaObtenida=" + notaObtenida + ", asitioAlExamen=" + asitioAlExamen + '}';
+        return "InscripcionAExamen{" + "alumno=" + alumno + ", examen=" + examen + '}';
     }
+  
 
 
 }

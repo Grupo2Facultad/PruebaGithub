@@ -185,12 +185,16 @@ private String  numeroMatricula;
         else{
            if(exa.getFecha().isAfter(LocalDate.now())){
             Acta acta=exa.getActa();
-            acta.getInscripciones().remove(new InscripcionAExamen(this,exa,false));
-            acta.getInscripciones().remove(new InscripcionAExamen(this,exa,true));
-            return true;
+               for (InscripcionAExamen inscripcione : acta.getInscripciones()) {
+                   if(inscripcione.getAlumno().equals(this)){
+                       acta.getInscripciones().remove(inscripcione);
+                       return true;
+                   }
+               }
+                JOptionPane.showMessageDialog(null,"Ese alumno no se encuentra inscripto en ese examen");
            }
            else{
-               JOptionPane.showMessageDialog(null,"Examen Viejo,no puede inscribirse");
+               JOptionPane.showMessageDialog(null,"Examen Viejo,no puede Darse de Baja");
            }
         }
         return false;
@@ -230,7 +234,6 @@ private String  numeroMatricula;
                 System.out.println(exa);
                 Acta acta = exa.getActa();
                     try {
-                        System.out.println("libre?"+libre);
                         acta.getInscripciones().add(new InscripcionAExamen(this, exa, libre));
                         return true;
                     } catch (NoSeInscribioException e) {
