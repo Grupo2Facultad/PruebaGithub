@@ -100,11 +100,9 @@ public class ActaFinal extends Acta{
    @Override
     public void imprimirActa() {
         String s="Acta del examen "+super.getExamen()+ "\n";
-        for (InscripcionAExamen habilitado : super.getHabilitados()) {
-           s=s+habilitado+"\n" ;
-       }
+
      if (cerrada){
-         ImpresionListado.Imprimir(s);
+         ImpresionListado.Imprimir((ArrayList)super.getHabilitados(),s);
      }
     }
 }

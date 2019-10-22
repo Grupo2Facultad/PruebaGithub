@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,8 +39,8 @@ public class AsignaturasPorDni implements ActionListener{
           int mes=Integer.parseInt(ingresoMes.getText());
           int dia=Integer.parseInt(ingresoDia.getText());
            Set<Asignatura> asignaturas=Main.getRegistroDeCarreras().getAsigPorDNI(DNI, LocalDate.of(año,mes,dia));
-          String asignaturasDNI="Las asignaturas cursadas son"+asignaturas;
-          ImpresionListado.Imprimir(asignaturasDNI);
+          String asignaturasDNI="Las asignaturas cursadas son";
+          ImpresionListado.Imprimir((ArrayList)asignaturas,asignaturasDNI);
         }
 }
     @Override

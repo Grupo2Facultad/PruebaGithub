@@ -84,17 +84,12 @@ class Ingresar implements ActionListener{
                 JOptionPane.showMessageDialog(null,"esa Asignatura no tiene un examen en esa fecha");
                 return;
             } 
-            String alumnos="Alumnos:";
             if(!habilitados.isEmpty()){
-            for (InscripcionAExamen habilitado : habilitados) {            
-                
-                alumnos+=habilitado.getAlumno()+"\n";
-            }
-            ImpresionListadoExamen imp= new ImpresionListadoExamen();
-            imp.Imprimir(alumnos, ex);
+            ImpresionListadoExamen imp= new ImpresionListadoExamen(habilitados);
+            imp.Imprimir( ex);
             }
             else{
-                ImpresionListado.Imprimir("no hay nadie habilitado");
+                ImpresionListado.Imprimir(null,"no hay nadie habilitado");
             }
             
         }
