@@ -59,11 +59,8 @@ public class BuscarCodigoAsignaturaActionListener implements ActionListener {
 
         }
         String todas = "Asignaturas disponibles: ";
-        for (Asignatura coincidencia : coincidencias) {
-            todas +=coincidencia+ "\n";
-
-        }
-       ImpresionListado.Imprimir(todas);
+        System.out.println(todas);
+       ImpresionListado.Imprimir((ArrayList)coincidencias,todas);
        
     }
 

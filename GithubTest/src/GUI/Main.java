@@ -76,7 +76,7 @@ public class Main {
         Asignatura ED= new Asignatura("ED","100","Estructura De Datos",DosMilQuince,LicenciaturaEnSistemas,
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.segundoCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
         Asignatura AC= new Asignatura("AC","100","Arquitectura De Computadoras",DosMilQuince,LicenciaturaEnSistemas,
-                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.segundoCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
+                2,new PeriodoLectivoConAño(PeriodoLectivoEnum.primerCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
         parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,1),18);
         parcialRecuperatorio=new Parcial(true,true,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,3),18);
         eFinal=new Final(true,true,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
