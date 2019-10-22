@@ -5,10 +5,8 @@
  */
 package GUI;
 
-import githubtest.Alumno;
 import githubtest.Examen;
 import githubtest.InscripcionAExamen;
-import githubtest.Parcial;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -18,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
@@ -28,6 +27,7 @@ import javax.swing.JTextField;
  * @author juanc
  */
 public class ImpresionListadoExamen{
+    
     class PonerNotas implements ActionListener{
         private Examen ex;
         Frame frame;
@@ -46,13 +46,15 @@ public class ImpresionListadoExamen{
                     frame=new Frame("poner nota");
                     frame.setVisible(true);
                     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    frame.setSize(500, 200);
+                    frame.setSize(800, 200);
+                    JLabel label=new JLabel(alumno.getAlumno().toString());
                     JTextField nota= new JTextField("nota");
                     JRadioButton boton=new JRadioButton("Asistio (Marcado si)");
                     JButton poner=new JButton("confirmar");
                     poner.addActionListener(new Confirmar(alumno,nota,boton));
                     Container con=frame.getContentPane();
                     con.setLayout(new FlowLayout());
+                    con.add(label);
                     con.add(nota);
                     con.add(boton);
                     con.add(poner);

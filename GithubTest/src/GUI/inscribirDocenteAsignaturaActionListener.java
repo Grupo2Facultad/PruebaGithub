@@ -26,7 +26,7 @@ import javax.swing.JTextField;
  */
 public class inscribirDocenteAsignaturaActionListener implements ActionListener{
 private JButton inscribir;
-private JTextField matricula,
+private JTextField legajo,
                  codigoAsig,
         dedicacion,
         cargo,
@@ -42,30 +42,41 @@ private JTextField matricula,
         public void actionPerformed(ActionEvent ae) {
             ArrayList<Asignatura> asignaturas = Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
             for (Asignatura asignatura : asignaturas) {
-                boolean e=false;
+                boolean e = false;
                 if (asignatura.getCodigo().equals(codigoAsig.getText())) {
-                    e=true;
-                    seleccionadaA = asignatura;
-                    Set<Docente>profesores =asignatura.getCarrera().getDocentes();
-                    boolean t=false;
-                    for (Docente profesore : profesores) {
-                        t=true;
-                        boolean i=false;
-                       if(profesore.getNumeroLegajo().equals(matricula.getText())){
-                           i=true;
-                           asignatura.getEquipo().getRoles().add(new Rol(profesore,dedicacion.getText(),cargo.getText(),fechaIngreso.getText(),fechaFinal.getText()));
-                           JOptionPane.showMessageDialog(null,"Operacion Exitosa");
-                       } 
-                       if(!i){
-                           JOptionPane.showMessageDialog(null,"Ese Docente No Dicta En Esa Carrera");
-                       }
+                    boolean yaExiste = false;
+                    for (Rol rol : asignatura.getEquipo().getRoles()) {
+                        if (rol.getDocente().getNumeroLegajo().equals(legajo.getText())) {
+                            yaExiste = true;
+                        }
                     }
-                    if(t=false){
-                        JOptionPane.showMessageDialog(null,"Numero de Matricula Invalido");
+                    if (!yaExiste) {
+                        e = true;
+                        seleccionadaA = asignatura;
+                        Set<Docente> profesores = asignatura.getCarrera().getDocentes();
+                        boolean t = false;
+                        for (Docente profesore : profesores) {
+                            t = true;
+                            boolean i = false;
+                            if (profesore.getNumeroLegajo().equals(legajo.getText())) {
+                                i = true;
+                                asignatura.getEquipo().getRoles().add(new Rol(profesore, dedicacion.getText(), cargo.getText(), fechaIngreso.getText(), fechaFinal.getText()));
+                                JOptionPane.showMessageDialog(null, "Operacion Exitosa");
+                            }
+                            if (!i) {
+                                JOptionPane.showMessageDialog(null, "Ese Docente No Dicta En Esa Carrera");
+                            }
+                        }
+                        if (t = false) {
+                            JOptionPane.showMessageDialog(null, "Numero de Matricula Invalido");
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Ese Docente ya dicta en esa Asignatura");
                     }
                 }
-                if(e=false){
-                    JOptionPane.showMessageDialog(null,"Codigo Invalido");
+                if (e = false) {
+                    JOptionPane.showMessageDialog(null, "Codigo Invalido");
                 }
             }
         }
@@ -82,8 +93,8 @@ private JTextField matricula,
             this.inscribir=new JButton("Ingresar");
             inscribir.setBounds(270, 300, 120, 30);
             inscribir.addActionListener(new Inscribir());
-            matricula = new JTextField("Matricula",5);
-            matricula.setBounds(100, 100, 120, 25);
+            legajo = new JTextField("Matricula",5);
+            legajo.setBounds(100, 100, 120, 25);
             cargo= new JTextField("Cargo",20);
             cargo.setBounds(270, 100, 120, 25);
             dedicacion=new JTextField("Dedicacion", 20);
@@ -94,7 +105,7 @@ private JTextField matricula,
             fechaIngreso.setBounds(270, 200, 120, 25);
             fechaFinal = new JTextField("Fecha de Final",20);
             fechaFinal.setBounds(430, 200, 120, 25);
-            container.add(matricula);
+            container.add(legajo);
             container.add(codigoAsig);
             container.add(fechaIngreso);
             container.add(fechaFinal);

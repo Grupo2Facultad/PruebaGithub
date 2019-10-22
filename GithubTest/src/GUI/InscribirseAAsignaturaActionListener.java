@@ -47,7 +47,6 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
                         if (radioButton.getSelectedObjects() != null) {
                             if (alumno.InscribirseAAsignaturaComoRegular(asignaturaCod.getText(), Main.registroDeCarreras)) {
                                 JOptionPane.showMessageDialog(null, "Operacion Exitosa");
-                                frame.setVisible(false);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Codigo Invalido");
                             }

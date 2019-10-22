@@ -26,8 +26,7 @@ import javax.swing.JTextField;
 public class ProfesoresPorAsignaturaActionListener implements ActionListener {
 
     private Frame frame;
-    private JTextField asignaturaNom,
-            asignaturaCod,
+    private JTextField asignaturaCod,
             ingresoAño,
             ingresoMes,
             ingresoDia;
@@ -42,7 +41,7 @@ public class ProfesoresPorAsignaturaActionListener implements ActionListener {
           int año=Integer.parseInt(ingresoAño.getText());
           int mes=Integer.parseInt(ingresoMes.getText());
           int dia=Integer.parseInt(ingresoDia.getText());
-           Set<Docente> docentes= Main.getRegistroDeCarreras().getDocentesAsignatura(asignaturaNom.getText(),asignaturaCod.getText(),LocalDate.of(año,mes,dia));
+           Set<Docente> docentes= Main.getRegistroDeCarreras().getDocentesAsignatura(asignaturaCod.getText(),LocalDate.of(año,mes,dia));
            String docentesConFormato="";
             for (Docente docente : docentes) {
                docentesConFormato+="\n"+docente;
@@ -63,8 +62,6 @@ public class ProfesoresPorAsignaturaActionListener implements ActionListener {
         ingresar = new JButton("Ingresar");
         ingresar.addActionListener(new Ingresar ());
         ingresar.setBounds(530, 198, 125,30);
-        asignaturaNom = new JTextField("Asignatura", 20);
-        asignaturaNom.setBounds(80,200, 100,25);
         asignaturaCod = new JTextField("Codigo", 20);
         asignaturaCod.setBounds(200, 200,100 ,25);
         ingresoAño = new JTextField("Año", 5);
@@ -77,7 +74,6 @@ public class ProfesoresPorAsignaturaActionListener implements ActionListener {
         slash.setBounds(378, 197, 15, 30);
         slash2 = new JLabel("/");
         slash2.setBounds(448, 197, 15, 30);
-        container.add(asignaturaNom);
         container.add(asignaturaCod);
         container.add(ingresoAño);
         container.add(slash);
