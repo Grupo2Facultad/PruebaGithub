@@ -6,6 +6,7 @@
 package GUI;
 
 import githubtest.Carrera;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -32,7 +33,12 @@ class GetCarreras implements ActionListener{
             for (Carrera carrera : carreras) {
                 carrerasConFormato+=carrera;
             }
+            if(!carreras.isEmpty()){
             JOptionPane.showMessageDialog(null,carrerasConFormato);
+            }
+            else{
+            JOptionPane.showMessageDialog(null,"Dni invalido o no esta inscripto a ninguna carrera");
+            }
         }
     
 }
@@ -41,7 +47,7 @@ class GetCarreras implements ActionListener{
          Frame frame=new Frame("Carreras Cursadas Por El Alumno con Determinado DNI" );
         Container container=frame.getContentPane();
         frame.setBounds(350, 250, 700, 400);
-        ingresarDNI=new JTextField(20);
+        ingresarDNI=new JTextField();
         ingresar=new JButton("Ingesar DNI");
         ingresar.addActionListener(new GetCarreras());
         container.setLayout(new FlowLayout());
