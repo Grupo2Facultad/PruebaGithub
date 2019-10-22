@@ -39,7 +39,7 @@ public class AsignaturasPorDni implements ActionListener{
           int dia=Integer.parseInt(ingresoDia.getText());
            Set<Asignatura> asignaturas=Main.getRegistroDeCarreras().getAsigPorDNI(DNI, LocalDate.of(año,mes,dia));
           String asignaturasDNI="Las asignaturas cursadas son"+asignaturas;
-          JOptionPane.showMessageDialog(null,asignaturasDNI);
+          ImpresionListado.Imprimir(asignaturasDNI);
         }
 }
     @Override

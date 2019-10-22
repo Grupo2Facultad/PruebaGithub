@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ *Listado de asistencias en una determinada clase
  * @author Alumno
  */
 public class BitacoraDiaria {
