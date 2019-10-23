@@ -37,15 +37,21 @@ public class ProfesoresPorAsignaturaActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent arg0) {
-          int año=Integer.parseInt(ingresoAño.getText());
-          int mes=Integer.parseInt(ingresoMes.getText());
-          int dia=Integer.parseInt(ingresoDia.getText());
-           Set<Docente> docentes= Main.getRegistroDeCarreras().getDocentesAsignatura(asignaturaCod.getText(),LocalDate.of(año,mes,dia));
-           String docentesConFormato="";
-            for (Docente docente : docentes) {
-               docentesConFormato+="\n"+docente;
+            int año = Integer.parseInt(ingresoAño.getText());
+            int mes = Integer.parseInt(ingresoMes.getText());
+            int dia = Integer.parseInt(ingresoDia.getText());
+            Set<Docente> docentes = Main.getRegistroDeCarreras().getDocentesAsignatura(asignaturaCod.getText(), LocalDate.of(año, mes, dia));
+            if (docentes.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Esa asignatura no tiene docentes");
+            } else {
+                if (docentes != null) {
+                    String docentesConFormato = "";
+                    for (Docente docente : docentes) {
+                        docentesConFormato += "\n" + docente;
+                    }
+                    JOptionPane.showMessageDialog(null, docentesConFormato);
+                }
             }
-            JOptionPane.showMessageDialog(null,docentesConFormato);
         }
 
     }

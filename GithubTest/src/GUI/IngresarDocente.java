@@ -67,8 +67,6 @@ public class IngresarDocente implements ActionListener {
             }
         };
         Enter enter= new Enter(ingresar,action);
-        Escape escape = new Escape(frame);
-        escape.setKey();
 
     }
 

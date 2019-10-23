@@ -54,29 +54,27 @@ public class ImprimirActaActionListener implements ActionListener {
                     ArrayList<Examen> examenes = (ArrayList) asignatura.getExamenes();
                     for (Examen examene : examenes) {
                         if (examene.getFecha().equals(fecha)) {
-                            f=true;
+                            f = true;
                             if (examene instanceof Final) {
-                                s=true;
-                                    ActaFinal actaFinal = (ActaFinal) examene.getActa();
-                                    actaFinal.cerrarActa();
-                                    actaFinal.imprimirActa();
-
+                                s = true;
+                                ActaFinal actaFinal = (ActaFinal) examene.getActa();
+                                actaFinal.cerrarActa();
+                                actaFinal.imprimirActa();
                             }
                         }
                     }
                 }
-                if (!t) {
-                    JOptionPane.showMessageDialog(null, "ese codigo no es valido");
-                    return;
-                }
-                if (!f) {
-                    JOptionPane.showMessageDialog(null, "esa Asignatura no tiene un examen en esa fecha");
-                    return;
-                }
-                if(!s){
-                    JOptionPane.showMessageDialog(null,"Ese Examen no es un Final");
-                }
-
+            }
+            if (!t) {
+                JOptionPane.showMessageDialog(null, "ese codigo no es valido");
+                return;
+            }
+            if (!f) {
+                JOptionPane.showMessageDialog(null, "esa Asignatura no tiene un examen en esa fecha");
+                return;
+            }
+            if (!s) {
+                JOptionPane.showMessageDialog(null, "Ese Examen no es un Final");
             }
         }
     }
@@ -84,7 +82,7 @@ public class ImprimirActaActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-         Frame frame=new Frame("Imprimir Acta",ingresar);
+        Frame frame=new Frame("Imprimir Acta",ingresar);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(300, 250, 600, 400);

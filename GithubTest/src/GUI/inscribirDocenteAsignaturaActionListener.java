@@ -35,15 +35,15 @@ public class inscribirDocenteAsignaturaActionListener implements ActionListener 
             fechaFinal;
     private Frame frame;
 
-    class Inscribir implements ActionListener {
+    public class Inscribir implements ActionListener {
 
         private Asignatura seleccionadaA;
 
         @Override
         public void actionPerformed(ActionEvent ae) {
             ArrayList<Asignatura> asignaturas = Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(LocalDate.now());
+            boolean e = false;
             for (Asignatura asignatura : asignaturas) {
-                boolean e = false;
                 if (asignatura.getCodigo().equals(codigoAsig.getText())) {
                     boolean yaExiste = false;
                     for (Rol rol : asignatura.getEquipo().getRoles()) {
@@ -68,16 +68,16 @@ public class inscribirDocenteAsignaturaActionListener implements ActionListener 
                                 JOptionPane.showMessageDialog(null, "Ese Docente No Dicta En Esa Carrera");
                             }
                         }
-                        if (t = false) {
+                        if (!t) {
                             JOptionPane.showMessageDialog(null, "Numero de Matricula Invalido");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Ese Docente ya dicta en esa Asignatura");
                     }
                 }
-                if (e = false) {
-                    JOptionPane.showMessageDialog(null, "Codigo Invalido");
-                }
+            }
+            if (!e) {
+                JOptionPane.showMessageDialog(null, "Codigo Invalido");
             }
         }
     }
@@ -115,7 +115,7 @@ public class inscribirDocenteAsignaturaActionListener implements ActionListener 
         Action action = new AbstractAction("Ingresar") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Inscribir().actionPerformed(e);
+                new inscribirDocenteAsignaturaActionListener.Inscribir().actionPerformed(e);
             }
         };
         Enter enter = new Enter(inscribir, action);
