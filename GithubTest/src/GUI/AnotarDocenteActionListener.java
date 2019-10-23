@@ -16,6 +16,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -99,7 +101,7 @@ public class AnotarDocenteActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        Frame frame = new Frame("Anotar Docente En Examen");
+        Frame frame = new Frame("Anotar Docente En Examen",ingresar);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 250, 750, 450);
@@ -107,7 +109,6 @@ public class AnotarDocenteActionListener implements ActionListener {
         container.setLayout(null);
         ingresar = new JButton("Ingresar");
         ingresar.setBounds(600, 147, 100, 30);
-        ingresar.addActionListener(new Ingresar());
         numeroLegajo = new JTextFieldAdaptado("Numero de legajo");
         numeroLegajo.setBounds(50, 150, 120, 25);
         asignaturaCod = new JTextFieldAdaptado("Codigo Asignatura");
@@ -135,6 +136,12 @@ public class AnotarDocenteActionListener implements ActionListener {
         container.add(ingresoDia);
         container.add(box);
         container.add(ingresar);
-
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Ingresar().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(ingresar, action);
     }
 }

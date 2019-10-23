@@ -6,18 +6,11 @@
 package GUI;
 
 import githubtest.Carrera;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  *
@@ -30,8 +23,7 @@ private JTextFieldAdaptado ingresoAño;
 private JTextFieldAdaptado ingresoMes;
 private JTextFieldAdaptado ingresoDia;
 private JLabel slash,
-        slash2,
-        carrerasDisponibles;
+        slash2;
           
 class MostrarCantidadAlumnos implements ActionListener{
         @Override
@@ -47,7 +39,6 @@ class MostrarCantidadAlumnos implements ActionListener{
           JOptionPane.showMessageDialog(null,cantidadEs);
             }
             catch(Exception e){
-                
             }
         }
 }
@@ -76,15 +67,6 @@ class MostrarCantidadAlumnos implements ActionListener{
         ingresar.setBounds(430, 148, 100, 30);
         slash=new JLabel("/");
         slash2=new JLabel("/");
-        ingresar.addActionListener(new MostrarCantidadAlumnos());
-        this.carrerasDisponibles=new JLabel();
-        carrerasDisponibles.setBounds(100, 200, 600, 25);
-            String disponibles="Carreras Disponibles: ";
-            ArrayList<Carrera>carreras=Main.registroDeCarreras.getCarreras();
-            for (Carrera carrera : carreras) {
-               disponibles+=carrera+"\n";
-           }
-            this.carrerasDisponibles.setText(disponibles);
         container.setLayout(new FlowLayout());
         container.add(carrera);
         container.add(ingresoAño);
@@ -93,9 +75,17 @@ class MostrarCantidadAlumnos implements ActionListener{
         container.add(slash2);
         container.add(ingresoDia);
         container.add(ingresar);
-        container.add(carrerasDisponibles);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MostrarCantidadAlumnos().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(ingresar, action);
+        Escape escape = new Escape(frame);
+        escape.setKey();
     }
     
 }

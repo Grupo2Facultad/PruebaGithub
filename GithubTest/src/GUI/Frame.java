@@ -5,17 +5,31 @@
  */
 package GUI;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 /**
  *
  * @author juanc
  */
-public class Frame  extends JFrame{
-    public Frame(String s){
+public class Frame extends JFrame {
+
+    private JComponent boton;
+
+    public Frame(String s, JComponent boton) {
         super(s);
-        setSize(1000,600);
+        this.setFocusTraversalPolicy(new FocusTraversalPolicyAdaptado(boton));
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        Escape escape = new Escape(this);
+        escape.setKey();
+    }
+
+    public Frame(String s) {
+        super(s);
+        setSize(1000, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Escape escape = new Escape(this);
+        escape.setKey();
     }
 }

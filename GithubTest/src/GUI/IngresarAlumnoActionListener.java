@@ -119,7 +119,7 @@ public class IngresarAlumnoActionListener implements ActionListener {
             }
         }
         if (!e || !t) {
-            throw new FaltaIngresoOCarreraInvalidaException("Falto Ingresar Algo o la Carrera es Invalida");
+            throw new FaltaIngresoOCarreraInvalidaException("Falto Ingresar Algo");
         }
 
     }

@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -92,8 +94,7 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent arg0) {
-
-        frame = new Frame("Insribirse a Asignatura");
+        frame = new Frame("Insribirse a Asignatura",inscribirse);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 250, 700, 400);
@@ -105,13 +106,20 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
         asignaturaCod.setBounds(190, 150, 120, 25);
         this.radioButton = new JRadioButton("Regular");
         radioButton.setBounds(330, 150, 120, 25);
+        radioButton.setSelected(true);
         inscribirse = new JButton("Ingresar");
         inscribirse.setBounds(450, 148, 120, 30);
-        inscribirse.addActionListener(new Ingresar());
         container.add(alumnoDNI);
         container.add(asignaturaCod);
         container.add(radioButton);
         container.add(inscribirse);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Ingresar().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(inscribirse, action);
         }
     }
 
