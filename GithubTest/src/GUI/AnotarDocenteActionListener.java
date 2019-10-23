@@ -30,7 +30,7 @@ import javax.swing.JTextField;
 public class AnotarDocenteActionListener implements ActionListener {
 
     private JButton ingresar;
-    private JTextField numeroLegajo,
+    private JTextFieldAdaptado numeroLegajo,
             asignaturaCod,
             ingresoAño,
             ingresoMes,
@@ -108,15 +108,15 @@ public class AnotarDocenteActionListener implements ActionListener {
         ingresar = new JButton("Ingresar");
         ingresar.setBounds(600, 147, 100, 30);
         ingresar.addActionListener(new Ingresar());
-        numeroLegajo = new JTextField("Numero de legajo", 20);
+        numeroLegajo = new JTextFieldAdaptado("Numero de legajo");
         numeroLegajo.setBounds(50, 150, 120, 25);
-        asignaturaCod = new JTextField("Codigo Asignatura", 15);
+        asignaturaCod = new JTextFieldAdaptado("Codigo Asignatura");
         asignaturaCod.setBounds(185, 150, 120, 25);
-        ingresoAño = new JTextField("Año", 5);
+        ingresoAño = new JTextFieldAdaptado("Año");
         ingresoAño.setBounds(320, 150, 40, 25);
-        ingresoMes = new JTextField("Mes", 3);
+        ingresoMes = new JTextFieldAdaptado("Mes");
         ingresoMes.setBounds(375, 150, 40, 25);
-        ingresoDia = new JTextField("Dia", 3);
+        ingresoDia = new JTextFieldAdaptado("Dia");
         ingresoDia.setBounds(430, 150, 40, 25);
         slash = new JLabel("/");
         slash2 = new JLabel("/");

@@ -24,7 +24,7 @@ import javax.swing.JTextField;
  */
 public class AsignaturasPorDni implements ActionListener{
     private JButton ingresar;
-    private JTextField ingresoDNI,
+    private JTextFieldAdaptado ingresoDNI,
             ingresoAño,
             ingresoMes,
             ingresoDia;
@@ -51,13 +51,13 @@ public class AsignaturasPorDni implements ActionListener{
         ingresar=new JButton("Ingresar");
         ingresar.addActionListener(new MostrarCantidadAlumnos ());
         ingresar.setBounds(400, 198, 120, 30);
-        ingresoDNI=new JTextField("DNI",20);
+        ingresoDNI=new JTextFieldAdaptado("DNI");
         ingresoDNI.setBounds(40,200, 125,25);
-        ingresoAño=new JTextField("Año",5);
+        ingresoAño=new JTextFieldAdaptado("Año");
          ingresoAño.setBounds(185, 200,50 ,25);
-        ingresoMes=new JTextField("Mes",3);
+        ingresoMes=new JTextFieldAdaptado("Mes");
         ingresoMes.setBounds(255, 200,70, 25);
-        ingresoDia=new JTextField("Dia",3);
+        ingresoDia=new JTextFieldAdaptado("Dia");
         ingresoDia.setBounds(345,200,35,25);
         slash=new JLabel("/");
         slash.setBounds(240, 198,15, 25);
