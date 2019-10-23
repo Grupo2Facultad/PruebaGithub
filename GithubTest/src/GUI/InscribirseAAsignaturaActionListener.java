@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -107,11 +109,17 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
         radioButton.setBounds(330, 150, 120, 25);
         inscribirse = new JButton("Ingresar");
         inscribirse.setBounds(450, 148, 120, 30);
-        inscribirse.addActionListener(new Ingresar());
         container.add(alumnoDNI);
         container.add(asignaturaCod);
         container.add(radioButton);
         container.add(inscribirse);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Ingresar().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(inscribirse, action);
         }
     }
 

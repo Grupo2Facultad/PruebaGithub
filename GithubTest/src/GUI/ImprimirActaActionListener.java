@@ -11,17 +11,16 @@ import githubtest.Asignatura;
 import githubtest.Examen;
 import githubtest.Final;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import static java.time.temporal.ChronoUnit.HOURS;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -44,7 +43,6 @@ public class ImprimirActaActionListener implements ActionListener {
             int año = Integer.parseInt(ingresoAño.getText());
             int mes = Integer.parseInt(ingresoMes.getText());
             int dia = Integer.parseInt(ingresoDia.getText());
-            ArrayList<Alumno> habilitados = new ArrayList<>();
             LocalDate fecha = LocalDate.of(año, mes, dia);
             ArrayList<Asignatura> asignaturas = Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(fecha);
             boolean t = false;
@@ -114,6 +112,13 @@ public class ImprimirActaActionListener implements ActionListener {
         container.add(slash2);
         container.add(ingresoDia);
         container.add(ingresar);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ImprimirActa().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(ingresar, action);
     }
     
 }

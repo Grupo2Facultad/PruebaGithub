@@ -14,11 +14,12 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -32,7 +33,7 @@ private JTextFieldAdaptado alumnoDNI,
             ingresoDia;
     private JLabel slash,
             slash2;
-    private JButton inscribirse;
+    private JButton darDeBaja;
     private Frame frame;
     class DarseDeBaja implements ActionListener{
             @Override
@@ -82,8 +83,7 @@ private JTextFieldAdaptado alumnoDNI,
         slash=new JLabel("/");
         slash2=new JLabel("/");
         asignaturaCod = new JTextFieldAdaptado("Codigo de Asignatura");
-        inscribirse=new JButton("Ingresar");
-        inscribirse.addActionListener(new DarseDeBaja());
+        darDeBaja=new JButton("Ingresar");
         container.add(alumnoDNI);
         container.add(asignaturaCod);
         container.add(ingresoAño);
@@ -91,7 +91,14 @@ private JTextFieldAdaptado alumnoDNI,
         container.add(ingresoMes);
         container.add(slash2);
         container.add(ingresoDia);
-        container.add(inscribirse);
+        container.add(darDeBaja);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DarseDeBaja().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(darDeBaja, action);
     }
     
 }

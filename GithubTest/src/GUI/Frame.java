@@ -16,6 +16,7 @@ public class Frame  extends JFrame{
         super(s);
         setSize(1000,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+         Escape escape = new Escape(this);
+        escape.setKey();
     }
 }

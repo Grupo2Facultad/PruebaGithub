@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -106,7 +108,6 @@ public class InscripcionAExamenActionListener implements ActionListener {
         paraFinales.setBounds(80, 260, 170, 25);
         inscribirse=new JButton("Ingresar");
         inscribirse.setBounds(600, 198, 140, 30);
-        inscribirse.addActionListener(new Inscribirse());
         container.add(alumnoDNI);
         container.add(asignaturaCod);
         container.add(ingresoAño);
@@ -117,6 +118,13 @@ public class InscripcionAExamenActionListener implements ActionListener {
         container.add(libre);
         container.add(paraFinales);
         container.add(inscribirse);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Inscribirse().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(inscribirse, action);
     }
     
 }

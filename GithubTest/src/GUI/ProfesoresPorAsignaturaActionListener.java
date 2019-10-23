@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.Set;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -60,7 +62,6 @@ public class ProfesoresPorAsignaturaActionListener implements ActionListener {
         Container container = frame.getContentPane();
         container.setLayout(null);
         ingresar = new JButton("Ingresar");
-        ingresar.addActionListener(new Ingresar ());
         ingresar.setBounds(530, 198, 125,30);
         asignaturaCod = new JTextFieldAdaptado("Codigo");
         asignaturaCod.setBounds(200, 200,100 ,25);
@@ -81,6 +82,13 @@ public class ProfesoresPorAsignaturaActionListener implements ActionListener {
         container.add(slash2);
         container.add(ingresoDia);
         container.add(ingresar);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Ingresar().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(ingresar, action);
     }
 
 }

@@ -5,16 +5,13 @@
  */
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.*;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 /**
  *
@@ -27,16 +24,16 @@ public Bedelia(){
    
     @Override
     public void actionPerformed(ActionEvent ae) {
-         JButton habilitadosParcial,
-            habilitadosFinal,
-            asignaturasPorDNI,
-            profesoresProAsignatura,
-            imprimirActa,
-            inscribirAAsignatura,
-            inscribirAExamen,
-            anotarDocenteEnExamen,
-             inscribirDocenteAsignatura,
-                 darAlumnoDeBaja;
+        JButton habilitadosParcial,
+                habilitadosFinal,
+                asignaturasPorDNI,
+                profesoresProAsignatura,
+                imprimirActa,
+                inscribirAAsignatura,
+                inscribirAExamen,
+                anotarDocenteEnExamen,
+                inscribirDocenteAsignatura,
+                darAlumnoDeBaja;
         Frame frame = new Frame("Bedelia");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);Toolkit pantalla = Toolkit.getDefaultToolkit();
@@ -88,6 +85,8 @@ public Bedelia(){
         container.add(darAlumnoDeBaja);
         container.add(new PanelBusquedaCodigo());
         container.getComponent(10).setBounds(100, 290, 800, 50);
+        Escape escape = new Escape(frame);
+        escape.setKey();
         
     }
     

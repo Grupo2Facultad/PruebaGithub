@@ -5,23 +5,22 @@
  */
 package GUI;
 
-import githubtest.Alumno;
 import githubtest.Asignatura;
 import githubtest.Examen;
 import githubtest.Final;
 import githubtest.InscripcionAExamen;
 import githubtest.Parcial;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -34,7 +33,7 @@ private JTextFieldAdaptado codigoAsig,
             ingresoDia;
     private JLabel slash,
             slash2;
-    private boolean tipo;
+    private final boolean tipo;
 private JButton ingresar;
 class Ingresar implements ActionListener{
     private Examen ex;
@@ -121,7 +120,6 @@ class Ingresar implements ActionListener{
         slash.setBounds(255, 198,15, 25);
         slash2=new JLabel("/");
         slash2.setBounds(315, 198,15, 25);
-        ingresar.addActionListener(new Ingresar());
         container.add(codigoAsig);
         container.add(ingresoAño);
         container.add(slash);
@@ -129,6 +127,14 @@ class Ingresar implements ActionListener{
         container.add(slash2);
         container.add(ingresoDia);
         container.add(ingresar);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Ingresar().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(ingresar, action);
+        
     }
     
 }

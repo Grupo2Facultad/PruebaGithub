@@ -12,6 +12,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Set;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -55,6 +57,15 @@ class GetCarreras implements ActionListener{
         container.add(ingresar);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new GetCarreras().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(ingresar, action);
+        Escape escape = new Escape(frame);
+        escape.setKey();
     }
     
 }

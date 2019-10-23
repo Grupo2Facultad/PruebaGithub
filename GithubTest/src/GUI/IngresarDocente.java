@@ -10,6 +10,8 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -40,7 +42,6 @@ public class IngresarDocente implements ActionListener {
         Container container = frame.getContentPane();
         container.setLayout(new FlowLayout());
         this.ingresar = new JButton("INGRESAR");
-        this.ingresar.addActionListener(new IngresarDocenteActionListener(this));
         this.ingresoApellido = new JTextFieldAdaptado("Apellido*", 20);
         this.ingresoNombre = new JTextFieldAdaptado("Nombre*", 20);
         this.ingresoDNI = new JTextFieldAdaptado("DNI*", 15);
@@ -59,6 +60,15 @@ public class IngresarDocente implements ActionListener {
         container.add(this.carrera);
         container.add(ingresoADocencia);
         container.add(obligatorios);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new IngresarDocenteActionListener(IngresarDocente.this).actionPerformed(e);
+            }
+        };
+        Enter enter= new Enter(ingresar,action);
+        Escape escape = new Escape(frame);
+        escape.setKey();
 
     }
 

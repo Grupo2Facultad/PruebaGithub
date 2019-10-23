@@ -14,11 +14,17 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRootPane;
+import javax.swing.KeyStroke;
 
 public class IngresarAlumno implements ActionListener {
 
@@ -49,14 +55,13 @@ public class IngresarAlumno implements ActionListener {
         Container container = frame.getContentPane();
         container.setLayout(new FlowLayout());
         this.ingresar = new JButton("Ingresar");
-        this.ingresar.addActionListener(new IngresarAlumnoActionListener(this));
         this.ingresoApellido = new JTextFieldAdaptado("Apellido*", 20);
         this.ingresoNombre = new JTextFieldAdaptado("Nombre*", 20);
         ingresoNombre.setBounds(100, 100, 100, 25);
         nombre = new JLabel("Nombre: ");
         nombre.setBounds(0, 100, 100, 25);
-        this.ingresoDNI = new JTextFieldAdaptado("DNI*",9);
-        this.ingresoNumeroMatricula = new JTextFieldAdaptado("Numero Matricula*",12);
+        this.ingresoDNI = new JTextFieldAdaptado("DNI*", 9);
+        this.ingresoNumeroMatricula = new JTextFieldAdaptado("Numero Matricula*", 12);
         carrera = new JComboBox<>();
         for (Carrera carrera1 : Main.getRegistroDeCarreras().getCarreras()) {
             carrera.addItem(carrera1.getNombre());
@@ -84,6 +89,15 @@ public class IngresarAlumno implements ActionListener {
         container.add(this.ingresoFechaNacimiento);
         container.add(obligatorios);
         container.add(nombre);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new IngresarAlumnoActionListener(IngresarAlumno.this).actionPerformed(e);
+            }
+        };
+        Enter enter= new Enter(ingresar,action);
+        Escape escape = new Escape(frame);
+        escape.setKey();
     }
 
     public JTextFieldAdaptado getIngresoNombre() {
@@ -153,7 +167,5 @@ public class IngresarAlumno implements ActionListener {
     public Frame getFrame() {
         return frame;
     }
-    
-        
-        }
-    
+
+}
