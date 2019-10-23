@@ -5,8 +5,10 @@
  */
 package GUI;
 
+import githubtest.Carrera;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,8 +20,8 @@ public class PanelBusquedaCodigo extends JPanel {
 
     private  final JTextFieldAdaptado ingresoAño,
             ingresoMes,
-            ingresoDia,
-            carrera;
+            ingresoDia;
+    private JComboBox carrera;
     private final JButton buscarCodigo;
     private final JLabel slash,
                   slash2;
@@ -31,7 +33,10 @@ public class PanelBusquedaCodigo extends JPanel {
         ingresoDia = new JTextFieldAdaptado("Dia",3);
         slash = new JLabel("/");
         slash2 = new JLabel("/");
-        carrera = new JTextFieldAdaptado("Carrera",20);
+        carrera = new JComboBox<>();
+        for (Carrera carrera1 : Main.getRegistroDeCarreras().getCarreras()) {
+            carrera.addItem(carrera1.getNombre());
+        }
         buscarCodigo = new JButton("Buscar Codigos De Asignatura Disponibles");
         buscarCodigo.addActionListener(new BuscarCodigoAsignaturaActionListener(ingresoAño,
                 ingresoMes, ingresoDia, carrera));

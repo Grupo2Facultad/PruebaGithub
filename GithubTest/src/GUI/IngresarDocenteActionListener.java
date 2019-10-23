@@ -63,7 +63,7 @@ private Carrera seleccionada;
         ArrayList<Carrera> carreras=Main.getRegistroDeCarreras().getCarreras();
         boolean t=false;
         for (Carrera carrera : carreras) {
-            if(carrera.getNombre().equals(info.getIngresoCarrera().getText())){
+            if(carrera.getNombre().equals(info.getCarrera().getSelectedItem())){
                 Set<Docente>yaExiste=carrera.getDocentes();
                 for (Docente docente : yaExiste) {
                       if(docente.getNumeroLegajo().equals(info.getIngresoNumeroLegajo().getText())){
