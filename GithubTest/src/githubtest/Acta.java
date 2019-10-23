@@ -14,6 +14,7 @@ import java.util.Objects;
  * @author juanc
  */
 public abstract class Acta {
+    private String algo;
     private List<InscripcionAExamen> inscripciones;
     private Examen examen;
 
