@@ -56,17 +56,17 @@ public class inscribirDocenteAsignaturaActionListener implements ActionListener 
                         seleccionadaA = asignatura;
                         Set<Docente> profesores = asignatura.getCarrera().getDocentes();
                         boolean t = false;
+                        boolean i = false;
                         for (Docente profesore : profesores) {
                             t = true;
-                            boolean i = false;
                             if (profesore.getNumeroLegajo().equals(legajo.getText())) {
                                 i = true;
                                 asignatura.getEquipo().getRoles().add(new Rol(profesore, dedicacion.getText(), cargo.getText(), fechaIngreso.getText(), fechaFinal.getText()));
                                 JOptionPane.showMessageDialog(null, "Operacion Exitosa");
                             }
-                            if (!i) {
-                                JOptionPane.showMessageDialog(null, "Ese Docente No Dicta En Esa Carrera");
-                            }
+                        }
+                        if (!i) {
+                            JOptionPane.showMessageDialog(null, "Ese Docente No Dicta En Esa Carrera");
                         }
                         if (!t) {
                             JOptionPane.showMessageDialog(null, "Numero de Matricula Invalido");

@@ -78,16 +78,24 @@ public class Main {
         Asignatura AC= new Asignatura("AC","100","Arquitectura De Computadoras",DosMilQuince,LicenciaturaEnSistemas,
                 2,new PeriodoLectivoConAño(PeriodoLectivoEnum.primerCuatrimestre,2019),true,4,new Equipo(),new BitacoraFinal());
         parcial=new Parcial(false,true,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,1),18);
-        parcialRecuperatorio=new Parcial(true,true,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,3),18);
+        parcialRecuperatorio=new Parcial(true,true,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,2),18);
+        Parcial parcial2=new Parcial(false,false,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,3),18);
+        Parcial parcialRecuperatorio2=new Parcial(true,false,POO,PeriodoLectivoEnum.segundoCuatrimestre,LocalDate.of(2019, Month.NOVEMBER,4),18);
         eFinal=new Final(true,true,POO,PeriodoLectivoEnum.Anual,LocalDate.of(2019,Month.NOVEMBER,5),18);
         POO.getExamenes().add(parcial);
+        POO.getExamenes().add(parcial2);
         POO.getExamenes().add(parcialRecuperatorio);
+        POO.getExamenes().add(parcialRecuperatorio2);
         POO.getExamenes().add(eFinal);
         ActaParcial acta=new ActaParcial(parcial);
+        ActaParcial acta2=new ActaParcial(parcial2);
         ActaParcial actaRecuperatorio=new ActaParcial(parcialRecuperatorio);
+        ActaParcial actaRecuperatorio2=new ActaParcial(parcialRecuperatorio2);
         ActaFinal actaFinal=new ActaFinal(eFinal);
         parcial.setActa(acta);
+        parcial2.setActa(acta2);
         parcialRecuperatorio.setActa(actaRecuperatorio);
+        parcialRecuperatorio2.setActa(actaRecuperatorio2);
         eFinal.setActa(actaFinal);
         DosMilQuince.getAsignaturas().add(POO);
         DosMilQuince.getAsignaturas().add(ED);
@@ -96,12 +104,16 @@ public class Main {
         DosMilQuince.getAsignaturas().add(IN);
         DosMilQuince.getAsignaturas().add(AC);
         registroDeCarreras.getCarreras().add(LicenciaturaEnSistemas);
-        //Finaliza zona LicenciaturaSistemas
+        ///Finaliza zona LicenciaturaSistemas
         Carrera ContadorPublico=new Carrera("ContadorPublico",2,LocalDate.of(2000,3,15),5);
         registroDeCarreras.getCarreras().add(ContadorPublico);
         ///
          Carrera LicenciaturaAdministracion=new Carrera("LicenciaturaAdministracion",3,LocalDate.of(1985,3,15),5);
         registroDeCarreras.getCarreras().add(LicenciaturaAdministracion);
+        ///
+        Carrera Turismo=new Carrera("Turismo",4,LocalDate.of(2010,6,17),4);
+        registroDeCarreras.getCarreras().add(Turismo);
+        
     }
     
     public static Carrera getLicenciaturaEnSistemas() {

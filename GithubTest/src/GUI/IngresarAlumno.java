@@ -96,8 +96,6 @@ public class IngresarAlumno implements ActionListener {
             }
         };
         Enter enter= new Enter(ingresar,action);
-        Escape escape = new Escape(frame);
-        escape.setKey();
     }
 
     public JTextFieldAdaptado getIngresoNombre() {
