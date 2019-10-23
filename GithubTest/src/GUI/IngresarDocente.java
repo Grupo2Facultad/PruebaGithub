@@ -21,7 +21,7 @@ import javax.swing.JLabel;
  * @author juanc
  */
 public class IngresarDocente implements ActionListener {
-     private TextField ingresoNombre,
+     private JTextFieldAdaptado ingresoNombre,
                ingresoApellido,
                ingresoDNI,
                ingresoNumeroLegajo,
@@ -41,17 +41,13 @@ public class IngresarDocente implements ActionListener {
             container.setLayout(new FlowLayout());
             this.ingresar=new JButton("INGRESAR");
             this.ingresar.addActionListener(new IngresarDocenteActionListener(this)) ;
-            this.ingresoApellido=new TextField(20);
-            this.ingresoApellido.setText("Apellido*");
-            this.ingresoNombre=new TextField(20);
-            this.ingresoNombre.setText("Nombre*");
-            this.ingresoDNI=new TextField(20);
-            this.ingresoDNI.setText("DNI*");
-            this.ingresoNumeroLegajo=new TextField(20);
+            this.ingresoApellido=new JTextFieldAdaptado("Apellido*");
+            this.ingresoNombre=new JTextFieldAdaptado("Nombre*");
+            this.ingresoDNI=new JTextFieldAdaptado("DNI*");
+            this.ingresoNumeroLegajo=new JTextFieldAdaptado("Numero Legajo*");
             this.ingresoNumeroLegajo.setText("Numero Legajo*");
-            this.ingresoCarrera=new TextField(20);
-            this.ingresoCarrera.setText("Carrera*");
-            this.ingresoADocencia=new TextField("ingreso A Docencia",20);
+            this.ingresoCarrera=new JTextFieldAdaptado("Carrera*");
+            this.ingresoADocencia=new JTextFieldAdaptado("ingreso A Docencia");
             this.carrerasDisponibles=new JLabel();
             String disponibles="Carreras Disponibles: ";
             ArrayList<Carrera>carreras=Main.registroDeCarreras.getCarreras();
@@ -72,29 +68,34 @@ public class IngresarDocente implements ActionListener {
             
         }
 
-    public TextField getIngresoNombre() {
+    public JTextFieldAdaptado getIngresoNombre() {
         return ingresoNombre;
     }
 
-    public TextField getIngresoApellido() {
+    public JTextFieldAdaptado getIngresoApellido() {
         return ingresoApellido;
     }
 
-    public TextField getIngresoDNI() {
+    public JTextFieldAdaptado getIngresoDNI() {
         return ingresoDNI;
     }
 
-    public TextField getIngresoNumeroLegajo() {
+    public JTextFieldAdaptado getIngresoNumeroLegajo() {
         return ingresoNumeroLegajo;
     }
 
-    public TextField getIngresoCarrera() {
+    public JTextFieldAdaptado getIngresoCarrera() {
         return ingresoCarrera;
     }
 
-    public TextField getIngresoADocencia() {
+    public JTextFieldAdaptado getIngresoADocencia() {
         return ingresoADocencia;
     }
+
+    public JLabel getCarrerasDisponibles() {
+        return carrerasDisponibles;
+    }
+
 
     public JLabel getObligatorios() {
         return obligatorios;

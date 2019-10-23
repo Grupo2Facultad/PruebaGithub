@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  * @author Alumno
  */
 public class DarDeBajaExamenActionListener implements ActionListener{
-private JTextField alumnoDNI,
+private JTextFieldAdaptado alumnoDNI,
             asignaturaCod,
             ingresoAño,
             ingresoMes,
@@ -75,13 +75,13 @@ private JTextField alumnoDNI,
         frame.setBounds(250, 200, 700, 200);
         Container container = frame.getContentPane();
         container.setLayout(new FlowLayout());
-        alumnoDNI=new JTextField("AlumnoDNI",20);
-        ingresoAño=new JTextField("Año",5);
-        ingresoMes=new JTextField("Mes",3);
-        ingresoDia=new JTextField("Dia",3);
+        alumnoDNI=new JTextFieldAdaptado("AlumnoDNI",20);
+        ingresoAño=new JTextFieldAdaptado("Año",5);
+        ingresoMes=new JTextFieldAdaptado("Mes",3);
+        ingresoDia=new JTextFieldAdaptado("Dia",3);
         slash=new JLabel("/");
         slash2=new JLabel("/");
-        asignaturaCod = new JTextField("Codigo de Asignatura",20);
+        asignaturaCod = new JTextFieldAdaptado("Codigo de Asignatura");
         inscribirse=new JButton("Ingresar");
         inscribirse.addActionListener(new DarseDeBaja());
         container.add(alumnoDNI);

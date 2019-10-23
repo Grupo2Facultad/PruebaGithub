@@ -21,13 +21,13 @@ import javax.swing.JTextField;
  */
 public class BuscarCodigoAsignaturaActionListener implements ActionListener {
 
-    private JTextField año,
+    private JTextFieldAdaptado año,
             mes,
             dia;
 
-    private JTextField carrera;
+    private JTextFieldAdaptado carrera;
 
-    public BuscarCodigoAsignaturaActionListener(JTextField año, JTextField mes, JTextField dia, JTextField carrera) {
+    public BuscarCodigoAsignaturaActionListener(JTextFieldAdaptado año, JTextFieldAdaptado mes, JTextFieldAdaptado dia, JTextFieldAdaptado carrera) {
         this.año = año;
         this.mes = mes;
         this.dia = dia;
@@ -36,7 +36,9 @@ public class BuscarCodigoAsignaturaActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
+        System.out.println(carrera.getText());
         check();
+        System.out.println("la"+this.año.getText()+"aasd");
         int añoF = Integer.parseInt(this.año.getText());
         int mesF = Integer.parseInt(this.mes.getText());
         int diaF = Integer.parseInt(this.dia.getText());

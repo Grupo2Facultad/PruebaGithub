@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,10 +25,10 @@ import javax.swing.JTextField;
  */
 public class CantidadAlumnosCarreraPeriodoActionListener implements ActionListener{
 private JButton ingresar;
-private JTextField ingresoNombre;
-private JTextField ingresoAño;
-private JTextField ingresoMes;
-private JTextField ingresoDia;
+private JComboBox<String > carrera;
+private JTextFieldAdaptado ingresoAño;
+private JTextFieldAdaptado ingresoMes;
+private JTextFieldAdaptado ingresoDia;
 private JLabel slash,
         slash2,
         carrerasDisponibles;
@@ -36,7 +37,7 @@ class MostrarCantidadAlumnos implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent arg0){
             try{
-          ingresoNombre.getText();
+           String ingresoNombre=(String)carrera.getSelectedItem();
           int año=Integer.parseInt(ingresoAño.getText());
           int mes=Integer.parseInt(ingresoMes.getText());
           int dia=Integer.parseInt(ingresoDia.getText());
@@ -46,6 +47,7 @@ class MostrarCantidadAlumnos implements ActionListener{
           JOptionPane.showMessageDialog(null,cantidadEs);
             }
             catch(Exception e){
+                
             }
         }
 }
@@ -59,16 +61,18 @@ class MostrarCantidadAlumnos implements ActionListener{
         Frame frame=new Frame("Cantidad De Alumnos Por Carrera en un Periodo");
         frame.setBounds(200, 150, 1080, 600);
         Container container=frame.getContentPane();
-        ingresoNombre=new JTextField(20);
-        ingresoNombre.setBounds(100, 150, 120, 25);
-        ingresoNombre.setToolTipText("Carrera");
-        ingresoAño=new JTextField("Año",5);
+        carrera=new JComboBox<>();
+        for (Carrera carrera1 : Main.getRegistroDeCarreras().getCarreras()) {
+            carrera.addItem(carrera1.getNombre());
+        }
+        carrera.setBounds(100, 150, 120, 25);
+        ingresoAño=new JTextFieldAdaptado("Año",5);
         ingresoAño.setBounds(240, 150, 50, 25);
-        ingresoMes=new JTextField("Mes",3);
+        ingresoMes=new JTextFieldAdaptado("Mes",3);
         ingresoMes.setBounds(310, 150, 40, 25);
-        ingresoDia=new JTextField("Dia",3);
+        ingresoDia=new JTextFieldAdaptado("Dia",3);
         ingresoDia.setBounds(370, 150, 40, 25);
-        ingresar=new JButton("Inrgesar");
+        ingresar=new JButton("Ingresar");
         ingresar.setBounds(430, 148, 100, 30);
         slash=new JLabel("/");
         slash2=new JLabel("/");
@@ -82,7 +86,7 @@ class MostrarCantidadAlumnos implements ActionListener{
            }
             this.carrerasDisponibles.setText(disponibles);
         container.setLayout(new FlowLayout());
-        container.add(ingresoNombre);
+        container.add(carrera);
         container.add(ingresoAño);
         container.add(slash);
         container.add(ingresoMes);

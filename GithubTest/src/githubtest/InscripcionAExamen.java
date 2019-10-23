@@ -78,9 +78,7 @@ public class InscripcionAExamen {
                     habilitado = true;
                 }
             }
-            System.out.println(habilitado+ "esto");
             if(!habilitado){
-                System.out.println(("porque no legggaaa"));
                 JOptionPane.showMessageDialog(null,"No Habilitado");
                 throw new NoSeInscribioException("No quedo habilitado");
             }
@@ -113,7 +111,9 @@ public class InscripcionAExamen {
                                 notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
                             } catch (NullPointerException e) {
                                 JOptionPane.showMessageDialog(null, "Ese alumno todavia no tiene la nota del recuperatorio del segundo parcial");
-                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
+                              catch(NumberFormatException e){
+                                  JOptionPane.showMessageDialog(null,"Ese alumno no saco una nota valida en el recuperatorio segundo parcial, probablemente no asistio");
                             }
                         }
                     }
@@ -128,7 +128,9 @@ public class InscripcionAExamen {
                                 notaSegundo = Double.parseDouble(inscripcione.notaObtenida);
                             } catch (NullPointerException e) {
                                 JOptionPane.showMessageDialog(null, "Ese alumno todavia no tiene la nota del segundo parcial");
-                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
+                              catch(NumberFormatException e){
+                                  JOptionPane.showMessageDialog(null,"Ese alumno no saco una nota valida en el segundo parcial, probablemente no asistio");
                             }
                         }
                     }
@@ -143,7 +145,9 @@ public class InscripcionAExamen {
                             }
                             catch(NullPointerException e){
                                 JOptionPane.showMessageDialog(null,"Ese alumno todavia no tiene la nota del recuperatorio del primer parcial");
-                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
+                            }
+                              catch(NumberFormatException e){
+                                  JOptionPane.showMessageDialog(null,"Ese alumno no saco una nota valida en el recuperatorio del primer parcial, probablemente no asistio");
                             }
                             System.out.println("notaPrimero" + notaPrimero);
                         }
@@ -159,7 +163,6 @@ public class InscripcionAExamen {
                             }
                             catch(NullPointerException e){
                                 JOptionPane.showMessageDialog(null,"Ese alumno todavia no tiene la nota del primer parcial");
-                                throw new NullPointerException("Ese alumno todavia no tiene la nota del parcial anterior");
                             }
                             catch(NumberFormatException e){
                                   JOptionPane.showMessageDialog(null,"Ese alumno no saco una nota valida en el primer parcial, probablemente no asistio");
@@ -311,7 +314,6 @@ public class InscripcionAExamen {
             ArrayList<Asistencia> listadoAsistencias = (ArrayList) bitacoraDiaria.getListadoAsistencias();
             for (Asistencia asistencia : listadoAsistencias) {
                 if (asistencia.getAlumno().equals(alumno)) {
-                    System.out.println(asistencia.getAsistio());
                     if (!asistencia.getAsistio()) {
                         asistenciasTotal += 1;
                     } else {
@@ -322,9 +324,6 @@ public class InscripcionAExamen {
             }
         }
         double calculo = asistio / asistenciasTotal;
-        System.out.println("asistencias total" + asistenciasTotal);
-        System.out.println("asistio" + asistio);
-        System.out.println(calculo);
         if (calculo >= 0.75) {
             this.asistencia = true;
         } else {
