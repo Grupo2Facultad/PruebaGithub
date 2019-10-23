@@ -28,7 +28,7 @@ import javax.swing.JTextField;
  * @author juanc
  */
 public class HabiltiadosExamenActionListener implements ActionListener{
-private JTextField codigoAsig,
+private JTextFieldAdaptado codigoAsig,
          ingresoAño,
             ingresoMes,
             ingresoDia;
@@ -107,15 +107,15 @@ class Ingresar implements ActionListener{
        frame.setBounds(300, 200, 600, 500);
         Container container=frame.getContentPane();
         container.setLayout(null);
-        codigoAsig=new JTextField("Codigo de Asignatura",20);
+        codigoAsig=new JTextFieldAdaptado("Codigo de Asignatura");
         codigoAsig.setBounds(50, 200, 130, 25);
         ingresar = new JButton("Ingresar");
         ingresar.setBounds(400, 198, 120, 30);
-        ingresoAño=new JTextField("Año",5);
+        ingresoAño=new JTextFieldAdaptado("Año");
         ingresoAño.setBounds(200, 200, 50, 25);
-        ingresoMes=new JTextField("Mes",3);
+        ingresoMes=new JTextFieldAdaptado("Mes");
         ingresoMes.setBounds(270, 200,40, 25);
-        ingresoDia=new JTextField("Dia",3);
+        ingresoDia=new JTextFieldAdaptado("Dia");
         ingresoDia.setBounds(330,200,40,25);
         slash=new JLabel("/");
         slash.setBounds(255, 198,15, 25);
