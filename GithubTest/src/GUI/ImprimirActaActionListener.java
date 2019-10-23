@@ -29,7 +29,7 @@ import javax.swing.JTextField;
  */
 public class ImprimirActaActionListener implements ActionListener {
 
-    private JTextField codigoAsig,
+    private JTextFieldAdaptado codigoAsig,
             ingresoAño,
             ingresoMes,
             ingresoDia;
@@ -92,15 +92,15 @@ public class ImprimirActaActionListener implements ActionListener {
         frame.setBounds(300, 250, 600, 400);
         Container container=frame.getContentPane();
         container.setLayout(null);
-        codigoAsig=new JTextField("Codigo de Asignatura",20);
+        codigoAsig=new JTextFieldAdaptado("Codigo de Asignatura");
         codigoAsig.setBounds(100, 100, 150, 25);
         ingresar = new JButton("Ingresar");
         ingresar.setBounds(190, 160, 150, 30);
-        ingresoAño=new JTextField("Año",5);
+        ingresoAño=new JTextFieldAdaptado("Año");
         ingresoAño.setBounds(270, 100, 50, 25);
-        ingresoMes=new JTextField("Mes",3);
+        ingresoMes=new JTextFieldAdaptado("Mes");
         ingresoMes.setBounds(340, 100, 40, 25);
-        ingresoDia=new JTextField("Dia",3);
+        ingresoDia=new JTextFieldAdaptado("Dia");
         ingresoDia.setBounds(400, 100, 40, 25);
         slash=new JLabel("/");
         slash.setBounds(325, 98, 15, 25);

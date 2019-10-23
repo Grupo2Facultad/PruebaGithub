@@ -12,8 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -21,13 +21,13 @@ import javax.swing.JTextField;
  */
 public class BuscarCodigoAsignaturaActionListener implements ActionListener {
 
-    private JTextField año,
+    private JTextFieldAdaptado año,
             mes,
             dia;
 
-    private JTextField carrera;
+    private JComboBox carrera;
 
-    public BuscarCodigoAsignaturaActionListener(JTextField año, JTextField mes, JTextField dia, JTextField carrera) {
+    public BuscarCodigoAsignaturaActionListener(JTextFieldAdaptado año, JTextFieldAdaptado mes, JTextFieldAdaptado dia, JComboBox carrera) {
         this.año = año;
         this.mes = mes;
         this.dia = dia;
@@ -36,7 +36,9 @@ public class BuscarCodigoAsignaturaActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
+        System.out.println(carrera.getSelectedItem());
         check();
+        System.out.println("la"+this.año.getText()+"aasd");
         int añoF = Integer.parseInt(this.año.getText());
         int mesF = Integer.parseInt(this.mes.getText());
         int diaF = Integer.parseInt(this.dia.getText());
@@ -44,7 +46,7 @@ public class BuscarCodigoAsignaturaActionListener implements ActionListener {
         ArrayList<Asignatura> coincidencias = new ArrayList<>();
         for (Asignatura asignatura1 : asignaturas) {
             System.out.println("llego acaasignatura");
-            if (asignatura1.getPeriodoLectivo().getAño() == añoF && asignatura1.getCarrera().getNombre().equals(carrera.getText())) {
+            if (asignatura1.getPeriodoLectivo().getAño() == añoF && asignatura1.getCarrera().getNombre().equals(carrera.getSelectedItem())) {
                 System.out.println("llego a las opciones");
                 if (asignatura1.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre) && mesF <= 6) {
                     coincidencias.add(asignatura1);
@@ -68,7 +70,7 @@ public class BuscarCodigoAsignaturaActionListener implements ActionListener {
         boolean e = false;
         ArrayList<Carrera> carreras = (ArrayList) Main.getRegistroDeCarreras().getCarreras();
         for (Carrera carrera1 : carreras) {
-            if (carrera1.getNombre().equals(carrera.getText())) {
+            if (carrera1.getNombre().equals(carrera.getSelectedItem())) {
                 e = true;
             }
         }

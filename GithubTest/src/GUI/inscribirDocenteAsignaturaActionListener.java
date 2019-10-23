@@ -26,7 +26,7 @@ import javax.swing.JTextField;
  */
 public class inscribirDocenteAsignaturaActionListener implements ActionListener{
 private JButton inscribir;
-private JTextField legajo,
+private JTextFieldAdaptado legajo,
                  codigoAsig,
         dedicacion,
         cargo,
@@ -93,17 +93,17 @@ private JTextField legajo,
             this.inscribir=new JButton("Ingresar");
             inscribir.setBounds(270, 300, 120, 30);
             inscribir.addActionListener(new Inscribir());
-            legajo = new JTextField("Matricula",5);
+            legajo = new JTextFieldAdaptado("Matricula");
             legajo.setBounds(100, 100, 120, 25);
-            cargo= new JTextField("Cargo",20);
+            cargo= new JTextFieldAdaptado("Cargo");
             cargo.setBounds(270, 100, 120, 25);
-            dedicacion=new JTextField("Dedicacion", 20);
+            dedicacion=new JTextFieldAdaptado("Dedicacion");
             dedicacion.setBounds(430, 100, 120, 25);
-            codigoAsig = new JTextField("Codigo de Asignatura",20);
+            codigoAsig = new JTextFieldAdaptado("Codigo de Asignatura");
             codigoAsig.setBounds(100, 200, 120, 25);
-            fechaIngreso = new JTextField("Fecha de Ingreso",20);
+            fechaIngreso = new JTextFieldAdaptado("Fecha de Ingreso");
             fechaIngreso.setBounds(270, 200, 120, 25);
-            fechaFinal = new JTextField("Fecha de Final",20);
+            fechaFinal = new JTextFieldAdaptado("Fecha de Final");
             fechaFinal.setBounds(430, 200, 120, 25);
             container.add(legajo);
             container.add(codigoAsig);
