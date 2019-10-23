@@ -13,30 +13,30 @@ import javax.swing.JTextField;
  *
  * @author juanc
  */
-public class JTextFieldAdaptado extends JTextField{
+public class JTextFieldAdaptado extends JTextField {
 
     public JTextFieldAdaptado(String text, int columns) {
         super(text, columns);
-           this.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
+        this.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
                 setText("");
             }
         });
-        
+        this.setToolTipText(text);
     }
 
     public JTextFieldAdaptado(String text) {
         super(text);
-          this.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
+        this.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
                 setText("");
             }
         });
+        this.setToolTipText(text);
     }
-   @Override
-   public String getText(){
-       return super.getText();
-   }
+
+    @Override
+    public String getText() {
+        return super.getText();
+    }
 }

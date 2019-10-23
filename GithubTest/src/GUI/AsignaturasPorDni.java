@@ -49,7 +49,7 @@ public class AsignaturasPorDni implements ActionListener{
 }
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        Frame frame=new Frame("Asignaturas Cursadas Por El Alumno con Determinado DNI en una determinada Fecha");
+        Frame frame=new Frame("Asignaturas Cursadas Por El Alumno con Determinado DNI en una determinada Fecha",ingresar);
         frame.setBounds(300, 200, 600, 500);
         Container container=frame.getContentPane();
         ingresar=new JButton("Ingresar");

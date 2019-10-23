@@ -101,7 +101,7 @@ public class AnotarDocenteActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        Frame frame = new Frame("Anotar Docente En Examen");
+        Frame frame = new Frame("Anotar Docente En Examen",ingresar);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 250, 750, 450);

@@ -100,7 +100,7 @@ class Ingresar implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-       Frame frame=new Frame("Habilitados al Examen");
+       Frame frame=new Frame("Habilitados al Examen",ingresar);
        frame.setVisible(true);
        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        frame.setBounds(300, 200, 600, 500);

@@ -95,7 +95,7 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0) {
 
-        frame = new Frame("Insribirse a Asignatura");
+        frame = new Frame("Insribirse a Asignatura",inscribirse);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 250, 700, 400);

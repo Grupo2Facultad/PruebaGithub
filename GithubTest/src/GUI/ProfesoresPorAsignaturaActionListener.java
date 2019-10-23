@@ -6,9 +6,7 @@
 package GUI;
 
 import githubtest.Docente;
-import githubtest.Rol;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -19,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -55,7 +52,7 @@ public class ProfesoresPorAsignaturaActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        frame = new Frame("Profesores Por Asignatura");
+        frame = new Frame("Profesores Por Asignatura",ingresar);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 200, 800, 500);

@@ -82,7 +82,7 @@ public class InscripcionAExamenActionListener implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        frame = new Frame("Insribirse a Examen");
+        frame = new Frame("Insribirse a Examen",inscribirse);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 200, 800, 500);

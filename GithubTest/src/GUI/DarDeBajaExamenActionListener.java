@@ -70,7 +70,7 @@ private JTextFieldAdaptado alumnoDNI,
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
-        frame = new Frame("Insribirse a Examen");
+        frame = new Frame("Insribirse a Examen",darDeBaja);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 200, 700, 200);

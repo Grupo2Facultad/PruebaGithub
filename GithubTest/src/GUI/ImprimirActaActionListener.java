@@ -84,7 +84,7 @@ public class ImprimirActaActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-         Frame frame=new Frame("Imprimir Acta");
+         Frame frame=new Frame("Imprimir Acta",ingresar);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(300, 250, 600, 400);
