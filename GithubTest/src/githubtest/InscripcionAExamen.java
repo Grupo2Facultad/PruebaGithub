@@ -234,11 +234,17 @@ public class InscripcionAExamen {
      * Habilita a un alumno a rendir un parcial
      */
     public void habilitarParcial() {
+        System.out.println("llego a HabiltiarParcial()");
         if (asistencia && notasPracticosBuenas && !tiene2Parciales) {
+            System.out.println("llego al 1");
             this.habilitado = true;
-            System.out.println("Nota btenida" + notaObtenida);
         }
         if (tiene2Parciales && asistencia && notasPracticosBuenas && aproboPrimerParcial) {
+              System.out.println("llego al 2");
+            this.habilitado = true;
+        }
+        if (tiene2Parciales && asistencia && notasPracticosBuenas && ((Parcial)examen).isPrimeroTrueSegundoFalse()) {
+              System.out.println("llego al 3");
             this.habilitado = true;
         }
     }
@@ -251,23 +257,25 @@ public class InscripcionAExamen {
      */
     public void verificarPrimero(List<Examen> examenes) {
         for (Examen examene : examenes) {
-            if (((Parcial) examene).isPrimeroTrueSegundoFalse()) {
-                ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
-                boolean l = false;
-                for (InscripcionAExamen inscripcione : inscripciones) {
-                    if (inscripcione.getAlumno().equals(alumno) && !l) {
-                        if (Double.parseDouble(inscripcione.getNotaObtenida()) > 6) {
-                            this.aproboPrimerParcial = true;
-                        } else {
-                            this.aproboPrimerParcial = false;
+            if (examene instanceof Parcial) {
+                if (((Parcial) examene).isPrimeroTrueSegundoFalse()) {
+                    ArrayList<InscripcionAExamen> inscripciones = (ArrayList) examene.getActa().getInscripciones();
+                    boolean l = false;
+                    for (InscripcionAExamen inscripcione : inscripciones) {
+                        if (inscripcione.getAlumno().equals(alumno) && !l) {
+                            if (Double.parseDouble(inscripcione.getNotaObtenida()) > 6) {
+                                this.aproboPrimerParcial = true;
+                            } else {
+                                this.aproboPrimerParcial = false;
+                            }
                         }
-                    }
-                    if (inscripcione.getAlumno().equals(alumno) && ((Parcial) examene).isRecuperatorio()) {
-                        if (Double.parseDouble(inscripcione.getNotaObtenida()) > 6) {
-                            l = true;
-                            this.aproboPrimerParcial = true;
-                        } else {
-                            this.aproboPrimerParcial = false;
+                        if (inscripcione.getAlumno().equals(alumno) && ((Parcial) examene).isRecuperatorio()) {
+                            if (Double.parseDouble(inscripcione.getNotaObtenida()) > 6) {
+                                l = true;
+                                this.aproboPrimerParcial = true;
+                            } else {
+                                this.aproboPrimerParcial = false;
+                            }
                         }
                     }
                 }

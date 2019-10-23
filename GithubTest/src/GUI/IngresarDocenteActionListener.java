@@ -7,10 +7,8 @@ package GUI;
 
 import githubtest.Carrera;
 import githubtest.Docente;
-import githubtest.Rol;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -32,7 +30,7 @@ private Carrera seleccionada;
     public void actionPerformed(ActionEvent arg0) {
         try {
             check();
-            Docente docente = new Docente(info.getIngresoNumeroLegajo().getText(), info.getIngresoADocencia().getText(),
+            Docente docente = new Docente(info.getIngresoNumeroLegajo().getText(), info.getFecha().armado().toString(),
              info.getIngresoNombre().getText(), info.getIngresoApellido().getText(), info.getIngresoDNI().getText());
           seleccionada.getDocentes().add(docente);
             JOptionPane.showMessageDialog(null, "operacion exitosa");
@@ -59,7 +57,6 @@ private Carrera seleccionada;
         if (info.getIngresoNumeroLegajo().getText().equals("Numero Legajo*")||info.getIngresoNumeroLegajo().getText().equals("")){
             e=false;
         }
-        //MAl
         ArrayList<Carrera> carreras=Main.getRegistroDeCarreras().getCarreras();
         boolean t=false;
         for (Carrera carrera : carreras) {

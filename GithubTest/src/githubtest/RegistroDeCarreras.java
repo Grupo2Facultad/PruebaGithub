@@ -151,8 +151,10 @@ public class RegistroDeCarreras {
     public Set<Docente> getDocentesAsignatura(String cod, LocalDate date) {
         Set<Docente> docentes = new HashSet<>();
                     ArrayList<Asignatura> asignaturas = getAsignaturasPorFechaPlanDeEstudio(date);
+                    boolean x=false;
                     for (Asignatura asignatura : asignaturas) {
                         if (asignatura.getCodigo().equals(cod)) {
+                            x=true;
                             if (asignatura.getPeriodoLectivo().getAño() == date.getYear()) {
                                 if (date.getMonthValue() <= 6) {
                                     if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre)) {
@@ -178,6 +180,10 @@ public class RegistroDeCarreras {
                                 }
                             }
                         }
+                    if(!x){
+                        JOptionPane.showMessageDialog(null, "Codigo Invalido");
+                        return null;
+                    }
         return docentes;
     }
 

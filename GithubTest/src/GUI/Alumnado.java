@@ -6,15 +6,11 @@
 package GUI;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *
@@ -54,6 +50,8 @@ public class Alumnado implements ActionListener{
         container.add(carrerasPorDNI);
         container.add(ingresarAlumno);
         container.add(ingresarDocente);
+        Escape escape = new Escape(frame);
+        escape.setKey();
 
     }
     

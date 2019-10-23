@@ -8,11 +8,14 @@ package GUI;
 import githubtest.Alumno;
 import githubtest.Carrera;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,13 +30,9 @@ import javax.swing.JTextField;
 public class InscripcionAExamenActionListener implements ActionListener {
 
     private JTextFieldAdaptado alumnoDNI,
-            asignaturaCod,
-            ingresoAño,
-            ingresoMes,
-            ingresoDia;
-    private JLabel slash,
-            slash2,
-            paraFinales;
+            asignaturaCod;
+    private FechaComboBox fecha;
+   private JLabel paraFinales;
     private JButton inscribirse;
     private JRadioButton libre;
     private Frame frame;
@@ -44,10 +43,6 @@ public class InscripcionAExamenActionListener implements ActionListener {
         public void actionPerformed(ActionEvent arg0) {
             try {
                 String DNI = alumnoDNI.getText();
-                int año = Integer.parseInt(ingresoAño.getText());
-                int mes = Integer.parseInt(ingresoMes.getText());
-                int dia = Integer.parseInt(ingresoDia.getText());
-                LocalDate fecha = LocalDate.of(año, mes, dia);
                 ArrayList<Carrera> carreras = Main.registroDeCarreras.getCarreras();
                 boolean e = false;
                 for (Carrera carrera : carreras) {
@@ -58,7 +53,7 @@ public class InscripcionAExamenActionListener implements ActionListener {
                             if (libre.getSelectedObjects() != null) {
                                 noRegular = true;
                             }
-                            if (alumno.InscibirseAExamen(fecha, asignaturaCod.getText(), noRegular)) {
+                            if (alumno.InscibirseAExamen(fecha.armado(), asignaturaCod.getText(), noRegular)) {
                                 JOptionPane.showMessageDialog(null, "Operacion Exitosa");
                             }
                             e = true;
@@ -80,43 +75,32 @@ public class InscripcionAExamenActionListener implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        frame = new Frame("Insribirse a Examen");
+        frame = new Frame("Insribirse a Examen",inscribirse);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 200, 800, 500);
         Container container = frame.getContentPane();
-        container.setLayout(null);
+        container.setLayout(new FlowLayout());
         alumnoDNI=new JTextFieldAdaptado("DNI");
-        alumnoDNI.setBounds(270, 200, 100, 25);
-        ingresoAño=new JTextFieldAdaptado("Año");
-        ingresoAño.setBounds(390, 200, 50, 25);
-        ingresoMes=new JTextFieldAdaptado("Mes");
-        ingresoMes.setBounds(460, 200, 50, 25);
-        ingresoDia=new JTextFieldAdaptado("Dia");
-        ingresoDia.setBounds(530, 200, 50, 25);
-        slash=new JLabel("/");
-        slash.setBounds(445, 197, 15, 30);
-        slash2=new JLabel("/");
-        slash2.setBounds(515, 197, 15, 30);
+        fecha= new FechaComboBox();
         asignaturaCod = new JTextFieldAdaptado("Codigo de Asignatura");
-        asignaturaCod.setBounds(80,200, 170,25);
         libre = new JRadioButton("libre");
         libre.setBounds(170,260,170,25);
         paraFinales = new JLabel("Para Finales: ");
-        paraFinales.setBounds(80, 260, 170, 25);
         inscribirse=new JButton("Ingresar");
-        inscribirse.setBounds(600, 198, 140, 30);
-        inscribirse.addActionListener(new Inscribirse());
         container.add(alumnoDNI);
         container.add(asignaturaCod);
-        container.add(ingresoAño);
-        container.add(slash);
-        container.add(ingresoMes);
-        container.add(slash2);
-        container.add(ingresoDia);
+        container.add(fecha);
         container.add(libre);
         container.add(paraFinales);
         container.add(inscribirse);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Inscribirse().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(inscribirse, action);
     }
     
 }

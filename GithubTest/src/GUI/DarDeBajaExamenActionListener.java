@@ -14,11 +14,12 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -26,22 +27,14 @@ import javax.swing.JTextField;
  */
 public class DarDeBajaExamenActionListener implements ActionListener{
 private JTextFieldAdaptado alumnoDNI,
-            asignaturaCod,
-            ingresoAño,
-            ingresoMes,
-            ingresoDia;
-    private JLabel slash,
-            slash2;
-    private JButton inscribirse;
+            asignaturaCod;
+private FechaComboBox fecha;
+    private JButton darDeBaja;
     private Frame frame;
     class DarseDeBaja implements ActionListener{
             @Override
         public void actionPerformed(ActionEvent arg0) {
             String DNI = alumnoDNI.getText();
-           int año=Integer.parseInt(ingresoAño.getText());
-          int mes=Integer.parseInt(ingresoMes.getText());
-          int dia=Integer.parseInt(ingresoDia.getText());
-            LocalDate fecha=LocalDate .of(año,mes,dia); 
             ArrayList<Carrera> carreras = Main.registroDeCarreras.getCarreras();
             boolean e = false;
             for (Carrera carrera : carreras) {
@@ -49,7 +42,7 @@ private JTextFieldAdaptado alumnoDNI,
                 for (Alumno alumno : alumnos) {
                     if (alumno.getDNI().equals(DNI)) {
                         try{
-                        if (alumno.DarseDeBaja(fecha,asignaturaCod.getText())) {
+                        if (alumno.DarseDeBaja(fecha.armado(),asignaturaCod.getText())) {
                             JOptionPane.showMessageDialog(null, "Operacion Exitosa");
                             frame.setVisible(false);
                         }
@@ -69,29 +62,27 @@ private JTextFieldAdaptado alumnoDNI,
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
-        frame = new Frame("Insribirse a Examen");
+        frame = new Frame("Darse de baja",darDeBaja);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 200, 700, 200);
         Container container = frame.getContentPane();
         container.setLayout(new FlowLayout());
         alumnoDNI=new JTextFieldAdaptado("AlumnoDNI",20);
-        ingresoAño=new JTextFieldAdaptado("Año",5);
-        ingresoMes=new JTextFieldAdaptado("Mes",3);
-        ingresoDia=new JTextFieldAdaptado("Dia",3);
-        slash=new JLabel("/");
-        slash2=new JLabel("/");
+        fecha= new FechaComboBox();
         asignaturaCod = new JTextFieldAdaptado("Codigo de Asignatura");
-        inscribirse=new JButton("Ingresar");
-        inscribirse.addActionListener(new DarseDeBaja());
+        darDeBaja=new JButton("Ingresar");
         container.add(alumnoDNI);
         container.add(asignaturaCod);
-        container.add(ingresoAño);
-        container.add(slash);
-        container.add(ingresoMes);
-        container.add(slash2);
-        container.add(ingresoDia);
-        container.add(inscribirse);
+        container.add(fecha);
+        container.add(darDeBaja);
+        Action action = new AbstractAction("Ingresar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DarseDeBaja().actionPerformed(e);
+            }
+        };
+        Enter enter = new Enter(darDeBaja, action);
     }
     
 }
