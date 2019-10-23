@@ -33,12 +33,8 @@ public class AnotarDocenteActionListener implements ActionListener {
 
     private JButton ingresar;
     private JTextFieldAdaptado numeroLegajo,
-            asignaturaCod,
-            ingresoAño,
-            ingresoMes,
-            ingresoDia;
-    private JLabel slash,
-            slash2;
+            asignaturaCod;
+    private FechaComboBox fecha;
     private JComboBox box;
 
     class Ingresar implements ActionListener {
@@ -47,11 +43,7 @@ public class AnotarDocenteActionListener implements ActionListener {
         public void actionPerformed(ActionEvent arg0) {
            RolExamenEnum rol=(RolExamenEnum)box.getSelectedItem();
             try {
-                int año = Integer.parseInt(ingresoAño.getText());
-                int mes = Integer.parseInt(ingresoMes.getText());
-                int dia = Integer.parseInt(ingresoDia.getText());
-                LocalDate fecha = LocalDate.of(año, mes, dia);
-                ArrayList<Asignatura> asignaturas = Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(fecha);
+                ArrayList<Asignatura> asignaturas = Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(fecha.armado());
                 Docente docente=Main.getRegistroDeCarreras().getDocentesPorLegajo(numeroLegajo);
                 if(docente==null){
                     throw new DocenteException("El docente no existe");
@@ -62,7 +54,7 @@ public class AnotarDocenteActionListener implements ActionListener {
                        v=true;
                         ArrayList<Examen> examenes = (ArrayList) asignatura.getExamenes();
                         for (Examen examene : examenes) {
-                            if (examene.getFecha().equals(fecha)) {
+                            if (examene.getFecha().equals(fecha.armado())) {
                                 check(examene,rol);
                                 examene.getDocenteExamen().add(new DocenteExamen(rol,docente));
                                 JOptionPane.showMessageDialog(null,"Operacion exitosa");
@@ -104,23 +96,12 @@ public class AnotarDocenteActionListener implements ActionListener {
         Frame frame = new Frame("Anotar Docente En Examen",ingresar);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setBounds(250, 250, 750, 450);
         Container container = frame.getContentPane();
-        container.setLayout(null);
+        container.setLayout(new FlowLayout());
         ingresar = new JButton("Ingresar");
-        ingresar.setBounds(600, 147, 100, 30);
-        numeroLegajo = new JTextFieldAdaptado("Numero de legajo");
-        numeroLegajo.setBounds(50, 150, 120, 25);
-        asignaturaCod = new JTextFieldAdaptado("Codigo Asignatura");
-        asignaturaCod.setBounds(185, 150, 120, 25);
-        ingresoAño = new JTextFieldAdaptado("Año");
-        ingresoAño.setBounds(320, 150, 40, 25);
-        ingresoMes = new JTextFieldAdaptado("Mes");
-        ingresoMes.setBounds(375, 150, 40, 25);
-        ingresoDia = new JTextFieldAdaptado("Dia");
-        ingresoDia.setBounds(430, 150, 40, 25);
-        slash = new JLabel("/");
-        slash2 = new JLabel("/");
+        fecha= new FechaComboBox();
+        numeroLegajo = new JTextFieldAdaptado("Numero de legajo",15);
+        asignaturaCod = new JTextFieldAdaptado("Codigo Asignatura",20);
         box = new JComboBox();
         box.addItem(RolExamenEnum.TITULAR);
         box.addItem(RolExamenEnum.VVOCAL1);
@@ -129,11 +110,7 @@ public class AnotarDocenteActionListener implements ActionListener {
         box.setBounds(485, 147, 100, 30);
         container.add(numeroLegajo);
         container.add(asignaturaCod);
-        container.add(ingresoAño);
-        container.add(slash);
-        container.add(ingresoMes);
-        container.add(slash2);
-        container.add(ingresoDia);
+        container.add(fecha);
         container.add(box);
         container.add(ingresar);
         Action action = new AbstractAction("Ingresar") {

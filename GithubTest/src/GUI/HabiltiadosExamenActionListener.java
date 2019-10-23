@@ -11,6 +11,9 @@ import githubtest.Final;
 import githubtest.InscripcionAExamen;
 import githubtest.Parcial;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -27,24 +30,16 @@ import javax.swing.JOptionPane;
  * @author juanc
  */
 public class HabiltiadosExamenActionListener implements ActionListener{
-private JTextFieldAdaptado codigoAsig,
-         ingresoAño,
-            ingresoMes,
-            ingresoDia;
-    private JLabel slash,
-            slash2;
+private JTextFieldAdaptado codigoAsig;
+private FechaComboBox fecha;
     private final boolean tipo;
 private JButton ingresar;
 class Ingresar implements ActionListener{
     private Examen ex;
         @Override
         public void actionPerformed(ActionEvent arg0) {
-          int año=Integer.parseInt(ingresoAño.getText());
-          int mes=Integer.parseInt(ingresoMes.getText());
-          int dia=Integer.parseInt(ingresoDia.getText());
           ArrayList<InscripcionAExamen>habilitados=new ArrayList<>();
-            LocalDate fecha=LocalDate .of(año,mes,dia); 
-            ArrayList<Asignatura>asignaturas=Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(fecha);
+            ArrayList<Asignatura>asignaturas=Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(fecha.armado());
             boolean t=false;
             boolean f=false;
             for (Asignatura asignatura : asignaturas) {
@@ -52,7 +47,7 @@ class Ingresar implements ActionListener{
                    t=true;
                     ArrayList<Examen> examenes=(ArrayList)asignatura.getExamenes();
                     for (Examen examene : examenes) {
-                        if(examene.getFecha().equals(fecha)){
+                        if(examene.getFecha().equals(fecha.armado())){
                             ex=examene;
                             f=true;
                             if(tipo&& examene instanceof Parcial){
@@ -103,29 +98,18 @@ class Ingresar implements ActionListener{
        Frame frame=new Frame("Habilitados al Examen",ingresar);
        frame.setVisible(true);
        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-       frame.setBounds(300, 200, 600, 500);
+       Toolkit pantalla = Toolkit.getDefaultToolkit();
+    Dimension mip = pantalla.getScreenSize();
+    int h = mip.height;
+    int w = mip.width;
+    frame.setBounds(w/4, h/4, w/2, h/2);
         Container container=frame.getContentPane();
-        container.setLayout(null);
+        container.setLayout(new FlowLayout());
         codigoAsig=new JTextFieldAdaptado("Codigo de Asignatura");
-        codigoAsig.setBounds(50, 200, 130, 25);
         ingresar = new JButton("Ingresar");
-        ingresar.setBounds(400, 198, 120, 30);
-        ingresoAño=new JTextFieldAdaptado("Año");
-        ingresoAño.setBounds(200, 200, 50, 25);
-        ingresoMes=new JTextFieldAdaptado("Mes");
-        ingresoMes.setBounds(270, 200,40, 25);
-        ingresoDia=new JTextFieldAdaptado("Dia");
-        ingresoDia.setBounds(330,200,40,25);
-        slash=new JLabel("/");
-        slash.setBounds(255, 198,15, 25);
-        slash2=new JLabel("/");
-        slash2.setBounds(315, 198,15, 25);
+        fecha=new FechaComboBox();
         container.add(codigoAsig);
-        container.add(ingresoAño);
-        container.add(slash);
-        container.add(ingresoMes);
-        container.add(slash2);
-        container.add(ingresoDia);
+        container.add(fecha);
         container.add(ingresar);
         Action action = new AbstractAction("Ingresar") {
             @Override

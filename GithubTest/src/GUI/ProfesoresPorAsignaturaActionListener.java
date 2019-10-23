@@ -7,6 +7,7 @@ package GUI;
 
 import githubtest.Docente;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -25,22 +26,15 @@ import javax.swing.JOptionPane;
 public class ProfesoresPorAsignaturaActionListener implements ActionListener {
 
     private Frame frame;
-    private JTextFieldAdaptado asignaturaCod,
-            ingresoAño,
-            ingresoMes,
-            ingresoDia;
-    private JLabel slash,
-            slash2;
+    private JTextFieldAdaptado asignaturaCod;
+    private FechaComboBox fecha;
     private JButton ingresar;
 
     class Ingresar implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            int año = Integer.parseInt(ingresoAño.getText());
-            int mes = Integer.parseInt(ingresoMes.getText());
-            int dia = Integer.parseInt(ingresoDia.getText());
-            Set<Docente> docentes = Main.getRegistroDeCarreras().getDocentesAsignatura(asignaturaCod.getText(), LocalDate.of(año, mes, dia));
+            Set<Docente> docentes = Main.getRegistroDeCarreras().getDocentesAsignatura(asignaturaCod.getText(), fecha.armado());
             if (docentes.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Esa asignatura no tiene docentes");
             } else {
@@ -63,27 +57,12 @@ public class ProfesoresPorAsignaturaActionListener implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(250, 200, 800, 500);
         Container container = frame.getContentPane();
-        container.setLayout(null);
+        container.setLayout(new FlowLayout());
         ingresar = new JButton("Ingresar");
-        ingresar.setBounds(530, 198, 125,30);
         asignaturaCod = new JTextFieldAdaptado("Codigo");
-        asignaturaCod.setBounds(200, 200,100 ,25);
-        ingresoAño = new JTextFieldAdaptado("Año");
-        ingresoAño.setBounds(320, 200,50, 25);
-        ingresoMes = new JTextFieldAdaptado("Mes"); 
-        ingresoMes.setBounds(390,200,50,25);
-        ingresoDia = new JTextFieldAdaptado("Dia"); 
-        ingresoDia.setBounds(460,200,50,25);
-        slash = new JLabel("/");
-        slash.setBounds(378, 197, 15, 30);
-        slash2 = new JLabel("/");
-        slash2.setBounds(448, 197, 15, 30);
+        fecha= new FechaComboBox();
         container.add(asignaturaCod);
-        container.add(ingresoAño);
-        container.add(slash);
-        container.add(ingresoMes);
-        container.add(slash2);
-        container.add(ingresoDia);
+        container.add(fecha);
         container.add(ingresar);
         Action action = new AbstractAction("Ingresar") {
             @Override

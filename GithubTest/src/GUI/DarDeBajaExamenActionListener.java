@@ -27,22 +27,14 @@ import javax.swing.JOptionPane;
  */
 public class DarDeBajaExamenActionListener implements ActionListener{
 private JTextFieldAdaptado alumnoDNI,
-            asignaturaCod,
-            ingresoAño,
-            ingresoMes,
-            ingresoDia;
-    private JLabel slash,
-            slash2;
+            asignaturaCod;
+private FechaComboBox fecha;
     private JButton darDeBaja;
     private Frame frame;
     class DarseDeBaja implements ActionListener{
             @Override
         public void actionPerformed(ActionEvent arg0) {
             String DNI = alumnoDNI.getText();
-           int año=Integer.parseInt(ingresoAño.getText());
-          int mes=Integer.parseInt(ingresoMes.getText());
-          int dia=Integer.parseInt(ingresoDia.getText());
-            LocalDate fecha=LocalDate .of(año,mes,dia); 
             ArrayList<Carrera> carreras = Main.registroDeCarreras.getCarreras();
             boolean e = false;
             for (Carrera carrera : carreras) {
@@ -50,7 +42,7 @@ private JTextFieldAdaptado alumnoDNI,
                 for (Alumno alumno : alumnos) {
                     if (alumno.getDNI().equals(DNI)) {
                         try{
-                        if (alumno.DarseDeBaja(fecha,asignaturaCod.getText())) {
+                        if (alumno.DarseDeBaja(fecha.armado(),asignaturaCod.getText())) {
                             JOptionPane.showMessageDialog(null, "Operacion Exitosa");
                             frame.setVisible(false);
                         }
@@ -77,20 +69,12 @@ private JTextFieldAdaptado alumnoDNI,
         Container container = frame.getContentPane();
         container.setLayout(new FlowLayout());
         alumnoDNI=new JTextFieldAdaptado("AlumnoDNI",20);
-        ingresoAño=new JTextFieldAdaptado("Año",5);
-        ingresoMes=new JTextFieldAdaptado("Mes",3);
-        ingresoDia=new JTextFieldAdaptado("Dia",3);
-        slash=new JLabel("/");
-        slash2=new JLabel("/");
+        fecha= new FechaComboBox();
         asignaturaCod = new JTextFieldAdaptado("Codigo de Asignatura");
         darDeBaja=new JButton("Ingresar");
         container.add(alumnoDNI);
         container.add(asignaturaCod);
-        container.add(ingresoAño);
-        container.add(slash);
-        container.add(ingresoMes);
-        container.add(slash2);
-        container.add(ingresoDia);
+        container.add(fecha);
         container.add(darDeBaja);
         Action action = new AbstractAction("Ingresar") {
             @Override

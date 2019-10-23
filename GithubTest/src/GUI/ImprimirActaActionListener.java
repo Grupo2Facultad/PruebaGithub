@@ -11,6 +11,7 @@ import githubtest.Asignatura;
 import githubtest.Examen;
 import githubtest.Final;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -28,23 +29,15 @@ import javax.swing.JOptionPane;
  */
 public class ImprimirActaActionListener implements ActionListener {
 
-    private JTextFieldAdaptado codigoAsig,
-            ingresoAño,
-            ingresoMes,
-            ingresoDia;
-    private JLabel slash,
-            slash2;
+    private JTextFieldAdaptado codigoAsig;
+    private FechaComboBox fecha;
     private JButton ingresar;
 
     class ImprimirActa implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent arg0) {
-            int año = Integer.parseInt(ingresoAño.getText());
-            int mes = Integer.parseInt(ingresoMes.getText());
-            int dia = Integer.parseInt(ingresoDia.getText());
-            LocalDate fecha = LocalDate.of(año, mes, dia);
-            ArrayList<Asignatura> asignaturas = Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(fecha);
+            ArrayList<Asignatura> asignaturas = Main.registroDeCarreras.getAsignaturasPorFechaPlanDeEstudio(fecha.armado());
             boolean t = false;
             boolean f = false;
             boolean s = false;
@@ -53,7 +46,7 @@ public class ImprimirActaActionListener implements ActionListener {
                     t = true;
                     ArrayList<Examen> examenes = (ArrayList) asignatura.getExamenes();
                     for (Examen examene : examenes) {
-                        if (examene.getFecha().equals(fecha)) {
+                        if (examene.getFecha().equals(fecha.armado())) {
                             f = true;
                             if (examene instanceof Final) {
                                 s = true;
@@ -87,28 +80,12 @@ public class ImprimirActaActionListener implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(300, 250, 600, 400);
         Container container=frame.getContentPane();
-        container.setLayout(null);
+        container.setLayout(new FlowLayout());
         codigoAsig=new JTextFieldAdaptado("Codigo de Asignatura");
-        codigoAsig.setBounds(100, 100, 150, 25);
         ingresar = new JButton("Ingresar");
-        ingresar.setBounds(190, 160, 150, 30);
-        ingresoAño=new JTextFieldAdaptado("Año");
-        ingresoAño.setBounds(270, 100, 50, 25);
-        ingresoMes=new JTextFieldAdaptado("Mes");
-        ingresoMes.setBounds(340, 100, 40, 25);
-        ingresoDia=new JTextFieldAdaptado("Dia");
-        ingresoDia.setBounds(400, 100, 40, 25);
-        slash=new JLabel("/");
-        slash.setBounds(325, 98, 15, 25);
-        slash2=new JLabel("/");
-        slash2.setBounds(385, 98, 15, 25);
-        ingresar.addActionListener(new ImprimirActa ());
+        fecha= new FechaComboBox();
         container.add(codigoAsig);
-        container.add(ingresoAño);
-        container.add(slash);
-        container.add(ingresoMes);
-        container.add(slash2);
-        container.add(ingresoDia);
+        container.add(fecha);
         container.add(ingresar);
         Action action = new AbstractAction("Ingresar") {
             @Override

@@ -51,16 +51,15 @@ public class IngresarAlumno implements ActionListener {
         frame = new Frame("Ingreso De Alumno");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setBounds(150, 100, 1200, 700);
+        frame.setBounds(150, 100, 1387, 700);
         Container container = frame.getContentPane();
         container.setLayout(new FlowLayout());
         this.ingresar = new JButton("Ingresar");
         this.ingresoApellido = new JTextFieldAdaptado("Apellido*", 20);
         this.ingresoNombre = new JTextFieldAdaptado("Nombre*", 20);
-        ingresoNombre.setBounds(100, 100, 100, 25);
-        nombre = new JLabel("Nombre: ");
         this.ingresoDNI = new JTextFieldAdaptado("DNI*", 9);
         this.ingresoNumeroMatricula = new JTextFieldAdaptado("Numero Matricula*", 12);
+        nombre = new JLabel("Nombre: ");
         appellido = new JLabel("Apellido: ");
         ddni = new JLabel("DNI: ");
         nnro = new JLabel("Nro. Matricula: ");

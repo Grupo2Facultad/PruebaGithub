@@ -26,8 +26,8 @@ public class IngresarDocente implements ActionListener {
     private JTextFieldAdaptado ingresoNombre,
             ingresoApellido,
             ingresoDNI,
-            ingresoNumeroLegajo,
-            ingresoADocencia;
+            ingresoNumeroLegajo;
+    private FechaComboBox fecha;        
     private JComboBox carrera;
     private JLabel obligatorios;
     private JButton ingresar;
@@ -50,7 +50,7 @@ public class IngresarDocente implements ActionListener {
         for (Carrera carrera1 : Main.getRegistroDeCarreras().getCarreras()) {
             carrera.addItem(carrera1.getNombre());
         }
-        this.ingresoADocencia = new JTextFieldAdaptado("ingreso A Docencia");
+        this.fecha = new FechaComboBox();
         obligatorios = new JLabel("Campos Obligatorios: Apellido, Nombre,DNI,NumeroMatricula, Carrera (Marcados con *)");
         container.add(this.ingresar);
         container.add(this.ingresoNombre);
@@ -58,7 +58,7 @@ public class IngresarDocente implements ActionListener {
         container.add(this.ingresoDNI);
         container.add(this.ingresoNumeroLegajo);
         container.add(this.carrera);
-        container.add(ingresoADocencia);
+        container.add(fecha);
         container.add(obligatorios);
         Action action = new AbstractAction("Ingresar") {
             @Override
@@ -86,10 +86,10 @@ public class IngresarDocente implements ActionListener {
         return ingresoNumeroLegajo;
     }
 
-
-    public JTextFieldAdaptado getIngresoADocencia() {
-        return ingresoADocencia;
+    public FechaComboBox getFecha() {
+        return fecha;
     }
+
 
     public JComboBox getCarrera() {
         return carrera;

@@ -30,7 +30,7 @@ private Carrera seleccionada;
     public void actionPerformed(ActionEvent arg0) {
         try {
             check();
-            Docente docente = new Docente(info.getIngresoNumeroLegajo().getText(), info.getIngresoADocencia().getText(),
+            Docente docente = new Docente(info.getIngresoNumeroLegajo().getText(), info.getFecha().armado().toString(),
              info.getIngresoNombre().getText(), info.getIngresoApellido().getText(), info.getIngresoDNI().getText());
           seleccionada.getDocentes().add(docente);
             JOptionPane.showMessageDialog(null, "operacion exitosa");

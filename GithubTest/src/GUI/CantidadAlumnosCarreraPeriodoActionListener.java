@@ -8,6 +8,7 @@ package GUI;
 import githubtest.Carrera;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -19,29 +20,25 @@ import javax.swing.*;
 public class CantidadAlumnosCarreraPeriodoActionListener implements ActionListener{
 private JButton ingresar;
 private JComboBox<String > carrera;
-private JTextFieldAdaptado ingresoAño;
-private JTextFieldAdaptado ingresoMes;
-private JTextFieldAdaptado ingresoDia;
-private JLabel slash,
-        slash2;
+private FechaComboBox fecha;
           
-class MostrarCantidadAlumnos implements ActionListener{
+    class MostrarCantidadAlumnos implements ActionListener {
+
         @Override
-        public void actionPerformed(ActionEvent arg0){
-            try{
-           String ingresoNombre=(String)carrera.getSelectedItem();
-          int año=Integer.parseInt(ingresoAño.getText());
-          int mes=Integer.parseInt(ingresoMes.getText());
-          int dia=Integer.parseInt(ingresoDia.getText());
-          int cantidad= Main.getRegistroDeCarreras().getAlumnosPorCarrera(ingresoNombre,LocalDate.of(año,mes,dia));
-            System.out.println("cantidad"+cantidad);
-          String cantidadEs="La cantidad de alumnos es "+cantidad;
-          JOptionPane.showMessageDialog(null,cantidadEs);
-            }
-            catch(Exception e){
+        public void actionPerformed(ActionEvent arg0) {
+            try {
+                String ingresoNombre = (String) carrera.getSelectedItem();
+                LocalDate date = fecha.armado();
+                int cantidad = Main.getRegistroDeCarreras().getAlumnosPorCarrera(ingresoNombre, date);
+                System.out.println("cantidad" + cantidad);
+                String cantidadEs = "La cantidad de alumnos es " + cantidad;
+                JOptionPane.showMessageDialog(null, cantidadEs);
+            } catch (DateTimeException d) {
+                JOptionPane.showMessageDialog(null,"Fecha Invalida");
+            } catch (Exception e) {
             }
         }
-}
+    }
 
     /**
      *
@@ -50,31 +47,20 @@ class MostrarCantidadAlumnos implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0) {
         Frame frame=new Frame("Cantidad De Alumnos Por Carrera en un Periodo");
-        frame.setBounds(200, 150, 1080, 600);
+        frame.setBounds(200, 150, 800, 200);
         Container container=frame.getContentPane();
         carrera=new JComboBox<>();
         for (Carrera carrera1 : Main.getRegistroDeCarreras().getCarreras()) {
             carrera.addItem(carrera1.getNombre());
         }
         carrera.setBounds(100, 150, 120, 25);
-        ingresoAño=new JTextFieldAdaptado("Año",5);
-        ingresoAño.setBounds(240, 150, 50, 25);
-        ingresoMes=new JTextFieldAdaptado("Mes",3);
-        ingresoMes.setBounds(310, 150, 40, 25);
-        ingresoDia=new JTextFieldAdaptado("Dia",3);
-        ingresoDia.setBounds(370, 150, 40, 25);
         ingresar=new JButton("Ingresar");
         ingresar.setBounds(430, 148, 100, 30);
-        slash=new JLabel("/");
-        slash2=new JLabel("/");
+        fecha= new FechaComboBox();
         container.setLayout(new FlowLayout());
         container.add(carrera);
-        container.add(ingresoAño);
-        container.add(slash);
-        container.add(ingresoMes);
-        container.add(slash2);
-        container.add(ingresoDia);
         container.add(ingresar);
+        container.add(fecha);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Action action = new AbstractAction("Ingresar") {

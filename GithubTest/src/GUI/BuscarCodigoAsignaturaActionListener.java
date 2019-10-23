@@ -20,38 +20,29 @@ import javax.swing.JOptionPane;
  * @author juanc
  */
 public class BuscarCodigoAsignaturaActionListener implements ActionListener {
-
-    private JTextFieldAdaptado año,
-            mes,
-            dia;
-
+private FechaComboBox fecha;
     private JComboBox carrera;
 
-    public BuscarCodigoAsignaturaActionListener(JTextFieldAdaptado año, JTextFieldAdaptado mes, JTextFieldAdaptado dia, JComboBox carrera) {
-        this.año = año;
-        this.mes = mes;
-        this.dia = dia;
+    public BuscarCodigoAsignaturaActionListener(FechaComboBox fecha, JComboBox carrera) {
+        this.fecha = fecha;
         this.carrera = carrera;
     }
 
+   
+
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        System.out.println(carrera.getSelectedItem());
         check();
-        System.out.println("la"+this.año.getText()+"aasd");
-        int añoF = Integer.parseInt(this.año.getText());
-        int mesF = Integer.parseInt(this.mes.getText());
-        int diaF = Integer.parseInt(this.dia.getText());
-        ArrayList<Asignatura> asignaturas = Main.getRegistroDeCarreras().getAsignaturasPorFechaPlanDeEstudio(LocalDate.of(añoF, mesF, diaF));
+        ArrayList<Asignatura> asignaturas = Main.getRegistroDeCarreras().getAsignaturasPorFechaPlanDeEstudio(fecha.armado());
         ArrayList<Asignatura> coincidencias = new ArrayList<>();
         for (Asignatura asignatura1 : asignaturas) {
             System.out.println("llego acaasignatura");
-            if (asignatura1.getPeriodoLectivo().getAño() == añoF && asignatura1.getCarrera().getNombre().equals(carrera.getSelectedItem())) {
+            if (asignatura1.getPeriodoLectivo().getAño() == fecha.armado().getYear()&& asignatura1.getCarrera().getNombre().equals(carrera.getSelectedItem())) {
                 System.out.println("llego a las opciones");
-                if (asignatura1.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre) && mesF <= 6) {
+                if (asignatura1.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre) && fecha.armado().getMonthValue() <= 6) {
                     coincidencias.add(asignatura1);
                 }
-                if (asignatura1.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.segundoCuatrimestre) && mesF > 6) {
+                if (asignatura1.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.segundoCuatrimestre) && fecha.armado().getMonthValue()> 6) {
                     coincidencias.add(asignatura1);
                 }
                 if (asignatura1.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.Anual)) {
