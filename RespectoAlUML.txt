@@ -1,0 +1,1 @@
+El UML debe ser abierto con un navegador web, en caso de que no ande se adjunta en formato jpg
