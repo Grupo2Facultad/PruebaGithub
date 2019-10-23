@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  * @author juanc
  */
 public class InscribirseAAsignaturaActionListener implements ActionListener{
-    private JTextField alumnoDNI,
+    private JTextFieldAdaptado alumnoDNI,
             asignaturaCod;
     private JButton inscribirse;
     private JRadioButton radioButton;
@@ -99,9 +99,9 @@ public class InscribirseAAsignaturaActionListener implements ActionListener{
         frame.setBounds(250, 250, 700, 400);
         Container container = frame.getContentPane();
         container.setLayout(null);
-        alumnoDNI = new JTextField("AlumnoDNI", 20);
+        alumnoDNI = new JTextFieldAdaptado("AlumnoDNI");
         alumnoDNI.setBounds(50, 150, 120, 25);
-        asignaturaCod = new JTextField("Codigo", 6);
+        asignaturaCod = new JTextFieldAdaptado("Codigo");
         asignaturaCod.setBounds(190, 150, 120, 25);
         this.radioButton = new JRadioButton("Regular");
         radioButton.setBounds(330, 150, 120, 25);

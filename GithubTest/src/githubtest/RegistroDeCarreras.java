@@ -8,9 +8,9 @@ package githubtest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -36,10 +36,10 @@ public class RegistroDeCarreras {
      * @return La cantidad de alumnos de la carrera pasada por parametro que se encuentran cursando alguna asignatura en la fecha dada
      * @throws java.lang.Exception
      */
-    public int getAlumnosPorCarrera(JTextField nombreCarrera, LocalDate fechaParaPeriodo)throws Exception{
+    public int getAlumnosPorCarrera(String  nombreCarrera, LocalDate fechaParaPeriodo)throws Exception{
         boolean r=false;
         for (Carrera carrera : carreras) {
-            if(carrera.getNombre().equals(nombreCarrera.getText())){
+            if(carrera.getNombre().equals(nombreCarrera)){
                r=true;
             }
         }
@@ -50,7 +50,7 @@ public class RegistroDeCarreras {
         Set<Alumno> e = new HashSet();
                     ArrayList<Asignatura> asignaturas = getAsignaturasPorFechaPlanDeEstudio(fechaParaPeriodo);
                     for (Asignatura asignatura : asignaturas){
-                       if(asignatura.getCarrera().getNombre().equals(nombreCarrera.getText())){
+                       if(asignatura.getCarrera().getNombre().equals(nombreCarrera)){
                         if (asignatura.getPeriodoLectivo().getAño() == fechaParaPeriodo.getYear()) {
                             if (fechaParaPeriodo.getMonthValue() <= 6) {
                                 if (asignatura.getPeriodoLectivo().getPeriodoLectivo().equals(PeriodoLectivoEnum.primerCuatrimestre)) {

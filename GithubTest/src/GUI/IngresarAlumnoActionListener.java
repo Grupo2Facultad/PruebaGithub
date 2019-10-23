@@ -91,7 +91,7 @@ public class IngresarAlumnoActionListener implements ActionListener {
         ArrayList<Carrera> carreras = Main.getRegistroDeCarreras().getCarreras();
         boolean t = false;
         for (Carrera carrera : carreras) {
-            if (carrera.getNombre().equals(info.getIngresoCarrera().getText())) {
+            if (carrera.getNombre().equals(info.getCarrera().getSelectedItem())) {
                 Set<Alumno> yaExiste = carrera.getAlumnos();
                 for (Alumno alumno : yaExiste) {
                     Alumno definitivo = new Alumno(info.getIngresoNombre().getText(), info.getIngresoApellido().getText(),

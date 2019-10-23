@@ -5,11 +5,12 @@
  */
 package GUI;
 
+import githubtest.Carrera;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -17,22 +18,25 @@ import javax.swing.JTextField;
  */
 public class PanelBusquedaCodigo extends JPanel {
 
-    private JTextField ingresoAño,
+    private  final JTextFieldAdaptado ingresoAño,
             ingresoMes,
-            ingresoDia,
-            carrera;
-    private JButton buscarCodigo;
-    private JLabel slash,
-            slash2;
+            ingresoDia;
+    private JComboBox carrera;
+    private final JButton buscarCodigo;
+    private final JLabel slash,
+                  slash2;
 
     public PanelBusquedaCodigo() {
         this.setLayout(new FlowLayout());
-        ingresoAño = new JTextField("Año", 5);
-        ingresoMes = new JTextField("Mes", 3);
-        ingresoDia = new JTextField("Dia", 3);
+        ingresoAño = new JTextFieldAdaptado("Año",5);
+        ingresoMes = new JTextFieldAdaptado("Mes",3);
+        ingresoDia = new JTextFieldAdaptado("Dia",3);
         slash = new JLabel("/");
         slash2 = new JLabel("/");
-        carrera = new JTextField("Carrera", 20);
+        carrera = new JComboBox<>();
+        for (Carrera carrera1 : Main.getRegistroDeCarreras().getCarreras()) {
+            carrera.addItem(carrera1.getNombre());
+        }
         buscarCodigo = new JButton("Buscar Codigos De Asignatura Disponibles");
         buscarCodigo.addActionListener(new BuscarCodigoAsignaturaActionListener(ingresoAño,
                 ingresoMes, ingresoDia, carrera));
